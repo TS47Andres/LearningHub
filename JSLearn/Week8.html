@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Learning - Week 8: Functions</title>
+     <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="javascript.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">JS</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#function-declaration">Declaration/Expression</a></li>
+                <li><a href="#function-parameters">Parameters</a></li>
+                <li><a href="#function-return">Returning Values</a></li>
+                <li><a href="#variable-scope">Scope</a></li>
+                <li><a href="#arrow-functions">Arrow Functions</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                 <h1>Week 8: Functions - The Power of Reusability</h1>
+                <p class="tagline">Learn how to define and use functions to write organized, reusable, and efficient JavaScript code.</p>
+                <a href="#function-declaration" class="button">Explore Chapter 8</a>
+            </div>
+        </section>
+
+        <section id="function-declaration" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 8: Writing Reusable Code with Functions</h2>
+                <h3>Defining Functions: Declaration vs. Expression.</h3>
+                <p>Functions are fundamental building blocks in JavaScript. They are blocks of code designed to perform a particular task. Functions allow you to make your code more modular, reusable, and easier to debug.</p>
+                <p>There are several ways to define functions in JavaScript:</p>
+                <h4>1. Function Declaration (Statement)</h4>
+                <p>This is the classic way to define a function using the function keyword.</p>
+                <pre><code class="code-snippet ">function greet(name) {
+  console.log("Hello, " + name + "!");
+}
+
+// Calling the function
+greet("Alice"); // Output: Hello, Alice!
+</code></pre>
+                 <ul>
+                      <li>Function declarations are "hoisted", meaning the JavaScript interpreter moves their definition to the top of their scope before code execution. This allows you to call a function declaration *before* it appears in the code.</li>
+                 </ul>
+                 <h4>2. Function Expression</h4>
+                 <p>A function expression defines a function as part of a larger expression, typically assigning it to a variable. The function can be named or anonymous.</p>
+                <pre><code class="code-snippet ">// Anonymous function expression assigned to a variable
+const farewell = function(name) {
+  console.log("Goodbye, " + name + "!");
+};
+
+// Named function expression (less common, useful for debugging)
+const add = function sum(x, y) {
+  return x + y;
+};
+
+// Calling the function via the variable
+farewell("Bob"); // Output: Goodbye, Bob!
+let result = add(5, 3); // result = 8
+console.log(result);
+</code></pre>
+                 <ul>
+                      <li>Function expressions are *not* hoisted in the same way as declarations. You cannot call a function expression before its definition in the code.</li>
+                 </ul>
+                  <p>We will also cover Arrow Functions later this week, which provide a more concise syntax for function expressions.</p>
+            </div>
+        </section>
+
+        <section id="function-parameters" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Function Parameters and Arguments.</h3>
+                <p>Parameters are the names listed in the function definition (placeholders for inputs), while arguments are the actual values passed to the function when it is called.</p>
+                <h4>Passing Arguments</h4>
+                <p>Arguments are passed to functions based on their position.</p>
+                <pre><code class="code-snippet ">function displayInfo(username, age) {
+  console.log(`Username: ${username}, Age: ${age}`);
+}
+
+displayInfo("Charlie", 35); // "Charlie" maps to username, 35 maps to age
+</code></pre>
+                <h4>Default Parameters (ES6+)</h4>
+                <p>You can provide default values for parameters, which are used if an argument is not provided for that parameter during the function call.</p>
+                <pre><code class="code-snippet ">function createMessage(text, sender = "System") { // "System" is the default
+  console.log(`From ${sender}: ${text}`);
+}
+
+createMessage("File saved successfully."); // Output: From System: File saved successfully.
+createMessage("Need assistance!", "User123"); // Output: From User123: Need assistance!
+</code></pre>
+                <h4>Rest Parameters (ES6+)</h4>
+                <p>The rest parameter syntax (...parameterName) allows a function to accept an indefinite number of arguments as an array. It must be the last parameter in the function definition.</p>
+                 <pre><code class="code-snippet ">function sumAll(...numbers) { // Collects all arguments into the 'numbers' array
+  let total = 0;
+  for (let num of numbers) {
+    total += num;
+  }
+  return total;
+}
+
+console.log(sumAll(1, 2, 3));       // Output: 6
+console.log(sumAll(10, 20, 30, 40)); // Output: 100
+console.log(sumAll(5));            // Output: 5
+</code></pre>
+            </div>
+        </section>
+
+        <section id="function-return" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Returning Values from Functions.</h3>
+                <p>Functions often compute a value and need to send it back to the part of the code that called them. This is done using the return statement.</p>
+                <h4>The return Statement</h4>
+                <p>When a return statement is executed, the function immediately stops executing and sends the specified value back to the caller.</p>
+                <pre><code class="code-snippet ">function multiply(a, b) {
+  return a * b; // Returns the product of a and b
+  // Any code after the return statement in the same block is unreachable
+  console.log("This won't execute");
+}
+
+let product = multiply(6, 7); // The returned value (42) is stored in 'product'
+console.log(product); // Output: 42
+</code></pre>
+                <h4>Returning Multiple Values</h4>
+                <p>While a function can only have one return statement execute, you can return multiple values by returning them within an array or an object.</p>
+                <pre><code class="code-snippet ">// Returning multiple values using an array
+function getCoordinates() {
+  let x = 10;
+  let y = 25;
+  return [x, y]; // Return an array
+}
+
+let coords = getCoordinates();
+let xPos = coords[0]; // 10
+let yPos = coords[1]; // 25
+console.log(`Position: x=${xPos}, y=${yPos}`);
+
+// Returning multiple values using an object
+function getUserData() {
+    return { username: 'Dave', id: 102 }; // Return an object
+}
+
+let userData = getUserData();
+console.log(`Username: ${userData.username}, ID: ${userData.id}`);
+</code></pre>
+                <h4>Returning undefined</h4>
+                <p>If a function doesn't have an explicit return statement, or if it has a return; statement with no value, it implicitly returns undefined.</p>
+                 <pre><code class="code-snippet ">function logMessage(msg) {
+  console.log(msg);
+  // No return statement here
+}
+
+let returnValue = logMessage("Testing"); // Logs "Testing" to console
+console.log(returnValue); // Output: undefined</code></pre>
+            </div>
+        </section>
+
+        <section id="variable-scope" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Scope of Variables (Global, Function, Block).</h3>
+                <p>Scope determines the accessibility (visibility) of variables. Where a variable is declared affects where it can be used in your code.</p>
+                <h4>Global Scope</h4>
+                <p>Variables declared outside of any function or block have global scope. They can be accessed from anywhere in your JavaScript code (including inside functions).</p>
+                <pre><code class="code-snippet ">let globalVar = "I am global";
+
+function checkGlobal() {
+  console.log(globalVar); // Accessible inside the function
+}
+
+checkGlobal(); // Output: I am global
+console.log(globalVar); // Also accessible outside
+</code></pre>
+                <p>Relying heavily on global variables is generally discouraged as it can lead to naming conflicts and make code harder to manage.</p>
+
+                <h4>Function Scope (var)</h4>
+                <p>Variables declared using var (the older way) inside a function have function scope. They are accessible anywhere within that function, even before their declaration (due to hoisting, where their declaration, but not assignment, is moved to the top), but not outside the function.</p>
+                <pre><code class="code-snippet ">function functionScopeTest() {
+  if (true) {
+    var message = "Hello from var";
+  }
+  console.log(message); // Accessible here - Output: Hello from var
+}
+functionScopeTest();
+// console.log(message); // Error: message is not defined (outside function scope)
+</code></pre>
+
+                <h4>Block Scope (let and const)</h4>
+                <p>Variables declared using let and const (introduced in ES6) have block scope. They are only accessible within the block ({...}) in which they are defined (e.g., inside an if statement, a for loop, or a function).</p>
+                 <pre><code class="code-snippet ">function blockScopeTest() {
+  let functionLevel = "I'm function-scoped (using let)";
+  if (true) {
+    let blockVar = "I am block-scoped";
+    const blockConst = "Me too!";
+    console.log(blockVar);   // Accessible here
+    console.log(blockConst); // Accessible here
+    console.log(functionLevel); // Outer scope 'let' is accessible
+  }
+  // console.log(blockVar); // Error: blockVar is not defined here
+  // console.log(blockConst); // Error: blockConst is not defined here
+}
+blockScopeTest();
+</code></pre>
+                <p>Block scoping with let and const helps prevent errors and makes code more predictable compared to var's function scoping. It's the preferred way in modern JavaScript.</p>
+            </div>
+        </section>
+
+        <section id="arrow-functions" class="full-width content-block scroll-fade-in">
+              <div class="container">
+                 <h3>Arrow Functions (ES6+).</h3>
+                 <p>Arrow functions provide a more concise syntax for writing function expressions. They are especially useful for simple, inline functions.</p>
+                 <h4>Syntax Variations</h4>
+                 <pre><code class="code-snippet ">// 1. Basic syntax with multiple parameters
+const add = (x, y) => {
+  return x + y;
+};
+
+// 2. If only one parameter, parentheses are optional
+const square = x => {
+  return x * x;
+};
+
+// 3. If the function body is a single expression,
+//    curly braces and 'return' can be omitted (implicit return)
+const double = num => num * 2;
+
+// 4. No parameters requires empty parentheses
+const getRandom = () => Math.random();
+
+console.log(add(5, 4));     // Output: 9
+console.log(square(6));   // Output: 36
+console.log(double(10));  // Output: 20
+console.log(getRandom()); // Output: (a random number between 0 and 1)
+</code></pre>
+                 <h4>Key Differences from Regular Functions</h4>
+                 <ul>
+                      <li><strong>Concise Syntax:</strong> Often shorter to write.</li>
+                      <li><strong>No arguments object:</strong> Arrow functions don't have their own arguments object (use rest parameters ...args instead).</li>
+                      <li><strong>this binding:</strong> Arrow functions do *not* have their own this context. They inherit this from the surrounding (lexical) scope where they were defined. This is a significant difference and often helpful in avoiding this-related confusion, especially with callbacks and methods. We'll revisit this in more detail later.</li>
+                 </ul>
+                 <pre><code class="code-snippet ">// Example showing 'this' difference (conceptual - more relevant in Week 10/OOP)
+/*
+let myObject = {
+  value: 10,
+  regularMethod: function() {
+     console.log(this.value); // 'this' refers to myObject
+     setTimeout(function() {
+         // console.log(this.value); // 'this' here is different (often window/global), causes error or undefined
+     }, 100);
+  },
+  arrowMethod: function() {
+     console.log(this.value); // 'this' refers to myObject
+     setTimeout(() => {
+         console.log(this.value); // Arrow function inherits 'this' from arrowMethod scope, logs 10
+     }, 100);
+  }
+};
+myObject.arrowMethod();
+*/
+</code></pre>
+                 <p>Arrow functions are widely used in modern JavaScript, especially with array methods like map, filter, and forEach.</p>
+              </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 JSLearn - Your JavaScript Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro &amp; Setup</a>
+                <a href="Week1.html#what-is-js-section">What is JS?</a>
+                <a href="Week1.html#why-learn-section">Why Learn?</a>
+                <a href="Week1.html#setup-section">Setup Env</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#arithmetic-operators">Arithmetic Ops</a>
+                <a href="Week2.html#comparison-operators">Comparison Ops</a>
+                <a href="Week2.html#logical-operators">Logical Ops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#interaction-output">Output</a>
+                <a href="Week3.html#interaction-input">Input</a>
+                <a href="Week3.html#string-properties">Properties</a>
+                <a href="Week3.html#string-methods">Methods</a>
+                <a href="Week3.html#template-literals">Literals</a>
+                 <a href="Week3.html#dom-intro">DOM Intro</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#conditional-logic">Logic</a>
+                <a href="Week4.html#if-statement">if</a>
+                <a href="Week4.html#else-if-statement">else if</a>
+                <a href="Week4.html#else-statement">else</a>
+                <a href="Week4.html#truthy-falsy">Truthy/Falsy</a>
+                <a href="Week4.html#switch-statement">switch</a>
+                <a href="Week4.html#ternary-operator">Ternary Op</a>
+                <a href="Week4.html#nested-if">Nested if</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#for-loops">for Loops</a>
+                 <a href="Week5.html#while-loops">while Loops</a>
+                 <a href="Week5.html#do-while-loops">do...while</a>
+                 <a href="Week5.html#break-continue">break/continue</a>
+                 <a href="Week5.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#array-intro">Array Intro</a>
+                <a href="Week6.html#array-indexing">Indexing &amp; Modifying</a>
+                <a href="Week6.html#array-methods">Common Methods</a>
+                <a href="Week6.html#array-iteration">Iteration Methods</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#object-literals">Object Literals</a>
+                <a href="Week7.html#object-properties">Properties</a>
+                <a href="Week7.html#object-methods">Methods</a>
+                <a href="Week7.html#object-iteration">Iteration</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="Week8.html#function-declaration">Declaration/Expression</a>
+                <a href="Week8.html#function-parameters">Parameters</a>
+                <a href="Week8.html#function-return">Returning Values</a>
+                <a href="Week8.html#variable-scope">Scope</a>
+                <a href="Week8.html#arrow-functions">Arrow Functions</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#what-is-dom">DOM Intro</a>
+                <a href="Week9.html#selecting-elements">Selecting Elements</a>
+                <a href="Week9.html#manipulating-dom">Manipulating</a>
+                <a href="Week9.html#event-handling">Events</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#callbacks">Callbacks</a>
+                <a href="Week10.html#closures">Closures</a>
+                <a href="Week10.html#iife">IIFE</a>
+                 <a href="Week10.html#this-keyword">`this` Keyword</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#error-types">Error Types</a>
+                <a href="Week11.html#debugging">Debugging</a>
+                <a href="Week11.html#try-catch">Try/Catch</a>
+                <a href="Week11.html#throw-statement">Throw</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week12.html#es6-overview">ES6+ Overview</a>
+                 <a href="Week12.html#js-modules">Modules</a>
+                 <a href="Week12.html#async-intro">Async Intro</a>
+                 <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

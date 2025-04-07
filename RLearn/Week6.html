@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Learning - Week 6: Control Flow - Loops</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="r.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .r-blue { color: #276DC3; /* Example R blue */ }
+        body.dark-mode .r-blue { color: #75AADB; /* Lighter R blue for dark mode */ }
+        /* Style for R code comments (if different highlighting needed) */
+        .code-r-comment { color: #008000; font-style: italic; } /* Example: Green comment */
+        body.dark-mode .code-r-comment { color: #77dd77; }
+        /* Style for assignment operator */
+        .code-r-assign { color: #cc7832; } /* Example color */
+        body.dark-mode .code-r-assign { color: #ffc66d; }
+         /* Style for R keywords/functions if needed */
+        .code-r-keyword { color: #0000ff; } /* Example: blue */
+        body.dark-mode .code-r-keyword { color: #87CEFA; } /* Example: light blue */
+    </style>
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="r-blue">R</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#for-loops">for Loops</a></li>
+                <li><a href="#while-loops">while Loops</a></li>
+                <li><a href="#break-next">break/next</a></li>
+                 <li><a href="#nested-loops">Nested Loops</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 6: Automating Repetitive Tasks with Loops</h1>
+                <p class="tagline">Learn how to use `for` and `while` loops in R to execute code repeatedly.</p>
+                <a href="#for-loops" class="button">Explore Chapter 6</a>
+            </div>
+        </section>
+
+        <section id="for-loops" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 6: Repeating Actions with Loops</h2>
+                <h3>`for` Loops: Iterating Over Sequences.</h3>
+                <p>Loops are essential for automating repetitive tasks. A `for` loop in R iterates over each element in a sequence (like a vector or list), executing a block of code for each element.</p>
+                <h4>Syntax</h4>
+                <pre><code class="code-snippet"><span class="code-r-keyword">for</span> (variable <span class="code-r-keyword">in</span> sequence) {
+  <span class="code-r-comment"># Code block to execute for each element in 'sequence'</span>
+  <span class="code-r-comment"># 'variable' takes the value of the current element</span>
+  statement1
+  statement2
+  <span class="code-r-comment"># ...</span>
+}</code></pre>
+                <ul>
+                    <li>The `for` keyword starts the loop.</li>
+                    <li>`variable` is a temporary variable that holds the current element from the `sequence` during each iteration.</li>
+                    <li>`in` separates the variable from the sequence being iterated over.</li>
+                    <li>`sequence` is typically a vector or list (or other iterable object).</li>
+                    <li>The code block to be executed is enclosed in curly braces `{}`.</li>
+                </ul>
+                <h4>Iterating Over a Vector</h4>
+                <pre><code class="code-snippet">fruits <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-string">"apple"</span>, <span class="code-string">"banana"</span>, <span class="code-string">"cherry"</span>)
+
+<span class="code-r-keyword">for</span> (fruit <span class="code-r-keyword">in</span> fruits) {
+  <span class="code-function">print</span>(<span class="code-function">paste</span>(<span class="code-string">"Current fruit:"</span>, fruit))
+}
+<span class="code-r-comment"># Output:</span>
+<span class="code-r-comment"># [1] "Current fruit: apple"</span>
+<span class="code-r-comment"># [1] "Current fruit: banana"</span>
+<span class="code-r-comment"># [1] "Current fruit: cherry"</span>
+</code></pre>
+                <h4>Iterating Over a Sequence of Numbers</h4>
+                 <p>Often, you'll want to loop a specific number of times or over indices. The colon operator `:` is useful for creating integer sequences.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Loop 5 times (i will be 1, 2, 3, 4, 5)</span>
+<span class="code-r-keyword">for</span> (i <span class="code-r-keyword">in</span> <span class="code-number">1</span>:<span class="code-number">5</span>) {
+  <span class="code-function">print</span>(<span class="code-function">paste</span>(<span class="code-string">"Iteration number:"</span>, i))
+}
+
+<span class="code-r-comment"># Iterating through indices of a vector</span>
+my_vector <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-number">10</span>, <span class="code-number">20</span>, <span class="code-number">30</span>)
+<span class="code-r-keyword">for</span> (i <span class="code-r-keyword">in</span> <span class="code-number">1</span>:<span class="code-function">length</span>(my_vector)) {
+  <span class="code-function">print</span>(<span class="code-function">paste</span>(<span class="code-string">"Element at index"</span>, i, <span class="code-string">"is"</span>, my_vector[i]))
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="while-loops" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                 <h3>`while` Loops: Repeating Based on a Condition.</h3>
+                 <p>A `while` loop repeatedly executes a block of code as long as a specified logical condition remains `TRUE`.</p>
+                 <h4>Syntax</h4>
+                <pre><code class="code-snippet"><span class="code-r-keyword">while</span> (condition) {
+  <span class="code-r-comment"># Code block to execute as long as 'condition' is TRUE</span>
+  statement1
+  statement2
+  <span class="code-r-comment"># ...</span>
+  <span class="code-r-comment"># IMPORTANT: Something inside the loop must eventually make 'condition' FALSE!</span>
+}</code></pre>
+                 <ul>
+                     <li>The `while` keyword is followed by the condition in parentheses `()`.</li>
+                     <li>The condition must evaluate to a single `TRUE` or `FALSE`.</li>
+                     <li>The code block in braces `{}` executes repeatedly.</li>
+                     <li><strong>Crucially, the code within the loop must modify variables involved in the condition so that it eventually becomes `FALSE`. Otherwise, the loop will run forever (an infinite loop).</strong></li>
+                 </ul>
+                <h4>Example: Counter</h4>
+                <pre><code class="code-snippet">count <span class="code-r-assign"><-</span> <span class="code-number">1</span>
+
+<span class="code-r-keyword">while</span> (count <= <span class="code-number">5</span>) {
+  <span class="code-function">print</span>(<span class="code-function">paste</span>(<span class="code-string">"Count is:"</span>, count))
+  count <span class="code-r-assign"><-</span> count + <span class="code-number">1</span> <span class="code-r-comment"># Increment count to eventually stop the loop</span>
+}
+<span class="code-r-comment"># Output:</span>
+<span class="code-r-comment"># [1] "Count is: 1"</span>
+<span class="code-r-comment"># [1] "Count is: 2"</span>
+<span class="code-r-comment"># [1] "Count is: 3"</span>
+<span class="code-r-comment"># [1] "Count is: 4"</span>
+<span class="code-r-comment"># [1] "Count is: 5"</span>
+</code></pre>
+                 <h4>Example: Waiting for a condition</h4>
+                 <pre><code class="code-snippet">value <span class="code-r-assign"><-</span> <span class="code-number">0</span>
+<span class="code-r-keyword">while</span> (value < <span class="code-number">0.9</span>) {
+  value <span class="code-r-assign"><-</span> <span class="code-function">runif</span>(<span class="code-number">1</span>) <span class="code-r-comment"># Generate a random number between 0 and 1</span>
+  <span class="code-function">print</span>(<span class="code-function">paste</span>(<span class="code-string">"Current random value:"</span>, value))
+}
+<span class="code-function">print</span>(<span class="code-string">"Found a value >= 0.9!"</span>)</code></pre>
+            </div>
+        </section>
+
+        <section id="break-next" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                 <h3>`break` and `next` Statements: Controlling Loop Execution.</h3>
+                <p>You can alter the standard flow of loops using the `break` and `next` statements.</p>
+                <h4>`break` Statement</h4>
+                <p>The `break` statement immediately terminates the innermost loop (`for` or `while`) it is contained within. Execution continues with the first statement after the terminated loop.</p>
+                <pre><code class="code-snippet"><span class="code-r-keyword">for</span> (i <span class="code-r-keyword">in</span> <span class="code-number">1</span>:<span class="code-number">10</span>) {
+  <span class="code-function">print</span>(i)
+  <span class="code-r-keyword">if</span> (i == <span class="code-number">5</span>) {
+    <span class="code-function">print</span>(<span class="code-string">"Found 5, stopping loop."</span>)
+    <span class="code-r-keyword">break</span> <span class="code-r-comment"># Exit the loop</span>
+  }
+}
+<span class="code-r-comment"># Output: 1 2 3 4 5 "Found 5, stopping loop."</span>
+</code></pre>
+                <h4>`next` Statement</h4>
+                 <p>The `next` statement skips the rest of the current iteration of a loop and immediately proceeds to the next iteration. It's similar to `continue` in other languages like Python.</p>
+                 <pre><code class="code-snippet"><span class="code-r-keyword">for</span> (i <span class="code-r-keyword">in</span> <span class="code-number">1</span>:<span class="code-number">7</span>) {
+  <span class="code-r-keyword">if</span> (i %% <span class="code-number">2</span> == <span class="code-number">0</span>) { <span class="code-r-comment"># Check if i is even</span>
+    <span class="code-function">print</span>(<span class="code-function">paste</span>(<span class="code-string">"Skipping even number:"</span>, i))
+    <span class="code-r-keyword">next</span> <span class="code-r-comment"># Go to the next iteration</span>
+  }
+  <span class="code-function">print</span>(<span class="code-function">paste</span>(<span class="code-string">"Processing odd number:"</span>, i))
+}
+<span class="code-r-comment"># Output:</span>
+<span class="code-r-comment"># [1] "Processing odd number: 1"</span>
+<span class="code-r-comment"># [1] "Skipping even number: 2"</span>
+<span class="code-r-comment"># [1] "Processing odd number: 3"</span>
+<span class="code-r-comment"># [1] "Skipping even number: 4"</span>
+<span class="code-r-comment"># [1] "Processing odd number: 5"</span>
+<span class="code-r-comment"># [1] "Skipping even number: 6"</span>
+<span class="code-r-comment"># [1] "Processing odd number: 7"</span>
+</code></pre>
+            </div>
+        </section>
+
+        <section id="nested-loops" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                 <h3>Nested Loops: Loops Inside Loops.</h3>
+                 <p>You can place one loop inside another loop. This is useful for tasks like iterating over elements in a matrix or other multi-dimensional structures.</p>
+                <h4>Example: Iterating through a Matrix</h4>
+                 <pre><code class="code-snippet">my_matrix <span class="code-r-assign"><-</span> <span class="code-function">matrix</span>(<span class="code-number">1</span>:<span class="code-number">6</span>, nrow <span class="code-r-assign">=</span> <span class="code-number">2</span>, ncol <span class="code-r-assign">=</span> <span class="code-number">3</span>)
+<span class="code-function">print</span>(my_matrix)
+
+<span class="code-r-comment"># Loop through rows</span>
+<span class="code-r-keyword">for</span> (row_num <span class="code-r-keyword">in</span> <span class="code-number">1</span>:<span class="code-function">nrow</span>(my_matrix)) {
+  <span class="code-r-comment"># Loop through columns for the current row</span>
+  <span class="code-r-keyword">for</span> (col_num <span class="code-r-keyword">in</span> <span class="code-number">1</span>:<span class="code-function">ncol</span>(my_matrix)) {
+    element <span class="code-r-assign"><-</span> my_matrix[row_num, col_num]
+    <span class="code-function">print</span>(<span class="code-function">paste</span>(<span class="code-string">"Element at row"</span>, row_num, <span class="code-string">"col"</span>, col_num, <span class="code-string">"is:"</span>, element))
+  }
+}</code></pre>
+                 <p>The inner loop completes all its iterations for each single iteration of the outer loop. Be mindful that nested loops can become computationally intensive if the sequences are very large.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RLearn - Your R Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#what-is-r">What is R?</a>
+                <a href="Week1.html#why-learn-r">Why Learn R?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#rstudio-tour">RStudio Tour</a>
+                <a href="Week1.html#first-commands">First Commands</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#vectors">Vectors</a>
+                <a href="Week2.html#operators">Operators</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#vector-ops">Vector Ops</a>
+                 <a href="Week3.html#matrices">Matrices</a>
+                 <a href="Week3.html#getting-help">Getting Help</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#lists">Lists</a>
+                <a href="Week4.html#data-frames">Data Frames</a>
+                <a href="Week4.html#viewing-data">Viewing Data</a>
+                <a href="Week4.html#import-csv">Import CSV</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#conditionals">Conditional Logic</a>
+                <a href="Week5.html#if-statement">if Statement</a>
+                <a href="Week5.html#else-if-else">else if / else</a>
+                <a href="Week5.html#ifelse-function">ifelse() Function</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="#for-loops">for Loops</a>
+                <a href="#while-loops">while Loops</a>
+                <a href="#break-next">break / next</a>
+                <a href="#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#function-definition">Function Def</a>
+                <a href="Week7.html#parameters">Parameters</a>
+                <a href="Week7.html#return-values">Return Values</a>
+                <a href="Week7.html#scope">Scope</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#tidyverse">Tidyverse</a>
+                <a href="Week8.html#dplyr">dplyr Intro</a>
+                <a href="Week8.html#core-verbs">Core Verbs</a>
+                <a href="Week8.html#pipe">Pipe Operator</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#group-summarise">Group & Summarise</a>
+                <a href="Week9.html#tidyr">tidyr Intro</a>
+                <a href="Week9.html#pivoting">Pivoting</a>
+                <a href="Week9.html#joins">Joining Data</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#grammar-graphics">Grammar of Graphics</a>
+                <a href="Week10.html#ggplot2">ggplot2 Intro</a>
+                <a href="Week10.html#geoms">Geoms</a>
+                <a href="Week10.html#aesthetics">Aesthetics</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#customizing">Customizing Plots</a>
+                <a href="Week11.html#saving-plots">Saving Plots</a>
+                <a href="Week11.html#basic-stats">Basic Stats</a>
+                <a href="Week11.html#summary">summary()</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#project">Mini Project</a>
+                <a href="Week12.html#r-markdown">R Markdown</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+        </div>
+
+</body>
+</html>

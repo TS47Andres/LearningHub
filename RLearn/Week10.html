@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Learning - Week 10: Intro Data Visualization (ggplot2)</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="r.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .r-blue { color: #276DC3; /* Example R blue */ }
+        body.dark-mode .r-blue { color: #75AADB; /* Lighter R blue for dark mode */ }
+        /* Style for R code comments (if different highlighting needed) */
+        .code-r-comment { color: #008000; font-style: italic; } /* Example: Green comment */
+        body.dark-mode .code-r-comment { color: #77dd77; }
+        /* Style for assignment operator */
+        .code-r-assign { color: #cc7832; } /* Example color */
+        body.dark-mode .code-r-assign { color: #ffc66d; }
+         /* Style for R keywords/functions if needed */
+        .code-r-keyword { color: #0000ff; } /* Example: blue */
+        body.dark-mode .code-r-keyword { color: #87CEFA; } /* Example: light blue */
+         /* Style for pipe operator */
+         .code-r-pipe { color: #b58900; font-weight: bold;} /* Example: Brown/bold */
+         body.dark-mode .code-r-pipe { color: #ffdb58; }
+         /* Style for ggplot plus */
+         .code-ggplot-plus { color: #d0104c; font-weight: bold; } /* Example: Red/bold */
+         body.dark-mode .code-ggplot-plus { color: #ff69b4; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="r-blue">R</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#grammar-graphics">Grammar of Graphics</a></li>
+                <li><a href="#ggplot2-intro">ggplot2 Intro</a></li>
+                <li><a href="#ggplot-aes">ggplot() & aes()</a></li>
+                <li><a href="#geoms">Geoms</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 10: Visualizing Data with ggplot2</h1>
+                <p class="tagline">Unlock the power of the Grammar of Graphics to create insightful plots.</p>
+                <a href="#grammar-graphics" class="button">Explore Chapter 10</a>
+            </div>
+        </section>
+
+        <section id="grammar-graphics" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 10: Introduction to Data Visualization with `ggplot2`</h2>
+                <h3>The Grammar of Graphics.</h3>
+                <p>`ggplot2` is based on the "Grammar of Graphics", a concept developed by Leland Wilkinson. This grammar provides a framework for thinking about and building plots layer by layer. Instead of thinking in terms of specific chart types (like scatter plot, bar chart), you think about the components that make up a graphic:</p>
+                <ul>
+                    <li><strong>Data:</strong> The dataset containing the variables you want to plot.</li>
+                    <li><strong>Aesthetics (`aes`):</strong> How variables in your data are mapped to visual properties (aesthetics) of the plot. Examples include mapping variables to x-position, y-position, color, size, shape, fill, etc.</li>
+                    <li><strong>Geometric Objects (`geoms`):</strong> The visual elements used to represent the data points (e.g., points, lines, bars, boxes).</li>
+                    <li><strong>Facets:</strong> Creating subplots based on subsets of the data.</li>
+                    <li><strong>Statistics (`stats`):</strong> Statistical transformations applied to the data (e.g., calculating counts for a bar chart, smoothing lines).</li>
+                    <li><strong>Coordinates (`coords`):</strong> The coordinate system used (e.g., Cartesian, polar).</li>
+                    <li><strong>Theme:</strong> Controls the non-data elements of the plot (e.g., background, grid lines, fonts, titles).</li>
+                </ul>
+                <p>By combining these components, you can create a vast array of customized and informative visualizations.</p>
+            </div>
+        </section>
+
+        <section id="ggplot2-intro" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Introduction to `ggplot2`.</h3>
+                <p>`ggplot2` is the premier data visualization package in the Tidyverse and one of the most popular in R overall. It implements the Grammar of Graphics, allowing you to build complex plots iteratively.</p>
+                <h4>Installation and Loading</h4>
+                <p>Like other packages, `ggplot2` needs to be installed once and loaded in each R session where you want to use it. It's included in the `tidyverse` package.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Install ggplot2 (if not already installed via tidyverse)</span>
+<span class="code-r-comment"># install.packages("ggplot2")</span>
+
+<span class="code-r-comment"># Install the complete Tidyverse (includes ggplot2)</span>
+<span class="code-r-comment"># install.packages("tidyverse")</span>
+
+<span class="code-r-comment"># Load the package</span>
+<span class="code-function">library</span>(ggplot2)
+<span class="code-r-comment"># Or, if you installed the whole suite:</span>
+<span class="code-r-comment"># library(tidyverse)</span>
+</code></pre>
+                <h4>Basic Plotting Template</h4>
+                <p>A typical `ggplot2` call follows this structure:</p>
+                <pre><code class="code-snippet"><span class="code-function">ggplot</span>(data = &lt;DATA_FRAME&gt;, mapping = <span class="code-function">aes</span>(&lt;AESTHETIC_MAPPINGS&gt;)) <span class="code-ggplot-plus">+</span>
+  &lt;GEOM_FUNCTION&gt;()</code></pre>
+                <ul>
+                    <li>`ggplot()`: Initializes the plot, specifying the default dataset and optionally the default aesthetic mappings.</li>
+                    <li>`aes()`: Defines the aesthetic mappings – how variables map to visual properties.</li>
+                    <li>`+`: Layers are added to the plot using the plus sign.</li>
+                    <li>`<GEOM_FUNCTION>()`: Specifies the type of geometric object to draw (e.g., `geom_point()`, `geom_bar()`).</li>
+                </ul>
+                <p>We'll use the built-in `mpg` dataset (available when `ggplot2` is loaded) for examples. It contains fuel economy data for cars.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># View structure of mpg dataset</span>
+<span class="code-function">str</span>(mpg)</code></pre>
+            </div>
+        </section>
+
+        <section id="ggplot-aes" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                 <h3>`ggplot()` and `aes()`: Data and Aesthetics.</h3>
+                <h4>`ggplot()`</h4>
+                 <p>The `ggplot()` function creates the initial plot object. Its most important argument is `data`, which specifies the data frame containing the variables you want to plot.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Initialize a plot using the mpg dataset</span>
+<span class="code-function">ggplot</span>(data = mpg) <span class="code-r-comment"># Creates an empty grey background (no layers yet)</span>
+</code></pre>
+                 <h4>`aes()` - Aesthetic Mappings</h4>
+                 <p>The `aes()` function defines how variables from your data frame are mapped to visual properties (aesthetics) of the plot layers (geoms). Common aesthetics include:</p>
+                 <ul>
+                     <li>`x`: Position on the x-axis.</li>
+                     <li>`y`: Position on the y-axis.</li>
+                     <li>`color` (or `colour`): Color of points, lines, outlines.</li>
+                     <li>`fill`: Fill color of shapes like bars, boxes.</li>
+                     <li>`size`: Size of points or thickness of lines.</li>
+                     <li>`shape`: Shape of points.</li>
+                     <li>`alpha`: Transparency.</li>
+                 </ul>
+                 <p>You specify mappings within `aes()` like `aes(x = variable1, y = variable2, color = variable3)`.</p>
+                 <pre><code class="code-snippet"><span class="code-r-comment"># Initialize plot, mapping 'displ' (engine displacement) to x-axis</span>
+<span class="code-r-comment"># and 'hwy' (highway miles per gallon) to y-axis</span>
+<span class="code-function">ggplot</span>(data = mpg, mapping = <span class="code-function">aes</span>(x = displ, y = hwy))
+<span class="code-r-comment"># Still an empty plot, but R now knows which variables map to axes</span>
+</code></pre>
+                <p>Mappings defined in the main `ggplot()` call are inherited by subsequent geom layers unless overridden.</p>
+            </div>
+        </section>
+
+        <section id="geoms" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Geometric Objects (Geoms): Representing Data Visually.</h3>
+                <p>Geoms determine how the data is actually represented on the plot. You add geoms as layers using the `+` operator. Each `geom_*()` function requires aesthetic mappings (defined either in `ggplot()` or within the geom itself).</p>
+
+                <h4>`geom_point()`: Scatter Plots</h4>
+                 <p>Used to create scatter plots, showing the relationship between two continuous variables.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Scatter plot of engine displacement vs highway mpg</span>
+<span class="code-function">ggplot</span>(data = mpg, mapping = <span class="code-function">aes</span>(x = displ, y = hwy)) <span class="code-ggplot-plus">+</span>
+  <span class="code-function">geom_point</span>()
+
+<span class="code-r-comment"># Map 'class' variable to point color</span>
+<span class="code-function">ggplot</span>(data = mpg, mapping = <span class="code-function">aes</span>(x = displ, y = hwy, color = class)) <span class="code-ggplot-plus">+</span>
+  <span class="code-function">geom_point</span>()
+
+<span class="code-r-comment"># Map 'cyl' (cylinders) to point size (use sparingly)</span>
+<span class="code-function">ggplot</span>(data = mpg, mapping = <span class="code-function">aes</span>(x = displ, y = hwy, size = cyl)) <span class="code-ggplot-plus">+</span>
+  <span class="code-function">geom_point</span>(alpha = <span class="code-number">0.5</span>) <span class="code-r-comment"># Add transparency</span>
+</code></pre>
+
+                <h4>`geom_smooth()`: Adding Trend Lines</h4>
+                 <p>Often used with `geom_point()` to show trends in the data.</p>
+                 <pre><code class="code-snippet"><span class="code-r-comment"># Scatter plot with a smoothed conditional mean line</span>
+<span class="code-function">ggplot</span>(data = mpg, mapping = <span class="code-function">aes</span>(x = displ, y = hwy)) <span class="code-ggplot-plus">+</span>
+  <span class="code-function">geom_point</span>() <span class="code-ggplot-plus">+</span>
+  <span class="code-function">geom_smooth</span>() <span class="code-r-comment"># Uses a default smoothing method</span>
+</code></pre>
+
+                <h4>`geom_bar()` / `geom_col()`: Bar Charts</h4>
+                 <p>`geom_bar()` automatically counts occurrences of categories on the x-axis (`stat="count"` is default). `geom_col()` is used when you have a variable representing the bar height already.</p>
+                 <pre><code class="code-snippet"><span class="code-r-comment"># Bar chart of car counts by 'class'</span>
+<span class="code-function">ggplot</span>(data = mpg, mapping = <span class="code-function">aes</span>(x = class)) <span class="code-ggplot-plus">+</span>
+  <span class="code-function">geom_bar</span>()
+
+<span class="code-r-comment"># Bar chart with 'drv' (drive type) mapped to fill color</span>
+<span class="code-function">ggplot</span>(data = mpg, mapping = <span class="code-function">aes</span>(x = class, fill = drv)) <span class="code-ggplot-plus">+</span>
+  <span class="code-function">geom_bar</span>(position = <span class="code-string">"dodge"</span>) <span class="code-r-comment"># Dodge places bars side-by-side</span>
+</code></pre>
+
+                 <h4>Other Common Geoms</h4>
+                 <ul>
+                     <li>`geom_line()`: For line graphs (connects points in order).</li>
+                     <li>`geom_boxplot()`: For box-and-whisker plots summarizing distributions.</li>
+                     <li>`geom_histogram()`: For visualizing the distribution of a single continuous variable.</li>
+                     <li>`geom_density()`: For smoothed density estimates.</li>
+                    <li>`geom_text()` / `geom_label()`: For adding text annotations.</li>
+                 </ul>
+                <p>Experimenting with different geoms and aesthetic mappings is key to effective data visualization with `ggplot2`!</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RLearn - Your R Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#what-is-r">What is R?</a>
+                <a href="Week1.html#why-learn-r">Why Learn R?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#rstudio-tour">RStudio Tour</a>
+                <a href="Week1.html#first-commands">First Commands</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#vectors">Vectors</a>
+                <a href="Week2.html#operators">Operators</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#vector-ops">Vector Ops</a>
+                 <a href="Week3.html#matrices">Matrices</a>
+                 <a href="Week3.html#getting-help">Getting Help</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#lists">Lists</a>
+                <a href="Week4.html#data-frames">Data Frames</a>
+                <a href="Week4.html#viewing-data">Viewing Data</a>
+                <a href="Week4.html#import-csv">Import CSV</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#conditionals">Conditional Logic</a>
+                <a href="Week5.html#if-statement">if Statement</a>
+                <a href="Week5.html#else-if-else">else if / else</a>
+                <a href="Week5.html#ifelse-function">ifelse() Function</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#for-loops">for Loops</a>
+                <a href="Week6.html#while-loops">while Loops</a>
+                <a href="Week6.html#break-next">break / next</a>
+                <a href="Week6.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#function-definition">Function Definition</a>
+                <a href="Week7.html#parameters">Parameters</a>
+                <a href="Week7.html#return-values">Return Values</a>
+                <a href="Week7.html#scope">Scope (Environments)</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#tidyverse">Tidyverse</a>
+                <a href="Week8.html#dplyr-intro">dplyr Intro</a>
+                <a href="Week8.html#core-verbs">Core Verbs</a>
+                <a href="Week8.html#pipe">Pipe Operator</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#group-summarise">Group & Summarise</a>
+                <a href="Week9.html#tidyr">tidyr Intro</a>
+                <a href="Week9.html#pivoting">Pivoting</a>
+                <a href="Week9.html#joins">Joining Data</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="#grammar-graphics">Grammar of Graphics</a>
+                <a href="#ggplot2-intro">ggplot2 Intro</a>
+                <a href="#ggplot-aes">ggplot() & aes()</a>
+                <a href="#geoms">Geoms</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#customizing">Customizing Plots</a>
+                <a href="Week11.html#saving-plots">Saving Plots</a>
+                <a href="Week11.html#basic-stats">Basic Stats</a>
+                <a href="Week11.html#summary">summary()</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#project">Mini Project</a>
+                <a href="Week12.html#r-markdown">R Markdown</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+        </div>
+
+</body>
+</html>

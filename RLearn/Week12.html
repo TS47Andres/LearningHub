@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Learning - Week 12: Project & Next Steps</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="r.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .r-blue { color: #276DC3; /* Example R blue */ }
+        body.dark-mode .r-blue { color: #75AADB; /* Lighter R blue for dark mode */ }
+        /* Style for R code comments (if different highlighting needed) */
+        .code-r-comment { color: #008000; font-style: italic; } /* Example: Green comment */
+        body.dark-mode .code-r-comment { color: #77dd77; }
+        /* Style for assignment operator */
+        .code-r-assign { color: #cc7832; } /* Example color */
+        body.dark-mode .code-r-assign { color: #ffc66d; }
+         /* Style for R keywords/functions if needed */
+        .code-r-keyword { color: #0000ff; } /* Example: blue */
+        body.dark-mode .code-r-keyword { color: #87CEFA; } /* Example: light blue */
+         /* Style for pipe operator */
+         .code-r-pipe { color: #b58900; font-weight: bold;} /* Example: Brown/bold */
+         body.dark-mode .code-r-pipe { color: #ffdb58; }
+         /* Style for ggplot plus */
+         .code-ggplot-plus { color: #d0104c; font-weight: bold; } /* Example: Red/bold */
+         body.dark-mode .code-ggplot-plus { color: #ff69b4; }
+         /* Style for R Markdown Chunks */
+         pre code.rmd-chunk { background-color: #e8e8e8; border: 1px solid #ccc; display: block; padding: 10px; }
+         body.dark-mode pre code.rmd-chunk { background-color: #333; border: 1px solid #555;}
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="r-blue">R</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#project">Mini Project</a></li>
+                <li><a href="#r-markdown">R Markdown</a></li>
+                <li><a href="#next-steps">Next Steps</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 12: Applying Your Skills & Moving Forward</h1>
+                <p class="tagline">Consolidate your learning with a project, discover R Markdown, and plan your next steps in R.</p>
+                <a href="#project" class="button">Explore Chapter 12</a>
+            </div>
+        </section>
+
+        <section id="project" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 12: Consolidation and Future Learning</h2>
+                <h3>Mini Data Analysis Project.</h3>
+                <p>It's time to put everything you've learned together! This mini-project aims to consolidate your skills in data import, manipulation with `dplyr`, and visualization with `ggplot2`.</p>
+                <h4>Project Goal</h4>
+                 <p>Choose a built-in R dataset (like `mtcars`, `diamonds` from ggplot2, or `iris`) or find a simple, clean CSV dataset online (e.g., from Kaggle Datasets, data.gov). Your goal is to explore the data and answer a few simple questions using R.</p>
+                <h4>Suggested Steps</h4>
+                <ol>
+                    <li><strong>Choose Data & Define Questions:</strong> Select your dataset. Formulate 2-3 specific questions you want to answer using the data (e.g., "What is the relationship between horsepower and fuel efficiency in `mtcars`?", "How does diamond price vary by cut in `diamonds`?", "Are there differences in petal length between iris species?").</li>
+                    <li><strong>Load Data & Packages:</strong> Load the necessary packages (`tidyverse` or `dplyr`/`ggplot2`). If using an external CSV, import it using `read.csv()` or `readr::read_csv()`.</li>
+                    <li><strong>Explore & Clean (if necessary):</strong> Use functions like `str()`, `summary()`, `head()` to understand the data. Check for missing values (`NA`) and decide how to handle them (e.g., remove rows using `na.omit()` or `dplyr::filter()`).</li>
+                    <li><strong>Manipulate & Analyze:</strong> Use `dplyr` verbs (`filter`, `select`, `group_by`, `summarise`, `mutate`, `arrange`) to process the data relevant to your questions. Calculate summary statistics.</li>
+                    <li><strong>Visualize:</strong> Create informative plots using `ggplot2` (`geom_point`, `geom_boxplot`, `geom_bar`, etc.) to illustrate your findings. Customize labels and themes for clarity.</li>
+                    <li><strong>Conclude:</strong> Briefly summarize your findings based on your analysis and visualizations. What answers did you find to your initial questions?</li>
+                </ol>
+                <p>The process of working through even a small project like this will significantly reinforce your understanding and build confidence.</p>
+            </div>
+        </section>
+
+        <section id="r-markdown" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Introduction to R Markdown.</h3>
+                <p>R Markdown (`.Rmd`) is a powerful framework that allows you to create dynamic, reproducible documents directly from R. It integrates your R code, the output of that code (including plots and tables), and narrative text (written using Markdown syntax) into a single file.</p>
+                <h4>Why Use R Markdown?</h4>
+                <ul>
+                    <li><strong>Reproducibility:</strong> Your analysis, results, and explanations are all in one place, making it easy for others (and your future self) to understand and reproduce your work.</li>
+                    <li><strong>Automation:</strong> If your data changes, you simply "knit" the R Markdown document again to update all results and outputs automatically.</li>
+                    <li><strong>Multiple Output Formats:</strong> You can render your `.Rmd` file into various formats like HTML, PDF, Word documents, presentations (slides), dashboards, and more, often with minimal changes to the source file.</li>
+                    <li><strong>Integration:</strong> Seamlessly blends code, output, and text.</li>
+                </ul>
+                <h4>Basic Structure</h4>
+                <p>An R Markdown file typically consists of:</p>
+                <ol>
+                    <li><strong>YAML Header:</strong> At the top, enclosed by `---`, specifies metadata like title, author, date, and output format.</li>
+                    <li><strong>Markdown Text:</strong> Narrative text formatted using standard Markdown syntax (headings, lists, bold, italics, links, etc.).</li>
+                    <li><strong>Code Chunks:</strong> Blocks of R code enclosed by `` ```{r chunk-name, options} `` and `` ``` ``. When the document is rendered ("knitted"), the code in these chunks is executed, and the results (text output, plots, tables) can be embedded in the final document according to chunk options (e.g., `echo=TRUE` shows code, `eval=TRUE` runs code, `fig.show='hold'` shows plots).</li>
+                </ol>
+                 <pre><code class="code-snippet">---
+title: "My Analysis Report"
+author: "Your Name"
+date: "`r Sys.Date()`" <span class="code-r-comment"># R code can be embedded here!</span>
+output: html_document
+---
+
+## Introduction
+
+This is regular text written using Markdown. We can include **bold** and *italic* text.
+
+Here is an R code chunk:
+
+` `` `{r setup, include=FALSE}
+# Chunk options like include=FALSE prevent code and output from appearing
+library(tidyverse)
+` `` `
+
+## Analysis Section
+
+We loaded the `mpg` dataset earlier. Let's create a plot:
+
+` `` `{r scatterplot, echo=TRUE, fig.cap="MPG Scatter Plot"}
+# This code and its output (the plot) will be included
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(color = class)) +
+  labs(title = "Displacement vs Highway MPG")
+` `` `
+
+The plot above shows the relationship between engine displacement and fuel efficiency.</code></pre>
+                <p>To create and render R Markdown documents, you'll typically use RStudio, which has excellent built-in support (File > New File > R Markdown..., and the "Knit" button).</p>
+            </div>
+        </section>
+
+        <section id="next-steps" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                 <h3>Where to Go Next?</h3>
+                 <p>Congratulations on completing this 12-week introduction to R! You've built a solid foundation in R programming, data manipulation, and visualization. But the R world is vast! Here are some ideas for continuing your journey:</p>
+                 <h4>Deepen Your Skills</h4>
+                 <ul>
+                     <li><strong>More Tidyverse:</strong> Explore `purrr` for functional programming, `lubridate` for dates/times, `stringr` for text manipulation in more detail.</li>
+                     <li><strong>Advanced ggplot2:</strong> Learn about facets, coordinate systems, advanced theme customization, and extension packages like `ggrepel` or `patchwork`.</li>
+                     <li><strong>Statistical Modeling:</strong> Dive into R's powerful modeling capabilities, covering linear models (`lm`), generalized linear models (`glm`), and machine learning packages (`caret`, `tidymodels`, `randomForest`, `xgboost`).</li>
+                    <li><strong>R Programming Concepts:</strong> Learn about R's object-oriented systems (S3, S4, R6), debugging tools, profiling, and creating your own packages.</li>
+                 </ul>
+                 <h4>Explore Specific Domains</h4>
+                 <ul>
+                     <li><strong>Time Series Analysis:</strong> Packages like `forecast`, `xts`, `zoo`.</li>
+                     <li><strong>Spatial Analysis:</strong> Packages like `sf`, `sp`, `raster`, `leaflet`.</li>
+                     <li><strong>Bioinformatics:</strong> The Bioconductor project offers a huge range of specialized packages.</li>
+                    <li><strong>Interactive Visualizations & Dashboards:</strong> Packages like `shiny`, `plotly`, `flexdashboard`.</li>
+                 </ul>
+                 <h4>Engage with the Community</h4>
+                 <ul>
+                     <li><strong>R-bloggers:</strong> An aggregator of R news and tutorials from numerous blogs.</li>
+                     <li><strong>Stack Overflow:</strong> Search for answers to specific R questions (use the `[r]` tag) and contribute answers once you're comfortable.</li>
+                     <li><strong>Twitter/Mastodon:</strong> Follow R users and hashtags like `#rstats`.</li>
+                     <li><strong>Conferences:</strong> Look for useR! (international) or local R conferences and user groups.</li>
+                     <li><strong>Contribute:</strong> Find an open-source R package you use and contribute bug reports, documentation improvements, or even code.</li>
+                 </ul>
+                 <p>The key is to keep practicing, work on projects that interest you, and never stop learning. Good luck!</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RLearn - Your R Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#what-is-r">What is R?</a>
+                <a href="Week1.html#why-learn-r">Why Learn R?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#rstudio-tour">RStudio Tour</a>
+                <a href="Week1.html#first-commands">First Commands</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#vectors">Vectors</a>
+                <a href="Week2.html#operators">Operators</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#vector-ops">Vector Ops</a>
+                 <a href="Week3.html#matrices">Matrices</a>
+                 <a href="Week3.html#getting-help">Getting Help</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#lists">Lists</a>
+                <a href="Week4.html#data-frames">Data Frames</a>
+                <a href="Week4.html#viewing-data">Viewing Data</a>
+                <a href="Week4.html#import-csv">Import CSV</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#conditionals">Conditional Logic</a>
+                <a href="Week5.html#if-statement">if Statement</a>
+                <a href="Week5.html#else-if-else">else if / else</a>
+                <a href="Week5.html#ifelse-function">ifelse() Function</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#for-loops">for Loops</a>
+                <a href="Week6.html#while-loops">while Loops</a>
+                <a href="Week6.html#break-next">break / next</a>
+                <a href="Week6.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#function-definition">Function Definition</a>
+                <a href="Week7.html#parameters">Parameters</a>
+                <a href="Week7.html#return-values">Return Values</a>
+                <a href="Week7.html#scope">Scope (Environments)</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#tidyverse">Tidyverse</a>
+                <a href="Week8.html#dplyr-intro">dplyr Intro</a>
+                <a href="Week8.html#core-verbs">Core Verbs</a>
+                <a href="Week8.html#pipe">Pipe Operator</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#group-summarise">Group & Summarise</a>
+                <a href="Week9.html#tidyr">tidyr Intro</a>
+                <a href="Week9.html#pivoting">Pivoting</a>
+                <a href="Week9.html#joins">Joining Data</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#grammar-graphics">Grammar of Graphics</a>
+                <a href="Week10.html#ggplot2-intro">ggplot2 Intro</a>
+                <a href="Week10.html#ggplot-aes">ggplot() & aes()</a>
+                <a href="Week10.html#geoms">Geoms</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#customizing">Customizing Plots</a>
+                <a href="Week11.html#saving-plots">Saving Plots</a>
+                <a href="Week11.html#basic-stats">Basic Stats</a>
+                <a href="Week11.html#summary-func">summary() Function</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="#project">Mini Project</a>
+                <a href="#r-markdown">R Markdown</a>
+                <a href="#next-steps">Next Steps</a>
+            </div>
+        </div>
+        </div>
+
+</body>
+</html>

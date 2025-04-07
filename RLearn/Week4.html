@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Learning - Week 4: Lists & Data Frames</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="r.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .r-blue { color: #276DC3; /* Example R blue */ }
+        body.dark-mode .r-blue { color: #75AADB; /* Lighter R blue for dark mode */ }
+        /* Style for R code comments (if different highlighting needed) */
+        .code-r-comment { color: #008000; font-style: italic; } /* Example: Green comment */
+        body.dark-mode .code-r-comment { color: #77dd77; }
+        /* Style for assignment operator */
+        .code-r-assign { color: #cc7832; } /* Example color */
+        body.dark-mode .code-r-assign { color: #ffc66d; }
+         /* Style for R keywords/functions if needed */
+        .code-r-keyword { color: #0000ff; } /* Example: blue */
+        body.dark-mode .code-r-keyword { color: #87CEFA; } /* Example: light blue */
+    </style>
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="r-blue">R</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#lists">Lists</a></li>
+                <li><a href="#data-frames">Data Frames</a></li>
+                <li><a href="#viewing-data">Viewing Data</a></li>
+                <li><a href="#import-csv">Import CSV</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 4: Organizing Data with Lists & Data Frames</h1>
+                <p class="tagline">Learn about R's flexible lists and the essential data frame structure.</p>
+                <a href="#lists" class="button">Explore Chapter 4</a>
+            </div>
+        </section>
+
+        <section id="lists" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 4: Data Structures - Lists & Data Frames</h2>
+                <h3>Introduction to Lists: Flexible Containers.</h3>
+                <p>While atomic vectors require all elements to be of the same type, R <strong>lists</strong> are more flexible. A list is an ordered collection of components (elements) where each component can be of a <strong>different data type</strong>. Lists can contain vectors, matrices, other lists, functions, or any R object.</p>
+
+                <h4>Creating Lists</h4>
+                <p>Lists are created using the `list()` function. You can also name the components of a list during creation.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># A list with components of different types</span>
+my_list <span class="code-r-assign"><-</span> <span class="code-function">list</span>(<span class="code-number">10</span>, <span class="code-string">"hello"</span>, <span class="code-r-keyword">TRUE</span>, <span class="code-r-keyword">c</span>(<span class="code-number">1</span>,<span class="code-number">2</span>,<span class="code-number">3</span>))
+<span class="code-function">print</span>(my_list)
+
+<span class="code-r-comment"># A named list</span>
+student_info <span class="code-r-assign"><-</span> <span class="code-function">list</span>(
+  name <span class="code-r-assign">=</span> <span class="code-string">"Alice"</span>,
+  age <span class="code-r-assign">=</span> <span class="code-number">21L</span>,
+  major <span class="code-r-assign">=</span> <span class="code-string">"Statistics"</span>,
+  courses <span class="code-r-assign">=</span> <span class="code-r-keyword">c</span>(<span class="code-string">"STAT101"</span>, <span class="code-string">"MATH200"</span>, <span class="code-string">"CS150"</span>)
+)
+<span class="code-function">print</span>(student_info)</code></pre>
+
+                <h4>Accessing List Elements</h4>
+                <p>Accessing elements in lists requires different operators depending on whether you want to extract a sub-list or a specific component:</p>
+                <ul>
+                    <li><strong>`[]` (Single Brackets):</strong> Extracts a <strong>sub-list</strong>. The result is always a list.
+                         <pre><code class="code-snippet">student_info[<span class="code-number">1</span>]       <span class="code-r-comment"># Output: A list containing the 'name' component: list(name = "Alice")</span>
+student_info[<span class="code-r-keyword">c</span>(<span class="code-number">1</span>,<span class="code-number">3</span>)]  <span class="code-r-comment"># Output: A list containing 'name' and 'major'</span></code></pre>
+                    </li>
+                    <li><strong>`[[]]` (Double Brackets):</strong> Extracts a <strong>single component</strong> from the list. The result's type depends on the type of the extracted component. Can use index or name.
+                        <pre><code class="code-snippet">student_info[[<span class="code-number">1</span>]]        <span class="code-r-comment"># Output: [1] "Alice" (Character vector)</span>
+student_info[[<span class="code-string">"major"</span>]]   <span class="code-r-comment"># Output: [1] "Statistics" (Character vector)</span>
+student_info[[<span class="code-number">4</span>]]        <span class="code-r-comment"># Output: [1] "STAT101" "MATH200" "CS150" (Character vector)</span></code></pre>
+                    </li>
+                    <li><strong>`$` Operator:</strong> A convenient shortcut to extract a single component by its <strong>name</strong>.
+                        <pre><code class="code-snippet">student_info$name    <span class="code-r-comment"># Output: [1] "Alice"</span>
+student_info$courses <span class="code-r-comment"># Output: [1] "STAT101" "MATH200" "CS150"</span></code></pre>
+                    </li>
+                </ul>
+                <p>Understanding the difference between `[]` and `[[]]` or `$` is crucial when working with lists.</p>
+            </div>
+        </section>
+
+        <section id="data-frames" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Introduction to Data Frames.</h3>
+                <p>Data frames are the most important data structure for storing and working with tabular data (like spreadsheets or database tables) in R. They are two-dimensional structures where columns can contain different data types, but all elements within a single column must be of the same type.</p>
+                <p>Technically, a data frame is a special kind of list where each component is an atomic vector (or factor, matrix, etc.) of the <strong>same length</strong>. Each component represents a column, and the elements within each component represent the rows.</p>
+
+                <h4>Creating Data Frames</h4>
+                <p>You typically create data frames using the `data.frame()` function, providing named vectors as arguments, where each argument becomes a column.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Create vectors for columns</span>
+ids <span class="code-r-assign"><-</span> <span class="code-number">1</span>:<span class="code-number">3</span>
+names <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-string">"Alice"</span>, <span class="code-string">"Bob"</span>, <span class="code-string">"Charlie"</span>)
+ages <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-number">25</span>, <span class="code-number">30</span>, <span class="code-number">22</span>)
+is_student <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-r-keyword">TRUE</span>, <span class="code-r-keyword">FALSE</span>, <span class="code-r-keyword">TRUE</span>)
+
+<span class="code-r-comment"># Create the data frame</span>
+my_dataframe <span class="code-r-assign"><-</span> <span class="code-function">data.frame</span>(
+  ID <span class="code-r-assign">=</span> ids,
+  Name <span class="code-r-assign">=</span> names,
+  Age <span class="code-r-assign">=</span> ages,
+  Student <span class="code-r-assign">=</span> is_student
+)
+
+<span class="code-function">print</span>(my_dataframe)
+<span class="code-r-comment"># Output:</span>
+<span class="code-r-comment">#   ID    Name Age Student</span>
+<span class="code-r-comment"># 1  1   Alice  25    TRUE</span>
+<span class="code-r-comment"># 2  2     Bob  30   FALSE</span>
+<span class="code-r-comment"># 3  3 Charlie  22    TRUE</span>
+</code></pre>
+                <p>Data frames are central to data analysis in R, and many packages (like `dplyr` and `ggplot2`) are designed to work primarily with them.</p>
+            </div>
+        </section>
+
+        <section id="viewing-data" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Viewing and Inspecting Data Frames.</h3>
+                <p>When working with data frames, especially larger ones, it's essential to have tools to inspect their structure and content without printing the entire dataset.</p>
+                <ul>
+                    <li><strong>`head(df, n=6)`:</strong> Shows the first `n` rows (default is 6).</li>
+                    <li><strong>`tail(df, n=6)`:</strong> Shows the last `n` rows (default is 6).</li>
+                    <li><strong>`str(df)`:</strong> Displays the <strong>str</strong>ucture compactly, showing the total observations (rows), variables (columns), the data type of each column, and the first few values. Highly recommended!</li>
+                    <li><strong>`summary(df)`:</strong> Provides a statistical summary for each column (min, max, mean, median, quartiles for numeric; counts for factors/characters).</li>
+                    <li><strong>`dim(df)`:</strong> Returns the dimensions (number of rows and columns) as a vector `c(rows, cols)`.</li>
+                    <li><strong>`nrow(df)`:</strong> Returns the number of rows.</li>
+                    <li><strong>`ncol(df)`:</strong> Returns the number of columns.</li>
+                     <li><strong>`names(df)` or `colnames(df)`:</strong> Returns the column names.</li>
+                     <li><strong>`rownames(df)`:</strong> Returns the row names (often just sequence numbers by default).</li>
+                </ul>
+                 <pre><code class="code-snippet"><span class="code-r-comment"># Assuming 'my_dataframe' from the previous section</span>
+<span class="code-function">head</span>(my_dataframe)
+<span class="code-function">str</span>(my_dataframe)
+<span class="code-function">summary</span>(my_dataframe)
+<span class="code-function">dim</span>(my_dataframe)
+<span class="code-function">names</span>(my_dataframe)</code></pre>
+            </div>
+        </section>
+
+        <section id="import-csv" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Importing Data from CSV Files.</h3>
+                <p>Often, your data will reside in external files. Comma-Separated Value (CSV) files are a very common format for storing tabular data. R provides functions to easily read these files into data frames.</p>
+                <h4>The `read.csv()` Function</h4>
+                <p>The primary function for reading CSV files is `read.csv()`.</p>
+                 <pre><code class="code-snippet">my_data <span class="code-r-assign"><-</span> <span class="code-function">read.csv</span>(file <span class="code-r-assign">=</span> <span class="code-string">"path/to/your/file.csv"</span>)</code></pre>
+                <p>Key arguments for `read.csv()`:</p>
+                <ul>
+                     <li><strong>`file`:</strong> The path to the CSV file (a string). This can be a local path or even a URL.</li>
+                     <li><strong>`header`:</strong> A logical value (`TRUE` or `FALSE`) indicating whether the first row of the file contains variable (column) names. Default is `TRUE`.</li>
+                     <li><strong>`sep`:</strong> The character used to separate values within a row. Default is a comma (`","`). For tab-separated files, use `"\t"`.</li>
+                     <li><strong>`stringsAsFactors`:</strong> Historically, this defaulted to `TRUE`, converting character columns into factors. In recent R versions (4.0.0+), the default is `FALSE`, which is often preferred. It's good practice to set it explicitly (`stringsAsFactors = FALSE`) if you want character data to remain as character vectors.</li>
+                    <li><strong>`na.strings`:</strong> A character vector of strings that should be interpreted as missing values (`NA`).</li>
+                 </ul>
+                 <h4>Example</h4>
+                 <p>Imagine you have a CSV file named `data.csv` in the same directory as your R script with the following content:</p>
+                 <pre><code>Name,Score,Group
+David,85,A
+Eve,92,B
+Frank,78,A</code></pre>
+                 <p>You would read it like this:</p>
+                 <pre><code class="code-snippet">dataset <span class="code-r-assign"><-</span> <span class="code-function">read.csv</span>(<span class="code-string">"data.csv"</span>, stringsAsFactors <span class="code-r-assign">=</span> <span class="code-r-keyword">FALSE</span>)
+<span class="code-function">print</span>(dataset)
+<span class="code-function">str</span>(dataset)</code></pre>
+                <p>There are other functions like `read.table()` (more general) and functions from packages like `readr` (part of the Tidyverse, often faster and more consistent) for reading various types of delimited files.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RLearn - Your R Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#what-is-r">What is R?</a>
+                <a href="Week1.html#why-learn-r">Why Learn R?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#rstudio-tour">RStudio Tour</a>
+                <a href="Week1.html#first-commands">First Commands</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#vectors">Vectors</a>
+                <a href="Week2.html#operators">Operators</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#vector-ops">Vector Ops</a>
+                 <a href="Week3.html#matrices">Matrices</a>
+                 <a href="Week3.html#getting-help">Getting Help</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="#lists">Lists</a>
+                <a href="#data-frames">Data Frames</a>
+                <a href="#viewing-data">Viewing Data</a>
+                <a href="#import-csv">Import CSV</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#conditionals">Conditionals</a>
+                <a href="Week5.html#if-else">if/else/else if</a>
+                <a href="Week5.html#ifelse">ifelse()</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#for-loops">for Loops</a>
+                <a href="Week6.html#while-loops">while Loops</a>
+                <a href="Week6.html#break-next">break/next</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#function-definition">Function Def</a>
+                <a href="Week7.html#parameters">Parameters</a>
+                <a href="Week7.html#return-values">Return Values</a>
+                <a href="Week7.html#scope">Scope</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#tidyverse">Tidyverse</a>
+                <a href="Week8.html#dplyr">dplyr Intro</a>
+                <a href="Week8.html#core-verbs">Core Verbs</a>
+                <a href="Week8.html#pipe">Pipe Operator</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#group-summarise">Group & Summarise</a>
+                <a href="Week9.html#tidyr">tidyr Intro</a>
+                <a href="Week9.html#pivoting">Pivoting</a>
+                <a href="Week9.html#joins">Joining Data</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#grammar-graphics">Grammar of Graphics</a>
+                <a href="Week10.html#ggplot2">ggplot2 Intro</a>
+                <a href="Week10.html#geoms">Geoms</a>
+                <a href="Week10.html#aesthetics">Aesthetics</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#customizing">Customizing Plots</a>
+                <a href="Week11.html#saving-plots">Saving Plots</a>
+                <a href="Week11.html#basic-stats">Basic Stats</a>
+                <a href="Week11.html#summary">summary()</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#project">Mini Project</a>
+                <a href="Week12.html#r-markdown">R Markdown</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+        </div>
+
+</body>
+</html>

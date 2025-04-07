@@ -1,0 +1,792 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lexend:wght@100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Shippori+Antique&display=swap');
+
+/* Import Remixicon font library */
+@import 'remixicon/fonts/remixicon.css';
+
+/* --- R Theme Colors --- */
+:root {
+    --r-blue: #0073B7; /* Primary R-like Blue */
+    --r-grey: #808080; /* Standard Grey */
+    --r-silver: #C0C0C0; /* Lighter Silver/Grey Accent */
+    --light-bg: #FFFFFF; /* White background for light mode */
+    --light-text: #333333; /* Dark grey text for light mode */
+    --dark-bg: #1a1a1a; /* Dark background for dark mode */
+    --dark-text: #e0e0e0; /* Light grey text for dark mode */
+    --code-bg: #282c34; /* Kept from original for code snippets */
+    --code-text: #abb2bf; /* Kept from original for code snippets */
+    --header-footer-bg-light: var(--r-blue);
+    --header-footer-text-light: var(--light-bg);
+    --header-footer-bg-dark: #222; /* Darker background for dark mode header/footer */
+    --header-footer-text-dark: var(--dark-text);
+    --link-hover-light: var(--r-grey);
+    --link-hover-dark: var(--r-silver);
+    --button-bg-light: var(--r-grey);
+    --button-text-light: var(--light-bg);
+    --button-hover-light: #666666; /* Darker grey */
+    --button-bg-dark: var(--r-silver);
+    --button-text-dark: var(--dark-bg);
+    --button-hover-dark: #a0a0a0; /* Darker silver */
+}
+
+
+/* --- General Body and Typography --- */
+body {
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    background-color: var(--light-bg); /* Light mode background */
+    color: var(--light-text); /* Light mode text */
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h2, h3, h4 {
+    color: var(--r-blue); /* R Blue for headings */
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+}
+
+h3, h4 {
+    font-family: "Merriweather", serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* --- Header and Navigation --- */
+header {
+    background-color: var(--light-bg); 
+    color: var(--light-text); 
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.python-yellow {
+    color: #ffc107; /* Keep original yellow for PyLearn logo specific part */
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: var(--r-blue); 
+    text-decoration: none;
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: medium;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--link-hover-light); 
+}
+
+/* --- Main Content Area --- */
+main {
+    padding-top: 70px;
+}
+
+.full-width {
+    width: 100%;
+    padding: 40px 0;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.container > p {
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: medium;
+}
+
+.content-block {
+    background-color: var(--light-bg); /* Default light background */
+}
+
+.bg-light {
+    background-color: #f9f9f9; /* Slightly off-white for variation */
+}
+
+/* Common styles for lists, tables within content blocks */
+.content-block ul,
+.content-block ol,
+.content-block table {
+    padding-left: 25px;
+    margin-bottom: 15px;
+}
+
+.content-block table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* Common styles for list items, table headers/cells */
+.content-block li,
+.content-block th,
+.content-block td {
+    margin-bottom: 8px;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Specific table cell/header borders */
+.content-block th,
+.content-block td {
+    border: 1px solid #ddd;
+}
+
+/* Specific list item styling */
+.content-block ul li,
+.content-block ol li {
+    border: none;
+    padding: 0;
+    text-align: inherit;
+    font-family: "Lexend", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 15px;
+}
+
+/* Table header specific style */
+.content-block th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* --- Code Snippet Highlighting (PRESERVED) --- */
+pre code.code-snippet {
+    font-family: 'Courier New', monospace;
+    background-color: var(--code-bg); /* Dark background for code */
+    color: var(--code-text); /* Light text color for code */
+    padding: 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    white-space: pre-wrap; /* Wrap long lines */
+    margin-bottom: 1em;
+    display: block;
+}
+
+/* Syntax highlighting colors (PRESERVED) */
+.code-keyword { color: #c678dd; }
+.code-string { color: #98c379; }
+.code-comment { color: #5c6370; font-style: italic; }
+.code-function { color: #61afef; }
+.code-parameter { color: #d19a66; }
+.code-variable { color: #e06c75; }
+.code-number { color: #d19a66; }
+
+/* --- Hero Section --- */
+.hero {
+    background-color: var(--r-blue); /* R Blue background */
+    color: var(--light-bg); /* White text */
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+
+.hero-content h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: var(--light-bg); /* Ensure hero H1 is light */
+}
+
+.hero-content .tagline {
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #e0f2f7; /* Lighter text on blue */
+    letter-spacing: 2px;
+}
+
+/* --- Buttons --- */
+.button {
+    display: inline-block;
+    background-color: var(--button-bg-light); /* R Grey */
+    color: var(--button-text-light); /* White text */
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: medium;
+    transition: background-color 0.3s ease;
+    border: none; /* Ensure no border */
+}
+
+.button:hover {
+    background-color: var(--button-hover-light); /* Darker Grey */
+}
+
+/* --- Syllabus Section (index Page Specific) --- */
+.syllabus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.syllabus-card {
+    background-color: var(--light-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.syllabus-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.syllabus-card h3 {
+    color: var(--r-blue);
+    margin-bottom: 10px;
+    font-weight: bolder;
+}
+
+.syllabus-card p {
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 0.95rem;
+}
+
+.syllabus-card ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 15px;
+}
+
+.syllabus-card li {
+    margin-bottom: 5px;
+    border: none;
+    list-style-type: none;
+    display: flex;
+    align-items: baseline;
+}
+
+/* Custom bullet points using Remixicon */
+.syllabus-card li::before {
+    font-family: 'RemixIcon';
+    content: '\EA6C';
+    font-size: 0.9em;
+    color: var(--r-blue);
+    margin-right: 0.6em;
+    flex-shrink: 0;
+}
+
+.syllabus-link {
+    display: inline-block;
+    background-color: var(--r-blue); /* R Blue link background */
+    color: var(--light-bg); /* White text */
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-family: 'Merriweather', serif;
+    font-size: 15px;
+}
+
+.syllabus-link:hover {
+    background-color: #005a8c; /* Darker R Blue on hover */
+}
+
+/* --- Scroll Animations (PRESERVED) --- */
+.scroll-fade-in,
+.scroll-slide-left,
+.scroll-slide-right {
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.scroll-fade-in { transform: translateY(20px); }
+.scroll-slide-left { transform: translateX(-50px); }
+.scroll-slide-right { transform: translateX(50px); }
+.scroll-fade-in.show,
+.scroll-slide-left.show,
+.scroll-slide-right.show {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+}
+
+/* --- Dark Mode Toggle Button --- */
+#darkModeToggle {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 101;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 1.2em;
+    line-height: 1;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--light-bg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease;
+    color: var(--light-text); /* Ensure icon color matches */
+}
+
+#darkModeToggle:hover {
+    filter: brightness(90%);
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--header-footer-bg-light);
+    color: var(--header-footer-text-light);
+    text-align: center;
+    padding: 1rem 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 40px;
+}
+
+/* --- Vertical Navigation Styles --- */
+.vertical-nav {
+    position: fixed;
+    left: 15px;
+    top: 80px;
+    width: 170px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    background-color: rgba(0, 115, 183, 0.9); /* Semi-transparent R Blue */
+    border-radius: 5px;
+    z-index: 99;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    padding-bottom: 10px;
+}
+
+.vertical-nav a.nav-main-link,
+.vertical-nav button.nav-main-link {
+    display: block;
+    color: var(--light-bg);
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+    padding: 12px 15px;
+    width: 100%;
+    text-align: left;
+    font-size: 1em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: "Lexend", sans-serif;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.vertical-nav button.nav-main-link i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+}
+
+.vertical-nav button.nav-main-link.active i {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.vertical-nav a.nav-main-link:hover,
+.vertical-nav button.nav-main-link:hover {
+    background-color: var(--link-hover-light); /* Grey hover */
+    color: var(--light-bg); /* White text */
+}
+
+.nav-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-item:last-child {
+    border-bottom: none;
+}
+
+.sub-nav {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.sub-nav.show {
+    max-height: 500px;
+}
+
+.sub-nav a {
+    display: block;
+    color: #e0e0e0;
+    text-decoration: none;
+    padding: 8px 15px 8px 25px;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+    font-family: "Lexend", sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sub-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Hamburger Menu Button (Hidden on Desktop) --- */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0 5px;
+    z-index: 110;
+    line-height: 1;
+}
+.menu-toggle .ri-close-line { display: none; }
+.menu-toggle.active .ri-menu-line { display: none; }
+.menu-toggle.active .ri-close-line { display: block; }
+
+
+/* --- Dark Mode Styles --- */
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+body.dark-mode header {
+    background-color: var(--header-footer-bg-dark);
+    color: var(--header-footer-text-dark);
+    border-bottom: 1px solid #444;
+}
+
+body.dark-mode nav ul li a {
+    color: var(--header-footer-text-dark);
+}
+
+body.dark-mode nav ul li a:hover {
+    color: var(--link-hover-dark); /* Silver hover */
+}
+
+body.dark-mode .hero {
+    background-color: #005a8c; /* Darker R Blue */
+    color: var(--dark-text);
+}
+
+body.dark-mode .hero-content h1 {
+     color: var(--dark-text); /* Ensure hero H1 is light in dark mode */
+}
+
+
+body.dark-mode .hero-content .tagline {
+    color: #c0e0ef; /* Lighter tagline text */
+}
+
+body.dark-mode .button {
+    background-color: var(--button-bg-dark); /* Silver button */
+    color: var(--button-text-dark); /* Dark text */
+}
+
+body.dark-mode .button:hover {
+    background-color: var(--button-hover-dark); /* Darker silver */
+}
+
+body.dark-mode #darkModeToggle {
+    background-color: #333;
+    color: var(--dark-text);
+    box-shadow: 0 2px 5px rgba(255,255,255,0.1);
+}
+body.dark-mode #darkModeToggle:hover {
+    filter: brightness(120%);
+}
+
+
+body.dark-mode .content-block {
+    background-color: #2a2a2a; /* Slightly lighter dark bg */
+    color: var(--dark-text);
+}
+
+body.dark-mode .bg-light {
+    background-color: var(--dark-bg); /* Use main dark bg for contrast */
+}
+
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+    color: #5dade2; /* Lighter blue for headings */
+}
+
+body.dark-mode .content-block th,
+body.dark-mode .content-block td {
+    border: 1px solid #444;
+}
+
+/* Reset list item borders in dark mode */
+body.dark-mode .content-block ul li,
+body.dark-mode .content-block ol li {
+    border: none;
+}
+
+body.dark-mode .container a {
+    color: var(--link-hover-dark); /* Use silver for links */
+}
+body.dark-mode .container a:hover {
+     filter: brightness(120%);
+}
+
+
+body.dark-mode .content-block th {
+    background-color: #333;
+    color: #f1f1f1;
+}
+
+body.dark-mode .syllabus-card li {
+    border: none;
+}
+
+body.dark-mode .syllabus-card li::before {
+    color: #5dade2; /* Lighter blue icon */
+}
+
+body.dark-mode footer {
+    background-color: var(--header-footer-bg-dark);
+    color: var(--header-footer-text-dark);
+    border-top: 1px solid #444;
+}
+
+/* index Page Specific Dark Mode */
+body.dark-mode .syllabus-card {
+    background-color: #333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .syllabus-card:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .syllabus-card h3 {
+    color: #5dade2; /* Lighter blue */
+}
+
+body.dark-mode .syllabus-link {
+    background-color: var(--r-blue); /* Keep R Blue */
+    color: var(--light-bg); /* White text */
+}
+
+body.dark-mode .syllabus-link:hover {
+    background-color: #005a8c; /* Darker R Blue */
+}
+
+/* --- Dark mode code highlighting (PRESERVED) --- */
+body.dark-mode pre code.code-snippet {
+    background-color: var(--code-bg); /* Dark background for code */
+    color: var(--code-text); /* Light text color for code */
+    border: 1px solid #444; /* Add subtle border in dark mode */
+}
+body.dark-mode .code-keyword { color: #c678dd; }
+body.dark-mode .code-string { color: #98c379; }
+body.dark-mode .code-comment { color: #5c6370; font-style: italic; }
+body.dark-mode .code-function { color: #61afef; }
+body.dark-mode .code-parameter { color: #d19a66; }
+body.dark-mode .code-variable { color: #e06c75; }
+body.dark-mode .code-number { color: #d19a66; }
+
+/* Dark Mode Vertical Nav */
+body.dark-mode .vertical-nav {
+    background-color: rgba(34, 34, 34, 0.9); /* Dark grey background */
+    box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .vertical-nav a.nav-main-link,
+body.dark-mode .vertical-nav button.nav-main-link {
+    color: var(--dark-text);
+}
+
+body.dark-mode .vertical-nav a.nav-main-link:hover,
+body.dark-mode .vertical-nav button.nav-main-link:hover {
+    background-color: var(--link-hover-dark); /* Silver hover */
+    color: var(--dark-bg); /* Dark text */
+}
+
+body.dark-mode .nav-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .sub-nav {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .sub-nav a {
+    color: #ccc;
+}
+
+body.dark-mode .sub-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+/* --- End Dark Mode Styles --- */
+
+
+/* --- MOBILE RESPONSIVE STYLES (PRESERVED from Original) --- */
+@media (max-width: 768px) {
+
+    /* Basic resets and adjustments */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: hidden; width: 100%; }
+    body { font-size: 14px; -webkit-text-size-adjust: 100%; padding-top: 55px; position: relative; }
+    p, li, h1, h2, h3, h4, .tagline, .logo, nav a, .button, .syllabus-link, footer p, .syllabus-card p { overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; hyphens: auto; max-width: 100%; }
+    .container { padding-left: 12px; padding-right: 12px; }
+
+    /* Font size adjustments */
+    h1, .hero-content h1 { font-size: 1.8rem; line-height: 1.2; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.2rem; }
+    h4 { font-size: 1.0rem; }
+    .full-width { padding: 20px 0; }
+
+    /* Header & Navigation */
+    header { padding: 0.5rem 0; height: 55px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; left: 0; }
+    /* dark mode header already handled */
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 0 15px; height: 100%; position: relative; }
+    .logo { font-size: 1.2rem; margin: 0; flex-shrink: 0; }
+
+    /* Show Hamburger Button, hide desktop nav */
+    .menu-toggle { display: block; order: 3; }
+    header nav > ul { display: none !important; }
+
+    /* Vertical Navigation becomes Sidebar */
+    .vertical-nav {
+        display: block;
+        position: fixed;
+        left: -250px;
+        top: 55px;
+        width: 200px;
+        height: calc(100vh - 55px);
+        z-index: 105;
+        overflow-y: auto;
+        transition: left 0.3s ease-in-out;
+        border-right: 1px solid #444;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        box-shadow: 3px 0px 6px rgba(0,0,0,0.2);
+        /* Background color handled by light/dark mode rules */
+    }
+    body.dark-mode .vertical-nav {
+        border-right: 1px solid #555;
+    }
+
+    /* Active state for sidebar */
+    .vertical-nav.sidebar-active {
+        left: 0;
+    }
+
+    /* Styling within the sidebar */
+    .vertical-nav a.nav-main-link,
+    .vertical-nav button.nav-main-link { padding: 10px 15px; font-size: 0.95rem; }
+    .vertical-nav .sub-nav a { padding: 6px 15px 6px 25px; font-size: 0.85rem; }
+    .vertical-nav .sub-nav { position: static; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; /* background handled by light/dark rules */ }
+    .vertical-nav .sub-nav.show { max-height: 500px; }
+
+    /* Hero Section */
+    .hero-content { padding: 25px 15px; overflow-x: hidden; }
+    .hero-content .tagline { font-size: 0.9rem; margin-bottom: 20px; }
+    .hero-content .button {
+        display: block;
+        margin-top: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+    }
+
+    /* Syllabus Grid */
+    .syllabus-grid { grid-template-columns: 1fr; gap: 15px; }
+    .syllabus-card { padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.08); overflow-x: hidden; }
+    .syllabus-card p { font-size: 0.9rem; }
+    .syllabus-card ul { padding-left: 5px; }
+    .syllabus-card ul li { font-size: 0.85rem; }
+    .syllabus-card li::before { margin-right: 0.5em; }
+    .syllabus-link { padding: 6px 12px; font-size: 0.8rem; }
+
+    /* Content Blocks & Code */
+    .content-block { overflow-x: hidden; }
+    .content-block p, .content-block li { font-size: 0.9rem; line-height: 1.5; }
+    .content-block ul, .content-block ol { padding-left: 20px; }
+    .content-block li { margin-bottom: 6px; }
+    .content-block pre { padding: 10px; font-size: 0.75em; line-height: 1.4; white-space: pre-wrap; word-wrap: break-word; word-break: break-all; overflow-x: auto; max-width: 100%; }
+    pre code.code-snippet { font-size: 1em; display: block; /* background/color handled by light/dark rules */ }
+
+    /* Tables - make them scrollable */
+    .content-block table { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; border: 1px solid #ddd; margin-bottom: 15px; font-size: 0.85rem; }
+    body.dark-mode .content-block table { border: 1px solid #444; }
+    .content-block th, .content-block td { padding: 5px 7px; white-space: normal; }
+
+    /* Dark Mode Toggle Button */
+    #darkModeToggle { position: fixed; top: 70px; right: 15px; padding: 10px; font-size: 1.1em; z-index: 101; }
+
+    /* Footer */
+    footer { padding: 0.8rem 0; font-size: 0.75rem; }
+
+} /* End of @media (max-width: 768px) */
+
+
+/* Optional: Further adjustments for very small screens (PRESERVED) */
+@media (max-width: 480px) {
+    h1, .hero-content h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; }
+    h3 { font-size: 1.1rem; }
+    .logo { font-size: 1.1rem; }
+    .vertical-nav { width: 180px; left: -200px; }
+    #darkModeToggle { top: 65px; right: 10px; padding: 8px; font-size: 1em; }
+}
+/* --- END MOBILE RESPONSIVE STYLES ---  */

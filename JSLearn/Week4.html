@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Learning - Week 4: Conditional Statements</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="javascript.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">JS</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#conditional-logic">Logic</a></li>
+                <li><a href="#if-statement">if</a></li>
+                <li><a href="#else-if-statement">else if</a></li>
+                <li><a href="#else-statement">else</a></li>
+                <li><a href="#truthy-falsy">Truthy/Falsy</a></li>
+                <li><a href="#switch-statement">switch</a></li>
+                <li><a href="#ternary-operator">Ternary Op</a></li>
+                <li><a href="#nested-if">Nested if</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 4: Guiding Your Code with Conditional Logic</h1>
+                <p class="tagline">Learn how to make your JavaScript programs make decisions using if, else if, else, and switch.</p>
+                <a href="#conditional-logic" class="button">Explore Chapter 4</a>
+            </div>
+        </section>
+
+        <section id="conditional-logic" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 4: Making Decisions with if, else if, else, and switch</h2>
+                <h3>Understanding Conditional Logic.</h3>
+                <p>Conditional logic is essential for creating programs that can react differently based on various inputs or situations. It allows your code to follow different paths, making it dynamic and intelligent.</p>
+                <p>In JavaScript, the primary tools for conditional logic are the if, else if, and else statements, along with the switch statement for handling specific multi-way branching scenarios. These constructs evaluate conditions (expressions that result in true or false) to determine which block of code to execute.</p>
+                <p>Think about everyday decisions: "If the traffic light is green, go. Else if it's yellow, slow down. Else (if it's red), stop." Conditional statements in programming mirror this decision-making process.</p>
+            </div>
+        </section>
+
+        <section id="if-statement" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                 <h3>if Statements: Executing Code Based on a Condition.</h3>
+                <p>The if statement executes a block of code only if a specified condition evaluates to true (or a "truthy" value).</p>
+                <h4>Syntax</h4>
+                <pre><code class="code-snippet ">if (condition) {
+  // Code to be executed if the condition is true
+  statement1;
+  statement2;
+  // ... more statements
+}</code></pre>
+                <ul>
+                    <li>The if keyword is followed by a condition enclosed in parentheses ().</li>
+                    <li>The code block to be executed is enclosed in curly braces {}. While braces are optional for a single statement, it's strongly recommended to always use them for clarity and to avoid errors.</li>
+                </ul>
+                <h4>Example</h4>
+                <pre><code class="code-snippet ">let temperature = 25; // degrees Celsius
+
+if (temperature > 20) {
+  console.log("It's a warm day!");
+}</code></pre>
+                <p>In this example, "It's a warm day!" will be printed because the condition temperature > 20 is true.</p>
+            </div>
+        </section>
+
+        <section id="else-if-statement" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                 <h3>else if Statements: Checking Multiple Conditions.</h3>
+                <p>The else if statement allows you to check additional conditions if the preceding if (or else if) condition was false.</p>
+                <h4>Syntax</h4>
+                <pre><code class="code-snippet ">if (condition1) {
+  // Code for condition1 being true
+} else if (condition2) {
+  // Code executed if condition1 is false AND condition2 is true
+} else if (condition3) {
+  // Code executed if condition1 and condition2 are false AND condition3 is true
+} // ... more else if statements can follow
+</code></pre>
+                <ul>
+                    <li>Conditions are checked in order.</li>
+                    <li>As soon as an if or else if condition evaluates to true, its block is executed, and the rest of the chain is skipped.</li>
+                </ul>
+                <h4>Example</h4>
+                <pre><code class="code-snippet ">let score = 78;
+
+if (score >= 90) {
+  console.log("Grade: A");
+} else if (score >= 80) {
+  console.log("Grade: B"); // This block executes
+} else if (score >= 70) {
+  console.log("Grade: C");
+} else {
+  console.log("Grade: D or F");
+}</code></pre>
+                <p>Since score >= 90 is false, it checks score >= 80, which is true. "Grade: B" is printed, and the remaining else if and else are skipped.</p>
+            </div>
+        </section>
+
+        <section id="else-statement" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>else Statements: Providing a Default Action.</h3>
+                <p>The else statement provides a block of code that executes if *none* of the preceding if or else if conditions were true. It acts as a default or fallback case.</p>
+                <h4>Syntax</h4>
+                <pre><code class="code-snippet ">if (condition1) {
+  // Code for condition1 true
+} else if (condition2) {
+  // Code for condition1 false, condition2 true
+} else {
+  // Code executed if ALL preceding conditions (condition1, condition2) are false
+}</code></pre>
+                <ul>
+                    <li>An else statement is optional and must appear last in an if...else if... chain.</li>
+                    <li>It does not have a condition associated with it.</li>
+                </ul>
+                <h4>Example</h4>
+                <pre><code class="code-snippet ">let hour = 20; // 8 PM
+
+if (hour < 12) {
+  console.log("Good morning!");
+} else if (hour < 18) {
+  console.log("Good afternoon!");
+} else {
+  console.log("Good evening!"); // This block executes
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="truthy-falsy" class="full-width content-block scroll-fade-in">
+             <div class="container">
+                 <h3>Truthy and Falsy Values.</h3>
+                <p>In JavaScript, conditions don't strictly need to evaluate to true or false. Any value can be evaluated in a boolean context. Values that evaluate to true are called "truthy", and values that evaluate to false are called "falsy".</p>
+                 <h4>Falsy Values:</h4>
+                 <p>There are only a few falsy values in JavaScript:</p>
+                 <ul>
+                      <li>false</li>
+                      <li>0 (zero)</li>
+                      <li>-0 (minus zero)</li>
+                      <li>0n (BigInt zero)</li>
+                      <li>"" (empty string)</li>
+                      <li>null</li>
+                      <li>undefined</li>
+                      <li>NaN (Not a Number)</li>
+                 </ul>
+                 <p><strong>All other values</strong>, including non-empty strings ("hello"), non-zero numbers (42), objects ({}), and arrays ([]), are <strong>truthy</strong>.</p>
+                 <h4>Example:</h4>
+                 <pre><code class="code-snippet ">let username = ""; // Falsy
+let points = 0;    // Falsy
+let userList = []; // Truthy (even though empty)
+
+if (username) {
+  console.log("Username exists."); // This won't run
+} else {
+  console.log("Please enter a username."); // This will run
+}
+
+if (points) {
+  console.log("You have points!"); // This won't run
+} else {
+    console.log("No points yet."); // This will run
+}
+
+if(userList){
+    console.log("User list exists (might be empty)."); // This WILL run
+}</code></pre>
+                 <p>Understanding truthy/falsy is important for writing concise conditional checks.</p>
+            </div>
+        </section>
+
+        <section id="switch-statement" class="full-width content-block bg-light scroll-slide-left">
+            <div class="container">
+                <h3>switch Statement: Handling Multiple Specific Cases.</h3>
+                <p>The switch statement provides an alternative way to execute different blocks of code based on the value of an expression. It's often cleaner than long if...else if...else chains when you're comparing a single value against multiple specific possibilities.</p>
+                 <h4>Syntax</h4>
+                 <pre><code class="code-snippet ">switch (expression) {
+  case value1:
+    // Code to execute if expression === value1
+    break; // Important: exits the switch
+  case value2:
+    // Code to execute if expression === value2
+    break;
+  // ... more cases
+  default:
+    // Code to execute if no case matches
+}</code></pre>
+                 <ul>
+                      <li>The expression is evaluated once.</li>
+                      <li>Its value is compared strictly (===) against the value of each case.</li>
+                      <li>If a match is found, the code block associated with that case is executed.</li>
+                      <li>The break statement is crucial. It stops the execution within the switch. If omitted, execution will "fall through" to the next case, which is usually unintended.</li>
+                      <li>The default case is optional and executes if no other case matches.</li>
+                 </ul>
+                 <h4>Example</h4>
+                 <pre><code class="code-snippet ">let day = new Date().getDay(); // Returns 0 (Sunday) to 6 (Saturday)
+let dayName;
+
+switch (day) {
+  case 0:
+    dayName = "Sunday";
+    break;
+  case 1:
+    dayName = "Monday";
+    break;
+  case 2:
+    dayName = "Tuesday";
+    break;
+  case 3:
+    dayName = "Wednesday";
+    break;
+  case 4:
+    dayName = "Thursday";
+    break;
+  case 5:
+    dayName = "Friday";
+    break;
+  case 6:
+    dayName = "Saturday";
+    break;
+  default: // Should not happen with getDay()
+    dayName = "Invalid Day";
+}
+console.log("Today is " + dayName);</code></pre>
+            </div>
+        </section>
+
+        <section id="ternary-operator" class="full-width content-block scroll-fade-in">
+              <div class="container">
+                 <h3>Conditional (Ternary) Operator: A Concise if-else.</h3>
+                 <p>The ternary operator is a shorthand way to write a simple if-else statement, especially useful for assigning a value based on a condition.</p>
+                 <h4>Syntax</h4>
+                 <pre><code class="code-snippet ">condition ? valueIfTrue : valueIfFalse</code></pre>
+                 <ul>
+                      <li>If the condition is truthy, the expression evaluates to valueIfTrue.</li>
+                      <li>If the condition is falsy, the expression evaluates to valueIfFalse.</li>
+                 </ul>
+                  <h4>Example</h4>
+                 <pre><code class="code-snippet ">let age = 21;
+let beverage = (age >= 18) ? "Beer" : "Juice";
+console.log("Allowed beverage:", beverage); // Output: Allowed beverage: Beer
+
+let isAuthenticated = false;
+let greeting = isAuthenticated ? "Welcome back!" : "Please log in.";
+console.log(greeting); // Output: Please log in.</code></pre>
+                 <p>While concise, avoid nesting ternary operators excessively as it can quickly become hard to read.</p>
+              </div>
+        </section>
+
+        <section id="nested-if" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                 <h3>Nested if Statements: Conditions within Conditions.</h3>
+                <p>You can place if, else if, and else statements inside the code blocks of other conditional statements. This allows for more complex decision-making logic based on multiple levels of conditions.</p>
+                <h4>Syntax</h4>
+                <pre><code class="code-snippet ">if (outerCondition) {
+  console.log("Outer condition is true.");
+  if (innerCondition) {
+    console.log("Inner condition is also true.");
+  } else {
+    console.log("Inner condition is false.");
+  }
+} else {
+  console.log("Outer condition is false.");
+}</code></pre>
+                <ul>
+                    <li>Pay close attention to curly braces {} to define the scope of each block correctly.</li>
+                    <li>Deeply nested conditionals can become difficult to read and debug. Consider if you can simplify the logic, perhaps by using logical operators (&&, ||) or by breaking the logic into separate functions.</li>
+                </ul>
+                <h4>Example</h4>
+                <pre><code class="code-snippet ">let userRole = "admin";
+let isActive = true;
+
+if (isActive) {
+  console.log("User account is active.");
+  if (userRole === "admin") {
+    console.log("Admin access granted.");
+  } else if (userRole === "editor") {
+    console.log("Editor access granted.");
+  } else {
+    console.log("Standard user access.");
+  }
+} else {
+  console.log("User account is inactive. Access denied.");
+}</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 JSLearn - Your JavaScript Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro & Setup</a>
+                <a href="Week1.html#what-is-js-section">What is JS?</a>
+                <a href="Week1.html#why-learn-section">Why Learn?</a>
+                <a href="Week1.html#setup-section">Setup Env</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#arithmetic-operators">Arithmetic Ops</a>
+                <a href="Week2.html#comparison-operators">Comparison Ops</a>
+                <a href="Week2.html#logical-operators">Logical Ops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#interaction-output">Output</a>
+                <a href="Week3.html#interaction-input">Input</a>
+                <a href="Week3.html#string-properties">Properties</a>
+                <a href="Week3.html#string-methods">Methods</a>
+                <a href="Week3.html#template-literals">Literals</a>
+                 <a href="Week3.html#dom-intro">DOM Intro</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="Week4.html#conditional-logic">Logic</a>
+                <a href="Week4.html#if-statement">if</a>
+                <a href="Week4.html#else-if-statement">else if</a>
+                <a href="Week4.html#else-statement">else</a>
+                <a href="Week4.html#truthy-falsy">Truthy/Falsy</a>
+                <a href="Week4.html#switch-statement">switch</a>
+                <a href="Week4.html#ternary-operator">Ternary Op</a>
+                <a href="Week4.html#nested-if">Nested if</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#for-loops">for Loops</a>
+                 <a href="Week5.html#while-loops">while Loops</a>
+                 <a href="Week5.html#do-while-loops">do...while</a>
+                 <a href="Week5.html#break-continue">break/continue</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#array-intro">Array Intro</a>
+                <a href="Week6.html#array-indexing">Array Indexing</a>
+                <a href="Week6.html#array-methods">Array Methods</a>
+                <a href="Week6.html#array-iteration">Iteration</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#object-literals">Object Literals</a>
+                <a href="Week7.html#object-properties">Properties</a>
+                <a href="Week7.html#object-methods">Methods</a>
+                <a href="Week7.html#object-iteration">Iteration</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#function-declaration">Declaration/Expression</a>
+                <a href="Week8.html#function-parameters">Parameters</a>
+                <a href="Week8.html#function-return">Return Values</a>
+                <a href="Week8.html#variable-scope">Variable Scope</a>
+                <a href="Week8.html#arrow-functions">Arrow Functions</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#what-is-dom">DOM Intro</a>
+                <a href="Week9.html#selecting-elements">Selecting Elements</a>
+                <a href="Week9.html#manipulating-dom">Manipulating</a>
+                <a href="Week9.html#event-handling">Events</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#callbacks">Callbacks</a>
+                <a href="Week10.html#closures">Closures</a>
+                <a href="Week10.html#iife">IIFE</a>
+                 <a href="Week10.html#this-keyword">`this` Keyword</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#error-types">Error Types</a>
+                <a href="Week11.html#debugging">Debugging</a>
+                <a href="Week11.html#try-catch">Try/Catch</a>
+                <a href="Week11.html#throw-statement">Throw</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week12.html#es6-overview">ES6+ Overview</a>
+                 <a href="Week12.html#js-modules">Modules</a>
+                 <a href="Week12.html#async-intro">Async Intro</a>
+                 <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

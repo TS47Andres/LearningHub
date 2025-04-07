@@ -1,0 +1,97 @@
+RLearn: 12-Week Program Plan
+
+Week 1: Introduction to R & RStudio
+
+What is R? History and applications (especially in statistics and data science).
+Why learn R? Advantages and use cases.
+Setting up the environment: Installing R and RStudio.
+Tour of RStudio (Console, Script Editor, Environment, Plots pane).
+Your first R commands: Basic calculations, assigning variables.
+Basic R syntax and conventions.
+
+
+Week 2: R Data Basics
+
+Variables and assignment.
+Fundamental data types: Numeric, Integer, Logical, Character.
+Introduction to Vectors: Creating, naming, and basic operations.
+Arithmetic and Logical Operators in R.
+
+
+Week 3: Data Structures - Vectors & Matrices
+
+More on Vectors: Indexing, slicing, vector recycling.
+Introduction to Matrices: Creating, indexing, basic matrix operations.
+Getting help in R: help(), ?, ??.
+
+
+Week 4: Data Structures - Lists & Data Frames
+
+Lists: Creating, naming, indexing, accessing elements.
+Data Frames: The core data structure for tabular data in R. Creating, viewing, and understanding structure (str(), head(), tail()).
+Importing data (basic): Reading CSV files (read.csv()).
+
+
+Week 5: Control Flow - Conditionals
+
+Conditional logic: if, else, else if statements.
+Using comparison and logical operators in conditions.
+Vectorized conditional logic with ifelse().
+
+
+Week 6: Control Flow - Loops
+
+Repeating actions: for loops (iterating over vectors, lists).
+while loops (repeating based on a condition).
+Controlling loops: break and next (similar to Python's continue).
+
+
+Week 7: Functions in R
+
+Writing your own functions: function() keyword.
+Function arguments (parameters) and return values.
+Variable scope (local vs. global environments).
+Using built-in R functions effectively.
+
+
+Week 8: Introduction to Data Manipulation with dplyr
+
+The Tidyverse concept.
+Introduction to the dplyr package (installing packages).
+Core dplyr verbs:
+filter(): Subsetting rows.
+select(): Subsetting columns.
+mutate(): Creating new columns.
+arrange(): Sorting data.
+summarise(): Calculating summary statistics.
+The pipe operator %>% (or |>) for chaining operations.
+
+
+Week 9: More Data Manipulation & Tidying
+
+Grouping data with group_by() before summarising.
+Introduction to tidyr for data tidying (e.g., pivot_longer(), pivot_wider()).
+Combining datasets (basic joins with dplyr).
+
+
+Week 10: Introduction to Data Visualization with ggplot2
+
+The Grammar of Graphics concept.
+Introduction to the ggplot2 package.
+Building plots layer by layer: ggplot(), aes(), geoms (geom_point(), geom_line(), geom_bar()).
+Mapping variables to aesthetics (color, size, shape).
+
+
+Week 11: Customizing Visualizations & Basic Statistics
+
+Customizing plots: Titles, labels, themes.
+Saving plots.
+Introduction to basic statistical functions in R: mean(), median(), sd(), summary().
+Simple statistical tests (e.g., t-tests, correlations) if appropriate for the audience.
+
+
+Week 12: Project & Next Steps
+
+Putting it all together: A small data analysis project combining data import, manipulation (dplyr), and visualization (ggplot2).
+Introduction to R Markdown for creating reports.
+Where to go next: Exploring specific packages (e.g., for machine learning, spatial analysis), contributing to the R community.

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Learning - Week 6: Arrays</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="javascript.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+             <div class="logo">
+                <span class="python-yellow">JS</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+             <ul>
+                <li><a href="#array-intro">Introduction</a></li>
+                <li><a href="#array-indexing">Indexing</a></li>
+                <li><a href="#array-methods">Methods</a></li>
+                <li><a href="#array-iteration">Iteration</a></li>
+                </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 6: Mastering Arrays - Your First Collection</h1>
+                <p class="tagline">Learn how to organize, access, and manipulate collections of data using arrays in JavaScript.</p>
+                <a href="#array-intro" class="button">Explore Chapter 6</a>
+            </div>
+        </section>
+
+        <section id="array-intro" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                 <h2>Chapter 6: Organizing Data with Arrays</h2>
+                <h3>Introduction to Arrays: Creating, Accessing Elements.</h3>
+                <p>Arrays are fundamental data structures in JavaScript used to store ordered collections of items. They are similar to lists in Python. Each item in an array has a specific position (index), starting from 0.</p>
+                <h4>Creating Arrays</h4>
+                <p>The most common way to create an array is using array literal syntax [].</p>
+                <pre><code class="code-snippet ">// Empty array
+let emptyArray = [];
+
+// Array of numbers
+let numbers = [10, 20, 30, 40, 50];
+
+// Array of strings
+let colors = ["red", "green", "blue"];
+
+// Array of mixed data types
+let mixedArray = [1, "hello", true, null, { name: "Alice" }]; // Arrays can hold different types</code></pre>
+                <p>You can also create arrays using the new Array() constructor, but array literals are generally preferred.</p>
+                <h4>Accessing Elements (Indexing)</h4>
+                <p>You access array elements using their index within square brackets []. Remember that indices start at 0.</p>
+                <pre><code class="code-snippet ">let fruits = ["apple", "banana", "cherry"];
+console.log(fruits[0]); // Output: "apple" (first element)
+console.log(fruits[1]); // Output: "banana" (second element)
+
+let thirdFruit = fruits[2]; // "cherry"
+console.log(thirdFruit);
+
+// Accessing an index that doesn't exist returns 'undefined'
+console.log(fruits[3]); // Output: undefined
+</code></pre>
+                <h4>Array Length</h4>
+                <p>The length property tells you how many elements are in the array.</p>
+                 <pre><code class="code-snippet ">console.log(fruits.length); // Output: 3</code></pre>
+                 <p>The length is always one more than the highest index.</p>
+            </div>
+        </section>
+
+        <section id="array-indexing" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                 <h3>Array Indexing and Modification.</h3>
+                <p>Array indexing allows you to retrieve and also <em>modify</em> individual elements in an array, as arrays are mutable (changeable).</p>
+                <h4>Accessing</h4>
+                <p>As shown before, use array[index].</p>
+                <pre><code class="code-snippet ">let scores = [85, 92, 78, 99];
+let firstScore = scores[0]; // 85
+let lastScore = scores[scores.length - 1]; // 99 (using length)
+console.log("First:", firstScore, "Last:", lastScore);</code></pre>
+                <h4>Modifying Elements</h4>
+                <p>You can change the value of an element by assigning a new value to its index.</p>
+                <pre><code class="code-snippet ">let colors = ["red", "green", "blue"];
+console.log("Original:", colors); // ["red", "green", "blue"]
+
+colors[1] = "yellow"; // Change the element at index 1
+console.log("Modified:", colors); // ["red", "yellow", "blue"]</code></pre>
+                 <h4>Adding Elements (by index)</h4>
+                 <p>You can technically add elements by assigning to an index beyond the current length, but this can create "sparse" arrays (with empty slots) and is often less clear than using array methods like push.</p>
+                 <pre><code class="code-snippet ">colors[3] = "purple"; // Adds 'purple' at index 3
+console.log("Added:", colors);    // ["red", "yellow", "blue", "purple"]
+console.log("New length:", colors.length); // 4
+
+colors[5] = "orange"; // Assigns to index 5, index 4 will be 'empty'
+console.log("Sparse:", colors);   // ["red", "yellow", "blue", "purple", empty, "orange"]
+console.log("Length:", colors.length); // 6
+console.log(colors[4]); // undefined
+</code></pre>
+            </div>
+        </section>
+
+        <section id="array-methods" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                 <h3>Common Array Methods: Modifying and Manipulating Arrays.</h3>
+                <p>JavaScript arrays come with a rich set of built-in methods for adding, removing, and manipulating elements.</p>
+                <h4>Adding/Removing Elements:</h4>
+                 <ul>
+                      <li><strong>push(element1, ..., elementN):</strong> Adds one or more elements to the <em>end</em> of the array and returns the new length. (Modifies original array).
+                           <pre><code class="code-snippet ">let pets = ["dog", "cat"];
+let newLength = pets.push("hamster", "goldfish");
+console.log(pets); // ["dog", "cat", "hamster", "goldfish"]
+console.log(newLength); // 4</code></pre>
+                      </li>
+                      <li><strong>pop():</strong> Removes the <em>last</em> element from the array and returns that element. (Modifies original array).
+                           <pre><code class="code-snippet ">let lastPet = pets.pop();
+console.log(pets); // ["dog", "cat", "hamster"]
+console.log(lastPet); // "goldfish"</code></pre>
+                      </li>
+                      <li><strong>unshift(element1, ..., elementN):</strong> Adds one or more elements to the <em>beginning</em> of the array and returns the new length. (Modifies original array).
+                           <pre><code class="code-snippet ">pets.unshift("rabbit");
+console.log(pets); // ["rabbit", "dog", "cat", "hamster"]</code></pre>
+                      </li>
+                      <li><strong>shift():</strong> Removes the <em>first</em> element from the array and returns that element. (Modifies original array).
+                           <pre><code class="code-snippet ">let firstPet = pets.shift();
+console.log(pets); // ["dog", "cat", "hamster"]
+console.log(firstPet); // "rabbit"</code></pre>
+                      </li>
+                 </ul>
+                <h4>Slicing and Splicing:</h4>
+                <ul>
+                      <li><strong>slice(startIndex, endIndex):</strong> Returns a <em>new</em> array containing a shallow copy of a portion of the original array from startIndex (inclusive) up to endIndex (exclusive). Does <em>not</em> modify the original array.
+                           <pre><code class="code-snippet ">let numbers = [10, 20, 30, 40, 50, 60];
+let middleNums = numbers.slice(2, 5); // Start at index 2, end before index 5
+console.log(middleNums); // [30, 40, 50]
+console.log(numbers);    // [10, 20, 30, 40, 50, 60] (original unchanged)
+
+let endNums = numbers.slice(3); // From index 3 to the end
+console.log(endNums); // [40, 50, 60]
+</code></pre>
+                      </li>
+                       <li><strong>splice(startIndex, deleteCount, item1, ..., itemN):</strong> Changes the contents of an array by removing or replacing existing elements and/or adding new elements <em>in place</em>. Returns an array containing the deleted elements. (Modifies original array).
+                           <pre><code class="code-snippet ">let letters = ['a', 'b', 'c', 'd', 'e'];
+
+// Remove 2 elements starting from index 1
+let removed = letters.splice(1, 2);
+console.log(letters); // ['a', 'd', 'e']
+console.log(removed); // ['b', 'c']
+
+// Remove 1 element at index 1, and insert 'X', 'Y'
+letters.splice(1, 1, 'X', 'Y');
+console.log(letters); // ['a', 'X', 'Y', 'e']
+
+// Insert 'Z' at index 2 without removing anything
+letters.splice(2, 0, 'Z');
+console.log(letters); // ['a', 'X', 'Z', 'Y', 'e']
+</code></pre>
+                      </li>
+                 </ul>
+                <h4>Other Useful Methods:</h4>
+                 <ul>
+                      <li><strong>indexOf(searchElement, fromIndex) / lastIndexOf():</strong> Returns the first (or last) index at which a given element can be found, or -1 if not present.</li>
+                      <li><strong>includes(searchElement, fromIndex):</strong> Returns true if an array includes a certain value, false otherwise.</li>
+                      <li><strong>join(separator):</strong> Joins all elements of an array into a string, separated by the specified separator (default is comma).</li>
+                      <li><strong>reverse():</strong> Reverses the order of elements in the array <em>in place</em>.</li>
+                      <li><strong>sort():</strong> Sorts the elements of an array <em>in place</em>. (Default sort is often lexicographical/string-based, requires a compare function for numerical sort).</li>
+                 </ul>
+            </div>
+        </section>
+
+        <section id="array-iteration" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                 <h3>Array Iteration Methods.</h3>
+                <p>JavaScript provides powerful methods specifically designed for iterating over arrays and performing actions on their elements, often replacing the need for manual for loops.</p>
+                <ul>
+                    <li><strong>forEach(callbackFunction):</strong> Executes a provided callbackFunction once for each array element. Does not return a value.
+                         <pre><code class="code-snippet ">let names = ["Alice", "Bob", "Charlie"];
+
+names.forEach(function(name, index) {
+  console.log(`Index ${index}: ${name}`);
+});
+
+// Using arrow function syntax:
+names.forEach((name) => console.log(`Hello, ${name}!`));</code></pre>
+                    </li>
+                     <li><strong>map(callbackFunction):</strong> Creates a <em>new</em> array populated with the results of calling a provided callbackFunction on every element in the calling array. Ideal for transforming data.
+                         <pre><code class="code-snippet ">let numbers = [1, 2, 3, 4];
+let squares = numbers.map(function(num) {
+  return num * num;
+});
+console.log(squares); // [1, 4, 9, 16]
+console.log(numbers); // [1, 2, 3, 4] (original unchanged)
+
+// Using arrow function:
+let doubled = numbers.map(num => num * 2);
+console.log(doubled); // [2, 4, 6, 8]
+</code></pre>
+                    </li>
+                    <li><strong>filter(callbackFunction):</strong> Creates a <em>new</em> array with all elements that pass the test implemented by the provided callbackFunction (the callback should return true or false).
+                         <pre><code class="code-snippet ">let values = [10, -5, 25, 0, 18, -2];
+let positiveValues = values.filter(function(val) {
+  return val > 0;
+});
+console.log(positiveValues); // [10, 25, 18]
+console.log(values);         // Original unchanged
+
+// Using arrow function:
+let evenValues = values.filter(val => val % 2 === 0);
+console.log(evenValues); // [10, 0, 18, -2]
+</code></pre>
+                    </li>
+                    <li>Many others like reduce(), find(), findIndex(), some(), every() provide powerful ways to process array data.</li>
+                </ul>
+                <p>These iteration methods often lead to more concise and readable code compared to traditional for loops for common array operations.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+         <p>&copy; 2025 JSLearn - Your JavaScript Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro &amp; Setup</a>
+                <a href="Week1.html#what-is-js-section">What is JS?</a>
+                <a href="Week1.html#why-learn-section">Why Learn?</a>
+                <a href="Week1.html#setup-section">Setup Env</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#arithmetic-operators">Arithmetic Ops</a>
+                <a href="Week2.html#comparison-operators">Comparison Ops</a>
+                <a href="Week2.html#logical-operators">Logical Ops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#interaction-output">Output</a>
+                <a href="Week3.html#interaction-input">Input</a>
+                <a href="Week3.html#string-properties">Properties</a>
+                <a href="Week3.html#string-methods">Methods</a>
+                <a href="Week3.html#template-literals">Literals</a>
+                 <a href="Week3.html#dom-intro">DOM Intro</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#conditional-logic">Logic</a>
+                <a href="Week4.html#if-statement">if</a>
+                <a href="Week4.html#else-if-statement">else if</a>
+                <a href="Week4.html#else-statement">else</a>
+                <a href="Week4.html#truthy-falsy">Truthy/Falsy</a>
+                <a href="Week4.html#switch-statement">switch</a>
+                <a href="Week4.html#ternary-operator">Ternary Op</a>
+                <a href="Week4.html#nested-if">Nested if</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#for-loops">for Loops</a>
+                 <a href="Week5.html#while-loops">while Loops</a>
+                 <a href="Week5.html#do-while-loops">do...while</a>
+                 <a href="Week5.html#break-continue">break/continue</a>
+                 <a href="Week5.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="Week6.html#array-intro">Array Intro</a>
+                <a href="Week6.html#array-indexing">Indexing &amp; Modifying</a>
+                <a href="Week6.html#array-methods">Common Methods</a>
+                <a href="Week6.html#array-iteration">Iteration Methods</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#object-literals">Object Literals</a>
+                <a href="Week7.html#object-properties">Properties</a>
+                <a href="Week7.html#object-methods">Methods</a>
+                <a href="Week7.html#object-iteration">Iteration</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#function-declaration">Declaration/Expression</a>
+                <a href="Week8.html#function-parameters">Parameters</a>
+                <a href="Week8.html#function-return">Return Values</a>
+                <a href="Week8.html#variable-scope">Variable Scope</a>
+                <a href="Week8.html#arrow-functions">Arrow Functions</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#what-is-dom">DOM Intro</a>
+                <a href="Week9.html#selecting-elements">Selecting Elements</a>
+                <a href="Week9.html#manipulating-dom">Manipulating</a>
+                <a href="Week9.html#event-handling">Events</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#callbacks">Callbacks</a>
+                <a href="Week10.html#closures">Closures</a>
+                <a href="Week10.html#iife">IIFE</a>
+                 <a href="Week10.html#this-keyword">`this` Keyword</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#error-types">Error Types</a>
+                <a href="Week11.html#debugging">Debugging</a>
+                <a href="Week11.html#try-catch">Try/Catch</a>
+                <a href="Week11.html#throw-statement">Throw</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week12.html#es6-overview">ES6+ Overview</a>
+                 <a href="Week12.html#js-modules">Modules</a>
+                 <a href="Week12.html#async-intro">Async Intro</a>
+                 <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

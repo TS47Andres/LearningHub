@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RLearn - Your R Learning Journey</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="r.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .r-blue { color: #276DC3; /* Example R blue */ }
+        body.dark-mode .r-blue { color: #75AADB; /* Lighter R blue for dark mode */ }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="r-blue">R</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#syllabus">Syllabus</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="full-width hero">
+            <div class="hero-content">
+                <h1>Welcome to RLearn</h1>
+                <p class="tagline">Embark on a 12-week journey to R mastery for data analysis!</p>
+                <a href="#syllabus" class="button">Explore the Syllabus</a>
+                </div>
+        </section>
+
+        <section id="about" class="full-width content-block">
+            <div class="container">
+                <h2>About RLearn</h2>
+                <p>RLearn is a comprehensive online platform designed to guide you from a beginner to a confident R programmer in just 12 weeks, focusing on the skills needed for effective data analysis and visualization.</p>
+                <p>Our curriculum is carefully structured to provide a gradual and engaging learning experience, covering fundamental R concepts, data structures, control flow, data manipulation with the Tidyverse, and data visualization with ggplot2.</p>
+                <p>Whether you're aiming for a career in data science, research, statistics, or simply want to harness the power of R for your data tasks, RLearn provides the resources and support you need.</p>
+            </div>
+        </section>
+
+        <section id="syllabus" class="full-width content-block bg-light">
+            <div class="container">
+                <h2>Our 12-Week R Syllabus</h2>
+                <p>Click on the links below to dive into each week's learning material:</p>
+
+                <div class="syllabus-grid">
+                    <div class="syllabus-card">
+                        <h3>Week 1: Introduction to R & RStudio</h3>
+                        <p>Intro to R, RStudio setup, basic commands.</p>
+                        <ul>
+                            <li>What is R?</li>
+                            <li>Why learn R?</li>
+                            <li>Installing R & RStudio</li>
+                            <li>RStudio Tour</li>
+                            <li>First commands</li>
+                        </ul>
+                        <a href="Week1.html" class="syllabus-link">Go to Week 1</a>
+                    </div>
+
+                    <div class="syllabus-card">
+                        <h3>Week 2: R Data Basics</h3>
+                        <p>Variables, fundamental data types, vectors.</p>
+                        <ul>
+                            <li>Variables & Assignment</li>
+                            <li>Numeric, Integer, Logical, Character</li>
+                            <li>Vectors (Creation)</li>
+                            <li>Arithmetic & Logical Operators</li>
+                        </ul>
+                        <a href="Week2.html" class="syllabus-link">Go to Week 2</a>
+                    </div>
+
+                    <div class="syllabus-card">
+                        <h3>Week 3: Data Structures - Vectors & Matrices</h3>
+                        <p>Vector manipulation, matrices, getting help.</p>
+                        <ul>
+                            <li>Vector Indexing & Slicing</li>
+                            <li>Vector Recycling</li>
+                            <li>Matrices (Creation, Indexing)</li>
+                            <li>Getting Help (`help()`, `?`)</li>
+                        </ul>
+                        <a href="Week3.html" class="syllabus-link">Go to Week 3</a>
+                    </div>
+
+                    <div class="syllabus-card">
+                        <h3>Week 4: Data Structures - Lists & Data Frames</h3>
+                        <p>Lists, introduction to data frames, importing data.</p>
+                        <ul>
+                            <li>Lists (Creation, Indexing)</li>
+                            <li>Data Frames (Intro)</li>
+                            <li>Viewing Data (`str`, `head`)</li>
+                            <li>Importing CSV (`read.csv`)</li>
+                        </ul>
+                        <a href="Week4.html" class="syllabus-link">Go to Week 4</a>
+                    </div>
+
+                    <div class="syllabus-card">
+                        <h3>Week 5: Control Flow - Conditionals</h3>
+                        <p>Making decisions with `if`, `else`, `else if`.</p>
+                        <ul>
+                            <li>`if`, `else if`, `else`</li>
+                            <li>Conditional Logic</li>
+                            <li>Vectorized `ifelse()`</li>
+                        </ul>
+                        <a href="Week5.html" class="syllabus-link">Go to Week 5</a>
+                    </div>
+
+                    <div class="syllabus-card">
+                        <h3>Week 6: Control Flow - Loops</h3>
+                        <p>Repeating actions with `for` and `while`.</p>
+                        <ul>
+                            <li>`for` loops (Vectors, Lists)</li>
+                            <li>`while` loops</li>
+                            <li>`break`, `next`</li>
+                        </ul>
+                        <a href="Week6.html" class="syllabus-link">Go to Week 6</a>
+                    </div>
+
+                    <div class="syllabus-card">
+                        <h3>Week 7: Functions in R</h3>
+                        <p>Writing and using reusable code blocks.</p>
+                        <ul>
+                            <li>Function Definition (`function`)</li>
+                            <li>Parameters & Arguments</li>
+                            <li>Return Values</li>
+                            <li>Variable Scope</li>
+                        </ul>
+                        <a href="Week7.html" class="syllabus-link">Go to Week 7</a>
+                    </div>
+
+                    <div class="syllabus-card">
+                        <h3>Week 8: Intro to Data Manipulation (dplyr)</h3>
+                        <p>Filtering, selecting, arranging, and mutating data.</p>
+                        <ul>
+                            <li>Tidyverse Concept</li>
+                            <li>Installing Packages</li>
+                            <li>`dplyr`: `filter`, `select`</li>
+                            <li>`dplyr`: `mutate`, `arrange`</li>
+                            <li>Pipe Operator (`%>%` or `|>`)</li>
+                        </ul>
+                        <a href="Week8.html" class="syllabus-link">Go to Week 8</a>
+                    </div>
+
+                    <div class="syllabus-card">
+                        <h3>Week 9: More Data Manipulation & Tidying</h3>
+                        <p>Grouping, summarising, tidying, joining data.</p>
+                        <ul>
+                            <li>`group_by()` & `summarise()`</li>
+                            <li>Intro to `tidyr`</li>
+                            <li>`pivot_longer()`, `pivot_wider()`</li>
+                            <li>Basic Joins (`dplyr`)</li>
+                        </ul>
+                        <a href="Week9.html" class="syllabus-link">Go to Week 9</a>
+                    </div>
+
+                    <div class="syllabus-card">
+                        <h3>Week 10: Intro Data Visualization (ggplot2)</h3>
+                        <p>Creating basic plots with ggplot2.</p>
+                        <ul>
+                            <li>Grammar of Graphics</li>
+                            <li>`ggplot()`, `aes()`</li>
+                            <li>Geoms (`point`, `line`, `bar`)</li>
+                            <li>Mapping Aesthetics</li>
+                        </ul>
+                        <a href="Week10.html" class="syllabus-link">Go to Week 10</a>
+                    </div>
+
+                    <div class="syllabus-card">
+                        <h3>Week 11: Customizing Visualizations & Stats</h3>
+                        <p>Improving plots, basic statistical functions.</p>
+                        <ul>
+                            <li>Titles, Labels, Themes</li>
+                            <li>Saving Plots</li>
+                            <li>Basic Stats (`mean`, `median`, `sd`)</li>
+                            <li>`summary()` function</li>
+                        </ul>
+                        <a href="Week11.html" class="syllabus-link">Go to Week 11</a>
+                    </div>
+
+                    <div class="syllabus-card">
+                        <h3>Week 12: Project & Next Steps</h3>
+                        <p>Apply skills, R Markdown intro, further learning.</p>
+                        <ul>
+                            <li>Mini Data Analysis Project</li>
+                            <li>Intro to R Markdown</li>
+                            <li>Exploring Packages</li>
+                            <li>R Community</li>
+                        </ul>
+                        <a href="Week12.html" class="syllabus-link">Go to Week 12</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="full-width content-block bg-light">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p>Have questions or need support? Reach out to us!</p>
+                <p>Email: akshatpcid12@gmail.com</p>
+                <p>Phone: +917682001264</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RLearn - Your R Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#what-is-r">What is R?</a>
+                <a href="Week1.html#why-learn-r">Why Learn R?</a>
+                <a href="Week1.html#setup">Setup Env</a>
+                <a href="Week1.html#rstudio-tour">RStudio Tour</a>
+                <a href="Week1.html#first-commands">First Commands</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#vectors">Vectors</a>
+                <a href="Week2.html#operators">Operators</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#vector-ops">Vector Ops</a>
+                <a href="Week3.html#matrices">Matrices</a>
+                <a href="Week3.html#getting-help">Getting Help</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#lists">Lists</a>
+                <a href="Week4.html#data-frames">Data Frames</a>
+                <a href="Week4.html#viewing-data">Viewing Data</a>
+                <a href="Week4.html#import-csv">Import CSV</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#conditionals">Conditionals</a>
+                <a href="Week5.html#if-else">if/else/else if</a>
+                <a href="Week5.html#ifelse">ifelse()</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#for-loops">for Loops</a>
+                <a href="Week6.html#while-loops">while Loops</a>
+                <a href="Week6.html#break-next">break/next</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#function-definition">Function Def</a>
+                <a href="Week7.html#parameters">Parameters</a>
+                <a href="Week7.html#return-values">Return Values</a>
+                <a href="Week7.html#scope">Scope</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#tidyverse">Tidyverse</a>
+                <a href="Week8.html#dplyr">dplyr Intro</a>
+                <a href="Week8.html#core-verbs">Core Verbs</a>
+                <a href="Week8.html#pipe">Pipe Operator</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#group-summarise">Group & Summarise</a>
+                <a href="Week9.html#tidyr">tidyr Intro</a>
+                <a href="Week9.html#pivoting">Pivoting</a>
+                <a href="Week9.html#joins">Joining Data</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#grammar-graphics">Grammar of Graphics</a>
+                <a href="Week10.html#ggplot2">ggplot2 Intro</a>
+                <a href="Week10.html#geoms">Geoms</a>
+                <a href="Week10.html#aesthetics">Aesthetics</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#customizing">Customizing Plots</a>
+                <a href="Week11.html#saving-plots">Saving Plots</a>
+                <a href="Week11.html#basic-stats">Basic Stats</a>
+                <a href="Week11.html#summary">summary()</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#project">Mini Project</a>
+                <a href="Week12.html#r-markdown">R Markdown</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

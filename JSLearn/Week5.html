@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Learning - Week 5: Loops</title>
+     <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="javascript.ico" type="image/x-icon">
+
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">JS</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+             <ul>
+                <li><a href="#for-loops">for Loops</a></li>
+                <li><a href="#while-loops">while Loops</a></li>
+                <li><a href="#do-while-loops">do...while</a></li>
+                <li><a href="#break-continue">break/continue</a></li>
+                <li><a href="#nested-loops">Nested Loops</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                 <h1>Week 5: Automating Repetitive Tasks with Loops</h1>
+                <p class="tagline">Learn how to use for, while, and do...while loops in JavaScript to execute code repeatedly.</p>
+                <a href="#for-loops" class="button">Explore Chapter 5</a>
+            </div>
+        </section>
+
+        <section id="for-loops" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 5: Repeating Actions with for, while, and do...while Loops</h2>
+                <h3>for Loops: Iterating a Specific Number of Times or Over Iterables.</h3>
+                <p>The for loop is commonly used when you know in advance how many times you want to repeat a block of code or when you want to iterate over the elements of an iterable (like an array or string).</p>
+                <h4>Classic for Loop Syntax</h4>
+                <pre><code class="code-snippet ">for (initialization; condition; final-expression) {
+  // Code to be executed in each iteration
+  statement1;
+  statement2;
+  // ...
+}</code></pre>
+                <ul>
+                    <li><strong>initialization</strong>: Executed once before the loop starts. Often used to declare and initialize a loop counter (e.g., let i = 0).</li>
+                    <li><strong>condition</strong>: Evaluated before each iteration. If it's true, the loop body executes. If it's false, the loop terminates.</li>
+                    <li><strong>final-expression</strong>: Executed at the end of each iteration, typically used to increment or decrement the loop counter (e.g., i++, i--).</li>
+                </ul>
+                <h4>Example: Counting 0 to 4</h4>
+                <pre><code class="code-snippet ">for (let i = 0; i < 5; i++) {
+  console.log("The number is " + i);
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>The number is 0
+The number is 1
+The number is 2
+The number is 3
+The number is 4</code></pre>
+                <h4>Iterating Over Strings (using classic for loop)</h4>
+                <pre><code class="code-snippet ">let message = "Hello";
+for (let i = 0; i < message.length; i++) {
+  console.log("Character at index " + i + ": " + message[i]);
+}</code></pre>
+                 <h4>Other for Loop Variants (Brief Mention - More with Arrays/Objects)</h4>
+                 <p>JavaScript also has other for loop variants designed specifically for iterating over collections:</p>
+                 <ul>
+                      <li><strong>for...in</strong>: Iterates over the *property names* (keys) of an object.</li>
+                      <li><strong>for...of</strong>: Iterates over the *values* of an iterable object (like arrays, strings, maps, sets).</li>
+                 </ul>
+                 <p>We will explore for...in and for...of more when we cover Objects and Arrays in detail.</p>
+            </div>
+        </section>
+
+        <section id="while-loops" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>while Loops: Repeating Actions Based on a Condition.</h3>
+                <p>A while loop executes a block of code repeatedly as long as a specified condition remains true.</p>
+                <h4>Syntax</h4>
+                <pre><code class="code-snippet ">while (condition) {
+  // Code to execute as long as condition is true
+  statement1;
+  // IMPORTANT: Ensure the condition eventually becomes false!
+}</code></pre>
+                <ul>
+                    <li>The condition is evaluated <em>before</em> each iteration.</li>
+                    <li>If the condition is true, the loop body executes.</li>
+                    <li>If the condition is initially false, the loop body never executes.</li>
+                    <li>You must include logic within the loop to eventually make the condition false, otherwise, you'll create an infinite loop.</li>
+                </ul>
+                <h4>Example: Countdown</h4>
+                <pre><code class="code-snippet ">let count = 3;
+while (count > 0) {
+  console.log(count + "...");
+  count--; // Decrement count, crucial to eventually exit the loop
+}
+console.log("Blast off!");</code></pre>
+                <p>Output:</p>
+                <pre><code>3...
+2...
+1...
+Blast off!</code></pre>
+                <h4>Example: Guessing Game (Simple)</h4>
+                <pre><code class="code-snippet ">let correctNumber = 7;
+let guess = 0; // Initialize guess
+
+while (guess !== correctNumber) {
+  // In a real app, get input differently, prompt halts execution
+  let guessStr = prompt("Guess the number (1-10):");
+  if (guessStr === null) break; // Handle cancel button
+
+  guess = parseInt(guessStr); // Convert string input to number
+
+  if (guess !== correctNumber) {
+    alert("Wrong guess, try again!");
+  }
+}
+
+if (guess === correctNumber) { // Check if loop exited due to correct guess
+    alert("You guessed it! The number was " + correctNumber);
+} else {
+    alert("You gave up!");
+}
+</code></pre>
+            </div>
+        </section>
+
+        <section id="do-while-loops" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                 <h3>do...while Loops: Condition Checked After Execution.</h3>
+                <p>The do...while loop is similar to while, but with a key difference: the condition is checked <em>after</em> the loop body executes. This guarantees that the loop body will run at least once, even if the condition is initially false.</p>
+                <h4>Syntax</h4>
+                <pre><code class="code-snippet ">do {
+  // Code to execute
+  // This block runs at least once
+  statement1;
+  // Ensure condition might eventually become false
+} while (condition);</code></pre>
+                <h4>Example</h4>
+                <pre><code class="code-snippet ">let attempts = 0;
+let password;
+
+do {
+  // This block runs at least once before checking attempts < 3
+  password = prompt("Enter password (attempt " + (attempts + 1) + "):");
+  attempts++;
+  if (password === null) break; // Handle cancel
+} while (password !== "secret" && attempts < 3); // Check condition AFTER the block
+
+if (password === "secret") {
+  alert("Password accepted!");
+} else if(password !== null) {
+  alert("Too many incorrect attempts.");
+} else {
+  alert("Login cancelled.");
+}
+</code></pre>
+                 <p>do...while is less common than for or while, but useful when you need to guarantee at least one execution of the loop body.</p>
+            </div>
+        </section>
+
+        <section id="break-continue" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>break and continue: Controlling Loop Flow.</h3>
+                <p>These statements allow you to alter the normal execution flow within loops (for, while, do...while).</p>
+                <h4>break Statement</h4>
+                <p>The break statement immediately terminates the innermost loop it's contained within. Program execution continues with the statement immediately following the terminated loop.</p>
+                <pre><code class="code-snippet ">for (let i = 0; i < 10; i++) {
+  if (i === 5) {
+    console.log("Found 5! Breaking loop.");
+    break; // Exit the loop immediately
+  }
+  console.log("Current number:", i);
+}
+console.log("Loop finished.");</code></pre>
+                 <p>Output:</p>
+                <pre><code>Current number: 0
+Current number: 1
+Current number: 2
+Current number: 3
+Current number: 4
+Found 5! Breaking loop.
+Loop finished.</code></pre>
+                <h4>continue Statement</h4>
+                <p>The continue statement skips the <em>rest</em> of the current iteration of the loop and proceeds immediately to the next iteration (checking the condition again in while/do...while, or executing the final-expression in for).</p>
+                <pre><code class="code-snippet ">for (let i = 1; i <= 5; i++) {
+  if (i % 2 !== 0) { // If the number is odd
+    continue; // Skip the rest of this iteration
+  }
+  // This line only runs for even numbers
+  console.log("Found an even number:", i);
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>Found an even number: 2
+Found an even number: 4</code></pre>
+            </div>
+        </section>
+
+        <section id="nested-loops" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Nested Loops: Loops Inside Loops.</h3>
+                <p>You can place one loop inside another. The inner loop will complete all its iterations for each single iteration of the outer loop.</p>
+                <h4>Example: Creating a Grid Pattern</h4>
+                <pre><code class="code-snippet ">let rows = 3;
+let cols = 4;
+
+for (let i = 0; i < rows; i++) { // Outer loop (for rows)
+  let rowString = "";
+  for (let j = 0; j < cols; j++) { // Inner loop (for columns)
+    rowString += `(${i},${j}) `; // Build up the string for the current row
+  }
+  console.log("Row " + i + ": " + rowString);
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>Row 0: (0,0) (0,1) (0,2) (0,3)
+Row 1: (1,0) (1,1) (1,2) (1,3)
+Row 2: (2,0) (2,1) (2,2) (2,3)
+</code></pre>
+                <p>Nested loops are common for working with multi-dimensional data structures (like grids or matrices) or when you need to perform an operation multiple times for each item in an outer set.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 JSLearn - Your JavaScript Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro & Setup</a>
+                <a href="Week1.html#what-is-js-section">What is JS?</a>
+                <a href="Week1.html#why-learn-section">Why Learn?</a>
+                <a href="Week1.html#setup-section">Setup Env</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#arithmetic-operators">Arithmetic Ops</a>
+                <a href="Week2.html#comparison-operators">Comparison Ops</a>
+                <a href="Week2.html#logical-operators">Logical Ops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#interaction-output">Output</a>
+                <a href="Week3.html#interaction-input">Input</a>
+                <a href="Week3.html#string-properties">Properties</a>
+                <a href="Week3.html#string-methods">Methods</a>
+                <a href="Week3.html#template-literals">Literals</a>
+                 <a href="Week3.html#dom-intro">DOM Intro</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#conditional-logic">Logic</a>
+                <a href="Week4.html#if-statement">if</a>
+                <a href="Week4.html#else-if-statement">else if</a>
+                <a href="Week4.html#else-statement">else</a>
+                <a href="Week4.html#truthy-falsy">Truthy/Falsy</a>
+                <a href="Week4.html#switch-statement">switch</a>
+                <a href="Week4.html#ternary-operator">Ternary Op</a>
+                <a href="Week4.html#nested-if">Nested if</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="Week5.html#for-loops">for Loops</a>
+                 <a href="Week5.html#while-loops">while Loops</a>
+                 <a href="Week5.html#do-while-loops">do...while</a>
+                 <a href="Week5.html#break-continue">break/continue</a>
+                 <a href="Week5.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#array-intro">Array Intro</a>
+                <a href="Week6.html#array-indexing">Array Indexing</a>
+                <a href="Week6.html#array-methods">Array Methods</a>
+                <a href="Week6.html#array-iteration">Iteration</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#object-literals">Object Literals</a>
+                <a href="Week7.html#object-properties">Properties</a>
+                <a href="Week7.html#object-methods">Methods</a>
+                <a href="Week7.html#object-iteration">Iteration</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#function-declaration">Declaration/Expression</a>
+                <a href="Week8.html#function-parameters">Parameters</a>
+                <a href="Week8.html#function-return">Return Values</a>
+                <a href="Week8.html#variable-scope">Variable Scope</a>
+                <a href="Week8.html#arrow-functions">Arrow Functions</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#what-is-dom">DOM Intro</a>
+                <a href="Week9.html#selecting-elements">Selecting Elements</a>
+                <a href="Week9.html#manipulating-dom">Manipulating</a>
+                <a href="Week9.html#event-handling">Events</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#callbacks">Callbacks</a>
+                <a href="Week10.html#closures">Closures</a>
+                <a href="Week10.html#iife">IIFE</a>
+                 <a href="Week10.html#this-keyword">`this` Keyword</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#error-types">Error Types</a>
+                <a href="Week11.html#debugging">Debugging</a>
+                <a href="Week11.html#try-catch">Try/Catch</a>
+                <a href="Week11.html#throw-statement">Throw</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week12.html#es6-overview">ES6+ Overview</a>
+                 <a href="Week12.html#js-modules">Modules</a>
+                 <a href="Week12.html#async-intro">Async Intro</a>
+                 <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

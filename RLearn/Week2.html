@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Learning - Week 2: R Data Basics</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="r.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .r-blue { color: #276DC3; /* Example R blue */ }
+        body.dark-mode .r-blue { color: #75AADB; /* Lighter R blue for dark mode */ }
+        /* Style for R code comments (if different highlighting needed) */
+        .code-r-comment { color: #008000; font-style: italic; } /* Example: Green comment */
+        body.dark-mode .code-r-comment { color: #77dd77; }
+        /* Style for assignment operator */
+        .code-r-assign { color: #cc7832; } /* Example color */
+        body.dark-mode .code-r-assign { color: #ffc66d; }
+         /* Style for R keywords/functions if needed */
+        .code-r-keyword { color: #0000ff; } /* Example: blue */
+        body.dark-mode .code-r-keyword { color: #87CEFA; } /* Example: light blue */
+    </style>
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="r-blue">R</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#variables">Variables</a></li>
+                <li><a href="#data-types">Data Types</a></li>
+                <li><a href="#vectors">Vectors</a></li>
+                <li><a href="#operators">Operators</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 2: Working with R's Basic Data</h1>
+                <p class="tagline">Learn about variables, data types, vectors, and operators in R.</p>
+                <a href="#variables" class="button">Dive into Chapter 2</a>
+            </div>
+        </section>
+
+        <section id="variables" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 2: Fundamental Data Types and Operations</h2>
+                <h3>Variables and Assignment.</h3>
+                <p>In R, variables are used to store data values. You can think of them as named containers for information in your R environment.</p>
+                <h4>Naming Variables</h4>
+                <p>As discussed in Week 1, variable names in R should be descriptive. They typically consist of letters, numbers, dots (`.`), and underscores (`_`). Remember:</p>
+                <ul>
+                    <li>They must start with a letter or a dot (if starting with a dot, the second character cannot be a number).</li>
+                    <li>R is case-sensitive (`myVar` is different from `myvar`).</li>
+                    <li>Avoid names of built-in functions or keywords.</li>
+                    <li>Common styles include `snake_case` (e.g., `user_age`) or using dots (e.g., `user.age`).</li>
+                </ul>
+                <h4>Assigning Values</h4>
+                <p>The preferred way to assign a value to a variable in R is using the assignment operator `<-`. You can also use `=`, but `<-` is the standard convention and avoids potential confusion with argument passing in functions.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Assigning values to variables</span>
+student_count <span class="code-r-assign"><-</span> <span class="code-number">30</span>         <span class="code-r-comment"># Using preferred '<-'</span>
+course.name <span class="code-r-assign"><-</span> <span class="code-string">"Introduction to R"</span>
+pi_approx <span class="code-r-assign">=</span> <span class="code-number">3.14159</span>     <span class="code-r-comment"># '=' also works but '<-' is conventional</span>
+
+<span class="code-r-comment"># Printing the values</span>
+<span class="code-function">print</span>(student_count)
+course.name <span class="code-r-comment"># Typing the name also prints in the console</span>
+pi_approx</code></pre>
+                <p>R is dynamically typed, meaning you don't need to declare the type of a variable before assigning a value to it. R infers the data type from the value assigned.</p>
+            </div>
+        </section>
+
+        <section id="data-types" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Fundamental Data Types (Atomic Vectors).</h3>
+                <p>In R, the most basic objects hold data of a single type. These are often referred to as atomic vectors. The main fundamental data types are:</p>
+                <ul>
+                    <li><strong>Numeric (`numeric` or `double`):</strong> Represents real numbers, including decimals (floating-point numbers). This is the default type for numbers in R.
+                        <pre><code class="code-snippet">height <span class="code-r-assign"><-</span> <span class="code-number">175.5</span>
+temperature <span class="code-r-assign"><-</span> <span class="code-number">-5.2</span></code></pre>
+                    </li>
+                    <li><strong>Integer (`integer`):</strong> Represents whole numbers. To explicitly create an integer, append `L` to the number.
+                        <pre><code class="code-snippet">count <span class="code-r-assign"><-</span> <span class="code-number">100L</span>
+year <span class="code-r-assign"><-</span> <span class="code-number">2025L</span></code></pre>
+                    </li>
+                    <li><strong>Logical (`logical`):</strong> Represents boolean values, which can only be `TRUE` or `FALSE` (note the uppercase). You can also use `T` for `TRUE` and `F` for `FALSE`, but the full words are recommended for clarity.
+                        <pre><code class="code-snippet">is_valid <span class="code-r-assign"><-</span> <span class="code-r-keyword">TRUE</span>
+has_data <span class="code-r-assign"><-</span> <span class="code-r-keyword">F</span></code></pre>
+                    </li>
+                    <li><strong>Character (`character`):</strong> Represents text strings. Enclose strings in double quotes (`"..."`) or single quotes (`'...'`).
+                        <pre><code class="code-snippet">message <span class="code-r-assign"><-</span> <span class="code-string">"Welcome to R!"</span>
+city <span class="code-r-assign"><-</span> <span class="code-string">'Delhi'</span></code></pre>
+                    </li>
+                    <li><strong>Complex (`complex`):</strong> Represents complex numbers with real and imaginary parts (e.g., `3 + 2i`).</li>
+                    <li><strong>Raw (`raw`):</strong> Holds raw bytes.</li>
+                </ul>
+                <p>You can check the data type of an object using the `class()` or `typeof()` function.</p>
+                <pre><code class="code-snippet">x <span class="code-r-assign"><-</span> <span class="code-number">10.5</span>
+y <span class="code-r-assign"><-</span> <span class="code-number">5L</span>
+z <span class="code-r-assign"><-</span> <span class="code-string">"hello"</span>
+a <span class="code-r-assign"><-</span> <span class="code-r-keyword">TRUE</span>
+
+<span class="code-function">class</span>(x)  <span class="code-r-comment"># Output: [1] "numeric"</span>
+<span class="code-function">typeof</span>(x) <span class="code-r-comment"># Output: [1] "double"</span>
+<span class="code-function">class</span>(y)  <span class="code-r-comment"># Output: [1] "integer"</span>
+<span class="code-function">class</span>(z)  <span class="code-r-comment"># Output: [1] "character"</span>
+<span class="code-function">class</span>(a)  <span class="code-r-comment"># Output: [1] "logical"</span></code></pre>
+            </div>
+        </section>
+
+        <section id="vectors" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                 <h3>Introduction to Vectors.</h3>
+                 <p>Vectors are arguably the most fundamental data structure in R. They are ordered collections of elements of the <strong>same basic data type</strong>. Even single values like `x <- 5` are actually vectors of length one.</p>
+                <h4>Creating Vectors</h4>
+                <p>The most common way to create a vector is using the combine function `c()`.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Numeric vector</span>
+numeric_vec <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-number">1.5</span>, <span class="code-number">2.3</span>, <span class="code-number">0.7</span>, <span class="code-number">4.1</span>)
+
+<span class="code-r-comment"># Integer vector</span>
+integer_vec <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-number">1L</span>, <span class="code-number">5L</span>, <span class="code-number">10L</span>, <span class="code-number">15L</span>)
+
+<span class="code-r-comment"># Logical vector</span>
+logical_vec <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-r-keyword">TRUE</span>, <span class="code-r-keyword">FALSE</span>, <span class="code-r-keyword">T</span>, <span class="code-r-keyword">F</span>)
+
+<span class="code-r-comment"># Character vector</span>
+character_vec <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-string">"apple"</span>, <span class="code-string">"banana"</span>, <span class="code-string">"cherry"</span>)
+
+<span class="code-r-comment"># Printing vectors</span>
+numeric_vec
+character_vec</code></pre>
+                 <h4>Vector Coercion</h4>
+                 <p>If you try to combine different data types in a single vector using `c()`, R will <strong>coerce</strong> the elements to the least restrictive type to ensure all elements are the same type. The coercion hierarchy generally goes: Logical -> Integer -> Numeric -> Character.</p>
+                 <pre><code class="code-snippet">mixed_vec <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-number">1L</span>, <span class="code-string">"apple"</span>, <span class="code-number">3.5</span>, <span class="code-r-keyword">TRUE</span>)
+mixed_vec  <span class="code-r-comment"># Output: [1] "1" "apple" "3.5" "TRUE"</span>
+<span class="code-function">class</span>(mixed_vec) <span class="code-r-comment"># Output: [1] "character" (All elements coerced to character)</span></code></pre>
+                 <p>We will explore vector indexing, slicing, and operations in more detail next week.</p>
+            </div>
+        </section>
+
+         <section id="operators" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                 <h3>Operators in R.</h3>
+                 <p>Operators are symbols that perform operations on variables and values (operands).</p>
+                <h4>Arithmetic Operators</h4>
+                <p>Used for mathematical calculations. They often work element-wise on vectors.</p>
+                 <table>
+                     <thead><tr><th>Operator</th><th>Name</th><th>Example (`a<-5`, `b<-2`)</th><th>Result</th></tr></thead>
+                     <tbody>
+                         <tr><td>`+`</td><td>Addition</td><td>`a + b`</td><td>`7`</td></tr>
+                         <tr><td>`-`</td><td>Subtraction</td><td>`a - b`</td><td>`3`</td></tr>
+                         <tr><td>`*`</td><td>Multiplication</td><td>`a * b`</td><td>`10`</td></tr>
+                         <tr><td>`/`</td><td>Division</td><td>`a / b`</td><td>`2.5`</td></tr>
+                         <tr><td>`^` or `**`</td><td>Exponentiation</td><td>`a ^ b`</td><td>`25`</td></tr>
+                         <tr><td>`%%`</td><td>Modulo (Remainder)</td><td>`a %% b`</td><td>`1`</td></tr>
+                         <tr><td>`%/%`</td><td>Integer Division</td><td>`a %/% b`</td><td>`2`</td></tr>
+                     </tbody>
+                 </table>
+                 <pre><code class="code-snippet">vec1 <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>)
+vec2 <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-number">4</span>, <span class="code-number">5</span>, <span class="code-number">6</span>)
+vec1 + vec2 <span class="code-r-comment"># Output: [1] 5 7 9 (Element-wise addition)</span></code></pre>
+
+                <h4>Comparison Operators</h4>
+                <p>Used to compare values. Result is a logical vector (`TRUE` or `FALSE`).</p>
+                <table>
+                    <thead><tr><th>Operator</th><th>Name</th><th>Example (`a<-5`, `b<-2`)</th><th>Result</th></tr></thead>
+                    <tbody>
+                        <tr><td>`==`</td><td>Equal to</td><td>`a == b`</td><td>`FALSE`</td></tr>
+                        <tr><td>`!=`</td><td>Not equal to</td><td>`a != b`</td><td>`TRUE`</td></tr>
+                        <tr><td>`>`</td><td>Greater than</td><td>`a > b`</td><td>`TRUE`</td></tr>
+                        <tr><td>`<`</td><td>Less than</td><td>`a < b`</td><td>`FALSE`</td></tr>
+                        <tr><td>`>=`</td><td>Greater than or equal to</td><td>`a >= 5`</td><td>`TRUE`</td></tr>
+                        <tr><td>`<=`</td><td>Less than or equal to</td><td>`a <= b`</td><td>`FALSE`</td></tr>
+                    </tbody>
+                </table>
+                 <pre><code class="code-snippet">vec1 > vec2 <span class="code-r-comment"># Output: [1] FALSE FALSE FALSE (Element-wise comparison)</span>
+vec1 == <span class="code-r-keyword">c</span>(<span class="code-number">1</span>,<span class="code-number">5</span>,<span class="code-number">3</span>) <span class="code-r-comment"># Output: [1] TRUE FALSE TRUE</span></code></pre>
+
+                <h4>Logical Operators</h4>
+                 <p>Used to combine or negate logical values.</p>
+                 <ul>
+                     <li><strong>Element-wise:</strong> `&` (AND), `|` (OR), `!` (NOT) - Operate on each element of vectors.</li>
+                     <li><strong>Short-circuiting:</strong> `&&` (AND), `||` (OR) - Evaluate from left to right and stop as soon as the result is determined. Typically used in `if` statements with single logical values, not vectors.</li>
+                 </ul>
+                 <table>
+                    <thead><tr><th>Operator</th><th>Name</th><th>Example (`x<-TRUE`, `y<-FALSE`)</th><th>Result</th></tr></thead>
+                    <tbody>
+                        <tr><td>`&`</td><td>Element-wise AND</td><td>`x & y`</td><td>`FALSE`</td></tr>
+                        <tr><td>`|`</td><td>Element-wise OR</td><td>`x | y`</td><td>`TRUE`</td></tr>
+                        <tr><td>`!`</td><td>NOT</td><td>`!x`</td><td>`FALSE`</td></tr>
+                        <tr><td>`&&`</td><td>Logical AND (Short-circuit)</td><td>`x && y`</td><td>`FALSE`</td></tr>
+                         <tr><td>`||`</td><td>Logical OR (Short-circuit)</td><td>`x || y`</td><td>`TRUE`</td></tr>
+                    </tbody>
+                 </table>
+                  <pre><code class="code-snippet">vec_a <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-r-keyword">TRUE</span>, <span class="code-r-keyword">TRUE</span>, <span class="code-r-keyword">FALSE</span>)
+vec_b <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-r-keyword">TRUE</span>, <span class="code-r-keyword">FALSE</span>, <span class="code-r-keyword">FALSE</span>)
+
+vec_a & vec_b  <span class="code-r-comment"># Output: [1]  TRUE FALSE FALSE</span>
+vec_a | vec_b  <span class="code-r-comment"># Output: [1]  TRUE  TRUE FALSE</span>
+!vec_a         <span class="code-r-comment"># Output: [1] FALSE FALSE  TRUE</span>
+
+<span class="code-r-comment"># && and || typically used with single values in control flow</span>
+<span class="code-keyword">if</span> ( (5 > 3) && (2 == 2) ) { <span class="code-function">print</span>(<span class="code-string">"Both true"</span>) }</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RLearn - Your R Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#what-is-r">What is R?</a>
+                <a href="Week1.html#why-learn-r">Why Learn R?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#rstudio-tour">RStudio Tour</a>
+                <a href="Week1.html#first-commands">First Commands</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="#variables">Variables</a>
+                <a href="#data-types">Data Types</a>
+                <a href="#vectors">Vectors</a>
+                <a href="#operators">Operators</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#vector-ops">Vector Ops</a>
+                <a href="Week3.html#matrices">Matrices</a>
+                <a href="Week3.html#getting-help">Getting Help</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#lists">Lists</a>
+                <a href="Week4.html#data-frames">Data Frames</a>
+                <a href="Week4.html#viewing-data">Viewing Data</a>
+                <a href="Week4.html#import-csv">Import CSV</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#conditionals">Conditionals</a>
+                <a href="Week5.html#if-else">if/else/else if</a>
+                <a href="Week5.html#ifelse">ifelse()</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#for-loops">for Loops</a>
+                <a href="Week6.html#while-loops">while Loops</a>
+                <a href="Week6.html#break-next">break/next</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#function-definition">Function Def</a>
+                <a href="Week7.html#parameters">Parameters</a>
+                <a href="Week7.html#return-values">Return Values</a>
+                <a href="Week7.html#scope">Scope</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#tidyverse">Tidyverse</a>
+                <a href="Week8.html#dplyr">dplyr Intro</a>
+                <a href="Week8.html#core-verbs">Core Verbs</a>
+                <a href="Week8.html#pipe">Pipe Operator</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#group-summarise">Group & Summarise</a>
+                <a href="Week9.html#tidyr">tidyr Intro</a>
+                <a href="Week9.html#pivoting">Pivoting</a>
+                <a href="Week9.html#joins">Joining Data</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#grammar-graphics">Grammar of Graphics</a>
+                <a href="Week10.html#ggplot2">ggplot2 Intro</a>
+                <a href="Week10.html#geoms">Geoms</a>
+                <a href="Week10.html#aesthetics">Aesthetics</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#customizing">Customizing Plots</a>
+                <a href="Week11.html#saving-plots">Saving Plots</a>
+                <a href="Week11.html#basic-stats">Basic Stats</a>
+                <a href="Week11.html#summary">summary()</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#project">Mini Project</a>
+                <a href="Week12.html#r-markdown">R Markdown</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+        </div>
+
+</body>
+</html>

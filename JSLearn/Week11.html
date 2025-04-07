@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Learning - Week 11: Error Handling &amp; Debugging</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="javascript.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">JS</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#error-types">Error Types</a></li>
+                <li><a href="#debugging">Debugging Tools</a></li>
+                <li><a href="#try-catch">try...catch</a></li>
+                <li><a href="#throw-statement">throw</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 11: Handling Errors and Debugging Code</h1>
+                <p class="tagline">Learn how to anticipate, catch, and fix errors in your JavaScript programs.</p>
+                <a href="#error-types" class="button">Explore Chapter 11</a>
+            </div>
+        </section>
+
+        <section id="error-types" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 11: Dealing with the Unexpected</h2>
+                <h3>Types of Errors in JavaScript.</h3>
+                <p>Errors are a normal part of software development. Understanding the different kinds of errors that can occur in JavaScript helps you diagnose and fix them more effectively.</p>
+                <h4>1. Syntax Errors</h4>
+                <p>These errors occur when your code violates the grammatical rules of the JavaScript language. The browser's JavaScript engine cannot parse or understand the code. Syntax errors prevent the script from executing at all.</p>
+                <pre><code class="code-snippet ">// Example: Missing closing parenthesis
+// console.log("Hello"
+
+// Example: Misspelled keyword
+// functon greet() {}
+
+// Example: Missing curly brace
+// if (x > 5) { console.log("Hi");
+</code></pre>
+                <p>Syntax errors are usually caught during the initial parsing phase and reported in the browser's developer console, often pointing to the line where the error occurred.</p>
+
+                <h4>2. Runtime Errors (Exceptions)</h4>
+                <p>These errors occur *during* the execution of the script, after the syntax has been successfully parsed. They happen when the engine encounters an operation it cannot perform.</p>
+                <p>Common types of runtime errors (often represented by specific Error objects):</p>
+                <ul>
+                    <li><strong>ReferenceError</strong>: Occurs when trying to access a variable or function that hasn't been declared or is not in scope.
+                         <pre><code class="code-snippet ">// console.log(nonExistentVariable); // ReferenceError
+</code></pre>
+                    </li>
+                    <li><strong>TypeError</strong>: Occurs when an operation is performed on a value of an inappropriate type (e.g., calling something that isn't a function, accessing properties of null or undefined).
+                         <pre><code class="code-snippet ">// let num = 10;
+// num.toUpperCase(); // TypeError: num.toUpperCase is not a function
+
+// let data = null;
+// console.log(data.property); // TypeError: Cannot read properties of null
+</code></pre>
+                    </li>
+                    <li><strong>RangeError</strong>: Occurs when a value is not in the set or range of allowed values (e.g., invalid array length).
+                         <pre><code class="code-snippet ">// let arr = new Array(-1); // RangeError: Invalid array length
+</code></pre>
+                    </li>
+                    <li><strong>URIError</strong>: Occurs when global URI handling functions (like decodeURIComponent()) are used incorrectly.</li>
+                </ul>
+                <p>Runtime errors will stop the execution of the current script unless they are handled using error handling mechanisms.</p>
+                <h4>3. Logical Errors</h4>
+                <p>These are errors in the program's logic. The code runs without throwing syntax or runtime errors, but it doesn't produce the expected or correct result. These are often the hardest errors to find and fix, requiring careful debugging.</p>
+                <pre><code class="code-snippet ">// Example: Incorrect calculation logic
+function calculateAverage(a, b) {
+  // Bug: Should be (a + b) / 2
+  return a + b / 2; // Divides b by 2 first, then adds a
+}
+console.log(calculateAverage(4, 6)); // Expected 5, but gets 7
+</code></pre>
+            </div>
+        </section>
+
+        <section id="debugging" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Using Browser Debugger Tools.</h3>
+                <p>Modern web browsers come with powerful built-in developer tools that include a debugger. Learning to use the debugger is an essential skill for finding and fixing errors (especially runtime and logical errors).</p>
+                <h4>Key Debugger Features:</h4>
+                <ul>
+                    <li><strong>Console:</strong> We've already used console.log() to print values. The console also displays error messages and allows you to execute JavaScript commands interactively.</li>
+                    <li><strong>Sources Panel:</strong> Allows you to view the source code of your HTML, CSS, and JavaScript files.</li>
+                    <li><strong>Breakpoints:</strong> You can set breakpoints in your JavaScript code (usually by clicking on the line number in the Sources panel). When the code execution reaches a breakpoint, it pauses, allowing you to inspect the state of your program.</li>
+                    <li><strong>Stepping Controls:</strong> While paused at a breakpoint, you can:
+                         <ul>
+                              <li><strong>Step Over:</strong> Execute the current line and move to the next line (without going inside any function calls on the current line).</li>
+                              <li><strong>Step Into:</strong> If the current line calls a function, move execution into that function.</li>
+                              <li><strong>Step Out:</strong> Continue execution until the current function returns, then pause again.</li>
+                              <li><strong>Resume:</strong> Continue execution normally until the next breakpoint (or the end of the script).</li>
+                         </ul>
+                    </li>
+                    <li><strong>Watch Expressions:</strong> Monitor the values of specific variables or expressions as you step through the code.</li>
+                    <li><strong>Call Stack:</strong> Shows the sequence of function calls that led to the current point of execution. Helps understand how you got there.</li>
+                    <li><strong>Scope Variables:</strong> Inspect the values of local and global variables at the current point of execution.</li>
+                </ul>
+                <h4>How to Use:</h4>
+                <ol>
+                    <li>Open Developer Tools (F12 or right-click -&gt; Inspect).</li>
+                    <li>Go to the &quot;Sources&quot; (or sometimes &quot;Debugger&quot;) tab.</li>
+                    <li>Find your JavaScript file in the file navigator.</li>
+                    <li>Click on a line number to set a breakpoint.</li>
+                    <li>Refresh the page or perform the action that triggers the code containing the breakpoint.</li>
+                    <li>Execution will pause. Use the stepping controls and inspect variables/watch expressions to understand what's happening.</li>
+                </ol>
+                <p>Using the debugger is much more efficient than littering your code with console.log statements for complex problems.</p>
+            </div>
+        </section>
+
+        <section id="try-catch" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Exception Handling using try...catch...finally.</h3>
+                <p>JavaScript provides the try...catch...finally statement to handle runtime errors (exceptions) gracefully, preventing them from crashing your entire script.</p>
+                <h4>Syntax</h4>
+                <pre><code class="code-snippet ">try {
+  // Code that might potentially throw an error
+  // ... risky operations ...
+  console.log("Attempting risky operation...");
+  let result = riskyFunction(); // Assume this might fail
+  console.log("Operation succeeded.");
+
+} catch (error) {
+  // Code to execute if an error occurs within the 'try' block
+  console.error("An error occurred!");
+  console.error("Error name:", error.name);     // e.g., "TypeError"
+  console.error("Error message:", error.message); // Specific error description
+  // console.error(error.stack); // Stack trace (more detail)
+  // You can decide how to handle the error here (log it, show user message, etc.)
+
+} finally {
+  // Code that will always execute, regardless of whether an error occurred or not
+  // Useful for cleanup operations (e.g., closing resources, resetting state)
+  console.log("Finally block executed - cleanup can happen here.");
+}
+</code></pre>
+                <ul>
+                    <li><strong>try block:</strong> Contains the code that might throw an exception.</li>
+                    <li><strong>catch (error) block:</strong> If an error occurs in the try block, execution jumps to the catch block. The error object contains information about the error (like its name and message). This block is optional (but usually needed if you use try).</li>
+                    <li><strong>finally block:</strong> This block is optional. Its code executes *after* the try (and catch, if an error occurred) block finishes, regardless of whether an error happened. It's useful for cleanup actions that must always run.</li>
+                </ul>
+                <h4>Example</h4>
+                <pre><code class="code-snippet ">function divide(a, b) {
+  if (b === 0) {
+    // We'll learn to throw errors next
+    return "Error: Division by zero is not allowed.";
+  }
+  return a / b;
+}
+
+try {
+  let num1 = 10;
+  let num2 = 0; // Change to non-zero to see success path
+  console.log("Trying division...");
+  let result = divide(num1, num2);
+  console.log("Result:", result); // This might not run if error occurs before
+
+} catch (err) {
+  // This specific example doesn't throw a catchable error yet,
+  // but shows where one *would* be caught.
+  console.error("Caught an error:", err.message);
+
+} finally {
+  console.log("Division attempt finished.");
+}
+</code></pre>
+                <p>Using try...catch allows your program to handle errors gracefully instead of abruptly stopping.</p>
+            </div>
+        </section>
+
+        <section id="throw-statement" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>The throw Statement: Creating Custom Errors.</h3>
+                <p>In addition to catching built-in runtime errors, you can also explicitly signal that an error condition has occurred in your own code using the throw statement.</p>
+                <p>You can throw various types of values, but it's standard practice to throw Error objects (or objects inheriting from Error).</p>
+                <h4>Syntax</h4>
+                <pre><code class="code-snippet ">throw expression; // The value/object to be thrown
+</code></pre>
+                <h4>Throwing Error Objects</h4>
+                <p>JavaScript has built-in error constructors (Error, TypeError, ReferenceError, etc.) that you can use:</p>
+                <pre><code class="code-snippet ">function checkAge(age) {
+  if (typeof age !== 'number') {
+    throw new TypeError("Age must be a number."); // Throw a specific error type
+  }
+  if (age < 0) {
+    throw new Error("Age cannot be negative."); // Throw a generic error object
+  }
+  if (age < 18) {
+    console.log("Access denied - under 18.");
+    return false;
+  }
+  console.log("Access granted.");
+  return true;
+}
+
+try {
+  console.log("Checking age 25...");
+  checkAge(25); // Access granted.
+
+  console.log("Checking age -5...");
+  checkAge(-5); // This will throw an Error
+
+  // This line won't be reached if the previous one throws an error
+  console.log("Checking age 'twenty'...");
+  checkAge("twenty");
+
+} catch (error) {
+  console.error("--- Error Caught ---");
+  console.error("Name:", error.name);
+  console.error("Message:", error.message);
+  console.error("--------------------");
+} finally {
+    console.log("Age checks complete.");
+}
+</code></pre>
+                <p>When an error is thrown, the current function stops executing, and the JavaScript engine looks up the call stack for the nearest catch block to handle it. If no catch block is found, the program terminates (usually logging the error to the console).</p>
+                <p>Throwing custom errors makes your functions more robust by clearly indicating when invalid input or unexpected situations occur.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 JSLearn - Your JavaScript Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro &amp; Setup</a>
+                <a href="Week1.html#what-is-js-section">What is JS?</a>
+                <a href="Week1.html#why-learn-section">Why Learn?</a>
+                <a href="Week1.html#setup-section">Setup Env</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#arithmetic-operators">Arithmetic Ops</a>
+                <a href="Week2.html#comparison-operators">Comparison Ops</a>
+                <a href="Week2.html#logical-operators">Logical Ops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#interaction-output">Output</a>
+                <a href="Week3.html#interaction-input">Input</a>
+                <a href="Week3.html#string-properties">Properties</a>
+                <a href="Week3.html#string-methods">Methods</a>
+                <a href="Week3.html#template-literals">Literals</a>
+                <a href="Week3.html#dom-intro">DOM Intro</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#conditional-logic">Logic</a>
+                <a href="Week4.html#if-statement">if</a>
+                <a href="Week4.html#else-if-statement">else if</a>
+                <a href="Week4.html#else-statement">else</a>
+                <a href="Week4.html#truthy-falsy">Truthy/Falsy</a>
+                <a href="Week4.html#switch-statement">switch</a>
+                <a href="Week4.html#ternary-operator">Ternary Op</a>
+                <a href="Week4.html#nested-if">Nested if</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#for-loops">for Loops</a>
+                <a href="Week5.html#while-loops">while Loops</a>
+                <a href="Week5.html#do-while-loops">do...while</a>
+                <a href="Week5.html#break-continue">break/continue</a>
+                <a href="Week5.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#array-intro">Array Intro</a>
+                <a href="Week6.html#array-indexing">Indexing &amp; Modifying</a>
+                <a href="Week6.html#array-methods">Common Methods</a>
+                <a href="Week6.html#array-iteration">Iteration Methods</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#object-literals">Object Literals</a>
+                <a href="Week7.html#object-properties">Properties</a>
+                <a href="Week7.html#object-methods">Methods</a>
+                <a href="Week7.html#object-iteration">Iteration</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#function-declaration">Declaration/Expression</a>
+                <a href="Week8.html#function-parameters">Parameters</a>
+                <a href="Week8.html#function-return">Return Values</a>
+                <a href="Week8.html#variable-scope">Variable Scope</a>
+                <a href="Week8.html#arrow-functions">Arrow Functions</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#what-is-dom">What is the DOM?</a>
+                <a href="Week9.html#selecting-elements">Selecting Elements</a>
+                <a href="Week9.html#manipulating-dom">Manipulating</a>
+                <a href="Week9.html#event-handling">Event Handling</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#callbacks">Callbacks</a>
+                <a href="Week10.html#closures">Closures</a>
+                <a href="Week10.html#iife">IIFE</a>
+                <a href="Week10.html#this-keyword">`this` Keyword</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="Week11.html#error-types">Error Types</a>
+                <a href="Week11.html#debugging">Debugging Tools</a>
+                <a href="Week11.html#try-catch">try...catch</a>
+                <a href="Week11.html#throw-statement">throw</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#es6-overview">ES6+ Overview</a>
+                <a href="Week12.html#js-modules">Modules</a>
+                <a href="Week12.html#async-intro">Async Intro</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

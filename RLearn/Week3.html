@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Learning - Week 3: Vectors & Matrices</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="r.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .r-blue { color: #276DC3; /* Example R blue */ }
+        body.dark-mode .r-blue { color: #75AADB; /* Lighter R blue for dark mode */ }
+        /* Style for R code comments (if different highlighting needed) */
+        .code-r-comment { color: #008000; font-style: italic; } /* Example: Green comment */
+        body.dark-mode .code-r-comment { color: #77dd77; }
+        /* Style for assignment operator */
+        .code-r-assign { color: #cc7832; } /* Example color */
+        body.dark-mode .code-r-assign { color: #ffc66d; }
+         /* Style for R keywords/functions if needed */
+        .code-r-keyword { color: #0000ff; } /* Example: blue */
+        body.dark-mode .code-r-keyword { color: #87CEFA; } /* Example: light blue */
+    </style>
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="r-blue">R</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#vector-ops">Vector Ops</a></li>
+                <li><a href="#matrices">Matrices</a></li>
+                <li><a href="#getting-help">Getting Help</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 3: Manipulating Data with Vectors & Matrices</h1>
+                <p class="tagline">Learn indexing, slicing, recycling, and introduce matrices and R's help system.</p>
+                <a href="#vector-ops" class="button">Explore Chapter 3</a>
+            </div>
+        </section>
+
+        <section id="vector-ops" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 3: Data Structures - Vectors & Matrices</h2>
+                <h3>Vector Operations: Indexing, Slicing, Recycling.</h3>
+                <p>Last week, we introduced vectors as ordered collections of elements of the same type. Now, let's learn how to access and manipulate these elements.</p>
+
+                <h4>Vector Indexing</h4>
+                <p>You can select specific elements from a vector using square brackets `[]`. R uses <strong>1-based indexing</strong>, meaning the first element is at index 1.</p>
+                <ul>
+                    <li><strong>Positive Integers:</strong> Select elements at the specified positions.
+                        <pre><code class="code-snippet">my_vector <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-number">10</span>, <span class="code-number">20</span>, <span class="code-number">30</span>, <span class="code-number">40</span>, <span class="code-number">50</span>)
+my_vector[<span class="code-number">1</span>]       <span class="code-r-comment"># Output: [1] 10 (First element)</span>
+my_vector[<span class="code-number">3</span>]       <span class="code-r-comment"># Output: [1] 30 (Third element)</span>
+my_vector[<span class="code-r-keyword">c</span>(<span class="code-number">1</span>, <span class="code-number">4</span>)] <span class="code-r-comment"># Output: [1] 10 40 (First and fourth elements)</span></code></pre>
+                    </li>
+                    <li><strong>Negative Integers:</strong> Exclude elements at the specified positions.
+                        <pre><code class="code-snippet">my_vector[-<span class="code-number">1</span>]      <span class="code-r-comment"># Output: [1] 20 30 40 50 (All except the first)</span>
+my_vector[-<span class="code-r-keyword">c</span>(<span class="code-number">2</span>, <span class="code-number">3</span>)] <span class="code-r-comment"># Output: [1] 10 40 50 (All except second and third)</span></code></pre>
+                    </li>
+                    <li><strong>Logical Vectors:</strong> Select elements where the corresponding logical value is `TRUE`. The logical vector must typically be the same length as the vector being indexed.
+                        <pre><code class="code-snippet">my_vector[<span class="code-r-keyword">c</span>(<span class="code-r-keyword">TRUE</span>, <span class="code-r-keyword">FALSE</span>, <span class="code-r-keyword">TRUE</span>, <span class="code-r-keyword">FALSE</span>, <span class="code-r-keyword">TRUE</span>)] <span class="code-r-comment"># Output: [1] 10 30 50</span>
+<span class="code-r-comment"># Often used with conditions:</span>
+my_vector[my_vector > <span class="code-number">25</span>] <span class="code-r-comment"># Output: [1] 30 40 50</span></code></pre>
+                    </li>
+                </ul>
+
+                <h4>Vector Slicing</h4>
+                <p>You can select a contiguous sequence of elements using the colon operator `:` to create an integer sequence for indexing.</p>
+                 <pre><code class="code-snippet">my_vector[<span class="code-number">2</span>:<span class="code-number">4</span>] <span class="code-r-comment"># Output: [1] 20 30 40 (Elements at index 2, 3, and 4)</span></code></pre>
+
+                <h4>Vector Recycling</h4>
+                 <p>When you perform an operation involving two vectors of different lengths, R automatically <strong>recycles</strong> (repeats) the elements of the shorter vector to match the length of the longer one. This can be useful, but be aware of it to avoid unexpected results, especially if the length of the longer vector is not a multiple of the shorter one (which usually results in a warning).</p>
+                <pre><code class="code-snippet">vec_long <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>, <span class="code-number">4</span>, <span class="code-number">5</span>, <span class="code-number">6</span>)
+vec_short <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-number">10</span>, <span class="code-number">20</span>)
+
+vec_long + vec_short  <span class="code-r-comment"># Output: [1] 11 22 13 24 15 26</span>
+<span class="code-r-comment"># vec_short is recycled to c(10, 20, 10, 20, 10, 20) before addition</span>
+
+vec_short2 <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-number">10</span>, <span class="code-number">20</span>, <span class="code-number">30</span>)
+vec_long + vec_short2 <span class="code-r-comment"># Output: [1] 11 22 33 14 25 36</span>
+<span class="code-r-comment"># Output includes a warning because 6 is not a multiple of 3</span>
+<span class="code-r-comment"># Warning message:</span>
+<span class="code-r-comment"># In vec_long + vec_short2 : longer object length is not a multiple of shorter object length</span>
+</code></pre>
+            </div>
+        </section>
+
+        <section id="matrices" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Introduction to Matrices.</h3>
+                <p>A matrix is a two-dimensional rectangular data structure in R. Like vectors, all elements in a matrix must be of the <strong>same data type</strong> (e.g., all numeric or all character).</p>
+
+                <h4>Creating Matrices</h4>
+                <p>Matrices are typically created using the `matrix()` function:</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Create a matrix from a vector of data</span>
+data_vector <span class="code-r-assign"><-</span> <span class="code-number">1</span>:<span class="code-number">6</span>  <span class="code-r-comment"># Creates vector c(1, 2, 3, 4, 5, 6)</span>
+
+<span class="code-r-comment"># Create a 2x3 matrix (2 rows, 3 columns), filled by column (default)</span>
+mat1 <span class="code-r-assign"><-</span> <span class="code-function">matrix</span>(data <span class="code-r-assign">=</span> data_vector, nrow <span class="code-r-assign">=</span> <span class="code-number">2</span>, ncol <span class="code-r-assign">=</span> <span class="code-number">3</span>)
+<span class="code-function">print</span>(mat1)
+<span class="code-r-comment"># Output:</span>
+<span class="code-r-comment">#      [,1] [,2] [,3]</span>
+<span class="code-r-comment"># [1,]    1    3    5</span>
+<span class="code-r-comment"># [2,]    2    4    6</span>
+
+<span class="code-r-comment"># Create a 2x3 matrix, filled by row</span>
+mat2 <span class="code-r-assign"><-</span> <span class="code-function">matrix</span>(data <span class="code-r-assign">=</span> data_vector, nrow <span class="code-r-assign">=</span> <span class="code-number">2</span>, ncol <span class="code-r-assign">=</span> <span class="code-number">3</span>, byrow <span class="code-r-assign">=</span> <span class="code-r-keyword">TRUE</span>)
+<span class="code-function">print</span>(mat2)
+<span class="code-r-comment"># Output:</span>
+<span class="code-r-comment">#      [,1] [,2] [,3]</span>
+<span class="code-r-comment"># [1,]    1    2    3</span>
+<span class="code-r-comment"># [2,]    4    5    6</span>
+</code></pre>
+
+                <h4>Matrix Indexing</h4>
+                <p>You access elements in a matrix using two indices inside square brackets: `matrix[row, column]`. Leaving an index blank selects the entire row or column.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Using mat2 from above</span>
+mat2[<span class="code-number">1</span>, <span class="code-number">2</span>]  <span class="code-r-comment"># Output: [1] 2 (Element at row 1, column 2)</span>
+mat2[<span class="code-number">2</span>, <span class="code-number">3</span>]  <span class="code-r-comment"># Output: [1] 6 (Element at row 2, column 3)</span>
+
+mat2[<span class="code-number">1</span>, ]    <span class="code-r-comment"># Output: [1] 1 2 3 (Selects the entire first row)</span>
+mat2[, <span class="code-number">3</span>]    <span class="code-r-comment"># Output: [1] 3 6 (Selects the entire third column)</span>
+
+mat2[<span class="code-number">1</span>, <span class="code-r-keyword">c</span>(<span class="code-number">1</span>, <span class="code-number">3</span>)] <span class="code-r-comment"># Output: [1] 1 3 (Row 1, columns 1 and 3)</span>
+</code></pre>
+                <p>Matrices are fundamental for many mathematical and statistical operations in R, especially linear algebra.</p>
+            </div>
+        </section>
+
+        <section id="getting-help" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Getting Help in R.</h3>
+                <p>As you learn R, knowing how to find help is essential. R has excellent built-in documentation and functions to assist you.</p>
+                 <ul>
+                     <li><strong>`help(function_name)` or `?function_name`:</strong> The most common way to get help. This displays the documentation page for a specific function or topic if you know its name.
+                         <pre><code class="code-snippet"><span class="code-function">help</span>(mean)
+?<span class="code-function">matrix</span>
+?<span class="code-r-keyword">c</span></code></pre>
+                        <p>The help page typically includes a description, usage details, argument explanations, examples, and related functions.</p>
+                     </li>
+                     <li><strong>`help.search("keyword")` or `??keyword`:</strong> Searches the documentation for a keyword or concept when you don't know the exact function name. Requires quotes for multi-word searches.
+                         <pre><code class="code-snippet"><span class="code-function">help.search</span>(<span class="code-string">"standard deviation"</span>)
+??<span class="code-string">"linear model"</span></code></pre>
+                        <p>This returns a list of potentially relevant help pages.</p>
+                     </li>
+                     <li><strong>`example(function_name)`:</strong> Runs the example code provided in the help documentation for a specific function. This is a great way to see the function in action.
+                         <pre><code class="code-snippet"><span class="code-function">example</span>(mean)
+<span class="code-function">example</span>(plot)</code></pre>
+                     </li>
+                     <li><strong>`str(object_name)`:</strong> Displays the <strong>str</strong>ucture of an R object (like a vector, matrix, data frame, or list), showing its type, dimensions, and a preview of its contents. Very useful for understanding complex objects.
+                          <pre><code class="code-snippet">my_vec <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-string">"a"</span>, <span class="code-string">"b"</span>, <span class="code-string">"c"</span>)
+<span class="code-function">str</span>(my_vec) <span class="code-r-comment"># Output: chr [1:3] "a" "b" "c"</span>
+
+my_mat <span class="code-r-assign"><-</span> <span class="code-function">matrix</span>(<span class="code-number">1</span>:<span class="code-number">4</span>, nrow<span class="code-r-assign">=</span><span class="code-number">2</span>)
+<span class="code-function">str</span>(my_mat) <span class="code-r-comment"># Output: int [1:2, 1:2] 1 2 3 4</span></code></pre>
+                     </li>
+                 </ul>
+                <p>Don't hesitate to use these help functions frequently! They are invaluable tools for learning and troubleshooting in R.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RLearn - Your R Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#what-is-r">What is R?</a>
+                <a href="Week1.html#why-learn-r">Why Learn R?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#rstudio-tour">RStudio Tour</a>
+                <a href="Week1.html#first-commands">First Commands</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#vectors">Vectors</a>
+                <a href="Week2.html#operators">Operators</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="#vector-ops">Vector Ops</a>
+                 <a href="#matrices">Matrices</a>
+                 <a href="#getting-help">Getting Help</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#lists">Lists</a>
+                <a href="Week4.html#data-frames">Data Frames</a>
+                <a href="Week4.html#viewing-data">Viewing Data</a>
+                <a href="Week4.html#import-csv">Import CSV</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#conditionals">Conditionals</a>
+                <a href="Week5.html#if-else">if/else/else if</a>
+                <a href="Week5.html#ifelse">ifelse()</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#for-loops">for Loops</a>
+                <a href="Week6.html#while-loops">while Loops</a>
+                <a href="Week6.html#break-next">break/next</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#function-definition">Function Def</a>
+                <a href="Week7.html#parameters">Parameters</a>
+                <a href="Week7.html#return-values">Return Values</a>
+                <a href="Week7.html#scope">Scope</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#tidyverse">Tidyverse</a>
+                <a href="Week8.html#dplyr">dplyr Intro</a>
+                <a href="Week8.html#core-verbs">Core Verbs</a>
+                <a href="Week8.html#pipe">Pipe Operator</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#group-summarise">Group & Summarise</a>
+                <a href="Week9.html#tidyr">tidyr Intro</a>
+                <a href="Week9.html#pivoting">Pivoting</a>
+                <a href="Week9.html#joins">Joining Data</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#grammar-graphics">Grammar of Graphics</a>
+                <a href="Week10.html#ggplot2">ggplot2 Intro</a>
+                <a href="Week10.html#geoms">Geoms</a>
+                <a href="Week10.html#aesthetics">Aesthetics</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#customizing">Customizing Plots</a>
+                <a href="Week11.html#saving-plots">Saving Plots</a>
+                <a href="Week11.html#basic-stats">Basic Stats</a>
+                <a href="Week11.html#summary">summary()</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#project">Mini Project</a>
+                <a href="Week12.html#r-markdown">R Markdown</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+        </div>
+
+</body>
+</html>

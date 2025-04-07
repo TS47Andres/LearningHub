@@ -1,0 +1,113 @@
+JSLearn: 12-Week JavaScript Syllabus Draft
+
+Week 1: Getting Started with JavaScript
+
+What is JavaScript? History and its role in web development (and beyond). 
+Why learn JavaScript? Advantages and use cases (front-end, back-end with Node.js, etc.). 
+Setting up your development environment:
+Browser Developer Tools (Console). 
+Code editors (VS Code, etc.). 
+Linking JS to HTML (<script> tag).
+Your first JS program (console.log, alert). 
+Basic syntax, comments, and statements. 
+
+
+Week 2: Data Basics in JS
+
+Variables: let, const, (var - legacy). 
+Basic data types: Numbers, Strings, Booleans, null, undefined, Symbols (briefly). 
+Operators:
+Arithmetic operators (+, -, *, /, %, **). 
+Comparison operators (==, ===, !=, !==, >, <, >=, <=). 
+Logical operators (&&, ||, !). 
+
+
+Week 3: Interaction & String Manipulation
+
+Output: console.log(), alert(), interacting with the DOM (brief intro). 
+Input: prompt(), getting values from HTML elements. 
+String manipulation:
+String properties (length). 
+String methods (e.g., toUpperCase(), toLowerCase(), trim(), indexOf(), slice(), replace()). 
+Template literals (backticks `${}`). 
+
+
+Week 4: Conditionals
+
+Making decisions in your code. 
+if, else if, else statements. 
+Conditional (ternary) operator.
+switch statement.
+Truthy and Falsy values.
+Nested conditionals. 
+
+
+Week 5: Loops
+
+Repeating actions automatically. 
+for loops. 
+while loops. 
+do...while loops.
+break and continue statements. 
+Iterating over strings and arrays. 
+Nested loops. 
+
+
+Week 6: Arrays
+
+Storing collections of data. 
+Array creation (literals, new Array()). 
+Accessing elements (indexing). 
+Common array methods (e.g., push(), pop(), shift(), unshift(), slice(), splice(), forEach(), map(), filter()). 
+Array length property.
+
+
+Week 7: Objects
+
+Introduction to JavaScript Objects (key-value pairs). 
+Object literals: Creating, accessing properties (dot notation, bracket notation). 
+Modifying object properties. 
+Object methods (functions as properties). 
+Iterating over object properties (for...in loop).
+
+
+Week 8: Functions
+
+Writing reusable code blocks. 
+Function declaration vs. function expression. 
+Parameters and arguments. 
+Return values. 
+Variable scope (global, function/local scope, block scope with let/const). 
+Arrow functions (ES6).
+
+
+Week 9: Introduction to the DOM
+
+What is the Document Object Model (DOM)?
+Selecting HTML elements (e.g., getElementById, querySelector, querySelectorAll).
+Manipulating element styles and content (innerHTML, textContent, style).
+Handling basic events (e.g., onclick, onmouseover).
+
+
+Week 10: Advanced Functions & Scope
+
+Callbacks and asynchronous behavior (introduction).
+Closures.
+Immediately Invoked Function Expressions (IIFE).
+The this keyword (basic understanding in different contexts).
+
+
+Week 11: Error Handling & Debugging
+
+Types of errors in JavaScript. 
+Using the browser's debugger tools.
+Exception handling using try...catch...finally. 
+The throw statement. 
+
+
+Week 12: Introduction to ES6+ and Next Steps
+
+Overview of modern JavaScript features (ES6+): let/const, arrow functions, template literals, destructuring, spread/rest operators.
+Brief introduction to Modules in JS (import/export).
+Introduction to asynchronous JavaScript: Promises, async/await.
+Where to go next: Frameworks (React, Angular, Vue), Node.js, further DOM manipulation, APIs.

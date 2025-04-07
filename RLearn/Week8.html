@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Learning - Week 8: Intro to Data Manipulation (dplyr)</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="r.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .r-blue { color: #276DC3; /* Example R blue */ }
+        body.dark-mode .r-blue { color: #75AADB; /* Lighter R blue for dark mode */ }
+        /* Style for R code comments (if different highlighting needed) */
+        .code-r-comment { color: #008000; font-style: italic; } /* Example: Green comment */
+        body.dark-mode .code-r-comment { color: #77dd77; }
+        /* Style for assignment operator */
+        .code-r-assign { color: #cc7832; } /* Example color */
+        body.dark-mode .code-r-assign { color: #ffc66d; }
+         /* Style for R keywords/functions if needed */
+        .code-r-keyword { color: #0000ff; } /* Example: blue */
+        body.dark-mode .code-r-keyword { color: #87CEFA; } /* Example: light blue */
+         /* Style for pipe operator */
+         .code-r-pipe { color: #b58900; font-weight: bold;} /* Example: Brown/bold */
+         body.dark-mode .code-r-pipe { color: #ffdb58; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="r-blue">R</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#tidyverse">Tidyverse</a></li>
+                <li><a href="#dplyr-intro">dplyr Intro</a></li>
+                <li><a href="#core-verbs">Core Verbs</a></li>
+                <li><a href="#pipe">Pipe Operator</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 8: Wrangling Data with dplyr</h1>
+                <p class="tagline">Enter the Tidyverse and learn essential data manipulation verbs.</p>
+                <a href="#tidyverse" class="button">Explore Chapter 8</a>
+            </div>
+        </section>
+
+        <section id="tidyverse" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 8: Introduction to Data Manipulation with `dplyr`</h2>
+                <h3>The Tidyverse Concept.</h3>
+                <p>The <strong>Tidyverse</strong> is an opinionated collection of R packages designed for data science. All packages in the Tidyverse share an underlying design philosophy, grammar, and data structures, making them work seamlessly together.</p>
+                <p>Key aspects of the Tidyverse philosophy include:</p>
+                <ul>
+                    <li>Using "tidy data" principles (each variable a column, each observation a row, each type of observational unit a table).</li>
+                    <li>Promoting readable code, often through the use of pipes.</li>
+                    <li>Providing consistent function names and arguments.</li>
+                    <li>Focusing on human-readable data manipulation and visualization.</li>
+                </ul>
+                <p>Some core packages within the Tidyverse include:</p>
+                <ul>
+                    <li><strong>`dplyr`</strong>: For data manipulation (filtering, selecting, mutating, arranging, summarising).</li>
+                    <li><strong>`ggplot2`</strong>: For declarative data visualization.</li>
+                    <li><strong>`tidyr`</strong>: For tidying data (reshaping layout).</li>
+                    <li><strong>`readr`</strong>: For reading rectangular data files (like CSVs).</li>
+                    <li><strong>`purrr`</strong>: For functional programming tools.</li>
+                    <li><strong>`tibble`</strong>: A modern reimagining of data frames.</li>
+                    <li><strong>`stringr`</strong>: For working with strings.</li>
+                    <li><strong>`forcats`</strong>: For working with factors.</li>
+                </ul>
+                <p>We will start by focusing on `dplyr`, a cornerstone of the Tidyverse for data transformation.</p>
+            </div>
+        </section>
+
+        <section id="dplyr-intro" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Introduction to `dplyr` & Installation.</h3>
+                <p>`dplyr` provides a consistent set of "verbs" (functions) that help you solve the most common data manipulation challenges. It's designed to be fast and intuitive.</p>
+                <h4>Installing Packages</h4>
+                <p>If you haven't used `dplyr` or the Tidyverse before, you need to install it first. Packages only need to be installed once per R installation (or library path).</p>
+                <p>You can install just `dplyr` or the entire Tidyverse suite (which includes `dplyr` and other useful packages). Installing the whole Tidyverse is often recommended.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Install only dplyr</span>
+<span class="code-function">install.packages</span>(<span class="code-string">"dplyr"</span>)
+
+<span class="code-r-comment"># Install the complete Tidyverse (recommended)</span>
+<span class="code-function">install.packages</span>(<span class="code-string">"tidyverse"</span>)</code></pre>
+                <p>Run one of these commands in your R console. You might be asked to choose a CRAN mirror (a server to download from) – pick one geographically close to you.</p>
+                <h4>Loading Packages</h4>
+                <p>Once installed, you need to load the package into your current R session using the `library()` function each time you start a new R session and want to use its functions.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Load dplyr (or tidyverse)</span>
+<span class="code-function">library</span>(dplyr)
+
+<span class="code-r-comment"># Or, if you installed the whole suite:</span>
+<span class="code-function">library</span>(tidyverse) <span class="code-r-comment"># This loads dplyr and several other core packages</span>
+</code></pre>
+                <p>Now you're ready to use `dplyr` functions!</p>
+            </div>
+        </section>
+
+        <section id="core-verbs" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Core `dplyr` Verbs.</h3>
+                <p>`dplyr` revolves around a few key verbs (functions) that take a data frame as the first argument and return a modified data frame. We'll use the built-in `iris` dataset for examples.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Load dplyr if not already loaded</span>
+<span class="code-function">library</span>(dplyr)
+
+<span class="code-r-comment"># View the structure of the iris dataset</span>
+<span class="code-function">str</span>(iris)</code></pre>
+
+                <h4>1. `filter()`: Subset rows based on conditions.</h4>
+                <p>Selects rows that meet specified logical criteria.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Filter for rows where Species is 'setosa'</span>
+setosa_data <span class="code-r-assign"><-</span> <span class="code-function">filter</span>(iris, Species == <span class="code-string">"setosa"</span>)
+<span class="code-function">head</span>(setosa_data)
+
+<span class="code-r-comment"># Filter for rows where Sepal.Length is greater than 7</span>
+long_sepals <span class="code-r-assign"><-</span> <span class="code-function">filter</span>(iris, Sepal.Length > <span class="code-number">7</span>)
+<span class="code-function">head</span>(long_sepals)
+
+<span class="code-r-comment"># Filter with multiple conditions (Species is virginica AND Petal.Width > 2)</span>
+virginica_wide <span class="code-r-assign"><-</span> <span class="code-function">filter</span>(iris, Species == <span class="code-string">"virginica"</span> & Petal.Width > <span class="code-number">2</span>)
+<span class="code-function">head</span>(virginica_wide)</code></pre>
+
+                <h4>2. `select()`: Subset columns by name.</h4>
+                <p>Keeps or removes columns.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Select only the Sepal.Length and Species columns</span>
+sepal_species <span class="code-r-assign"><-</span> <span class="code-function">select</span>(iris, Sepal.Length, Species)
+<span class="code-function">head</span>(sepal_species)
+
+<span class="code-r-comment"># Select all columns *except* Species</span>
+no_species <span class="code-r-assign"><-</span> <span class="code-function">select</span>(iris, -Species)
+<span class="code-function">head</span>(no_species)
+
+<span class="code-r-comment"># Select columns starting with "Petal"</span>
+petal_cols <span class="code-r-assign"><-</span> <span class="code-function">select</span>(iris, <span class="code-function">starts_with</span>(<span class="code-string">"Petal"</span>))
+<span class="code-function">head</span>(petal_cols)</code></pre>
+
+                <h4>3. `arrange()`: Reorder rows based on column values.</h4>
+                 <p>Sorts the rows.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Arrange rows by Petal.Length (ascending by default)</span>
+arranged_data <span class="code-r-assign"><-</span> <span class="code-function">arrange</span>(iris, Petal.Length)
+<span class="code-function">head</span>(arranged_data)
+
+<span class="code-r-comment"># Arrange rows by Petal.Length in descending order</span>
+arranged_desc <span class="code-r-assign"><-</span> <span class="code-function">arrange</span>(iris, <span class="code-function">desc</span>(Petal.Length))
+<span class="code-function">head</span>(arranged_desc)
+
+<span class="code-r-comment"># Arrange by Species, then by Sepal.Width within each species</span>
+arranged_multi <span class="code-r-assign"><-</span> <span class="code-function">arrange</span>(iris, Species, Sepal.Width)
+<span class="code-function">head</span>(arranged_multi)</code></pre>
+
+                <h4>4. `mutate()`: Create new columns or modify existing ones.</h4>
+                 <p>Computes and adds new variables.</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Create a new column 'Petal.Area'</span>
+iris_with_area <span class="code-r-assign"><-</span> <span class="code-function">mutate</span>(iris, Petal.Area = Petal.Length * Petal.Width)
+<span class="code-function">head</span>(iris_with_area)
+
+<span class="code-r-comment"># Create multiple new columns</span>
+iris_mod <span class="code-r-assign"><-</span> <span class="code-function">mutate</span>(iris,
+                     Petal.Area = Petal.Length * Petal.Width,
+                     Sepal.Area = Sepal.Length * Sepal.Width
+                    )
+<span class="code-function">head</span>(iris_mod)</code></pre>
+                <p>These verbs form the foundation of data manipulation with `dplyr`. We'll cover `summarise()` and `group_by()` next week.</p>
+            </div>
+        </section>
+
+        <section id="pipe" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                 <h3>The Pipe Operator (`%>%` or `|>`).</h3>
+                 <p>Often, you want to perform multiple data manipulation steps sequentially. You could do this by saving intermediate results, but that can be verbose. Alternatively, you could nest function calls, but that quickly becomes hard to read:</p>
+                 <pre><code class="code-snippet"><span class="code-r-comment"># Nested approach (hard to read)</span>
+<span class="code-function">head</span>(<span class="code-function">arrange</span>(<span class="code-function">select</span>(<span class="code-function">filter</span>(iris, Species == <span class="code-string">"setosa"</span>), Sepal.Length, Petal.Length), <span class="code-function">desc</span>(Sepal.Length)))</code></pre>
+                 <p>The pipe operator provides a much more elegant solution. It takes the result of the expression on its left-hand side and "pipes" it into the <strong>first argument</strong> of the function on its right-hand side.</p>
+                 <p>The most common pipe is `%>%` from the `magrittr` package (which is automatically loaded by `dplyr` and the `tidyverse`). Base R version 4.1.0 introduced a native pipe `|>` which works similarly in many cases.</p>
+                <h4>Syntax with `%>%`</h4>
+                 <pre><code class="code-snippet">data_frame <span class="code-r-pipe">%>%</span>
+  <span class="code-function">verb1</span>(argument2, ...) <span class="code-r-pipe">%>%</span>
+  <span class="code-function">verb2</span>(argument2, ...) <span class="code-r-pipe">%>%</span>
+  ...</code></pre>
+                <p>This reads like "Take `data_frame`, THEN apply `verb1`, THEN apply `verb2`, ..."</p>
+                <h4>Example using Pipe</h4>
+                <p>Let's rewrite the nested example using pipes:</p>
+                 <pre><code class="code-snippet"><span class="code-r-comment"># Pipe approach (much more readable)</span>
+result <span class="code-r-assign"><-</span> iris <span class="code-r-pipe">%>%</span>
+  <span class="code-function">filter</span>(Species == <span class="code-string">"setosa"</span>) <span class="code-r-pipe">%>%</span> <span class="code-r-comment"># Take iris, THEN filter</span>
+  <span class="code-function">select</span>(Sepal.Length, Petal.Length) <span class="code-r-pipe">%>%</span> <span class="code-r-comment"># THEN select columns</span>
+  <span class="code-function">arrange</span>(<span class="code-function">desc</span>(Sepal.Length)) <span class="code-r-pipe">%>%</span> <span class="code-r-comment"># THEN arrange rows</span>
+  <span class="code-function">head</span>() <span class="code-r-comment"># THEN take the first few rows</span>
+
+<span class="code-function">print</span>(result)</code></pre>
+                 <p>The pipe makes complex data manipulation sequences much easier to write, read, and debug.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RLearn - Your R Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#what-is-r">What is R?</a>
+                <a href="Week1.html#why-learn-r">Why Learn R?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#rstudio-tour">RStudio Tour</a>
+                <a href="Week1.html#first-commands">First Commands</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#vectors">Vectors</a>
+                <a href="Week2.html#operators">Operators</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#vector-ops">Vector Ops</a>
+                 <a href="Week3.html#matrices">Matrices</a>
+                 <a href="Week3.html#getting-help">Getting Help</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#lists">Lists</a>
+                <a href="Week4.html#data-frames">Data Frames</a>
+                <a href="Week4.html#viewing-data">Viewing Data</a>
+                <a href="Week4.html#import-csv">Import CSV</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#conditionals">Conditional Logic</a>
+                <a href="Week5.html#if-statement">if Statement</a>
+                <a href="Week5.html#else-if-else">else if / else</a>
+                <a href="Week5.html#ifelse-function">ifelse() Function</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#for-loops">for Loops</a>
+                <a href="Week6.html#while-loops">while Loops</a>
+                <a href="Week6.html#break-next">break / next</a>
+                <a href="Week6.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#function-definition">Function Definition</a>
+                <a href="Week7.html#parameters">Parameters</a>
+                <a href="Week7.html#return-values">Return Values</a>
+                <a href="Week7.html#scope">Scope (Environments)</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="#tidyverse">Tidyverse</a>
+                <a href="#dplyr-intro">dplyr Intro</a>
+                <a href="#core-verbs">Core Verbs</a>
+                <a href="#pipe">Pipe Operator</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#group-summarise">Group & Summarise</a>
+                <a href="Week9.html#tidyr">tidyr Intro</a>
+                <a href="Week9.html#pivoting">Pivoting</a>
+                <a href="Week9.html#joins">Joining Data</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#grammar-graphics">Grammar of Graphics</a>
+                <a href="Week10.html#ggplot2">ggplot2 Intro</a>
+                <a href="Week10.html#geoms">Geoms</a>
+                <a href="Week10.html#aesthetics">Aesthetics</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#customizing">Customizing Plots</a>
+                <a href="Week11.html#saving-plots">Saving Plots</a>
+                <a href="Week11.html#basic-stats">Basic Stats</a>
+                <a href="Week11.html#summary">summary()</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#project">Mini Project</a>
+                <a href="Week12.html#r-markdown">R Markdown</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+        </div>
+
+</body>
+</html>

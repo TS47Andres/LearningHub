@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Learning - Week 9: More Data Manipulation & Tidying</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="r.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .r-blue { color: #276DC3; /* Example R blue */ }
+        body.dark-mode .r-blue { color: #75AADB; /* Lighter R blue for dark mode */ }
+        /* Style for R code comments (if different highlighting needed) */
+        .code-r-comment { color: #008000; font-style: italic; } /* Example: Green comment */
+        body.dark-mode .code-r-comment { color: #77dd77; }
+        /* Style for assignment operator */
+        .code-r-assign { color: #cc7832; } /* Example color */
+        body.dark-mode .code-r-assign { color: #ffc66d; }
+         /* Style for R keywords/functions if needed */
+        .code-r-keyword { color: #0000ff; } /* Example: blue */
+        body.dark-mode .code-r-keyword { color: #87CEFA; } /* Example: light blue */
+         /* Style for pipe operator */
+         .code-r-pipe { color: #b58900; font-weight: bold;} /* Example: Brown/bold */
+         body.dark-mode .code-r-pipe { color: #ffdb58; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="r-blue">R</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#group-summarise">Group & Summarise</a></li>
+                <li><a href="#tidyr">tidyr Intro</a></li>
+                <li><a href="#pivoting">Pivoting</a></li>
+                <li><a href="#joins">Joining Data</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 9: Grouping, Summarising, and Tidying Data</h1>
+                <p class="tagline">Master grouped operations, reshape data layouts, and combine datasets.</p>
+                <a href="#group-summarise" class="button">Explore Chapter 9</a>
+            </div>
+        </section>
+
+        <section id="group-summarise" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 9: Advanced Data Manipulation & Tidying</h2>
+                <h3>`group_by()` and `summarise()`: Grouped Operations.</h3>
+                <p>A very common data analysis task is to calculate summary statistics for different groups within your data. `dplyr` makes this easy using `group_by()` in combination with `summarise()`.</p>
+
+                <h4>`group_by()`</h4>
+                <p>The `group_by()` function doesn't change the data frame visually, but it adds grouping metadata. Subsequent `dplyr` verbs (most notably `summarise()`) will then operate independently on each group.</p>
+
+                <h4>`summarise()` (or `summarize()`)</h4>
+                <p>The `summarise()` function collapses a data frame into a single row, usually containing summary statistics. When used after `group_by()`, it collapses each group into a single summary row.</p>
+                <p>Common summary functions to use inside `summarise()` include:</p>
+                <ul>
+                    <li>`mean(column)`: Average value</li>
+                    <li>`median(column)`: Median value</li>
+                    <li>`sd(column)`: Standard deviation</li>
+                    <li>`min(column)`: Minimum value</li>
+                    <li>`max(column)`: Maximum value</li>
+                    <li>`n()`: Counts the number of rows in the current group (no arguments needed).</li>
+                    <li>`sum(column)`: Sum of values</li>
+                </ul>
+
+                <h4>Example</h4>
+                <pre><code class="code-snippet"><span class="code-function">library</span>(dplyr)
+
+<span class="code-r-comment"># Calculate average Sepal.Length for each Species in the iris dataset</span>
+species_avg_sepal <span class="code-r-assign"><-</span> iris <span class="code-r-pipe">%>%</span>
+  <span class="code-function">group_by</span>(Species) <span class="code-r-pipe">%>%</span>
+  <span class="code-function">summarise</span>(Avg.Sepal.Length = <span class="code-function">mean</span>(Sepal.Length))
+
+<span class="code-function">print</span>(species_avg_sepal)
+<span class="code-r-comment"># Output:</span>
+<span class="code-r-comment"># # A tibble: 3 × 2</span>
+<span class="code-r-comment">#   Species    Avg.Sepal.Length</span>
+<span class="code-r-comment">#   &lt;fct&gt;                 &lt;dbl&gt;</span>
+<span class="code-r-comment"># 1 setosa                 5.01</span>
+<span class="code-r-comment"># 2 versicolor             5.94</span>
+<span class="code-r-comment"># 3 virginica              6.59</span>
+
+<span class="code-r-comment"># Calculate multiple summaries: count and average Petal.Width per Species</span>
+species_summary <span class="code-r-assign"><-</span> iris <span class="code-r-pipe">%>%</span>
+  <span class="code-function">group_by</span>(Species) <span class="code-r-pipe">%>%</span>
+  <span class="code-function">summarise</span>(
+    Count = <span class="code-function">n</span>(),
+    Avg.Petal.Width = <span class="code-function">mean</span>(Petal.Width),
+    Max.Petal.Length = <span class="code-function">max</span>(Petal.Length)
+  )
+
+<span class="code-function">print</span>(species_summary)</code></pre>
+
+                <h4>`ungroup()`</h4>
+                <p>After performing grouped operations, the data frame might retain its grouping structure. If you want to remove the grouping for subsequent operations, use `ungroup()`.</p>
+                 <pre><code class="code-snippet">grouped_data <span class="code-r-assign"><-</span> iris <span class="code-r-pipe">%>%</span> <span class="code-function">group_by</span>(Species)
+<span class="code-r-comment"># ... some grouped operations ...</span>
+ungrouped_data <span class="code-r-assign"><-</span> grouped_data <span class="code-r-pipe">%>%</span> <span class="code-function">ungroup</span>()</code></pre>
+            </div>
+        </section>
+
+        <section id="tidyr" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Introduction to `tidyr` for Tidy Data.</h3>
+                <p>Data often comes in formats that are convenient for data entry or presentation but not ideal for analysis. "Tidy data" is a concept where:</p>
+                <ol>
+                    <li>Each variable forms a column.</li>
+                    <li>Each observation forms a row.</li>
+                    <li>Each type of observational unit forms a table.</li>
+                </ol>
+                <p>The `tidyr` package (part of the Tidyverse) provides tools to reshape your data into a tidy format, making it easier to work with in `dplyr`, `ggplot2`, and other Tidyverse packages.</p>
+                <p>First, ensure `tidyr` is installed and loaded (it's included if you installed the `tidyverse` package):</p>
+                <pre><code class="code-snippet"><span class="code-r-comment"># install.packages("tidyr") # If needed</span>
+<span class="code-function">library</span>(tidyr)
+<span class="code-r-comment"># Or library(tidyverse)</span>
+</code></pre>
+                <p>Two fundamental functions in `tidyr` for reshaping data are `pivot_longer()` and `pivot_wider()`.</p>
+            </div>
+        </section>
+
+        <section id="pivoting" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Reshaping Data: `pivot_longer()` and `pivot_wider()`.</h3>
+                <p>Pivoting changes the layout of your data frame between "wide" and "long" formats.</p>
+
+                <h4>`pivot_longer()`: From Wide to Long</h4>
+                 <p>Use `pivot_longer()` when some of your column names are actually values of a variable. It "lengthens" data by increasing the number of rows and decreasing the number of columns.</p>
+                 <p>Key arguments:</p>
+                 <ul>
+                     <li>`cols`: The columns to pivot into longer format (gather).</li>
+                     <li>`names_to`: Name of the new column that will contain the original column names.</li>
+                     <li>`values_to`: Name of the new column that will contain the values from the original pivoted columns.</li>
+                 </ul>
+                 <pre><code class="code-snippet"><span class="code-r-comment"># Example wide data</span>
+wide_data <span class="code-r-assign"><-</span> <span class="code-function">data.frame</span>(
+  student = <span class="code-r-keyword">c</span>(<span class="code-string">"Alice"</span>, <span class="code-string">"Bob"</span>),
+  test1_score = <span class="code-r-keyword">c</span>(<span class="code-number">85</span>, <span class="code-number">90</span>),
+  test2_score = <span class="code-r-keyword">c</span>(<span class="code-number">88</span>, <span class="code-number">85</span>)
+)
+<span class="code-function">print</span>(wide_data)
+
+<span class="code-r-comment"># Pivot test scores into longer format</span>
+long_data <span class="code-r-assign"><-</span> wide_data <span class="code-r-pipe">%>%</span>
+  <span class="code-function">pivot_longer</span>(
+    cols = <span class="code-r-keyword">c</span>(test1_score, test2_score), <span class="code-r-comment"># Or cols = ends_with("_score")</span>
+    names_to = <span class="code-string">"test_type"</span>,
+    values_to = <span class="code-string">"score"</span>
+  )
+<span class="code-function">print</span>(long_data)
+<span class="code-r-comment"># Output:</span>
+<span class="code-r-comment"># # A tibble: 4 × 3</span>
+<span class="code-r-comment">#   student test_type   score</span>
+<span class="code-r-comment">#   &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;</span>
+<span class="code-r-comment"># 1 Alice   test1_score    85</span>
+<span class="code-r-comment"># 2 Alice   test2_score    88</span>
+<span class="code-r-comment"># 3 Bob     test1_score    90</span>
+<span class="code-r-comment"># 4 Bob     test2_score    85</span>
+</code></pre>
+
+                <h4>`pivot_wider()`: From Long to Wide</h4>
+                 <p>Use `pivot_wider()` when an observation is scattered across multiple rows. It "widens" data by increasing columns and decreasing rows.</p>
+                 <p>Key arguments:</p>
+                 <ul>
+                     <li>`names_from`: The column whose values will become the new column names.</li>
+                     <li>`values_from`: The column whose values will fill the new columns.</li>
+                 </ul>
+                <pre><code class="code-snippet"><span class="code-r-comment"># Using long_data from above</span>
+wide_again <span class="code-r-assign"><-</span> long_data <span class="code-r-pipe">%>%</span>
+  <span class="code-function">pivot_wider</span>(
+    names_from = test_type,
+    values_from = score
+  )
+<span class="code-function">print</span>(wide_again)
+<span class="code-r-comment"># Output (similar to original wide_data):</span>
+<span class="code-r-comment"># # A tibble: 2 × 3</span>
+<span class="code-r-comment">#   student test1_score test2_score</span>
+<span class="code-r-comment">#   &lt;chr&gt;         &lt;dbl&gt;       &lt;dbl&gt;</span>
+<span class="code-r-comment"># 1 Alice            85          88</span>
+<span class="code-r-comment"># 2 Bob              90          85</span>
+</code></pre>
+                 <p>Pivoting is crucial for preparing data for specific types of analysis or visualization.</p>
+            </div>
+        </section>
+
+         <section id="joins" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Combining Datasets: Basic Joins.</h3>
+                 <p>Often, data needed for an analysis is spread across multiple tables or data frames. You need to combine them based on common "key" variables. `dplyr` provides intuitive functions for joining datasets.</p>
+                 <p>The main join functions are:</p>
+                 <ul>
+                     <li><strong>`inner_join(x, y, by = "key")`:</strong> Keeps only rows where the key exists in <em>both</em> `x` and `y`.</li>
+                     <li><strong>`left_join(x, y, by = "key")`:</strong> Keeps all rows from `x` and adds matching columns from `y`. If no match in `y`, the new columns get `NA`.</li>
+                     <li><strong>`right_join(x, y, by = "key")`:</strong> Keeps all rows from `y` and adds matching columns from `x`. If no match in `x`, the new columns get `NA`.</li>
+                     <li><strong>`full_join(x, y, by = "key")`:</strong> Keeps all rows from <em>both</em> `x` and `y`. Where matches don't exist, `NA`s are filled in.</li>
+                 </ul>
+                <p>The `by` argument specifies the key column(s) to join on. If the key columns have the same name in both data frames, you can just provide the name (e.g., `by = "student_id"`). If they have different names, use a named vector (e.g., `by = c("student_id" = "pupil_identifier")`). If omitted, `dplyr` will try to join by all common column names.</p>
+                 <h4>Example</h4>
+                <pre><code class="code-snippet"><span class="code-function">library</span>(dplyr)
+
+<span class="code-r-comment"># Sample data frames</span>
+students <span class="code-r-assign"><-</span> <span class="code-function">data.frame</span>(
+  StudentID = <span class="code-number">1</span>:<span class="code-number">3</span>,
+  Name = <span class="code-r-keyword">c</span>(<span class="code-string">"Alice"</span>, <span class="code-string">"Bob"</span>, <span class="code-string">"Charlie"</span>)
+)
+
+enrollments <span class="code-r-assign"><-</span> <span class="code-function">data.frame</span>(
+  StudentID = <span class="code-r-keyword">c</span>(<span class="code-number">1</span>, <span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">4</span>), <span class="code-r-comment"># Note: Student 4 is not in 'students'</span>
+  Course = <span class="code-r-keyword">c</span>(<span class="code-string">"Math"</span>, <span class="code-string">"Science"</span>, <span class="code-string">"Math"</span>, <span class="code-string">"Art"</span>)
+)
+
+<span class="code-r-comment"># Inner Join: Keep only students present in both tables</span>
+inner_join_data <span class="code-r-assign"><-</span> <span class="code-function">inner_join</span>(students, enrollments, by = <span class="code-string">"StudentID"</span>)
+<span class="code-function">print</span>(inner_join_data)
+<span class="code-r-comment">#   StudentID  Name  Course</span>
+<span class="code-r-comment"># 1         1 Alice    Math</span>
+<span class="code-r-comment"># 2         1 Alice Science</span>
+<span class="code-r-comment"># 3         2   Bob    Math</span>
+
+<span class="code-r-comment"># Left Join: Keep all students, add their enrollments (Charlie has NA for Course)</span>
+left_join_data <span class="code-r-assign"><-</span> <span class="code-function">left_join</span>(students, enrollments, by = <span class="code-string">"StudentID"</span>)
+<span class="code-function">print</span>(left_join_data)
+<span class="code-r-comment">#   StudentID    Name  Course</span>
+<span class="code-r-comment"># 1         1   Alice    Math</span>
+<span class="code-r-comment"># 2         1   Alice Science</span>
+<span class="code-r-comment"># 3         2     Bob    Math</span>
+<span class="code-r-comment"># 4         3 Charlie    &lt;NA&gt;</span>
+</code></pre>
+                 <p>Choosing the correct join type is crucial for combining datasets accurately.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RLearn - Your R Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#what-is-r">What is R?</a>
+                <a href="Week1.html#why-learn-r">Why Learn R?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#rstudio-tour">RStudio Tour</a>
+                <a href="Week1.html#first-commands">First Commands</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#vectors">Vectors</a>
+                <a href="Week2.html#operators">Operators</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#vector-ops">Vector Ops</a>
+                 <a href="Week3.html#matrices">Matrices</a>
+                 <a href="Week3.html#getting-help">Getting Help</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#lists">Lists</a>
+                <a href="Week4.html#data-frames">Data Frames</a>
+                <a href="Week4.html#viewing-data">Viewing Data</a>
+                <a href="Week4.html#import-csv">Import CSV</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#conditionals">Conditional Logic</a>
+                <a href="Week5.html#if-statement">if Statement</a>
+                <a href="Week5.html#else-if-else">else if / else</a>
+                <a href="Week5.html#ifelse-function">ifelse() Function</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#for-loops">for Loops</a>
+                <a href="Week6.html#while-loops">while Loops</a>
+                <a href="Week6.html#break-next">break / next</a>
+                <a href="Week6.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#function-definition">Function Definition</a>
+                <a href="Week7.html#parameters">Parameters</a>
+                <a href="Week7.html#return-values">Return Values</a>
+                <a href="Week7.html#scope">Scope (Environments)</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#tidyverse">Tidyverse</a>
+                <a href="Week8.html#dplyr-intro">dplyr Intro</a>
+                <a href="Week8.html#core-verbs">Core Verbs</a>
+                <a href="Week8.html#pipe">Pipe Operator</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="#group-summarise">Group & Summarise</a>
+                <a href="#tidyr">tidyr Intro</a>
+                <a href="#pivoting">Pivoting</a>
+                <a href="#joins">Joining Data</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#grammar-graphics">Grammar of Graphics</a>
+                <a href="Week10.html#ggplot2">ggplot2 Intro</a>
+                <a href="Week10.html#geoms">Geoms</a>
+                <a href="Week10.html#aesthetics">Aesthetics</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#customizing">Customizing Plots</a>
+                <a href="Week11.html#saving-plots">Saving Plots</a>
+                <a href="Week11.html#basic-stats">Basic Stats</a>
+                <a href="Week11.html#summary">summary()</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#project">Mini Project</a>
+                <a href="Week12.html#r-markdown">R Markdown</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+        </div>
+
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Learning - Week 7: Objects</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="javascript.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">JS</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#object-literals">Object Literals</a></li>
+                <li><a href="#object-properties">Properties</a></li>
+                <li><a href="#object-methods">Methods</a></li>
+                <li><a href="#object-iteration">Iteration</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                 <h1>Week 7: Structuring Data with Objects</h1>
+                <p class="tagline">Learn to represent complex data using key-value pairs in JavaScript Objects.</p>
+                <a href="#object-literals" class="button">Explore Chapter 7</a>
+            </div>
+        </section>
+
+        <section id="object-literals" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 7: Structuring Data with Key-Value Pairs</h2>
+                <h3>Introduction to Objects: Key-Value Collections.</h3>
+                <p>Objects are a fundamental data type in JavaScript, used to store collections of related data and functionality. Unlike arrays which use numerical indices, objects use named <strong>keys</strong> (also called properties) to access their associated <strong>values</strong>. This makes them ideal for representing real-world entities or structured data, similar to dictionaries in Python.</p>
+                <h4>Creating Objects (Object Literals)</h4>
+                <p>The most common way to create an object is using object literal syntax {}.</p>
+                <pre><code class="code-snippet ">// Empty object
+let emptyObject = {};
+
+// Object representing a user
+let user = {
+  firstName: "Alice", // key: value (firstName is the key, "Alice" is the value)
+  lastName: "Smith",
+  age: 30,           // Keys are usually strings (quotes often optional if valid identifier)
+  isActive: true,
+  "zip code": "10001" // Keys with spaces or special chars need quotes
+};
+
+// Object representing a car
+let car = {
+  make: "Toyota",
+  model: "Camry",
+  year: 2022,
+  features: ["GPS", "Sunroof", "Bluetooth"] // Values can be any type, including arrays
+};</code></pre>
+                <ul>
+                    <li>Keys are typically strings (or Symbols). If a key is a valid JavaScript identifier, quotes are usually optional.</li>
+                    <li>Values can be any valid JavaScript data type: strings, numbers, booleans, arrays, other objects, functions, etc.</li>
+                    <li>Key-value pairs are separated by commas.</li>
+                    <li>Objects are collections of properties, and the order of properties is generally not guaranteed (though modern JS engines often preserve insertion order).</li>
+                </ul>
+                 <p>Objects allow you to group related data under meaningful names, making your code more organized and readable.</p>
+            </div>
+        </section>
+
+        <section id="object-properties" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Accessing and Modifying Object Properties.</h3>
+                <p>You can access and change the values associated with an object's keys (properties).</p>
+                <h4>Accessing Properties</h4>
+                <p>There are two main ways to access object properties:</p>
+                <ul>
+                    <li><strong>Dot Notation (.):</strong> Used when the key is a valid JavaScript identifier (no spaces, doesn't start with a number, etc.). This is the most common method.
+                          <pre><code class="code-snippet ">let person = { name: "Bob", city: "London" };
+
+console.log(person.name); // Output: Bob
+console.log(person.city); // Output: London</code></pre>
+                    </li>
+                    <li><strong>Bracket Notation ([]):</strong> Used when the key is stored in a variable, contains special characters, or is not a valid identifier. The key inside the brackets must be a string (or evaluate to a string).
+                          <pre><code class="code-snippet ">console.log(person["name"]); // Output: Bob
+
+let propertyName = "city";
+console.log(person[propertyName]); // Output: London (Accessing via variable)
+
+let book = { "title-with-hyphens": "Great Expectations" };
+console.log(book["title-with-hyphens"]); // Bracket notation needed here
+</code></pre>
+                    </li>
+                </ul>
+                <p>If you try to access a property that doesn't exist, you will get undefined (unlike Python dictionaries which raise a KeyError).</p>
+                 <pre><code class="code-snippet ">console.log(person.country); // Output: undefined</code></pre>
+
+                <h4>Modifying Properties</h4>
+                <p>Objects are mutable. You can change the value of an existing property or add a new property using assignment (=):</p>
+                <pre><code class="code-snippet ">let student = { id: 101, major: "Computer Science" };
+
+// Modify existing property
+student.major = "Data Science";
+console.log(student.major); // Output: Data Science
+
+// Add a new property
+student.gpa = 3.8;
+student["enrollmentStatus"] = "Active"; // Using bracket notation
+
+console.log(student); // { id: 101, major: 'Data Science', gpa: 3.8, enrollmentStatus: 'Active' }</code></pre>
+
+                <h4>Deleting Properties</h4>
+                <p>You can remove a property from an object using the delete operator:</p>
+                <pre><code class="code-snippet ">delete student.gpa;
+console.log(student); // { id: 101, major: 'Data Science', enrollmentStatus: 'Active' }
+console.log(student.gpa); // Output: undefined</code></pre>
+            </div>
+        </section>
+
+        <section id="object-methods" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Object Methods: Functions as Properties.</h3>
+                <p>When a function is stored as a property of an object, it's called a <strong>method</strong>. Methods define the actions or behaviors that an object can perform. They often operate on the data contained within the object itself.</p>
+                <h4>Defining Methods</h4>
+                <p>You define a method like any other property, but assign a function as the value.</p>
+                 <pre><code class="code-snippet ">let calculator = {
+  value: 0,
+  add: function(num) { // Traditional function expression
+    this.value += num; // 'this' refers to the calculator object itself
+  },
+  subtract(num) { // Shorthand method syntax (ES6+)
+    this.value -= num;
+  },
+  getValue() { // Shorthand syntax
+    return this.value;
+  }
+};</code></pre>
+                 <h4>Calling Methods</h4>
+                 <p>You call methods using dot notation, followed by parentheses () to invoke the function.</p>
+                 <pre><code class="code-snippet ">console.log(calculator.getValue()); // Output: 0
+
+calculator.add(10);
+console.log(calculator.getValue()); // Output: 10
+
+calculator.subtract(3);
+console.log(calculator.getValue()); // Output: 7</code></pre>
+                 <h4>The this Keyword</h4>
+                 <p>Inside an object method defined using traditional syntax or shorthand, the keyword this typically refers to the object the method was called on (e.g., calculator in the example above). This allows methods to access and manipulate the object's own properties (this.value). Arrow functions handle this differently, which we'll discuss later.</p>
+            </div>
+        </section>
+
+        <section id="object-iteration" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Iterating Over Object Properties.</h3>
+                <p>Sometimes you need to loop through the properties of an object.</p>
+                <h4>for...in Loop</h4>
+                <p>The for...in loop iterates over the enumerable property <em>keys</em> (names) of an object.</p>
+                <pre><code class="code-snippet ">let course = {
+  title: "JavaScript Basics",
+  duration: "12 Weeks",
+  level: "Beginner"
+};
+
+console.log("Course Properties:");
+for (let key in course) {
+  // 'key' will be "title", then "duration", then "level"
+  // Check if the property belongs to the object itself (not inherited)
+  if (course.hasOwnProperty(key)) {
+      console.log(`${key}: ${course[key]}`); // Use bracket notation to get value
+  }
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>Course Properties:
+title: JavaScript Basics
+duration: 12 Weeks
+level: Beginner</code></pre>
+                <p>Note: It's often recommended to include the hasOwnProperty() check inside a for...in loop to ensure you are only iterating over the object's own properties, not properties inherited from its prototype chain (a more advanced concept).</p>
+                 <h4>Other Iteration Methods (Object.keys, Object.values, Object.entries)</h4>
+                 <p>Modern JavaScript provides methods to get arrays of keys, values, or key-value pairs, which you can then iterate over using array methods like forEach:</p>
+                 <pre><code class="code-snippet ">let car = { make: "Honda", model: "Civic", year: 2021 };
+
+// Get an array of keys
+let keys = Object.keys(car); // ["make", "model", "year"]
+console.log("Keys:", keys);
+keys.forEach(key => console.log(`Key: ${key}`));
+
+// Get an array of values
+let values = Object.values(car); // ["Honda", "Civic", 2021]
+console.log("Values:", values);
+values.forEach(value => console.log(`Value: ${value}`));
+
+// Get an array of [key, value] pairs
+let entries = Object.entries(car); // [ ["make", "Honda"], ["model", "Civic"], ["year", 2021] ]
+console.log("Entries:", entries);
+entries.forEach(([key, value]) => { // Using array destructuring
+  console.log(`${key} -> ${value}`);
+});
+</code></pre>
+                 <p>These methods (Object.keys, Object.values, Object.entries) are often preferred over for...in in modern code because they don't iterate over inherited properties and work well with standard array iteration techniques.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 JSLearn - Your JavaScript Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro &amp; Setup</a>
+                <a href="Week1.html#what-is-js-section">What is JS?</a>
+                <a href="Week1.html#why-learn-section">Why Learn?</a>
+                <a href="Week1.html#setup-section">Setup Env</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#arithmetic-operators">Arithmetic Ops</a>
+                <a href="Week2.html#comparison-operators">Comparison Ops</a>
+                <a href="Week2.html#logical-operators">Logical Ops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#interaction-output">Output</a>
+                <a href="Week3.html#interaction-input">Input</a>
+                <a href="Week3.html#string-properties">Properties</a>
+                <a href="Week3.html#string-methods">Methods</a>
+                <a href="Week3.html#template-literals">Literals</a>
+                 <a href="Week3.html#dom-intro">DOM Intro</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#conditional-logic">Logic</a>
+                <a href="Week4.html#if-statement">if</a>
+                <a href="Week4.html#else-if-statement">else if</a>
+                <a href="Week4.html#else-statement">else</a>
+                <a href="Week4.html#truthy-falsy">Truthy/Falsy</a>
+                <a href="Week4.html#switch-statement">switch</a>
+                <a href="Week4.html#ternary-operator">Ternary Op</a>
+                <a href="Week4.html#nested-if">Nested if</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#for-loops">for Loops</a>
+                 <a href="Week5.html#while-loops">while Loops</a>
+                 <a href="Week5.html#do-while-loops">do...while</a>
+                 <a href="Week5.html#break-continue">break/continue</a>
+                 <a href="Week5.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#array-intro">Array Intro</a>
+                <a href="Week6.html#array-indexing">Indexing &amp; Modifying</a>
+                <a href="Week6.html#array-methods">Common Methods</a>
+                <a href="Week6.html#array-iteration">Iteration Methods</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="Week7.html#object-literals">Object Literals</a>
+                <a href="Week7.html#object-properties">Properties</a>
+                <a href="Week7.html#object-methods">Methods</a>
+                <a href="Week7.html#object-iteration">Iteration</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#function-declaration">Declaration/Expression</a>
+                <a href="Week8.html#function-parameters">Parameters</a>
+                <a href="Week8.html#function-return">Return Values</a>
+                <a href="Week8.html#variable-scope">Variable Scope</a>
+                <a href="Week8.html#arrow-functions">Arrow Functions</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#what-is-dom">DOM Intro</a>
+                <a href="Week9.html#selecting-elements">Selecting Elements</a>
+                <a href="Week9.html#manipulating-dom">Manipulating</a>
+                <a href="Week9.html#event-handling">Events</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#callbacks">Callbacks</a>
+                <a href="Week10.html#closures">Closures</a>
+                <a href="Week10.html#iife">IIFE</a>
+                 <a href="Week10.html#this-keyword">`this` Keyword</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#error-types">Error Types</a>
+                <a href="Week11.html#debugging">Debugging</a>
+                <a href="Week11.html#try-catch">Try/Catch</a>
+                <a href="Week11.html#throw-statement">Throw</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week12.html#es6-overview">ES6+ Overview</a>
+                 <a href="Week12.html#js-modules">Modules</a>
+                 <a href="Week12.html#async-intro">Async Intro</a>
+                 <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Learning - Week 3: Interaction &amp; Strings</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="javascript.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">JS</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#interaction-output">Output</a></li>
+                <li><a href="#interaction-input">Input</a></li>
+                <li><a href="#string-properties">Properties</a></li>
+                <li><a href="#string-methods">Methods</a></li>
+                <li><a href="#template-literals">Literals</a></li>
+                <li><a href="#dom-intro">DOM Intro</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 3: Talking to Your Program and Mastering Text</h1>
+                <p class="tagline">Learn how to interact with users and manipulate strings effectively in JavaScript.</p>
+                <a href="#interaction-output" class="button">Explore Chapter 3</a>
+            </div>
+        </section>
+
+        <section id="interaction-output" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 3: Interacting with the User and Working with Text</h2>
+                <h3>Output: Displaying Information (console.log, alert, DOM).</h3>
+                <p>Displaying information is crucial for understanding what your program is doing and for communicating with the user.</p>
+                <h4>console.log()</h4>
+                <p>This is the most common way to output information for debugging and development purposes. It prints messages to the browser's developer console (usually opened with F12).</p>
+                <pre><code class="code-snippet ">console.log("Hello from the console!");
+let user = "Alice";
+let score = 100;
+console.log("User:", user, "Score:", score); // Outputs multiple items
+</code></pre>
+                <p>The console is invaluable for seeing variable values, checking program flow, and diagnosing errors.</p>
+                <h4>alert()</h4>
+                <p>Displays a simple pop-up dialog box with a message and an "OK" button. It halts the execution of the script until the user clicks "OK". Primarily used for simple notifications, but can be intrusive.</p>
+                <pre><code class="code-snippet ">alert("This is an alert message!");
+alert("Welcome, " + user + "!");</code></pre>
+                <h4>Interacting with the DOM (Brief Intro)</h4>
+                <p>A more common way to display information in a web page is by manipulating the Document Object Model (DOM). This involves changing the content of HTML elements. We'll cover this more in Week 9, but here's a tiny preview:</p>
+                <pre><code class="code-snippet html">&lt;p id="messageArea"&gt;Initial text.&lt;/p&gt;
+
+&lt;script&gt;
+  // Find the paragraph element by its ID
+  let messageElement = document.getElementById("messageArea");
+  // Change its text content
+  messageElement.textContent = "New message set by JavaScript!";
+&lt;/script&gt;
+</code></pre>
+            </div>
+        </section>
+
+        <section id="interaction-input" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Input: Getting Data (prompt, DOM Elements).</h3>
+                <p>Programs often need to get input from the user.</p>
+                <h4>prompt()</h4>
+                <p>Displays a dialog box that prompts the user for input. It includes a message, an input field, an "OK" button, and a "Cancel" button.</p>
+                <pre><code class="code-snippet ">let userName = prompt("Please enter your name:");
+let ageStr = prompt("Enter your age:", "18"); // Optional second argument for default value
+
+console.log("User entered name:", userName);
+console.log("User entered age string:", ageStr);
+
+// IMPORTANT: prompt() always returns a string or null (if cancelled)
+if (ageStr !== null) {
+  let ageNum = parseInt(ageStr); // Convert string to number
+  if (!isNaN(ageNum)) { // Check if conversion was successful
+     console.log("Age as number:", ageNum);
+  } else {
+     console.log("Invalid age entered.");
+  }
+} else {
+  console.log("User cancelled the age prompt.");
+}</code></pre>
+                <p>Like alert(), prompt() halts script execution and can be disruptive to the user experience. It's rarely used in modern web applications.</p>
+                <h4>Getting Values from HTML Elements</h4>
+                <p>The standard way to get user input in web applications is through HTML form elements like &lt;input&gt;, &lt;textarea&gt;, &lt;select&gt;, etc. JavaScript is then used to read the values from these elements, often triggered by events like button clicks.</p>
+                <pre><code class="code-snippet html">&lt;label for="emailInput"&gt;Email:&lt;/label&gt;
+&lt;input type="email" id="emailInput"&gt;
+&lt;button onclick="showEmail()"&gt;Show Email&lt;/button&gt;
+
+&lt;script&gt;
+  function showEmail() {
+    // Get the input element
+    let emailInputElement = document.getElementById("emailInput");
+    // Get the current value from the input field
+    let email = emailInputElement.value;
+    alert("You entered: " + email);
+  }
+&lt;/script&gt;
+</code></pre>
+                <p>We'll delve deeper into handling form inputs and events later in the course.</p>
+            </div>
+        </section>
+
+        <section id="string-properties" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>String Properties and Basic Manipulation.</h3>
+                <p>Strings are sequences of characters. JavaScript provides ways to access information about strings and perform basic operations.</p>
+                <h4>length Property</h4>
+                <p>The length property returns the number of characters in a string.</p>
+                <pre><code class="code-snippet ">let text = "JavaScript";
+console.log(text.length); // Output: 10</code></pre>
+                <h4>Accessing Characters (Indexing)</h4>
+                <p>You can access individual characters in a string using bracket notation [] with the character's index (position). Indices start at 0.</p>
+                <pre><code class="code-snippet ">let language = "JavaScript";
+let firstChar = language[0];       // 'J'
+let secondChar = language[1];      // 'a'
+let lastChar = language[language.length - 1]; // 't'
+
+console.log("First:", firstChar, "Last:", lastChar);
+
+// Note: Strings are immutable in JS. You cannot change a character like this:
+// language[0] = 'j'; // This will not work or cause an error silently.
+</code></pre>
+                <p>Trying to access an index outside the string's bounds usually returns undefined.</p>
+                 <h4>Concatenation (+) Operator)</h4>
+                 <p>The + operator concatenates (joins) strings together.</p>
+                 <pre><code class="code-snippet ">let str1 = "Hello";
+let str2 = "World";
+let combined = str1 + " " + str2 + "!"; // "Hello World!"
+console.log(combined);</code></pre>
+            </div>
+        </section>
+
+        <section id="string-methods" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Common String Methods: Powerful Text Tools.</h3>
+                <p>JavaScript strings have many built-in methods for manipulation. These methods return *new* strings; they don't modify the original string (since strings are immutable).</p>
+                <ul>
+                    <li><strong>toUpperCase() / toLowerCase():</strong> Converts the string to uppercase or lowercase.
+                        <pre><code class="code-snippet ">let message = "Learning JS";
+console.log(message.toUpperCase()); // "LEARNING JS"
+console.log(message.toLowerCase()); // "learning js"</code></pre>
+                    </li>
+                    <li><strong>trim():</strong> Removes whitespace from both the beginning and end of the string. (trimStart(), trimEnd() also exist).
+                        <pre><code class="code-snippet ">let padded = "    Extra Space    ";
+console.log(padded.trim()); // "Extra Space"</code></pre>
+                    </li>
+                    <li><strong>indexOf(substring) / lastIndexOf(substring):</strong> Returns the index of the first (or last) occurrence of a substring. Returns -1 if not found.
+                        <pre><code class="code-snippet ">let sentence = "The quick brown fox jumps over the lazy dog.";
+console.log(sentence.indexOf("fox")); // 16
+console.log(sentence.indexOf("cat")); // -1
+console.log(sentence.indexOf("the")); // 31 (finds the second 'the')
+console.log(sentence.lastIndexOf("the")); // 31</code></pre>
+                    </li>
+                     <li><strong>includes(substring):</strong> Returns true if the string contains the specified substring, false otherwise.
+                         <pre><code class="code-snippet ">console.log(sentence.includes("brown")); // true
+console.log(sentence.includes("elephant")); // false</code></pre>
+                    </li>
+                    <li><strong>slice(startIndex, endIndex):</strong> Extracts a section of the string and returns it as a new string. endIndex is exclusive. Negative indices count from the end.
+                        <pre><code class="code-snippet ">let word = "Programming";
+console.log(word.slice(0, 4)); // "Prog"
+console.log(word.slice(4));    // "ramming" (from index 4 to end)
+console.log(word.slice(-4));   // "ming" (last 4 characters)</code></pre>
+                    </li>
+                     <li><strong>replace(searchValue, newValue):</strong> Returns a new string where the *first* occurrence of searchValue (can be a string or regex) is replaced by newValue. Use replaceAll() or a global regex for multiple replacements.
+                         <pre><code class="code-snippet ">let msg = "Please visit Microsoft!";
+let newMsg = msg.replace("Microsoft", "Our Website");
+console.log(newMsg); // "Please visit Our Website!"</code></pre>
+                    </li>
+                     <li><strong>split(separator):</strong> Splits the string into an array of substrings based on the separator.
+                         <pre><code class="code-snippet ">let data = "apple,banana,cherry";
+let fruitsArray = data.split(',');
+console.log(fruitsArray); // ["apple", "banana", "cherry"]
+
+let phrase = "JavaScript is fun";
+let wordsArray = phrase.split(' ');
+console.log(wordsArray); // ["JavaScript", "is", "fun"]</code></pre>
+                    </li>
+                     <li>Many others (startsWith(), endsWith(), charAt(), padStart(), padEnd(), etc.)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="template-literals" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Template Literals (Template Strings).</h3>
+                <p>Introduced in ES6, template literals provide an easier and more readable way to create strings, especially those containing variables or expressions.</p>
+                <p>They are enclosed by backticks (`` ` ``) instead of single or double quotes.</p>
+                <h4>Features:</h4>
+                <ul>
+                    <li><strong>Embedded Expressions:</strong> You can embed variables and expressions directly within the string using the ${expression} syntax. The expression is evaluated, and its result is included in the string.
+                        <pre><code class="code-snippet ">let userName = "Bob";
+let items = 3;
+let total = 75.50;
+
+let report = `User: ${userName}
+Items purchased: ${items}
+Total cost: $${total.toFixed(2)}`; // .toFixed(2) formats the number
+
+console.log(report);
+/* Output:
+User: Bob
+Items purchased: 3
+Total cost: $75.50
+*/</code></pre>
+                    </li>
+                    <li><strong>Multiline Strings:</strong> Strings created with backticks can span multiple lines without needing special characters like \n.
+                         <pre><code class="code-snippet ">let poem = `The rain in Spain
+falls mainly on the plain.`;
+console.log(poem);</code></pre>
+                    </li>
+                </ul>
+                <p>Template literals are generally preferred over traditional string concatenation (+) for embedding variables due to their improved readability.</p>
+            </div>
+        </section>
+
+         <section id="dom-intro" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Quick Look: JavaScript and the Web Page (DOM)</h3>
+                <p>While we've focused on core language features, remember that a primary use of JavaScript is interacting with HTML web pages. This is done via the Document Object Model (DOM).</p>
+                <p>The DOM represents the HTML document as a tree of objects. JavaScript can access and modify these objects (elements, attributes, text) to dynamically change the page content and style.</p>
+                <p>We briefly saw examples using document.getElementById() and .textContent. We will explore DOM manipulation in much more detail in Week 9.</p>
+                <pre><code class="code-snippet ">// Example reminder: Changing text
+// Assuming: &lt;p id="demo"&gt;Hello&lt;/p&gt;
+// document.getElementById("demo").textContent = "Hello JavaScript!";
+</code></pre>
+            </div>
+           </section>
+
+    </main>
+
+    <footer>
+         <p>&copy; 2025 JSLearn - Your JavaScript Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro &amp; Setup</a>
+                <a href="Week1.html#what-is-js-section">What is JS?</a>
+                <a href="Week1.html#why-learn-section">Why Learn?</a>
+                <a href="Week1.html#setup-section">Setup Env</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#arithmetic-operators">Arithmetic Ops</a>
+                <a href="Week2.html#comparison-operators">Comparison Ops</a>
+                <a href="Week2.html#logical-operators">Logical Ops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="Week3.html#interaction-output">Output</a>
+                <a href="Week3.html#interaction-input">Input</a>
+                <a href="Week3.html#string-properties">Properties</a>
+                <a href="Week3.html#string-methods">Methods</a>
+                <a href="Week3.html#template-literals">Literals</a>
+                 <a href="Week3.html#dom-intro">DOM Intro</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#if-else">If/Else If/Else</a>
+                <a href="Week4.html#ternary-operator">Ternary Operator</a>
+                <a href="Week4.html#switch-statement">Switch</a>
+                <a href="Week4.html#truthy-falsy">Truthy/Falsy</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#for-loops">for Loops</a>
+                 <a href="Week5.html#while-loops">while Loops</a>
+                 <a href="Week5.html#do-while-loops">do...while</a>
+                 <a href="Week5.html#break-continue">break/continue</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#array-intro">Array Intro</a>
+                <a href="Week6.html#array-indexing">Array Indexing</a>
+                <a href="Week6.html#array-methods">Array Methods</a>
+                <a href="Week6.html#array-iteration">Iteration</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#object-literals">Object Literals</a>
+                <a href="Week7.html#object-properties">Properties</a>
+                <a href="Week7.html#object-methods">Methods</a>
+                <a href="Week7.html#object-iteration">Iteration</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#function-declaration">Declaration/Expression</a>
+                <a href="Week8.html#function-parameters">Parameters</a>
+                <a href="Week8.html#function-return">Return Values</a>
+                <a href="Week8.html#variable-scope">Variable Scope</a>
+                <a href="Week8.html#arrow-functions">Arrow Functions</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#what-is-dom">DOM Intro</a>
+                <a href="Week9.html#selecting-elements">Selecting Elements</a>
+                <a href="Week9.html#manipulating-dom">Manipulating</a>
+                <a href="Week9.html#event-handling">Events</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#callbacks">Callbacks</a>
+                <a href="Week10.html#closures">Closures</a>
+                <a href="Week10.html#iife">IIFE</a>
+                 <a href="Week10.html#this-keyword">`this` Keyword</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#error-types">Error Types</a>
+                <a href="Week11.html#debugging">Debugging</a>
+                <a href="Week11.html#try-catch">Try/Catch</a>
+                <a href="Week11.html#throw-statement">Throw</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week12.html#es6-overview">ES6+ Overview</a>
+                 <a href="Week12.html#js-modules">Modules</a>
+                 <a href="Week12.html#async-intro">Async Intro</a>
+                 <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

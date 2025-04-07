@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Learning - Week 1: Getting Started</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="javascript.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">JS</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#introduction-section">Introduction</a></li>
+                <li><a href="#what-is-js-section">What is JS?</a></li>
+                <li><a href="#why-learn-section">Why Learn JS?</a></li>
+                <li><a href="#setup-section">Setup Environment</a></li>
+                <li><a href="#first-program-section">First Program</a></li>
+                <li><a href="#basic-syntax-section">Basic Syntax</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 1: Embarking on Your JavaScript Journey</h1>
+                <p class="tagline">Discover the language that powers the interactive web.</p>
+                <a href="#introduction-section" class="button">Explore Chapter 1</a>
+            </div>
+        </section>
+
+        <section id="introduction-section" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 1: Introduction to JavaScript and Your Development Environment</h2>
+                <p>Welcome to the dynamic world of JavaScript! This first week is all about getting you acquainted with JavaScript, understanding its core role, especially in web development, and setting up your computer so you can start writing and running JS code. We'll cover the fundamental questions: What exactly is JavaScript? Why is it essential for the web? And how do you prepare your system to start coding?</p>
+            </div>
+        </section>
+
+        <section id="what-is-js-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>What is JavaScript? History and its Role.</h3>
+                <p>JavaScript (often shortened to JS) is a high-level, interpreted programming language primarily known for making web pages interactive. It allows you to implement complex features on web pages – think dynamic content updates, interactive maps, animated graphics, controlling multimedia, etc.</p>
+                <h4>A Brief History</h4>
+                <p>JavaScript was created by Brendan Eich at Netscape Communications Corporation in 1995. It was initially named Mocha, then LiveScript, before finally being renamed JavaScript. Despite the name, JavaScript is distinct from the Java programming language. It was standardized under the name ECMAScript, and JavaScript is the most popular implementation of this standard.</p>
+                <h4>Key Characteristics</h4>
+                <ul>
+                    <li><strong>Interpreted/Just-in-Time Compiled:</strong> JavaScript engines in browsers interpret or compile the code on the fly.</li>
+                    <li><strong>Dynamically Typed:</strong> You don't need to declare the data type of a variable explicitly.</li>
+                    <li><strong>High-Level:</strong> Abstracts away many low-level details.</li>
+                    <li><strong>Multi-Paradigm:</strong> Supports procedural, object-oriented (prototype-based), and functional programming styles.</li>
+                    <li><strong>Single-Threaded (with Event Loop):</strong> Executes code in a single sequence but handles asynchronous operations efficiently.</li>
+                </ul>
+                <h4>Role in Web Development (and Beyond)</h4>
+                <p>JavaScript's primary role is on the client-side (in the user's browser) alongside HTML and CSS:</p>
+                <ul>
+                    <li><strong>HTML:</strong> Defines the structure and content of the web page.</li>
+                    <li><strong>CSS:</strong> Specifies the presentation and styling (layout, colors, fonts).</li>
+                    <li><strong>JavaScript:</strong> Adds interactivity, dynamic behavior, and logic.</li>
+                </ul>
+                 <p>However, JavaScript's use has expanded significantly:</p>
+                 <ul>
+                    <li><strong>Server-Side Development:</strong> With platforms like Node.js, JavaScript can run on servers to build back-end applications and APIs.</li>
+                    <li><strong>Mobile Apps:</strong> Frameworks like React Native and NativeScript allow building mobile apps using JavaScript.</li>
+                    <li><strong>Desktop Apps:</strong> Frameworks like Electron enable creating cross-platform desktop applications.</li>
+                    <li><strong>Game Development:</strong> Various libraries and engines use JavaScript for web-based and other games.</li>
+                 </ul>
+            </div>
+        </section>
+
+        <section id="why-learn-section" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Why Learn JavaScript? Advantages and Use Cases.</h3>
+                <p>Learning JavaScript is a valuable investment for anyone interested in web development or programming in general. Here's why:</p>
+                <ul>
+                    <li><strong>Ubiquitous on the Web:</strong> It's the standard language for web browser interactivity. You essentially <em>need</em> it for modern front-end development.</li>
+                    <li><strong>Versatility:</strong> As mentioned, JS is used for front-end, back-end, mobile, desktop, and more. Learn once, apply in many domains.</li>
+                    <li><strong>Large and Active Community:</strong> Massive community support means abundant tutorials, libraries, frameworks, and help available online (Stack Overflow, MDN Web Docs, etc.).</li>
+                    <li><strong>Rich Ecosystem of Libraries/Frameworks:</strong> Tools like React, Angular, Vue.js (front-end), Node.js/Express (back-end), and countless utility libraries simplify development.</li>
+                    <li><strong>Relatively Easy to Get Started:</strong> You only need a browser to start running basic JavaScript. The syntax is generally considered accessible for beginners.</li>
+                    <li><strong>High Demand in the Job Market:</strong> JavaScript developers are consistently in high demand across the tech industry.</li>
+                </ul>
+                <h4>Use Cases to Inspire You</h4>
+                <ul>
+                    <li>Virtually every interactive website you use (Google Maps, Facebook, Twitter, Netflix) relies heavily on JavaScript.</li>
+                    <li>Single Page Applications (SPAs) like Gmail are built using JavaScript frameworks.</li>
+                    <li>Real-time applications like chat apps and collaborative tools often use Node.js and WebSockets.</li>
+                    <li>Browser-based games.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="setup-section" class="full-width content-block bg-light scroll-slide-left">
+            <div class="container">
+                <h3>Setting up your Development Environment: Your JS Workshop.</h3>
+                <p>Getting started with JavaScript is relatively straightforward. You don't need complex installations for basic browser-based JS.</p>
+                <h4>1. Browser Developer Tools</h4>
+                <p>Every modern web browser (Chrome, Firefox, Edge, Safari) comes with built-in developer tools. The most important part for now is the <strong>Console</strong>.</p>
+                <ul>
+                    <li><strong>How to Open:</strong> Usually by pressing F12, or right-clicking on a webpage and selecting "Inspect" or "Inspect Element", then navigating to the "Console" tab.</li>
+                    <li><strong>Usage:</strong> You can type JavaScript code directly into the console and press Enter to execute it immediately. It's great for experimenting and quick tests. You'll also see error messages and output from console.log() here.</li>
+                </ul>
+                <h4>2. Code Editor</h4>
+                <p>While you <em>can</em> write JS in a simple text editor, a dedicated code editor offers features like syntax highlighting, auto-completion, and error checking.</p>
+                <ul>
+                     <li><strong>Visual Studio Code (VS Code):</strong> Free, popular, excellent JavaScript support, huge extension marketplace. (Recommended)</li>
+                     <li><strong>Sublime Text:</strong> Lightweight, fast, customizable (paid license encouraged).</li>
+                     <li><strong>Atom:</strong> (Development discontinued, but still usable) Free, open-source.</li>
+                     <li><strong>WebStorm:</strong> Powerful, feature-rich IDE specifically for web development (paid).</li>
+                </ul>
+                 <p>Download and install your preferred editor. We'll use VS Code in examples.</p>
+                <h4>3. Linking JavaScript to HTML</h4>
+                <p>To run JavaScript as part of a web page, you need to link it to an HTML file using the &lt;script&gt; tag.</p>
+                <ul>
+                    <li><strong>Internal Script:</strong> Place JS code directly within &lt;script&gt; tags in your HTML (usually placed just before the closing &lt;/body&gt; tag).
+                         <pre><code class="code-snippet html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello!&lt;/h1&gt;
+
+    &lt;script&gt;
+        console.log("Internal script executed!");
+        alert("Hello from internal script!");
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                         </code></pre>
+                      </li>
+                       <li><strong>External Script (Recommended):</strong> Write your JS code in a separate file (e.g., script.js) and link it using the src attribute in the &lt;script&gt; tag. This keeps your code organized.
+                            <p><strong>HTML (`index.html`):</strong></p>
+                            <pre><code class="code-snippet html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello!&lt;/h1&gt;
+
+    &lt;!-- Link to external script --&gt;
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                            </code></pre>
+                             <p><strong>JavaScript (`script.js`):</strong></p>
+                             <pre><code class="code-snippet ">
+console.log("External script executed!");
+alert("Hello from external script!");
+                             </code></pre>
+                             <p>Place the &lt;script src="script.js"&gt;&lt;/script&gt; tag usually just before the closing &lt;/body&gt; tag to ensure the HTML content is loaded before the script tries to interact with it.</p>
+                      </li>
+                </ul>
+                 <p>For this course, we'll primarily use the external script method.</p>
+            </div>
+        </section>
+
+        <section id="first-program-section" class="full-width content-block scroll-slide-right">
+            <div class="container">
+                <h3>Running your First JavaScript Program: Hello, World!</h3>
+                <p>Let's write the classic "Hello, World!" to verify your setup.</p>
+                <ol>
+                    <li><strong>Create Files:</strong> Create two files in the same folder: index.html and script.js.</li>
+                    <li><strong>Edit index.html:</strong> Paste the basic HTML structure linking the external script (shown in the previous section).</li>
+                    <li><strong>Edit script.js:</strong> Add the following lines:
+                         <pre><code class="code-snippet ">// Output a message to the browser's developer console
+console.log("Hello, Console!");
+
+// Display a pop-up alert box in the browser
+alert("Hello, World!");</code></pre>
+                    </li>
+                    <li><strong>Save Both Files.</strong></li>
+                    <li><strong>Open index.html in your Browser:</strong> Simply double-click the index.html file, or right-click and choose "Open with" your preferred browser.</li>
+                    <li><strong>See the Output:</strong>
+                         <ul>
+                              <li>You should immediately see a pop-up alert box saying "Hello, World!". Click "OK".</li>
+                              <li>Open the browser's developer console (F12). You should see the message "Hello, Console!".</li>
+                         </ul>
+                          <p>Congratulations! You've run your first JavaScript code in a browser.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="basic-syntax-section" class="full-width content-block bg-light scroll-fade-in">
+            <div class="container">
+                <h3>Basic Syntax, Comments, and Statements.</h3>
+                <p>Like any language, JavaScript has rules for how code is written.</p>
+                <ul>
+                     <li><strong>Statements:</strong> JavaScript programs are made up of statements, which are instructions to be executed. Statements typically end with a semicolon (;). While semicolons are often optional due to Automatic Semicolon Insertion (ASI), it's generally considered good practice to include them explicitly to avoid ambiguity.
+                         <pre><code class="code-snippet ">let message = "This is a statement";
+console.log(message);</code></pre>
+                      </li>
+                    <li><strong>Case Sensitivity:</strong> JavaScript is case-sensitive. myVariable, MyVariable, and myvariable are treated as different variables.</li>
+                    <li><strong>Whitespace:</strong> JavaScript largely ignores extra spaces, tabs, and newlines between statements, which can be used to format code for readability. However, whitespace <em>within</em> keywords or variable names is significant.</li>
+                    <li><strong>Comments: Explaining Your Code:</strong> Comments are ignored by the JavaScript engine but help humans understand the code.
+                         <ul>
+                              <li><strong>Single-line comments:</strong> Start with //. Everything after // on that line is a comment.
+                                   <pre><code class="code-snippet ">// This is a single-line comment
+let x = 10; // Assign 10 to x</code></pre>
+                              </li>
+                              <li><strong>Multi-line comments:</strong> Start with /* and end with */. Everything between them is a comment.
+                                   <pre><code class="code-snippet ">/*
+This is a
+multi-line
+comment.
+*/
+let y = 20;</code></pre>
+                              </li>
+                         </ul>
+                    </li>
+                     <li><strong>Code Blocks:</strong> Blocks of code (e.g., inside functions, loops, or conditional statements) are typically enclosed in curly braces {}. Unlike Python, indentation is primarily for readability in JavaScript, not for defining blocks (though consistent indentation is crucial for maintainability).
+                         <pre><code class="code-snippet ">if (x > 5) {
+  console.log("x is greater than 5");
+  // More code inside the block
+}</code></pre>
+                      </li>
+
+                </ul>
+                <p>Understanding these basic syntax rules will help you write clean, readable, and error-free JavaScript code.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 JSLearn - Your JavaScript Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="Week1.html#introduction-section">Intro &amp; Setup</a>
+                <a href="Week1.html#what-is-js-section">What is JS?</a>
+                <a href="Week1.html#why-learn-section">Why Learn?</a>
+                <a href="Week1.html#setup-section">Setup Env</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#arithmetic-operators">Arithmetic Ops</a>
+                <a href="Week2.html#comparison-operators">Comparison Ops</a>
+                <a href="Week2.html#logical-operators">Logical Ops</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#interaction-output">Output</a>
+                <a href="Week3.html#interaction-input">Input</a>
+                <a href="Week3.html#string-properties">Properties</a>
+                <a href="Week3.html#string-methods">Methods</a>
+                <a href="Week3.html#template-literals">Literals</a>
+                 <a href="Week3.html#dom-intro">DOM Intro</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#conditional-logic">Logic</a>
+                <a href="Week4.html#if-statement">if</a>
+                <a href="Week4.html#else-if-statement">else if</a>
+                <a href="Week4.html#else-statement">else</a>
+                <a href="Week4.html#truthy-falsy">Truthy/Falsy</a>
+                <a href="Week4.html#switch-statement">switch</a>
+                <a href="Week4.html#ternary-operator">Ternary Op</a>
+                <a href="Week4.html#nested-if">Nested if</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#for-loops">for Loops</a>
+                 <a href="Week5.html#while-loops">while Loops</a>
+                 <a href="Week5.html#do-while-loops">do...while</a>
+                 <a href="Week5.html#break-continue">break/continue</a>
+                 <a href="Week5.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#array-intro">Array Intro</a>
+                <a href="Week6.html#array-indexing">Indexing &amp; Modifying</a>
+                <a href="Week6.html#array-methods">Common Methods</a>
+                <a href="Week6.html#array-iteration">Iteration Methods</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#object-literals">Object Literals</a>
+                <a href="Week7.html#object-properties">Properties</a>
+                <a href="Week7.html#object-methods">Methods</a>
+                <a href="Week7.html#object-iteration">Iteration</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#function-declaration">Declaration/Expression</a>
+                <a href="Week8.html#function-parameters">Parameters</a>
+                <a href="Week8.html#function-return">Return Values</a>
+                <a href="Week8.html#variable-scope">Variable Scope</a>
+                <a href="Week8.html#arrow-functions">Arrow Functions</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#what-is-dom">What is the DOM?</a>
+                <a href="Week9.html#selecting-elements">Selecting Elements</a>
+                <a href="Week9.html#manipulating-dom">Manipulating</a>
+                <a href="Week9.html#event-handling">Event Handling</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#callbacks">Callbacks</a>
+                <a href="Week10.html#closures">Closures</a>
+                <a href="Week10.html#iife">IIFE</a>
+                 <a href="Week10.html#this-keyword">`this` Keyword</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#error-types">Error Types</a>
+                <a href="Week11.html#debugging">Debugging Tools</a>
+                <a href="Week11.html#try-catch">try...catch</a>
+                <a href="Week11.html#throw-statement">throw</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week12.html#es6-overview">ES6+ Overview</a>
+                 <a href="Week12.html#js-modules">Modules</a>
+                 <a href="Week12.html#async-intro">Async Intro</a>
+                 <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

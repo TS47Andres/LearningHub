@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Learning - Week 2: Variables, Data Types, and Operators</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="javascript.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+             <div class="logo">
+                <span class="python-yellow">JS</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#variables">Variables</a></li>
+                <li><a href="#data-types">Data Types</a></li>
+                <li><a href="#arithmetic-operators">Arithmetic</a></li>
+                <li><a href="#comparison-operators">Comparison</a></li>
+                <li><a href="#logical-operators">Logical</a></li>
+                </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                 <h1>Week 2: Mastering Variables, Data, and Operations in JS</h1>
+                <p class="tagline">Unlocking the power to store and manipulate information in JavaScript.</p>
+                <a href="#variables" class="button">Dive into Chapter 2</a>
+            </div>
+        </section>
+
+        <section id="variables" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                 <h2>Chapter 2: Fundamental Data Types and Operations</h2>
+                <h3>Variables: Naming, Declaring, Assigning Values.</h3>
+                <p>Variables are fundamental to programming. They act as named containers for storing data values that your program can use and manipulate. Think of them as labels for information.</p>
+                <h4>Declaring Variables (let, const, var)</h4>
+                <p>In modern JavaScript (ES6 and later), you primarily use let and const to declare variables:</p>
+                <ul>
+                    <li><strong>let</strong>: Declares variables whose value can be reassigned later. Variables declared with let are block-scoped (their scope is limited to the block {} they are defined in).
+                         <pre><code class="code-snippet ">let message = "Hello";
+message = "World"; // This is allowed
+console.log(message);</code></pre>
+                    </li>
+                    <li><strong>const</strong>: Declares variables whose value cannot be reassigned after initialization (constants). They are also block-scoped. Use const for values you don't intend to change.
+                         <pre><code class="code-snippet ">const pi = 3.14159;
+// pi = 3.14; // This would cause a TypeError!
+console.log(pi);</code></pre>
+                         <p>Note: For objects and arrays declared with const, the variable itself cannot be reassigned, but the <em>contents</em> of the object or array can still be modified.</p>
+                    </li>
+                    <li><strong>var (Legacy)</strong>: The older way to declare variables. var variables are function-scoped or globally-scoped, not block-scoped, which can sometimes lead to unexpected behavior. It's generally recommended to use letand const instead in modern JavaScript.
+                          <pre><code class="code-snippet ">var count = 10; // Older style, function-scoped
+</code></pre>
+                    </li>
+                </ul>
+                <h4>Naming Variables</h4>
+                <p>JavaScript variable names (identifiers) must follow these rules:</p>
+                <ul>
+                    <li>Can contain letters, digits, underscores (_), and dollar signs ($).</li>
+                    <li>Must begin with a letter, underscore (_), or dollar sign ($). Cannot start with a digit.</li>
+                    <li>Are case-sensitive (myVariable and myvariable are different).</li>
+                    <li>Cannot be reserved keywords (like let, const, if, for, function, etc.).</li>
+                    <li>The convention is to use <strong>camelCase</strong> for variable names (e.g., numberOfStudents, firstName).</li>
+                </ul>
+                 <h4>Assigning Values</h4>
+                <p>You assign a value to a variable using the assignment operator (=).</p>
+                <pre><code class="code-snippet ">let age = 30; // Declaring and assigning in one step
+const userName = "Alice";
+let score;      // Declaration without assignment (value is 'undefined')
+score = 100;    // Assignment later</code></pre>
+            </div>
+        </section>
+
+        <section id="data-types" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                 <h3>Basic Data Types: The Building Blocks of Information.</h3>
+                <p>JavaScript is dynamically typed, meaning you don't specify the data type when declaring a variable. The type is determined automatically based on the assigned value. JavaScript has several primitive data types:</p>
+                <ul>
+                    <li><strong>Number:</strong> Represents both integers and floating-point numbers. There's no distinct integer type like in some other languages.
+                         <pre><code class="code-snippet ">let integerNum = 100;
+let floatNum = 99.99;
+let scientificNum = 2.5e3; // 2500</code></pre>
+                    </li>
+                    <li><strong>String:</strong> Represents textual data. Enclosed in single quotes ('...'), double quotes ("..."), or backticks (`...` - template literals).
+                         <pre><code class="code-snippet ">let name = "Bob";
+let greeting = 'Hello!';
+let message = `Welcome, ${name}!`; // Template literal</code></pre>
+                    </li>
+                     <li><strong>Boolean:</strong> Represents logical values true or false. Used extensively in conditional logic.
+                         <pre><code class="code-snippet ">let isActive = true;
+let isLoggedIn = false;</code></pre>
+                    </li>
+                    <li><strong>undefined</strong>: A variable that has been declared but not assigned a value has the value undefined. It represents the unintentional absence of a value.
+                         <pre><code class="code-snippet ">let city;
+console.log(city); // Output: undefined</code></pre>
+                    </li>
+                     <li><strong>null</strong>: Represents the intentional absence of any object value. It's often assigned explicitly to indicate "no value".
+                         <pre><code class="code-snippet ">let selectedUser = null;</code></pre>
+                         <p>Note: typeof null strangely returns "object", which is a historical quirk.</p>
+                    </li>
+                    <li><strong>Symbol (ES6+):</strong> Represents a unique identifier. Used less commonly in basic programming but important for more advanced scenarios like creating unique object properties.
+                         <pre><code class="code-snippet ">const id = Symbol('uniqueId');</code></pre>
+                    </li>
+                     <li><strong>BigInt (ES2020+):</strong> Represents integers of arbitrary precision, larger than the standard Number type can safely handle. Created by appending n to an integer literal.
+                         <pre><code class="code-snippet ">const veryLargeNumber = 1234567890123456789012345678901234567890n;</code></pre>
+                    </li>
+                </ul>
+                 <p>JavaScript also has the <strong>Object</strong> type, which is a non-primitive type used for more complex data structures (we'll cover objects and arrays later).</p>
+                <p>You can use the typeof operator to check the data type of a variable:</p>
+                <pre><code class="code-snippet ">console.log(typeof 42);          // "number"
+console.log(typeof "hello");     // "string"
+console.log(typeof true);        // "boolean"
+console.log(typeof undefined);   // "undefined"
+console.log(typeof null);        // "object" (the quirk!)
+console.log(typeof Symbol('id')); // "symbol"
+console.log(typeof 100n);        // "bigint"
+console.log(typeof {});          // "object"
+console.log(typeof []);          // "object" (arrays are objects)</code></pre>
+            </div>
+        </section>
+
+        <section id="arithmetic-operators" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                 <h3>Arithmetic Operators: Performing Calculations.</h3>
+                <p>These operators perform mathematical calculations on numbers.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Name</th>
+                            <th>Example</th>
+                            <th>Result</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>+</td><td>Addition</td><td>5 + 3</td><td>8</td><td>Adds operands.</td></tr>
+                        <tr><td>-</td><td>Subtraction</td><td>5 - 3</td><td>2</td><td>Subtracts right operand from left.</td></tr>
+                        <tr><td>*</td><td>Multiplication</td><td>5 * 3</td><td>15</td><td>Multiplies operands.</td></tr>
+                        <tr><td>/</td><td>Division</td><td>5 / 3</td><td>1.666...</td><td>Divides left operand by right.</td></tr>
+                        <tr><td>%</td><td>Modulo (Remainder)</td><td>5 % 3</td><td>2</td><td>Returns the remainder of a division.</td></tr>
+                        <tr><td>**</td><td>Exponentiation (ES7+)</td><td>5 ** 3</td><td>125</td><td>Raises left operand to the power of the right.</td></tr>
+                        <tr><td>++</td><td>Increment</td><td>let x=5; x++;</td><td>x is 6</td><td>Increases operand by 1 (postfix/prefix).</td></tr>
+                        <tr><td>--</td><td>Decrement</td><td>let y=5; y--;</td><td>y is 4</td><td>Decreases operand by 1 (postfix/prefix).</td></tr>
+                    </tbody>
+                </table>
+                <p>Examples:</p>
+                <pre><code class="code-snippet ">let a = 10;
+let b = 4;
+console.log("a + b =", a + b);   // 14
+console.log("a / b =", a / b);   // 2.5
+console.log("a % b =", a % b);   // 2
+console.log("a ** b =", a ** b); // 10000
+
+let counter = 5;
+counter++; // counter is now 6
+console.log("Counter:", counter);</code></pre>
+                 <p>The + operator can also be used for string concatenation:</p>
+                 <pre><code class="code-snippet ">let firstName = "Jane";
+let lastName = "Doe";
+let fullName = firstName + " " + lastName; // "Jane Doe"
+console.log(fullName);</code></pre>
+            </div>
+        </section>
+
+        <section id="comparison-operators" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                 <h3>Comparison Operators: Making Comparisons.</h3>
+                <p>Comparison operators compare two values and return a boolean (true or false) result.</p>
+                <table>
+                     <thead>
+                        <tr><th>Operator</th><th>Name</th><th>Example (x=5, y='5', z=3)</th><th>Result</th><th>Description</th></tr>
+                     </thead>
+                     <tbody>
+                        <tr><td>==</td><td>Equal (Loose)</td><td>x == y</td><td>true</td><td>Compares values after type coercion. (Avoid if possible)</td></tr>
+                        <tr><td>===</td><td>Strictly Equal</td><td>x === y</td><td>false</td><td>Compares values AND types without coercion. (Recommended)</td></tr>
+                        <tr><td>!=</td><td>Not Equal (Loose)</td><td>x != z</td><td>true</td><td>Compares values after type coercion.</td></tr>
+                        <tr><td>!==</td><td>Strictly Not Equal</td><td>x !== y</td><td>true</td><td>Compares values AND types without coercion. (Recommended)</td></tr>
+                        <tr><td>></td><td>Greater than</td><td>x > z</td><td>true</td><td>Checks if left operand is greater than right.</td></tr>
+                        <tr><td><</td><td>Less than</td><td>x < z</td><td>false</td><td>Checks if left operand is less than right.</td></tr>
+                        <tr><td>>=</td><td>Greater than or equal to</td><td>x >= y</td><td>true</td><td>Checks if left is greater than or equal to right.</td></tr>
+                        <tr><td><=</td><td>Less than or equal to</td><td>x <= z</td><td>false</td><td>Checks if left is less than or equal to right.</td></tr>
+                     </tbody>
+                </table>
+                 <p><strong>Important:</strong> Always prefer strict equality (===) and strict inequality (!==) over loose equality (==, !=) to avoid unexpected results due to automatic type coercion.</p>
+                <pre><code class="code-snippet ">let p = 10;
+let q = '10';
+let r = 5;
+
+console.log("p == q:", p == q);     // true (loose equality, string '10' coerced to number 10)
+console.log("p === q:", p === q);   // false (strict equality, types are different)
+console.log("p !== q:", p !== q);   // true (strict inequality)
+console.log("p > r:", p > r);       // true</code></pre>
+            </div>
+        </section>
+
+        <section id="logical-operators" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                 <h3>Logical Operators: Combining Boolean Expressions.</h3>
+                <p>Logical operators combine or invert boolean values.</p>
+                <ul>
+                    <li><strong>&& (Logical AND):</strong> Returns true if <strong>both</strong> operands are true (or truthy). Otherwise returns false (or the first falsy value encountered).
+                         <pre><code class="code-snippet ">let isAdult = true;
+let hasTicket = false;
+console.log(isAdult && hasTicket); // false</code></pre>
+                    </li>
+                    <li><strong>|| (Logical OR):</strong> Returns true if <strong>at least one</strong> operand is true (or truthy). Returns false (or the last falsy value) only if both are false (or falsy).
+                          <pre><code class="code-snippet ">let isWeekend = true;
+let isHoliday = false;
+console.log(isWeekend || isHoliday); // true</code></pre>
+                    </li>
+                     <li><strong>! (Logical NOT):</strong> Inverts the boolean value of its operand. !true becomes false, and !false becomes true.
+                         <pre><code class="code-snippet ">let isRaining = false;
+console.log(!isRaining); // true</code></pre>
+                      </li>
+                </ul>
+                 <p>JavaScript also uses the concept of "truthy" and "falsy" values in logical operations. Falsy values include false, 0, "" (empty string), null, undefined, and NaN. All other values are considered truthy.</p>
+                 <h4>Operator Precedence</h4>
+                 <p>JavaScript operators have a specific order of precedence (similar to mathematical rules). For example, multiplication (*) happens before addition (+), and logical AND (&&) happens before logical OR (||). Use parentheses () to control the order of evaluation explicitly when needed.</p>
+                 <pre><code class="code-snippet ">let result = 10 + 5 * 2; // 20 (multiplication first)
+let result2 = (10 + 5) * 2; // 30 (parentheses first)
+
+let check = true || false && false; // true (&& has higher precedence than ||)
+let check2 = (true || false) && false; // false (parentheses first)
+</code></pre>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 JSLearn - Your JavaScript Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro &amp; Setup</a>
+                <a href="Week1.html#what-is-js-section">What is JS?</a>
+                <a href="Week1.html#why-learn-section">Why Learn?</a>
+                <a href="Week1.html#setup-section">Setup Env</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#arithmetic-operators">Arithmetic Ops</a>
+                <a href="Week2.html#comparison-operators">Comparison Ops</a>
+                <a href="Week2.html#logical-operators">Logical Ops</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#interaction-output">Interaction/Output</a>
+                <a href="Week3.html#string-methods">String Methods</a>
+                <a href="Week3.html#template-literals">Template Literals</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#if-else">If/Else If/Else</a>
+                <a href="Week4.html#ternary-operator">Ternary Operator</a>
+                <a href="Week4.html#switch-statement">Switch</a>
+                <a href="Week4.html#truthy-falsy">Truthy/Falsy</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#for-loops">for Loops</a>
+                 <a href="Week5.html#while-loops">while Loops</a>
+                 <a href="Week5.html#do-while-loops">do...while</a>
+                 <a href="Week5.html#break-continue">break/continue</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#array-intro">Array Intro</a>
+                <a href="Week6.html#array-indexing">Array Indexing</a>
+                <a href="Week6.html#array-methods">Array Methods</a>
+                <a href="Week6.html#array-iteration">Iteration</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#object-literals">Object Literals</a>
+                <a href="Week7.html#object-properties">Properties</a>
+                <a href="Week7.html#object-methods">Methods</a>
+                <a href="Week7.html#object-iteration">Iteration</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#function-declaration">Declaration/Expression</a>
+                <a href="Week8.html#function-parameters">Parameters</a>
+                <a href="Week8.html#function-return">Return Values</a>
+                <a href="Week8.html#variable-scope">Variable Scope</a>
+                <a href="Week8.html#arrow-functions">Arrow Functions</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#what-is-dom">DOM Intro</a>
+                <a href="Week9.html#selecting-elements">Selecting Elements</a>
+                <a href="Week9.html#manipulating-dom">Manipulating</a>
+                <a href="Week9.html#event-handling">Events</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#callbacks">Callbacks</a>
+                <a href="Week10.html#closures">Closures</a>
+                <a href="Week10.html#iife">IIFE</a>
+                 <a href="Week10.html#this-keyword">this Keyword</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#error-types">Error Types</a>
+                <a href="Week11.html#debugging">Debugging</a>
+                <a href="Week11.html#try-catch">Try/Catch</a>
+                <a href="Week11.html#throw-statement">Throw</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week12.html#es6-overview">ES6+ Overview</a>
+                 <a href="Week12.html#js-modules">Modules</a>
+                 <a href="Week12.html#async-intro">Async Intro</a>
+                 <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

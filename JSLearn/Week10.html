@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Learning - Week 10: Advanced Functions</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="javascript.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+             <div class="logo">
+                <span class="python-yellow">JS</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+             <ul>
+                <li><a href="#callbacks">Callbacks</a></li>
+                <li><a href="#closures">Closures</a></li>
+                <li><a href="#iife">IIFE</a></li>
+                <li><a href="#this-keyword">`this` Keyword</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 10: Diving Deeper into Functions</h1>
+                <p class="tagline">Explore advanced function concepts like callbacks, closures, IIFEs, and the `this` keyword.</p>
+                <a href="#callbacks" class="button">Explore Chapter 10</a>
+            </div>
+        </section>
+
+        <section id="callbacks" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 10: Advanced Function Concepts</h2>
+                <h3>Callbacks and Asynchronous Behavior (Introduction).</h3>
+                <p>In JavaScript, functions are "first-class citizens," meaning they can be treated like any other value: assigned to variables, passed as arguments to other functions, and returned from functions.</p>
+                <h4>Callback Functions</h4>
+                <p>A <strong>callback function</strong> is a function passed into another function as an argument, which is then invoked (or "called back") inside the outer function to complete some kind of routine or action.</p>
+                <p>Callbacks are fundamental to handling asynchronous operations (actions that don't block the main thread, like fetching data or timers) and are widely used in event handling and array methods.</p>
+                 <h4>Synchronous Callback Example (Array Methods)</h4>
+                 <p>We've already seen synchronous callbacks with array methods like forEach, map, and filter:</p>
+                 <pre><code class="code-snippet ">let numbers = [1, 2, 3, 4];
+
+// The function passed to forEach is a callback
+numbers.forEach(function(num) { // This function is called back for each number
+  console.log("Processing number:", num);
+});
+
+// The function passed to map is a callback
+let doubled = numbers.map(function(num) { // Called back for each number
+    return num * 2;
+});
+console.log("Doubled:", doubled);
+</code></pre>
+                 <h4>Asynchronous Callback Example (setTimeout)</h4>
+                 <p>A common asynchronous operation is using setTimeout, which executes a callback function once after a specified delay (in milliseconds).</p>
+                <pre><code class="code-snippet ">console.log("Start");
+
+// Execute the callback function after 2000ms (2 seconds)
+setTimeout(function() { // This is the callback function
+  console.log("Timer finished! This message appears after 2 seconds.");
+}, 2000);
+
+console.log("End (This appears before the timer finishes!)");
+</code></pre>
+                <p>Notice how "End" is logged before the timer message. This is because setTimeout doesn't block execution; it schedules the callback to run later, allowing the rest of the script to continue.</p>
+                <p>Handling asynchronous operations effectively is crucial in JavaScript. While callbacks are the traditional way, modern JS often uses Promises and async/await (covered later) for better readability and error handling, especially with complex asynchronous sequences.</p>
+            </div>
+        </section>
+
+        <section id="closures" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                 <h3>Closures: Functions Remembering Their Scope.</h3>
+                <p>A <strong>closure</strong> is a powerful JavaScript feature where an inner function has access to the variables and parameters of its outer (enclosing) function, even after the outer function has finished executing.</p>
+                <p>In simpler terms, a function "remembers" the environment (the scope) in which it was created.</p>
+                <h4>How Closures Work</h4>
+                <ol>
+                    <li>An outer function defines variables and/or an inner function.</li>
+                    <li>The outer function returns the inner function.</li>
+                    <li>When the inner function is later executed (even outside the outer function's execution context), it still has access to the variables defined in the outer function's scope.</li>
+                </ol>
+                <h4>Example: A Simple Counter</h4>
+                <pre><code class="code-snippet ">function createCounter() {
+  let count = 0; // 'count' is defined in the outer function's scope
+
+  // The inner function 'increments' and 'remembers' the 'count' variable
+  function increment() {
+    count++;
+    console.log("Count is now:", count);
+  }
+
+  return increment; // Return the inner function
+}
+
+// counter1 gets the 'increment' function, which has a closure over 'count' starting at 0
+let counter1 = createCounter();
+
+// counter2 gets a *new* 'increment' function, with its own closure over a *new* 'count' starting at 0
+let counter2 = createCounter();
+
+counter1(); // Output: Count is now: 1
+counter1(); // Output: Count is now: 2
+counter2(); // Output: Count is now: 1 (independent count)
+counter1(); // Output: Count is now: 3
+</code></pre>
+                <h4>Uses of Closures</h4>
+                <ul>
+                    <li>Creating private variables and methods (encapsulation).</li>
+                    <li>Maintaining state in asynchronous operations.</li>
+                    <li>Creating function factories (functions that create other functions).</li>
+                    <li>Implementing techniques like currying and partial application.</li>
+                </ul>
+                <p>Closures are a core concept in JavaScript and enable many advanced programming patterns.</p>
+            </div>
+        </section>
+
+        <section id="iife" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                 <h3>Immediately Invoked Function Expressions (IIFE).</h3>
+                <p>An <strong>Immediately Invoked Function Expression (IIFE)</strong>, pronounced "iffy", is a function that is defined and executed immediately after its creation.</p>
+                <h4>Syntax</h4>
+                <p>The key is wrapping the function expression in parentheses () and then immediately calling it with another pair of parentheses ().</p>
+                <pre><code class="code-snippet ">(function() {
+  // Code inside the IIFE
+  let message = "This runs immediately!";
+  console.log(message);
+  // Variables defined here are local to the IIFE's scope
+})(); // The final () invokes the function right away
+
+// Can also pass arguments
+(function(name) {
+  console.log("Hello, " + name + " from an IIFE!");
+})("IIFE User");
+</code></pre>
+                <h4>Why Use IIFEs?</h4>
+                <ul>
+                    <li><strong>Avoiding Global Scope Pollution:</strong> Variables declared inside an IIFE are local to that function's scope. This prevents them from accidentally interfering with variables in the global scope or other parts of your code. This was especially important before the introduction of block scope with let and const.</li>
+                    <li><strong>Creating Private Scope:</strong> Useful for creating modules or plugins where you want to encapsulate internal details.</li>
+                    <li><strong>Initialization Tasks:</strong> Running setup code immediately without creating global variables.</li>
+                </ul>
+                <p>While modern features like block scope and modules have reduced the *need* for IIFEs for simple scope management, they are still a pattern you might encounter in older codebases or use for specific initialization scenarios.</p>
+            </div>
+        </section>
+
+        <section id="this-keyword" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                 <h3>The `this` Keyword: Understanding Context.</h3>
+                <p>The `this` keyword in JavaScript is a special identifier whose value is determined by <strong>how a function is called</strong> (its execution context). It refers to the object that is currently executing the function.</p>
+                <p>Understanding `this` can be tricky because its value changes depending on the situation:</p>
+                <ul>
+                    <li><strong>In the Global Context:</strong> Outside any function, `this` refers to the global object (e.g., window in browsers, global in Node.js strict mode-off).
+                         <pre><code class="code-snippet ">console.log(this); // In browser, typically logs the 'window' object
+</code></pre>
+                    </li>
+                    <li><strong>Inside a Regular Function (Non-Method):</strong>
+                         <ul>
+                              <li>In non-strict mode, `this` usually defaults to the global object (window).</li>
+                              <li>In strict mode ('use strict';), `this` is undefined.</li>
+                         </ul>
+                          <pre><code class="code-snippet ">function showThis() {
+  'use strict'; // Enable strict mode
+  console.log(this);
+}
+showThis(); // Output: undefined (in strict mode)
+</code></pre>
+                    </li>
+                     <li><strong>Inside an Object Method:</strong> When a function is called as a method of an object (object.method()), `this` refers to the object the method was called on.
+                          <pre><code class="code-snippet ">let user = {
+  name: "Eve",
+  greet: function() {
+    console.log("Hello, " + this.name); // 'this' refers to the 'user' object
+  }
+};
+user.greet(); // Output: Hello, Eve
+</code></pre>
+                      </li>
+                    <li><strong>Inside Event Handlers:</strong> `this` often refers to the HTML element that triggered the event (though this can depend on how the handler is attached).</li>
+                    <li><strong>With call(), apply(), and bind():</strong> These methods allow you to explicitly set the value of `this` when calling a function.</li>
+                    <li><strong>Inside Arrow Functions:</strong> Arrow functions (=>) do *not* have their own `this` binding. They inherit `this` from the surrounding (lexical) scope where they were defined. This often simplifies code, especially within callbacks or nested functions.
+                         <pre><code class="code-snippet ">let counter = {
+  count: 0,
+  start: function() {
+    // 'this' here refers to the 'counter' object
+    setInterval(() => {
+      // Arrow function inherits 'this' from 'start' method's scope
+      this.count++;
+      console.log(this.count);
+    }, 1000); // Logs incrementing count every second
+  }
+};
+// counter.start(); // Uncomment to run
+</code></pre>
+                      </li>
+                </ul>
+                <p>The behavior of `this` is a common source of confusion. Carefully consider the context in which a function is called to determine what `this` will refer to.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 JSLearn - Your JavaScript Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro &amp; Setup</a>
+                <a href="Week1.html#what-is-js-section">What is JS?</a>
+                <a href="Week1.html#why-learn-section">Why Learn?</a>
+                <a href="Week1.html#setup-section">Setup Env</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#arithmetic-operators">Arithmetic Ops</a>
+                <a href="Week2.html#comparison-operators">Comparison Ops</a>
+                <a href="Week2.html#logical-operators">Logical Ops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#interaction-output">Output</a>
+                <a href="Week3.html#interaction-input">Input</a>
+                <a href="Week3.html#string-properties">Properties</a>
+                <a href="Week3.html#string-methods">Methods</a>
+                <a href="Week3.html#template-literals">Literals</a>
+                 <a href="Week3.html#dom-intro">DOM Intro</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#conditional-logic">Logic</a>
+                <a href="Week4.html#if-statement">if</a>
+                <a href="Week4.html#else-if-statement">else if</a>
+                <a href="Week4.html#else-statement">else</a>
+                <a href="Week4.html#truthy-falsy">Truthy/Falsy</a>
+                <a href="Week4.html#switch-statement">switch</a>
+                <a href="Week4.html#ternary-operator">Ternary Op</a>
+                <a href="Week4.html#nested-if">Nested if</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#for-loops">for Loops</a>
+                 <a href="Week5.html#while-loops">while Loops</a>
+                 <a href="Week5.html#do-while-loops">do...while</a>
+                 <a href="Week5.html#break-continue">break/continue</a>
+                 <a href="Week5.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#array-intro">Array Intro</a>
+                <a href="Week6.html#array-indexing">Indexing &amp; Modifying</a>
+                <a href="Week6.html#array-methods">Common Methods</a>
+                <a href="Week6.html#array-iteration">Iteration Methods</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#object-literals">Object Literals</a>
+                <a href="Week7.html#object-properties">Properties</a>
+                <a href="Week7.html#object-methods">Methods</a>
+                <a href="Week7.html#object-iteration">Iteration</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#function-declaration">Declaration/Expression</a>
+                <a href="Week8.html#function-parameters">Parameters</a>
+                <a href="Week8.html#function-return">Return Values</a>
+                <a href="Week8.html#variable-scope">Variable Scope</a>
+                <a href="Week8.html#arrow-functions">Arrow Functions</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#what-is-dom">What is the DOM?</a>
+                <a href="Week9.html#selecting-elements">Selecting Elements</a>
+                <a href="Week9.html#manipulating-dom">Manipulating</a>
+                <a href="Week9.html#event-handling">Event Handling</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="Week10.html#callbacks">Callbacks</a>
+                <a href="Week10.html#closures">Closures</a>
+                <a href="Week10.html#iife">IIFE</a>
+                 <a href="Week10.html#this-keyword">`this` Keyword</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#error-types">Error Types</a>
+                <a href="Week11.html#debugging">Debugging</a>
+                <a href="Week11.html#try-catch">Try/Catch</a>
+                <a href="Week11.html#throw-statement">Throw</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week12.html#es6-overview">ES6+ Overview</a>
+                 <a href="Week12.html#js-modules">Modules</a>
+                 <a href="Week12.html#async-intro">Async Intro</a>
+                 <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

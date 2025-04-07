@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Learning - Week 9: Introduction to the DOM</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="javascript.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+             <div class="logo">
+                <span class="python-yellow">JS</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#what-is-dom">What is the DOM?</a></li>
+                <li><a href="#selecting-elements">Selecting Elements</a></li>
+                <li><a href="#manipulating-dom">Manipulating</a></li>
+                <li><a href="#event-handling">Event Handling</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 9: Interacting with Web Pages - The DOM</h1>
+                <p class="tagline">Learn how JavaScript breathes life into HTML documents using the Document Object Model.</p>
+                <a href="#what-is-dom" class="button">Explore Chapter 9</a>
+            </div>
+        </section>
+
+        <section id="what-is-dom" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 9: Making Web Pages Dynamic with the DOM</h2>
+                <h3>What is the Document Object Model (DOM)?</h3>
+                <p>When a web browser loads an HTML document, it creates a model of that page in memory. This model is called the <strong>Document Object Model (DOM)</strong>. The DOM represents the page structure as a tree of objects, where each object corresponds to an HTML element, attribute, or piece of text.</p>
+                <p>Think of the DOM as a live, programmable representation of your HTML. JavaScript can access and manipulate this DOM tree to:</p>
+                <ul>
+                    <li>Change the content of HTML elements (e.g., update text, add images).</li>
+                    <li>Modify the attributes of HTML elements (e.g., change an image's src or a link's href).</li>
+                    <li>Alter the CSS styles of elements (e.g., change colors, sizes, visibility).</li>
+                    <li>Add or remove HTML elements and attributes.</li>
+                    <li>React to user events (like clicks, mouse movements, key presses).</li>
+                </ul>
+                <p>Essentially, the DOM is the bridge that connects JavaScript to the visual structure and content of a web page, allowing for dynamic updates without needing to reload the entire page.</p>
+                <p>The browser provides a global document object, which is the entry point for interacting with the DOM.</p>
+                <pre><code class="code-snippet ">// The 'document' object represents the entire HTML document
+console.log(document);
+console.log(document.body); // Access the &lt;body&gt; element object
+</code></pre>
+            </div>
+        </section>
+
+        <section id="selecting-elements" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Selecting HTML Elements.</h3>
+                <p>Before you can manipulate an element, you need to select it or get a reference to its corresponding object in the DOM. JavaScript provides several methods via the document object for this:</p>
+                <ul>
+                    <li><strong>getElementById(id):</strong> Selects the single element that has the specified id attribute. IDs must be unique within a page. Returns the element object or null if not found.
+                           <pre><code class="code-snippet html">&lt;p id="intro"&gt;This is the introduction.&lt;/p&gt;
+
+&lt;script&gt;
+  let introParagraph = document.getElementById("intro");
+  console.log(introParagraph); // Logs the &lt;p&gt; element object
+&lt;/script&gt;</code></pre>
+                    </li>
+                     <li><strong>getElementsByTagName(tagName):</strong> Selects all elements with the specified tag name (e.g., 'p', 'div', 'li'). Returns an HTMLCollection (a live, array-like list) of the found elements.
+                           <pre><code class="code-snippet ">// Get all paragraph elements on the page
+let allParagraphs = document.getElementsByTagName("p");
+console.log(allParagraphs); // HTMLCollection of &lt;p&gt; elements
+console.log(allParagraphs.length); // Number of paragraphs
+console.log(allParagraphs[0]); // Access the first paragraph
+</code></pre>
+                     </li>
+                    <li><strong>getElementsByClassName(className):</strong> Selects all elements that have the specified CSS class name. Returns an HTMLCollection.
+                           <pre><code class="code-snippet html">&lt;div class="highlight"&gt;Item 1&lt;/div&gt;
+&lt;span class="highlight"&gt;Item 2&lt;/span&gt;
+
+&lt;script&gt;
+  let highlightedItems = document.getElementsByClassName("highlight");
+  console.log(highlightedItems); // HTMLCollection
+&lt;/script&gt;
+</code></pre>
+                    </li>
+                    <li><strong>querySelector(cssSelector):</strong> Selects the *first* element that matches the specified CSS selector (e.g., #myId, .myClass, p, div > span). Returns the element object or null. Very versatile.
+                         <pre><code class="code-snippet ">let firstHighlight = document.querySelector(".highlight"); // Selects the first element with class="highlight"
+let intro = document.querySelector("#intro"); // Selects the element with id="intro"
+let firstListItem = document.querySelector("ul &gt; li"); // Selects the first &lt;li&gt; inside a &lt;ul&gt;
+console.log(firstHighlight);
+</code></pre>
+                    </li>
+                    <li><strong>querySelectorAll(cssSelector):</strong> Selects *all* elements that match the specified CSS selector. Returns a static NodeList (array-like list).
+                         <pre><code class="code-snippet ">let allHighlights = document.querySelectorAll(".highlight"); // Selects all elements with class="highlight"
+console.log(allHighlights); // NodeList
+allHighlights.forEach(item =&gt; { // Can iterate with forEach
+    console.log(item);
+});
+</code></pre>
+                    </li>
+                </ul>
+                 <p>querySelector and querySelectorAll are often preferred in modern JavaScript due to their flexibility with CSS selectors.</p>
+            </div>
+        </section>
+
+        <section id="manipulating-dom" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Manipulating Element Content and Style.</h3>
+                <p>Once you have selected an element object, you can change its content, attributes, and appearance.</p>
+                <h4>Changing Content:</h4>
+                <ul>
+                    <li><strong>textContent:</strong> Gets or sets the text content of an element and all its descendants, ignoring any HTML tags within. It's often safer for setting plain text.
+                         <pre><code class="code-snippet ">// Assuming: &lt;p id="myPara"&gt;Initial &lt;em&gt;text&lt;/em&gt;&lt;/p&gt;
+let para = document.getElementById("myPara");
+console.log(para.textContent); // "Initial text" (ignores &lt;em&gt;)
+para.textContent = "New text content set via JS.";
+// Now HTML is: &lt;p id="myPara"&gt;New text content set via JS.&lt;/p&gt;
+</code></pre>
+                      </li>
+                    <li><strong>innerHTML:</strong> Gets or sets the HTML content (including tags) within an element. Use with caution when setting content from untrusted sources, as it can introduce security risks (Cross-Site Scripting - XSS).
+                           <pre><code class="code-snippet ">// Assuming: &lt;div id="myDiv"&gt;&lt;/div&gt;
+let div = document.getElementById("myDiv");
+div.innerHTML = "&lt;strong&gt;Bold text&lt;/strong&gt; and a &lt;a href='#'&gt;link&lt;/a&gt;.";
+// The div now contains the actual bold text and link elements.
+</code></pre>
+                    </li>
+                </ul>
+                <h4>Changing Attributes:</h4>
+                 <ul>
+                      <li>You can often access common attributes directly as properties of the element object (e.g., id, className, src, href).</li>
+                      <li>Use getAttribute(name) and setAttribute(name, value) for any attribute.</li>
+                 </ul>
+                 <pre><code class="code-snippet html">&lt;img id="myImage" src="old.jpg" alt="Old Image"&gt;
+&lt;a id="myLink" href="/old-page"&gt;Old Link&lt;/a&gt;
+
+&lt;script&gt;
+  let img = document.getElementById("myImage");
+  let link = document.getElementById("myLink");
+
+  // Using direct properties
+  img.src = "new.png";
+  img.alt = "New Image";
+  link.href = "/new-page";
+
+  // Using setAttribute
+  link.setAttribute("target", "_blank"); // Add target="_blank" attribute
+&lt;/script&gt;</code></pre>
+                <h4>Changing CSS Styles:</h4>
+                <p>You can modify inline CSS styles using the style property of the element object. CSS property names are converted to camelCase (e.g., background-color becomes backgroundColor).</p>
+                <pre><code class="code-snippet ">// Assuming: &lt;p id="styledPara"&gt;Style me!&lt;/p&gt;
+let styledP = document.getElementById("styledPara");
+
+styledP.style.color = "blue";
+styledP.style.backgroundColor = "#f0f0f0"; // Note camelCase
+styledP.style.fontSize = "20px";
+styledP.style.padding = "10px";
+</code></pre>
+                 <p>For more complex styling changes, it's usually better to add or remove CSS classes using the classList property (element.classList.add('newClass'), element.classList.remove('oldClass'), element.classList.toggle('activeClass')).</p>
+            </div>
+        </section>
+
+        <section id="event-handling" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Basic Event Handling.</h3>
+                <p>Events are actions that happen in the browser, such as a user clicking a button, moving the mouse, or pressing a key. JavaScript allows you to "listen" for these events and execute code (an event handler or listener function) when they occur.</p>
+                <h4>Common Events:</h4>
+                <ul>
+                    <li>click: User clicks an element.</li>
+                    <li>mouseover / mouseout: Mouse pointer moves onto / off an element.</li>
+                    <li>keydown / keyup: User presses / releases a key.</li>
+                    <li>submit: A form is submitted.</li>
+                    <li>load: An asset (like an image or the whole page) finishes loading.</li>
+                </ul>
+                <h4>Ways to Attach Event Handlers:</h4>
+                 <ol>
+                      <li><strong>Inline HTML Attributes (Older method, generally discouraged):</strong>
+                            <pre><code class="code-snippet html">&lt;button onclick="alert('Button clicked!')"&gt;Click Me (Inline)&lt;/button&gt;</code></pre>
+                      </li>
+                       <li><strong>DOM Element Properties:</strong> Assign a function to the element's on<event> property (e.g., onclick, onmouseover). Only one handler per event type can be assigned this way.
+                            <pre><code class="code-snippet html">&lt;button id="btnProp"&gt;Click Me (Property)&lt;/button&gt;
+
+&lt;script&gt;
+  let buttonProp = document.getElementById("btnProp");
+  buttonProp.onclick = function() { // Assign a function to the onclick property
+    console.log("Button property handler executed!");
+  };
+  // Assigning again would overwrite the previous handler:
+  // buttonProp.onclick = function() { console.log("Overwritten!"); };
+&lt;/script&gt;</code></pre>
+                      </li>
+                       <li><strong>addEventListener() (Modern, recommended):</strong> Attaches an event listener function to an element. Allows multiple listeners for the same event type.
+                            <pre><code class="code-snippet html">&lt;button id="btnAdd"&gt;Click Me (addEventListener)&lt;/button&gt;
+
+&lt;script&gt;
+  let buttonAdd = document.getElementById("btnAdd");
+
+  function handleClick() {
+    alert("addEventListener handler executed!");
+  }
+
+  // Attach the listener
+  buttonAdd.addEventListener('click', handleClick);
+
+  // Can add another listener for the same event
+  buttonAdd.addEventListener('click', function() {
+     console.log('Another click listener ran!');
+  });
+
+  // To remove: buttonAdd.removeEventListener('click', handleClick);
+&lt;/script&gt;</code></pre>
+                      </li>
+                 </ol>
+                <p>Event handling is key to creating interactive and responsive web pages. We've only scratched the surface here.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+         <p>&copy; 2025 JSLearn - Your JavaScript Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro &amp; Setup</a>
+                <a href="Week1.html#what-is-js-section">What is JS?</a>
+                <a href="Week1.html#why-learn-section">Why Learn?</a>
+                <a href="Week1.html#setup-section">Setup Env</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#arithmetic-operators">Arithmetic Ops</a>
+                <a href="Week2.html#comparison-operators">Comparison Ops</a>
+                <a href="Week2.html#logical-operators">Logical Ops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#interaction-output">Output</a>
+                <a href="Week3.html#interaction-input">Input</a>
+                <a href="Week3.html#string-properties">Properties</a>
+                <a href="Week3.html#string-methods">Methods</a>
+                <a href="Week3.html#template-literals">Literals</a>
+                 <a href="Week3.html#dom-intro">DOM Intro</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#conditional-logic">Logic</a>
+                <a href="Week4.html#if-statement">if</a>
+                <a href="Week4.html#else-if-statement">else if</a>
+                <a href="Week4.html#else-statement">else</a>
+                <a href="Week4.html#truthy-falsy">Truthy/Falsy</a>
+                <a href="Week4.html#switch-statement">switch</a>
+                <a href="Week4.html#ternary-operator">Ternary Op</a>
+                <a href="Week4.html#nested-if">Nested if</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#for-loops">for Loops</a>
+                 <a href="Week5.html#while-loops">while Loops</a>
+                 <a href="Week5.html#do-while-loops">do...while</a>
+                 <a href="Week5.html#break-continue">break/continue</a>
+                 <a href="Week5.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#array-intro">Array Intro</a>
+                <a href="Week6.html#array-indexing">Indexing &amp; Modifying</a>
+                <a href="Week6.html#array-methods">Common Methods</a>
+                <a href="Week6.html#array-iteration">Iteration Methods</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#object-literals">Object Literals</a>
+                <a href="Week7.html#object-properties">Properties</a>
+                <a href="Week7.html#object-methods">Methods</a>
+                <a href="Week7.html#object-iteration">Iteration</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#function-declaration">Declaration/Expression</a>
+                <a href="Week8.html#function-parameters">Parameters</a>
+                <a href="Week8.html#function-return">Return Values</a>
+                <a href="Week8.html#variable-scope">Variable Scope</a>
+                <a href="Week8.html#arrow-functions">Arrow Functions</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="Week9.html#what-is-dom">What is the DOM?</a>
+                <a href="Week9.html#selecting-elements">Selecting Elements</a>
+                <a href="Week9.html#manipulating-dom">Manipulating</a>
+                <a href="Week9.html#event-handling">Event Handling</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#callbacks">Callbacks</a>
+                <a href="Week10.html#closures">Closures</a>
+                <a href="Week10.html#iife">IIFE</a>
+                 <a href="Week10.html#this-keyword">`this` Keyword</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#error-types">Error Types</a>
+                <a href="Week11.html#debugging">Debugging</a>
+                <a href="Week11.html#try-catch">Try/Catch</a>
+                <a href="Week11.html#throw-statement">Throw</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week12.html#es6-overview">ES6+ Overview</a>
+                 <a href="Week12.html#js-modules">Modules</a>
+                 <a href="Week12.html#async-intro">Async Intro</a>
+                 <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

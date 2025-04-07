@@ -1,0 +1,259 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lexend:wght@300;400;700&display=swap');
+/* Import Remixicon */
+@import 'remixicon/fonts/remixicon.css';
+
+/* Base Variables - Dark Theme */
+:root {
+    --bg-color: #1a1a1a; /* Dark background from PyLearn */
+    --primary-text-color: #e0e0e0; /* Light text from PyLearn */
+    --secondary-bg-color: #222222; /* Slightly lighter dark bg */
+    --card-bg-color: #2d2d2d; /* Card background */
+    --accent-color-1: #ffc107; /* Yellow from PyLearn */
+    --accent-color-2: #5dade2; /* Blue from PyLearn */
+    --accent-color-js: #F0DB4F; /* JS Yellow from JSLearn */
+    --border-color: #444444;
+    --font-primary: "Lexend", sans-serif;
+    --font-heading: "Bebas Neue", sans-serif;
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-color);
+    color: var(--primary-text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background-color: var(--secondary-bg-color);
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    width: 100%;
+}
+
+nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 2.2rem; /* Increased logo size */
+    font-weight: bold;
+    color: var(--accent-color-1); /* Using Python Yellow for main logo */
+}
+
+/* Main Content */
+main {
+    flex-grow: 1;
+    width: 100%;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1200x400/222222/e0e0e0?text=Learning+Background'); /* Placeholder background */
+    background-size: cover;
+    background-position: center;
+    padding: 60px 20px; /* Reduced padding */
+    text-align: center;
+    color: #fff;
+}
+
+.hero-content h1 {
+    font-family: var(--font-heading);
+    font-size: 2.8rem; /* Decreased heading size */
+    margin-bottom: 10px; /* Reduced margin */
+}
+
+.hero-content p {
+    font-size: 1.1rem; /* Slightly decreased paragraph size */
+    font-weight: 300;
+}
+
+/* Platforms Section */
+.platforms-section {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.platforms-section h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: var(--primary-text-color);
+}
+
+.platform-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.platform-card {
+    background-color: var(--card-bg-color);
+    padding: 30px 25px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.platform-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Platform Logo Image */
+.platform-logo {
+    width: 60px; /* Adjust size as needed */
+    height: 60px; /* Adjust size as needed */
+    margin-bottom: 20px;
+    object-fit: contain; /* Use contain or cover based on your images */
+    /* Add background or border if needed for empty src */
+    background-color: var(--secondary-bg-color);
+    border-radius: 50%; /* Make it circular if desired */
+    padding: 5px; /* Add padding if needed */
+}
+
+.platform-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    /* Removed margin-top to rely on image margin */
+    margin-bottom: 10px;
+    color: var(--primary-text-color);
+}
+
+.platform-card p {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Pushes button down */
+}
+
+/* Button */
+.button {
+    display: inline-block;
+    background-color: var(--accent-color-1);
+    color: var(--bg-color);
+    padding: 10px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: auto; /* Pushes button to bottom */
+}
+
+.button:hover {
+    background-color: #ffda63; /* Lighter yellow */
+    transform: scale(1.05);
+}
+
+/* Style JS button differently */
+.platform-card:nth-child(2) .button {
+    background-color: var(--accent-color-js);
+}
+.platform-card:nth-child(2) .button:hover {
+    background-color: #f7e87e; /* Lighter JS yellow */
+}
+
+.button.disabled {
+    background-color: #555;
+    color: #999;
+    cursor: not-allowed;
+}
+.button.disabled:hover {
+    background-color: #555;
+     transform: none;
+}
+
+/* Footer */
+footer {
+    background-color: var(--secondary-bg-color);
+    color: var(--primary-text-color);
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 40px; /* Space above footer */
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 2rem; /* Adjusted responsive logo size */
+    }
+    .hero-content h1 {
+        font-size: 2.2rem; /* Adjusted responsive hero heading */
+    }
+    .hero-content p {
+        font-size: 1rem;
+    }
+    .platforms-section h2 {
+        font-size: 2rem;
+    }
+    .platform-grid {
+        grid-template-columns: 1fr; /* Stack cards on smaller screens */
+        gap: 20px;
+    }
+    .platform-card {
+        padding: 20px;
+    }
+    .platform-logo {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        padding: 0 15px;
+    }
+    .logo {
+        font-size: 1.8rem; /* Further adjust logo size */
+    }
+    .hero-content h1 {
+        font-size: 1.8rem; /* Further adjust hero heading */
+    }
+     .hero-section {
+        padding: 50px 15px;
+    }
+    .platforms-section {
+         padding: 0 15px;
+         margin: 30px auto;
+    }
+    .platform-card h3 {
+         font-size: 1.5rem;
+    }
+    .button {
+         padding: 8px 20px;
+         font-size: 0.9rem;
+    }
+     .platform-logo {
+        width: 45px;
+        height: 45px;
+    }
+}

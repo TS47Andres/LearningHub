@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Learning - Week 11: Customizing Visualizations & Basic Stats</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="r.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .r-blue { color: #276DC3; /* Example R blue */ }
+        body.dark-mode .r-blue { color: #75AADB; /* Lighter R blue for dark mode */ }
+        /* Style for R code comments (if different highlighting needed) */
+        .code-r-comment { color: #008000; font-style: italic; } /* Example: Green comment */
+        body.dark-mode .code-r-comment { color: #77dd77; }
+        /* Style for assignment operator */
+        .code-r-assign { color: #cc7832; } /* Example color */
+        body.dark-mode .code-r-assign { color: #ffc66d; }
+         /* Style for R keywords/functions if needed */
+        .code-r-keyword { color: #0000ff; } /* Example: blue */
+        body.dark-mode .code-r-keyword { color: #87CEFA; } /* Example: light blue */
+         /* Style for pipe operator */
+         .code-r-pipe { color: #b58900; font-weight: bold;} /* Example: Brown/bold */
+         body.dark-mode .code-r-pipe { color: #ffdb58; }
+         /* Style for ggplot plus */
+         .code-ggplot-plus { color: #d0104c; font-weight: bold; } /* Example: Red/bold */
+         body.dark-mode .code-ggplot-plus { color: #ff69b4; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="r-blue">R</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#customizing">Customizing Plots</a></li>
+                <li><a href="#saving-plots">Saving Plots</a></li>
+                <li><a href="#basic-stats">Basic Stats</a></li>
+                <li><a href="#summary-func">summary()</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 11: Polishing Plots and Basic Statistics</h1>
+                <p class="tagline">Learn to customize ggplot2 visualizations, save them, and perform basic statistical analysis in R.</p>
+                <a href="#customizing" class="button">Explore Chapter 11</a>
+            </div>
+        </section>
+
+        <section id="customizing" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 11: Refining Visualizations & Exploring Data Summaries</h2>
+                <h3>Customizing `ggplot2` Plots.</h3>
+                <p>While `ggplot2` produces sensible defaults, you'll often want to customize plots for clarity, publication, or specific emphasis. You add customization layers using the `+` operator.</p>
+
+                <h4>Labels and Titles</h4>
+                <p>The `labs()` function is the primary way to add titles, subtitles, captions, and change axis/legend labels.</p>
+                <pre><code class="code-snippet"><span class="code-function">library</span>(ggplot2)
+
+<span class="code-r-comment"># Base plot from last week</span>
+p <span class="code-r-assign"><-</span> <span class="code-function">ggplot</span>(mpg, <span class="code-function">aes</span>(x = displ, y = hwy, color = class)) <span class="code-ggplot-plus">+</span>
+  <span class="code-function">geom_point</span>()
+
+<span class="code-r-comment"># Add labels</span>
+p <span class="code-ggplot-plus">+</span>
+  <span class="code-function">labs</span>(
+    title = <span class="code-string">"Fuel Efficiency vs. Engine Displacement"</span>,
+    subtitle = <span class="code-string">"Data from ggplot2 mpg dataset"</span>,
+    caption = <span class="code-string">"Source: fueleconomy.gov"</span>,
+    x = <span class="code-string">"Engine Displacement (Liters)"</span>,
+    y = <span class="code-string">"Highway Miles Per Gallon"</span>,
+    color = <span class="code-string">"Vehicle Class"</span> <span class="code-r-comment"># Changes the legend title</span>
+  )</code></pre>
+                <p>You can also use `ggtitle()`, `xlab()`, and `ylab()` for individual labels.</p>
+
+                <h4>Themes</h4>
+                <p>`ggplot2` includes several built-in themes that control the overall look (background, gridlines, fonts). Apply them by adding a `theme_*()` function.</p>
+                <pre><code class="code-snippet">p <span class="code-ggplot-plus">+</span> <span class="code-function">theme_bw</span>() <span class="code-r-comment"># Black and white theme</span>
+p <span class="code-ggplot-plus">+</span> <span class="code-function">theme_minimal</span>() <span class="code-r-comment"># Minimal theme</span>
+p <span class="code-ggplot-plus">+</span> <span class="code-function">theme_classic</span>() <span class="code-r-comment"># Classic theme without gridlines</span>
+<span class="code-r-comment"># p + theme_void() # Empty theme (axes/grid removed)</span></code></pre>
+                 <p>You can make fine-grained adjustments using the `theme()` function, targeting specific elements like `plot.title`, `axis.text`, `legend.position`, etc. (This is a more advanced topic).</p>
+
+                <h4>Scales</h4>
+                 <p>Scales control how data values are mapped to aesthetics. You can use `scale_*()` functions to customize axes, colors, shapes, etc.</p>
+                 <pre><code class="code-snippet"><span class="code-r-comment"># Example: Manually setting colors for vehicle class</span>
+p <span class="code-ggplot-plus">+</span>
+  <span class="code-function">scale_color_manual</span>(values = <span class="code-r-keyword">c</span>(
+    "2seater" = <span class="code-string">"red"</span>, "compact" = <span class="code-string">"blue"</span>, "midsize" = <span class="code-string">"green"</span>,
+    "minivan" = <span class="code-string">"purple"</span>, "pickup" = <span class="code-string">"orange"</span>, "subcompact" = <span class="code-string">"brown"</span>,
+    "suv" = <span class="code-string">"black"</span>)
+  )
+
+<span class="code-r-comment"># Example: Adjusting x-axis limits and breaks</span>
+p <span class="code-ggplot-plus">+</span>
+  <span class="code-function">scale_x_continuous</span>(limits = <span class="code-r-keyword">c</span>(<span class="code-number">1</span>, <span class="code-number">7</span>), breaks = <span class="code-number">1</span>:<span class="code-number">7</span>)
+</code></pre>
+                 <p>There are many `scale_*()` functions (`scale_fill_brewer`, `scale_shape_manual`, `scale_y_log10`, etc.) for detailed control.</p>
+            </div>
+        </section>
+
+        <section id="saving-plots" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Saving Your Plots (`ggsave`).</h3>
+                <p>Once you've created a plot you like, you'll want to save it to a file (e.g., for reports or presentations). The `ggsave()` function is the recommended way to save plots created with `ggplot2`.</p>
+                <h4>Usage</h4>
+                 <p>`ggsave()` conveniently saves the <em>last plot displayed</em> by default, or you can explicitly pass a plot object (like `p` we created earlier).</p>
+                 <pre><code class="code-snippet"><span class="code-r-comment"># First, create the plot and maybe display it</span>
+my_plot <span class="code-r-assign"><-</span> <span class="code-function">ggplot</span>(mpg, <span class="code-function">aes</span>(x = class)) <span class="code-ggplot-plus">+</span> <span class="code-function">geom_bar</span>() <span class="code-ggplot-plus">+</span>
+              <span class="code-function">labs</span>(title = <span class="code-string">"Counts of Vehicle Classes"</span>)
+<span class="code-function">print</span>(my_plot)
+
+<span class="code-r-comment"># Save the last plot displayed (my_plot) as a PNG file</span>
+<span class="code-function">ggsave</span>(filename = <span class="code-string">"plots/class_counts.png"</span>) <span class="code-r-comment"># Assumes a 'plots' subdirectory exists</span>
+
+<span class="code-r-comment"># Save a specific plot object (p) as a PDF, specifying dimensions</span>
+<span class="code-function">ggsave</span>(filename = <span class="code-string">"plots/displacement_vs_hwy.pdf"</span>, plot = p, width = <span class="code-number">8</span>, height = <span class="code-number">6</span>, units = <span class="code-string">"in"</span>)
+
+<span class="code-r-comment"># Save with higher resolution (dots per inch) for PNG</span>
+<span class="code-function">ggsave</span>(filename = <span class="code-string">"plots/high_res_plot.png"</span>, plot = my_plot, dpi = <span class="code-number">300</span>)</code></pre>
+                <p>Key arguments:</p>
+                <ul>
+                    <li>`filename`: The path and name of the output file (the file type is inferred from the extension, e.g., `.png`, `.pdf`, `.jpg`, `.svg`).</li>
+                    <li>`plot`: The plot object to save (defaults to the last plot displayed).</li>
+                    <li>`width`, `height`: Dimensions of the saved plot.</li>
+                    <li>`units`: Units for width and height (`"in"`, `"cm"`, `"mm"`).</li>
+                    <li>`dpi`: Resolution (dots per inch) for raster formats like PNG/JPG.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="basic-stats" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                 <h3>Basic Statistical Functions in R.</h3>
+                 <p>Beyond visualization, R is fundamentally a statistical programming language. Base R includes many functions for calculating common descriptive statistics.</p>
+                 <p>These functions typically operate on numeric vectors. Missing values (`NA`) often require special handling (e.g., using the `na.rm = TRUE` argument).</p>
+                <pre><code class="code-snippet">data_vector <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-number">1</span>, <span class="code-number">5</span>, <span class="code-number">2</span>, <span class="code-number">8</span>, <span class="code-number">3</span>, <span class="code-number">NA</span>, <span class="code-number">7</span>)
+
+<span class="code-r-comment"># Mean (Average)</span>
+<span class="code-function">mean</span>(data_vector) <span class="code-r-comment"># Output: NA (because of the NA value)</span>
+<span class="code-function">mean</span>(data_vector, na.rm = <span class="code-r-keyword">TRUE</span>) <span class="code-r-comment"># Output: [1] 4.333333</span>
+
+<span class="code-r-comment"># Median (Middle value)</span>
+<span class="code-function">median</span>(data_vector, na.rm = <span class="code-r-keyword">TRUE</span>) <span class="code-r-comment"># Output: [1] 4</span>
+
+<span class="code-r-comment"># Standard Deviation</span>
+<span class="code-function">sd</span>(data_vector, na.rm = <span class="code-r-keyword">TRUE</span>) <span class="code-r-comment"># Output: [1] 2.734263</span>
+
+<span class="code-r-comment"># Variance</span>
+<span class="code-function">var</span>(data_vector, na.rm = <span class="code-r-keyword">TRUE</span>) <span class="code-r-comment"># Output: [1] 7.47619</span>
+
+<span class="code-r-comment"># Minimum and Maximum</span>
+<span class="code-function">min</span>(data_vector, na.rm = <span class="code-r-keyword">TRUE</span>) <span class="code-r-comment"># Output: [1] 1</span>
+<span class="code-function">max</span>(data_vector, na.rm = <span class="code-r-keyword">TRUE</span>) <span class="code-r-comment"># Output: [1] 8</span>
+
+<span class="code-r-comment"># Range (Minimum and Maximum)</span>
+<span class="code-function">range</span>(data_vector, na.rm = <span class="code-r-keyword">TRUE</span>) <span class="code-r-comment"># Output: [1] 1 8</span>
+
+<span class="code-r-comment"># Quantiles (e.g., 0%, 25%, 50%, 75%, 100%)</span>
+<span class="code-function">quantile</span>(data_vector, na.rm = <span class="code-r-keyword">TRUE</span>)
+<span class="code-r-comment"># Output:</span>
+<span class="code-r-comment">#   0%  25%  50%  75% 100%</span>
+<span class="code-r-comment"># 1.00 2.25 4.00 6.50 8.00</span>
+</code></pre>
+                 <p>These functions are building blocks for exploring and understanding your data.</p>
+            </div>
+        </section>
+
+        <section id="summary-func" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>The `summary()` Function.</h3>
+                <p>The `summary()` function is a generic function in R, meaning its behavior depends on the type of object passed to it. It provides a quick overview of different kinds of R objects.</p>
+                <h4>Summary of a Numeric Vector</h4>
+                <p>For a numeric vector, `summary()` provides the "six-number summary": Minimum, 1st Quartile, Median, Mean, 3rd Quartile, and Maximum.</p>
+                <pre><code class="code-snippet">data_vector <span class="code-r-assign"><-</span> <span class="code-r-keyword">c</span>(<span class="code-number">1</span>, <span class="code-number">5</span>, <span class="code-number">2</span>, <span class="code-number">8</span>, <span class="code-number">3</span>, <span class="code-number">NA</span>, <span class="code-number">7</span>)
+<span class="code-function">summary</span>(data_vector)
+<span class="code-r-comment"># Output:</span>
+<span class="code-r-comment"># Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's</span>
+<span class="code-r-comment"># 1.00    2.25    4.00    4.33    6.50    8.00       1</span>
+</code></pre>
+                <h4>Summary of a Factor or Character Vector</h4>
+                 <p>For factors or character vectors, `summary()` typically provides frequency counts for the most common categories.</p>
+                 <pre><code class="code-snippet">classes <span class="code-r-assign"><-</span> <span class="code-function">factor</span>(<span class="code-r-keyword">c</span>(<span class="code-string">"A"</span>, <span class="code-string">"B"</span>, <span class="code-string">"A"</span>, <span class="code-string">"C"</span>, <span class="code-string">"B"</span>, <span class="code-string">"A"</span>))
+<span class="code-function">summary</span>(classes)
+<span class="code-r-comment"># Output:</span>
+<span class="code-r-comment"># A B C</span>
+<span class="code-r-comment"># 3 2 1</span>
+</code></pre>
+                <h4>Summary of a Data Frame</h4>
+                 <p>For a data frame, `summary()` applies the appropriate summary function to each column based on its data type.</p>
+                 <pre><code class="code-snippet"><span class="code-function">summary</span>(iris)
+<span class="code-r-comment"># Output (abbreviated):</span>
+<span class="code-r-comment"># Sepal.Length    Sepal.Width     Petal.Length    Petal.Width          Species</span>
+<span class="code-r-comment"># Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100   setosa    :50</span>
+<span class="code-r-comment"># 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300   versicolor:50</span>
+<span class="code-r-comment"># Median :5.800   Median :3.000   Median :4.350   Median :1.300   virginica :50</span>
+<span class="code-r-comment"># Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199</span>
+<span class="code-r-comment"># 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800</span>
+<span class="code-r-comment"># Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500</span>
+</code></pre>
+                 <p>The `summary()` function is an excellent first step in exploring any new dataset or object in R.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RLearn - Your R Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#what-is-r">What is R?</a>
+                <a href="Week1.html#why-learn-r">Why Learn R?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#rstudio-tour">RStudio Tour</a>
+                <a href="Week1.html#first-commands">First Commands</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#vectors">Vectors</a>
+                <a href="Week2.html#operators">Operators</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#vector-ops">Vector Ops</a>
+                 <a href="Week3.html#matrices">Matrices</a>
+                 <a href="Week3.html#getting-help">Getting Help</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#lists">Lists</a>
+                <a href="Week4.html#data-frames">Data Frames</a>
+                <a href="Week4.html#viewing-data">Viewing Data</a>
+                <a href="Week4.html#import-csv">Import CSV</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#conditionals">Conditional Logic</a>
+                <a href="Week5.html#if-statement">if Statement</a>
+                <a href="Week5.html#else-if-else">else if / else</a>
+                <a href="Week5.html#ifelse-function">ifelse() Function</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#for-loops">for Loops</a>
+                <a href="Week6.html#while-loops">while Loops</a>
+                <a href="Week6.html#break-next">break / next</a>
+                <a href="Week6.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#function-definition">Function Definition</a>
+                <a href="Week7.html#parameters">Parameters</a>
+                <a href="Week7.html#return-values">Return Values</a>
+                <a href="Week7.html#scope">Scope (Environments)</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#tidyverse">Tidyverse</a>
+                <a href="Week8.html#dplyr-intro">dplyr Intro</a>
+                <a href="Week8.html#core-verbs">Core Verbs</a>
+                <a href="Week8.html#pipe">Pipe Operator</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#group-summarise">Group & Summarise</a>
+                <a href="Week9.html#tidyr">tidyr Intro</a>
+                <a href="Week9.html#pivoting">Pivoting</a>
+                <a href="Week9.html#joins">Joining Data</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#grammar-graphics">Grammar of Graphics</a>
+                <a href="Week10.html#ggplot2-intro">ggplot2 Intro</a>
+                <a href="Week10.html#ggplot-aes">ggplot() & aes()</a>
+                <a href="Week10.html#geoms">Geoms</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="#customizing">Customizing Plots</a>
+                <a href="#saving-plots">Saving Plots</a>
+                <a href="#basic-stats">Basic Stats</a>
+                <a href="#summary-func">summary() Function</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#project">Mini Project</a>
+                <a href="Week12.html#r-markdown">R Markdown</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+        </div>
+
+</body>
+</html>

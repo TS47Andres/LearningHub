@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Learning - Week 1: Introduction to R & RStudio</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="r.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .r-blue { color: #276DC3; /* Example R blue */ }
+        body.dark-mode .r-blue { color: #75AADB; /* Lighter R blue for dark mode */ }
+        /* Style for R code comments (if different highlighting needed) */
+        .code-r-comment { color: #008000; font-style: italic; } /* Example: Green comment */
+        body.dark-mode .code-r-comment { color: #77dd77; }
+        /* Style for assignment operator */
+        .code-r-assign { color: #cc7832; } /* Example color */
+        body.dark-mode .code-r-assign { color: #ffc66d; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="r-blue">R</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#what-is-r">What is R?</a></li>
+                <li><a href="#why-learn-r">Why Learn R?</a></li>
+                <li><a href="#setup-env">Setup</a></li>
+                <li><a href="#rstudio-tour">RStudio</a></li>
+                <li><a href="#first-commands">First Commands</a></li>
+                <li><a href="#basic-syntax">Syntax</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 1: Your First Steps with R</h1>
+                <p class="tagline">Discover the R language and set up your RStudio environment.</p>
+                <a href="#what-is-r" class="button">Start Learning</a>
+            </div>
+        </section>
+
+        <section id="what-is-r" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 1: Introduction to R and Your Environment</h2>
+                <h3>What is R? Its History and Applications.</h3>
+                <p>Welcome to the world of R! R is a powerful open-source programming language and software environment primarily designed for statistical computing and graphical representation. It's widely used by statisticians, data scientists, researchers, and analysts across various fields.</p>
+                <h4>A Brief History</h4>
+                <p>R was created by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand, in the early 1990s. It's an implementation of the S programming language combined with lexical scoping semantics inspired by Scheme. R's name comes partly from the first names of its authors and partly as a play on the name of S.</p>
+                <h4>Key Characteristics</h4>
+                <ul>
+                    <li><strong>Interpreted:</strong> R commands are executed directly without needing prior compilation.</li>
+                    <li><strong>Vectorized Operations:</strong> R excels at operations on vectors, matrices, and data frames, making code more concise and often faster for data manipulation tasks.</li>
+                    <li><strong>Statistical Focus:</strong> It has a vast collection of built-in functions and packages specifically for statistical analysis and modeling.</li>
+                    <li><strong>Powerful Graphics:</strong> R is renowned for its high-quality static and dynamic graphics capabilities, especially through packages like `ggplot2`.</li>
+                    <li><strong>Extensible:</strong> The Comprehensive R Archive Network (CRAN) hosts thousands of user-contributed packages that extend R's functionality for almost any task imaginable.</li>
+                    <li><strong>Open Source:</strong> Free to use, distribute, and modify, with a large and active community.</li>
+                </ul>
+                <h4>Diverse Applications</h4>
+                <p>R is a cornerstone in:</p>
+                <ul>
+                    <li><strong>Data Analysis & Statistics:</strong> From basic descriptive statistics to complex modeling.</li>
+                    <li><strong>Data Visualization:</strong> Creating publication-quality plots and charts.</li>
+                    <li><strong>Machine Learning:</strong> Numerous packages for various ML algorithms.</li>
+                    <li><strong>Bioinformatics & Genomics:</strong> A standard tool in biological research.</li>
+                    <li><strong>Finance & Econometrics:</strong> Used extensively for financial modeling and analysis.</li>
+                    <li><strong>Social Sciences:</strong> Applied for survey analysis, modeling social phenomena.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="why-learn-r" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Why Learn R? Advantages and Use Cases.</h3>
+                <p>Choosing to learn R offers significant advantages, particularly if your interests lie in data analysis, statistics, or research:</p>
+                <ul>
+                    <li><strong>Leading Tool for Data Science:</strong> R is one of the dominant languages in data science, especially for statistical modeling and visualization.</li>
+                    <li><strong>Exceptional Graphics:</strong> R's visualization capabilities (especially with `ggplot2`) are arguably best-in-class for creating insightful and beautiful plots.</li>
+                    <li><strong>Vast Package Ecosystem (CRAN):</strong> Access to thousands of specialized, cutting-edge packages for statistics, machine learning, visualization, reporting, and more.</li>
+                    <li><strong>Strong Community Support:</strong> A large, active, and supportive community provides help through forums (like Stack Overflow), mailing lists, and conferences.</li>
+                    <li><strong>Designed for Data Analysis:</strong> Its syntax and data structures (vectors, data frames) are inherently suited for data manipulation and analysis tasks.</li>
+                    <li><strong>Reproducibility:</strong> Tools like R Markdown allow seamless integration of code, results, and narrative text for reproducible research and reporting.</li>
+                    <li><strong>High Demand in Relevant Fields:</strong> Proficiency in R is highly valued in roles involving data analysis, statistics, research, and quantitative analysis.</li>
+                </ul>
+                <h4>Use Cases to Inspire You</h4>
+                <p>Consider these real-world applications:</p>
+                <ul>
+                    <li>Analyzing clinical trial data in pharmaceuticals.</li>
+                    <li>Building financial models for risk assessment.</li>
+                    <li>Visualizing geographical data for environmental studies.</li>
+                    <li>Conducting statistical analysis for academic research papers.</li>
+                    <li>Developing machine learning models for customer churn prediction.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="setup-env" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Setting up Your Environment: Installing R & RStudio.</h3>
+                <p>To start coding in R, you need two key components: R itself (the language interpreter) and RStudio (an Integrated Development Environment - IDE - that makes working with R much easier).</p>
+                <h4>Step 1: Installing R</h4>
+                <p>R must be installed first. Download the appropriate version for your operating system from the official Comprehensive R Archive Network (CRAN).</p>
+                <ul>
+                    <li>Go to <a href="https://cran.r-project.org/" target="_blank">https://cran.r-project.org/</a></li>
+                    <li>Click on the link corresponding to your operating system (Linux, macOS, or Windows).</li>
+                    <li>Follow the instructions on the page to download and install the latest base distribution of R. Accept the default settings during installation.</li>
+                </ul>
+                <h4>Step 2: Installing RStudio</h4>
+                <p>RStudio provides a user-friendly interface with features like a code editor, console, environment viewer, plotting window, package manager, and debugger.</p>
+                <ul>
+                    <li>Go to the Posit website (the company behind RStudio): <a href="https://posit.co/download/rstudio-desktop/" target="_blank">https://posit.co/download/rstudio-desktop/</a></li>
+                    <li>Download the free RStudio Desktop version suitable for your operating system.</li>
+                    <li>Run the installer, accepting the default settings. RStudio should automatically detect your R installation.</li>
+                </ul>
+                <p>Once both are installed, launch RStudio. This will be your primary workspace for learning and using R.</p>
+            </div>
+        </section>
+
+        <section id="rstudio-tour" class="full-width content-block bg-light scroll-slide-left">
+            <div class="container">
+                 <h3>Tour of RStudio: Your R Workbench.</h3>
+                 <p>RStudio provides an integrated environment that makes working with R much more efficient. It's typically divided into four main panes (though the layout is customizable):</p>
+                 <ol>
+                     <li><strong>Console (Bottom-Left):</strong> This is where you type and execute R commands directly. You'll see output and error messages here. It's like a command line specifically for R.</li>
+                     <li><strong>Source Editor (Top-Left):</strong> This is where you write and save R scripts (`.R` files). Scripts allow you to write multiple lines of code, save them, and run them together. This pane might not be visible until you open or create a new script (File > New File > R Script).</li>
+                     <li><strong>Environment/History/Connections (Top-Right):</strong>
+                         <ul>
+                             <li><strong>Environment:</strong> Shows the objects (variables, data frames, functions, etc.) currently loaded in your R session.</li>
+                             <li><strong>History:</strong> Records the commands you've previously entered in the console.</li>
+                             <li><strong>Connections:</strong> For connecting to external databases or other resources.</li>
+                         </ul>
+                     </li>
+                    <li><strong>Files/Plots/Packages/Help/Viewer (Bottom-Right):</strong>
+                        <ul>
+                            <li><strong>Files:</strong> Navigate your computer's file system.</li>
+                            <li><strong>Plots:</strong> Displays graphs and plots generated by your R code.</li>
+                            <li><strong>Packages:</strong> View installed R packages, load/unload them, and install new ones.</li>
+                            <li><strong>Help:</strong> Access R's built-in help documentation.</li>
+                            <li><strong>Viewer:</strong> Displays local web content, like interactive visualizations.</li>
+                        </ul>
+                     </li>
+                 </ol>
+                 <p>Familiarize yourself with these panes, as you'll be using them constantly throughout this course.</p>
+            </div>
+        </section>
+
+        <section id="first-commands" class="full-width content-block scroll-slide-right">
+            <div class="container">
+                <h3>Running Your First R Commands: Saying Hello!</h3>
+                <p>Let's start by interacting directly with the R console in RStudio.</p>
+                <h4>Basic Calculations</h4>
+                <p>You can use R as a powerful calculator. Type these directly into the Console pane and press Enter:</p>
+                <pre><code class="code-snippet"><span class="code-number">5</span> + <span class="code-number">3</span>           <span class="code-r-comment"># Addition</span>
+<span class="code-number">10</span> - <span class="code-number">4</span>          <span class="code-r-comment"># Subtraction</span>
+<span class="code-number">6</span> * <span class="code-number">7</span>           <span class="code-r-comment"># Multiplication</span>
+<span class="code-number">15</span> / <span class="code-number">3</span>          <span class="code-r-comment"># Division</span>
+<span class="code-number">2</span> ^ <span class="code-number">5</span>           <span class="code-r-comment"># Exponentiation (2 to the power of 5)</span></code></pre>
+                <h4>Assigning Variables</h4>
+                <p>Store values in variables using the assignment operator `<-` (preferred) or `=`. Variable names in R often use dots (`.`) or underscores (`_`).</p>
+                 <pre><code class="code-snippet">x <span class="code-r-assign"><-</span> <span class="code-number">10</span>
+my.variable <span class="code-r-assign"><-</span> <span class="code-string">"Hello"</span>
+result <span class="code-r-assign">=</span> x * <span class="code-number">3</span></code></pre>
+                 <p>To see the value of a variable, simply type its name in the console and press Enter:</p>
+                 <pre><code class="code-snippet">x
+my.variable
+result</code></pre>
+                <h4>Your First Script: "Hello, R!"</h4>
+                 <ol>
+                     <li><strong>New Script:</strong> In RStudio, go to File > New File > R Script. This opens the Source Editor pane.</li>
+                     <li><strong>Write Code:</strong> Type the following line into the script editor:
+                        <pre><code class="code-snippet"><span class="code-function">print</span>(<span class="code-string">"Hello, R!"</span>)</code></pre>
+                        <p>The `print()` function displays output to the console.</p>
+                     </li>
+                     <li><strong>Save the Script:</strong> Go to File > Save As. Choose a location (e.g., create an "RLearn" folder) and name the file `hello.R`. R scripts typically have the `.R` extension.</li>
+                     <li><strong>Run the Code:</strong>
+                         <ul>
+                            <li>You can run the current line by placing your cursor on it and pressing `Ctrl+Enter` (Windows/Linux) or `Cmd+Enter` (macOS).</li>
+                            <li>You can run the entire script by clicking the "Source" button at the top of the editor pane or pressing `Ctrl+Shift+Enter` / `Cmd+Shift+Enter`.</li>
+                         </ul>
+                     </li>
+                     <li><strong>See the Output:</strong> You should see the following output appear in the Console pane:
+                        <pre><code class="code-snippet">[1] "Hello, R!"</code></pre>
+                        <p>(The `[1]` indicates that "Hello, R!" is the first element of the output vector).</p>
+                         <p>Congratulations! You've successfully run your first R script.</p>
+                     </li>
+                 </ol>
+            </div>
+        </section>
+
+        <section id="basic-syntax" class="full-width content-block bg-light scroll-fade-in">
+            <div class="container">
+                <h3>Basic Syntax and Conventions: The Rules of R.</h3>
+                <p>Like any language, R has its grammar and style. Understanding these basics is key to writing clear and functional R code.</p>
+                <ul>
+                    <li><strong>Comments:</strong> Explain your code using comments. In R, comments start with the hash symbol `#`. Everything after `#` on that line is ignored by R.
+                        <pre><code class="code-snippet"><span class="code-r-comment"># This is a comment explaining the code below</span>
+radius <span class="code-r-assign"><-</span> <span class="code-number">5</span> <span class="code-r-comment"># Assigning the value 5 to the variable 'radius'</span></code></pre>
+                    </li>
+                    <li><strong>Case Sensitivity:</strong> R is case-sensitive. `myVariable`, `MyVariable`, and `myvariable` are treated as distinct variables.</li>
+                    <li><strong>Statements:</strong> R code is executed statement by statement, typically one per line. You can put multiple statements on one line separated by semicolons `;`, but this is generally less readable.
+                         <pre><code class="code-snippet">a <span class="code-r-assign"><-</span> <span class="code-number">1</span>; b <span class="code-r-assign"><-</span> <span class="code-number">2</span>; <span class="code-function">print</span>(a+b) <span class="code-r-comment"># Less common style</span></code></pre>
+                    </li>
+                     <li><strong>Assignment Operator:</strong> The preferred assignment operator in R is `<-`. While `=` also works for assignment in most contexts, `<-` is stylistically preferred and less ambiguous (as `=` is also used for function arguments).
+                        <pre><code class="code-snippet">x <span class="code-r-assign"><-</span> <span class="code-number">100</span>   <span class="code-r-comment"># Preferred style</span>
+y <span class="code-r-assign">=</span> <span class="code-number">200</span>    <span class="code-r-comment"># Also works, but less conventional</span></code></pre>
+                     </li>
+                    <li><strong>Blocks and Braces `{}`:</strong> Unlike Python's reliance on indentation[cite: 10], R uses curly braces `{}` to group multiple statements into a block, often used with control flow structures (like `if`, `for`) and functions. Indentation is still crucial for readability but doesn't define the block structure syntactically.
+                        <pre><code class="code-snippet"><span class="code-keyword">if</span> (x > <span class="code-number">50</span>) {
+  <span class="code-function">print</span>(<span class="code-string">"x is large"</span>)
+  <span class="code-function">print</span>(<span class="code-string">"This is part of the if block"</span>)
+}</code></pre>
+                    </li>
+                    <li><strong>Variable Naming Conventions:</strong>
+                        <ul>
+                            <li>Should be descriptive.</li>
+                            <li>Can contain letters, numbers, dots (`.`), and underscores (`_`).</li>
+                            <li>Must start with a letter or a dot (if starting with a dot, the second character cannot be a number).</li>
+                            <li>Common styles include `snake_case` (e.g., `user_age`) or using dots (e.g., `user.age`). Consistency is key.</li>
+                            <li>Avoid using names of built-in functions (e.g., `c`, `list`, `mean`).</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Getting comfortable with these basic rules will make your R learning journey smoother.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RLearn - Your R Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show"> <a href="#what-is-r">What is R?</a>
+                <a href="#why-learn-r">Why Learn R?</a>
+                <a href="#setup-env">Setup Env</a>
+                <a href="#rstudio-tour">RStudio Tour</a>
+                <a href="#first-commands">First Commands</a>
+                <a href="#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#vectors">Vectors</a>
+                <a href="Week2.html#operators">Operators</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#vector-ops">Vector Ops</a>
+                <a href="Week3.html#matrices">Matrices</a>
+                <a href="Week3.html#getting-help">Getting Help</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#lists">Lists</a>
+                <a href="Week4.html#data-frames">Data Frames</a>
+                <a href="Week4.html#viewing-data">Viewing Data</a>
+                <a href="Week4.html#import-csv">Import CSV</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#conditionals">Conditionals</a>
+                <a href="Week5.html#if-else">if/else/else if</a>
+                <a href="Week5.html#ifelse">ifelse()</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#for-loops">for Loops</a>
+                <a href="Week6.html#while-loops">while Loops</a>
+                <a href="Week6.html#break-next">break/next</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#function-definition">Function Def</a>
+                <a href="Week7.html#parameters">Parameters</a>
+                <a href="Week7.html#return-values">Return Values</a>
+                <a href="Week7.html#scope">Scope</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#tidyverse">Tidyverse</a>
+                <a href="Week8.html#dplyr">dplyr Intro</a>
+                <a href="Week8.html#core-verbs">Core Verbs</a>
+                <a href="Week8.html#pipe">Pipe Operator</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#group-summarise">Group & Summarise</a>
+                <a href="Week9.html#tidyr">tidyr Intro</a>
+                <a href="Week9.html#pivoting">Pivoting</a>
+                <a href="Week9.html#joins">Joining Data</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#grammar-graphics">Grammar of Graphics</a>
+                <a href="Week10.html#ggplot2">ggplot2 Intro</a>
+                <a href="Week10.html#geoms">Geoms</a>
+                <a href="Week10.html#aesthetics">Aesthetics</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#customizing">Customizing Plots</a>
+                <a href="Week11.html#saving-plots">Saving Plots</a>
+                <a href="Week11.html#basic-stats">Basic Stats</a>
+                <a href="Week11.html#summary">summary()</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#project">Mini Project</a>
+                <a href="Week12.html#r-markdown">R Markdown</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+        </div>
+
+</body>
+</html>

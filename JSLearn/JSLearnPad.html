@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSLearn Pad</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/theme/material-darker.min.css">
+
+    <link rel="stylesheet" href="JSLearnPad.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="javascript.ico" type="image/x-icon">
+
+</head>
+<body>
+
+    <div class="container">
+        <h1><i class="fab fa-js-square"></i> JSLearn Pad</h1>
+        <p class="subtitle">Run JavaScript code directly in your browser!</p>
+
+        <div class="editor-container">
+            <label for="codeInput">Enter your JavaScript code:</label>
+            <textarea id="codeInput" name="codeInput">// Example using CodeMirror 5 for JavaScript!
+for (let i = 0; i < 5; i++) {
+    console.log(`Number: ${i}`);
+}
+
+function greet(name) {
+    return `Hello, ${name} from JSLearnPad!`;
+}
+
+console.log(greet("User"));
+</textarea>
+            <button id="runButton">Run Code</button>
+        </div>
+
+        <div class="output-container">
+            <label for="outputArea">Output (Console):</label>
+            <pre id="outputArea"></pre>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/addon/edit/closebrackets.min.js"></script>
+
+    <script>
+        // Initialize CodeMirror 5 from the textarea
+        var editor = CodeMirror.fromTextArea(document.getElementById("codeInput"), {
+            mode: "javascript",                 // Set language mode to JavaScript
+            theme: "material-darker",           // Set theme
+            lineNumbers: true,                  // Show line numbers
+            matchBrackets: true,                // Highlight matching brackets
+            autoCloseBrackets: true,            // Automatically close brackets/quotes
+            indentUnit: 4,                      // Indentation size
+            tabSize: 4,                         // Tab size
+            indentWithTabs: false               // Use spaces instead of tabs
+        });
+
+        const runButton = document.getElementById('runButton');
+        const outputArea = document.getElementById('outputArea');
+
+        // Capture console.log output
+        const originalConsoleLog = console.log;
+        console.log = function(...args) {
+            // Display the logged message in the output area
+            outputArea.textContent += args.map(arg => {
+                try {
+                    return typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg);
+                } catch (e) {
+                    return String(arg); // Fallback for non-serializable objects
+                }
+            }).join(' ') + '\n';
+            // Call the original console.log as well
+            originalConsoleLog.apply(console, args);
+        };
+
+         // Capture errors
+         window.onerror = function(message, source, lineno, colno, error) {
+            outputArea.textContent += `Error: ${message} (line ${lineno})\n`;
+            if (error) {
+                 outputArea.textContent += error.stack + '\n';
+            }
+            return true; // Prevents the default browser error handling
+         };
+
+
+        runButton.addEventListener('click', () => {
+            const userCode = editor.getValue(); // Get code from CodeMirror editor
+            outputArea.textContent = ''; // Clear previous output
+
+            try {
+                // Use Function constructor for safer execution context
+                new Function(userCode)();
+            } catch (error) {
+                 console.log(error); // Use our custom console.log to display errors
+            }
+        });
+
+    </script>
+
+</body>
+</html>
