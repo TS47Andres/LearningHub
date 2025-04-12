@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Learning - Week 3: Lists & Images</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="html.ico" type="image/x-icon"> </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">HTML</span>earn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#lists-section">Lists</a></li>
+                <li><a href="#images-section">Images</a></li>
+                <li><a href="#image-formats-section">Formats</a></li>
+                <li><a href="#image-attributes-section">Attributes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 3: Organizing Content with Lists and Images</h1>
+                <p class="tagline">Learn how to structure information using lists and embed visual media.</p>
+                <a href="#lists-section" class="button">Explore Chapter 3</a>
+            </div>
+        </section>
+
+        <section id="lists-section" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 3: Structuring Information and Adding Visuals</h2>
+                <h3>Organizing Information with Lists</h3>
+                <p>HTML lists allow you to group related items together, making content easier to read and scan. There are three main types of lists:</p>
+
+                <h4>1. Unordered Lists (&lt;ul&gt;)</h4>
+                <p>Used for items where the order doesn't matter. Each item is typically marked with a bullet point.</p>
+                <pre><code class="code-snippet html">&lt;h4&gt;Shopping List&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+  &lt;li&gt;Bread&lt;/li&gt;
+  &lt;li&gt;Eggs&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                <p>Renders as:</p>
+                <h4>Shopping List</h4>
+                <ul>
+                  <li>Milk</li>
+                  <li>Bread</li>
+                  <li>Eggs</li>
+                </ul>
+
+                <h4>2. Ordered Lists (&lt;ol&gt;)</h4>
+                <p>Used for items where the sequence is important. Each item is typically marked with a number or letter.</p>
+                <p>You can use the `type` attribute to change the marker (e.g., `type="A"` for uppercase letters, `type="i"` for lowercase Roman numerals).</p>
+                <pre><code class="code-snippet html">&lt;h4&gt;Instructions&lt;/h4&gt;
+&lt;ol type="1"&gt; &lt;!-- type="1" is default --&gt;
+  &lt;li&gt;Preheat oven.&lt;/li&gt;
+  &lt;li&gt;Mix ingredients.&lt;/li&gt;
+  &lt;li&gt;Bake for 30 minutes.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4&gt;Outline&lt;/h4&gt;
+&lt;ol type="A"&gt;
+  &lt;li&gt;Introduction&lt;/li&gt;
+  &lt;li&gt;Main Body&lt;/li&gt;
+  &lt;li&gt;Conclusion&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+                <p>Renders as:</p>
+                <h4>Instructions</h4>
+                <ol type="1">
+                  <li>Preheat oven.</li>
+                  <li>Mix ingredients.</li>
+                  <li>Bake for 30 minutes.</li>
+                </ol>
+                <h4>Outline</h4>
+                <ol type="A">
+                  <li>Introduction</li>
+                  <li>Main Body</li>
+                  <li>Conclusion</li>
+                </ol>
+
+                <h4>3. Definition Lists (&lt;dl&gt;)</h4>
+                <p>Used to define terms or display key-value pairs. Consists of terms (&lt;dt&gt;) and their descriptions (&lt;dd&gt;).</p>
+                <pre><code class="code-snippet html">&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;HyperText Markup Language - used for structuring web content.&lt;/dd&gt;
+  &lt;dt&gt;CSS&lt;/dt&gt;
+  &lt;dd&gt;Cascading Style Sheets - used for styling web content.&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+                 <p>Renders as:</p>
+                 <dl>
+                   <dt>HTML</dt>
+                   <dd>HyperText Markup Language - used for structuring web content.</dd>
+                   <dt>CSS</dt>
+                   <dd>Cascading Style Sheets - used for styling web content.</dd>
+                 </dl>
+                 <p>Lists can also be nested within each other for more complex structures.</p>
+            </div>
+        </section>
+
+        <section id="images-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Embedding Images (&lt;img&gt;)</h3>
+                <p>Images are embedded into HTML documents using the &lt;img&gt; tag. This is an empty tag, meaning it doesn't have a closing tag.</p>
+                <h4>Basic Image Syntax</h4>
+                <pre><code class="code-snippet html">&lt;img src="path/to/your/image.jpg" alt="Descriptive text about the image"&gt;</code></pre>
+                <ul>
+                    <li><strong>`src` Attribute (Source):</strong> This is mandatory and specifies the path (URL) to the image file. It can be a relative or absolute path.</li>
+                    <li><strong>`alt` Attribute (Alternative Text):</strong> This is mandatory for accessibility. It provides a textual description of the image for screen readers and is displayed if the image fails to load. Make it descriptive!</li>
+                </ul>
+                <h4>Example</h4>
+                <pre><code class="code-snippet html">&lt;!-- Using a relative path --&gt;
+&lt;img src="images/logo.png" alt="Our Company Logo"&gt;
+
+&lt;!-- Using an absolute path (external image) --&gt;
+&lt;img src="https://placehold.co/200x100/F0DB4F/333?text=HTML+Image" alt="Placeholder image showing HTML Image text"&gt;</code></pre>
+                 <p>Result (placeholder example):</p>
+                 <img src="https://placehold.co/200x100/F0DB4F/333?text=HTML+Image" alt="Placeholder image showing HTML Image text">
+
+                 <h4>Linking Images</h4>
+                 <p>You can make an image act as a link by wrapping the &lt;img&gt; tag within an &lt;a&gt; tag:</p>
+                 <pre><code class="code-snippet html">&lt;a href="index.html"&gt;
+  &lt;img src="images/home-icon.png" alt="Go to Homepage"&gt;
+&lt;/a&gt;</code></pre>
+            </div>
+        </section>
+
+        <section id="image-formats-section" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Common Web Image Formats</h3>
+                <p>Choosing the right image format is important for balancing quality and file size (which affects page load speed).</p>
+                <ul>
+                    <li><strong>JPEG (or JPG):</strong> Best for photographs and complex images with lots of colors and gradients. It uses lossy compression (some quality is lost to reduce file size). Does not support transparency.</li>
+                    <li><strong>PNG (Portable Network Graphics):</strong> Best for graphics with sharp lines, text, logos, and images requiring transparency. Uses lossless compression (no quality loss). File sizes can be larger than JPEGs for complex images.</li>
+                    <li><strong>GIF (Graphics Interchange Format):</strong> Best for simple animations and graphics with limited colors (up to 256). Supports transparency (but not partial transparency like PNG). Often replaced by PNG for static images and video/CSS for animations.</li>
+                    <li><strong>SVG (Scalable Vector Graphics):</strong> An XML-based vector image format. Ideal for logos, icons, and illustrations that need to scale perfectly without losing quality (resolution-independent). Can be styled with CSS and manipulated with JavaScript.</li>
+                    <li><strong>WebP:</strong> A modern format developed by Google offering both lossy and lossless compression, often providing smaller file sizes than JPEG or PNG at similar quality. Browser support is widespread but not universal (check compatibility).</li>
+                </ul>
+                <p>Consider the image content and requirements (transparency, animation, scalability) when selecting a format.</p>
+            </div>
+        </section>
+
+        <section id="image-attributes-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Image Attributes (`width` and `height`)</h3>
+                <p>You can specify the dimensions of an image using the `width` and `height` attributes directly on the &lt;img&gt; tag.</p>
+                <pre><code class="code-snippet html">&lt;img src="images/photo.jpg" alt="A scenic photo" width="300" height="200"&gt;</code></pre>
+                <ul>
+                    <li>Values are specified in pixels (the `px` unit is implied).</li>
+                    <li>Providing `width` and `height` helps the browser reserve space for the image before it loads, reducing layout shifts as the page renders.</li>
+                </ul>
+                <p><strong>Important Note:</strong> While these attributes work, it is generally considered best practice to control image dimensions using <strong>CSS</strong>. CSS offers more flexibility, allows for responsive design (making images adapt to different screen sizes), and separates presentation (styling) from structure (HTML).</p>
+                <p>We will cover CSS styling in detail later, but for now, be aware that setting dimensions in HTML is possible but often overridden or better handled by CSS in modern web development.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 HTMLLearn - Your HTML Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro</a>
+                <a href="Week1.html#what-is-html-section">What is HTML?</a>
+                <a href="Week1.html#basic-structure-section">Structure</a>
+                <a href="Week1.html#setup-section">Setup</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#formatting-section">Formatting</a>
+                <a href="Week2.html#phrase-tags-section">Phrase Tags</a>
+                <a href="Week2.html#links-section">Links</a>
+                <a href="Week2.html#paths-section">Paths</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#lists-section">Lists</a>
+                <a href="#images-section">Images</a>
+                <a href="#image-formats-section">Formats</a>
+                <a href="#image-attributes-section">Attributes</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#table-structure">Structure</a>
+                <a href="Week4.html#spanning">Spanning</a>
+                <a href="Week4.html#headers-captions">Headers</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#form-tag">Form Tag</a>
+                 <a href="Week5.html#inputs">Inputs</a>
+                 <a href="Week5.html#labels">Labels</a>
+                 <a href="Week5.html#attributes">Attributes</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#checkbox-radio">Checkbox/Radio</a>
+                <a href="Week6.html#select">Dropdown</a>
+                <a href="Week6.html#textarea">Text Area</a>
+                <a href="Week6.html#grouping">Grouping</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#semantic">Semantic HTML</a>
+                <a href="Week7.html#multimedia">Audio/Video</a>
+                <a href="Week7.html#iframe">Iframe</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#review">Review</a>
+                <a href="Week8.html#best-practices">Best Practices</a>
+                <a href="Week8.html#integration">Integration</a>
+                <a href="Week8.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

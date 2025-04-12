@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Learning - Week 5: Forms Part 1</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="html.ico" type="image/x-icon"> </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">HTML</span>earn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#form-tag-section">Form Tag</a></li>
+                <li><a href="#input-fields-section">Input Fields</a></li>
+                <li><a href="#labels-section">Labels</a></li>
+                <li><a href="#attributes-section">Attributes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 5: Introduction to HTML Forms</h1>
+                <p class="tagline">Learn how to collect user input using basic form elements.</p>
+                <a href="#form-tag-section" class="button">Explore Chapter 5</a>
+            </div>
+        </section>
+
+        <section id="form-tag-section" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 5: Collecting User Input with Forms</h2>
+                <h3>The &lt;form&gt; Element</h3>
+                <p>HTML forms are used to collect user input. The &lt;form&gt; element acts as a container for different types of input elements, such as text fields, checkboxes, radio buttons, submit buttons, etc.</p>
+                <pre><code class="code-snippet html">&lt;form action="/submit-page" method="post"&gt;
+  &lt;!-- Form elements go here --&gt;
+  &lt;p&gt;Form content...&lt;/p&gt;
+&lt;/form&gt;</code></pre>
+                <h4>Key Attributes of &lt;form&gt;:</h4>
+                <ul>
+                    <li><strong>`action`</strong>: Specifies the URL where the form data should be sent when the form is submitted. (Often a server-side script).</li>
+                    <li><strong>`method`</strong>: Specifies the HTTP method to use when submitting the form data. Common values are:
+                        <ul>
+                            <li><strong>`get`</strong>: Appends form data to the URL (visible, limited size, good for searches).</li>
+                            <li><strong>`post`</strong>: Sends form data in the HTTP request body (not visible in URL, no size limit, preferred for sensitive data or large submissions).</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>For this HTML-focused week, we won't process the form data, but understanding these attributes is crucial for when you integrate forms with server-side languages or JavaScript.</p>
+            </div>
+        </section>
+
+        <section id="input-fields-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Basic Input Fields (&lt;input&gt;)</h3>
+                <p>The &lt;input&gt; element is the most versatile form element. Its behavior is determined by its `type` attribute.</p>
+
+                <h4>Text Input (`type="text"`)</h4>
+                <p>Creates a single-line text input field.</p>
+                <pre><code class="code-snippet html">&lt;label for="username"&gt;Username:&lt;/label&gt;
+&lt;input type="text" id="username" name="username"&gt;</code></pre>
+
+                <h4>Password Input (`type="password"`)</h4>
+                <p>Similar to text input, but the characters entered are masked (shown as asterisks or dots).</p>
+                <pre><code class="code-snippet html">&lt;label for="password"&gt;Password:&lt;/label&gt;
+&lt;input type="password" id="password" name="userpass"&gt;</code></pre>
+
+                <h4>Submit Button (`type="submit"`)</h4>
+                <p>Creates a button that, when clicked, submits the form data to the URL specified in the form's `action` attribute.</p>
+                <pre><code class="code-snippet html">&lt;input type="submit" value="Log In"&gt; &lt;!-- The 'value' attribute sets the button text --&gt;</code></pre>
+
+                <h4>Reset Button (`type="reset"`)</h4>
+                <p>Creates a button that resets all form controls within the &lt;form&gt; to their initial values.</p>
+                <pre><code class="code-snippet html">&lt;input type="reset" value="Clear Form"&gt;</code></pre>
+
+                <h4>Generic Button (`type="button"`)</h4>
+                <p>Creates a clickable button with no default behavior. Its functionality is usually added using JavaScript.</p>
+                <pre><code class="code-snippet html">&lt;input type="button" value="Click Me" onclick="alert('Button clicked!')"&gt;</code></pre>
+
+                <h4>The &lt;button&gt; Element</h4>
+                <p>An alternative way to create buttons. It offers more flexibility as you can put content like text and images inside it. Its `type` attribute can be `submit` (default), `reset`, or `button`.</p>
+                <pre><code class="code-snippet html">&lt;button type="submit"&gt;
+  &lt;img src="images/save-icon.png" alt="" width="16" height="16"&gt; Save Changes
+&lt;/button&gt;
+
+&lt;button type="button" onclick="doSomething()"&gt;Custom Action&lt;/button&gt;</code></pre>
+            </div>
+        </section>
+
+        <section id="labels-section" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Labels for Inputs (&lt;label&gt;)</h3>
+                <p>The &lt;label&gt; element provides a caption for an item in a user interface. It's crucial for accessibility.</p>
+                <p>Associating a &lt;label&gt; with an &lt;input&gt; element allows users to click on the label to focus the corresponding input field. Screen readers also use labels to announce the purpose of the input field.</p>
+                <h4>How to Associate Labels:</h4>
+                <p>Use the `for` attribute on the &lt;label&gt;, making its value match the `id` attribute of the corresponding &lt;input&gt; element.</p>
+                <pre><code class="code-snippet html">&lt;form action="/submit-page" method="post"&gt;
+  &lt;!-- Method 1: Using 'for' and 'id' --&gt;
+  &lt;label for="fname"&gt;First Name:&lt;/label&gt;
+  &lt;input type="text" id="fname" name="firstName"&gt;
+  &lt;br&gt;&lt;br&gt;
+
+  &lt;label for="lname"&gt;Last Name:&lt;/label&gt;
+  &lt;input type="text" id="lname" name="lastName"&gt;
+  &lt;br&gt;&lt;br&gt;
+
+  &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;</code></pre>
+                <p><strong>Always use &lt;label&gt; elements for your form inputs!</strong></p>
+            </div>
+        </section>
+
+        <section id="attributes-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Common Input Attributes</h3>
+                <p>Several attributes are commonly used with &lt;input&gt; elements:</p>
+                <ul>
+                    <li><strong>`name`</strong>: This attribute is essential. Its value is sent to the server along with the input's value when the form is submitted. It identifies the piece of data.</li>
+                    <li><strong>`id`</strong>: Provides a unique identifier for the element within the HTML document. Used by &lt;label&gt; tags (`for` attribute) and often by CSS and JavaScript to target the element. <strong>Note:</strong> `id` is for client-side identification, `name` is for server-side processing.</li>
+                    <li><strong>`value`</strong>: Specifies the initial value of the input field. For buttons (`submit`, `reset`, `button`), it sets the text displayed on the button.</li>
+                    <li><strong>`placeholder`</strong>: Provides a short hint or example text displayed in the input field before the user enters a value. It disappears when the user starts typing.</li>
+                    <li><strong>`required`</strong>: A boolean attribute (no value needed). If present, the user must fill in the input field before submitting the form. The browser may show a default validation message if it's left empty.</li>
+                    <li><strong>`readonly`</strong>: A boolean attribute. If present, the input field's value cannot be modified by the user, but it is still sent upon submission.</li>
+                    <li><strong>`disabled`</strong>: A boolean attribute. If present, the input field is unusable and un-clickable, and its value is *not* sent upon submission.</li>
+                    <li><strong>`size`</strong>: (For `text`, `password`, etc.) Suggests the visible width of the input field in characters.</li>
+                    <li><strong>`maxlength`</strong>: (For `text`, `password`, etc.) Specifies the maximum number of characters allowed in the input field.</li>
+                </ul>
+                <h4>Example Using Attributes</h4>
+                <pre><code class="code-snippet html">&lt;form action="/register" method="post"&gt;
+  &lt;label for="email"&gt;Email Address:&lt;/label&gt;
+  &lt;input type="text"
+         id="email"
+         name="user_email"
+         placeholder="you@example.com"
+         required
+         size="30"&gt;
+  &lt;br&gt;&lt;br&gt;
+
+  &lt;label for="country"&gt;Country:&lt;/label&gt;
+  &lt;input type="text" id="country" name="user_country" value="USA" readonly&gt;
+  &lt;br&gt;&lt;br&gt;
+
+  &lt;input type="submit" value="Register"&gt;
+&lt;/form&gt;</code></pre>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 HTMLLearn - Your HTML Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro</a>
+                <a href="Week1.html#what-is-html-section">What is HTML?</a>
+                <a href="Week1.html#basic-structure-section">Structure</a>
+                <a href="Week1.html#setup-section">Setup</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#formatting-section">Formatting</a>
+                <a href="Week2.html#phrase-tags-section">Phrase Tags</a>
+                <a href="Week2.html#links-section">Links</a>
+                <a href="Week2.html#paths-section">Paths</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#lists-section">Lists</a>
+                <a href="Week3.html#images-section">Images</a>
+                <a href="Week3.html#image-formats-section">Formats</a>
+                <a href="Week3.html#image-attributes-section">Attributes</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#table-structure">Structure</a>
+                <a href="Week4.html#table-sections">Sections</a>
+                <a href="Week4.html#spanning">Spanning Cells</a>
+                <a href="Week4.html#headers-captions">Headers & Captions</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                 <a href="#form-tag-section">Form Tag</a>
+                 <a href="#input-fields-section">Input Fields</a>
+                 <a href="#labels-section">Labels</a>
+                 <a href="#attributes-section">Attributes</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#checkbox-radio">Checkbox/Radio</a>
+                <a href="Week6.html#select">Dropdown</a>
+                <a href="Week6.html#textarea">Text Area</a>
+                <a href="Week6.html#grouping">Grouping</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#semantic">Semantic HTML</a>
+                <a href="Week7.html#multimedia">Audio/Video</a>
+                <a href="Week7.html#iframe">Iframe</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#review">Review</a>
+                <a href="Week8.html#best-practices">Best Practices</a>
+                <a href="Week8.html#integration">Integration</a>
+                <a href="Week8.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

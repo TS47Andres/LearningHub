@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPP Learning - Week 9: Classes In-Depth</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="cpp.ico" type="image/x-icon">
+    </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="cpp-color">CPP</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#constructors">Constructors</a></li>
+                <li><a href="#destructors">Destructors</a></li>
+                <li><a href="#this-pointer">`this` Pointer</a></li>
+                <li><a href="#static-members">Static Members</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 9: Diving Deeper into Classes</h1>
+                <p class="tagline">Explore constructors, destructors, the `this` pointer, and static members in C++ classes.</p>
+                <a href="#constructors" class="button">Explore Chapter 9</a>
+            </div>
+        </section>
+
+        <section id="constructors" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 9: Classes In-Depth</h2>
+                <h3>Constructors: Initializing Objects.</h3>
+                <p>A <strong>constructor</strong> is a special member function of a class that is automatically called when an object of that class is created (instantiated). Its primary purpose is to initialize the object's member variables.</p>
+                <p>Key characteristics of constructors:</p>
+                <ul>
+                    <li>They have the <strong>same name as the class</strong> itself.</li>
+                    <li>They have <strong>no return type</strong> (not even `void`).</li>
+                    <li>They can be overloaded (you can have multiple constructors with different parameter lists).</li>
+                </ul>
+                <h4>Default Constructor</h4>
+                <p>A constructor that takes no arguments is called the default constructor. If you don't define any constructors yourself, the compiler will implicitly generate a default constructor that does nothing.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-keyword">class</span> MyClass {
+<span class="code-cpp-keyword">public</span>:
+    MyClass() { <span class="code-cpp-comment">// Default constructor definition</span>
+        std::cout &lt;&lt; <span class="code-cpp-string">"Default constructor called!"</span> &lt;&lt; std::endl;
+    }
+};
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    MyClass obj1; <span class="code-cpp-comment">// Calls the default constructor</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <h4>Parameterized Constructor</h4>
+                <p>Constructors can accept parameters to initialize member variables with specific values provided during object creation.</p>
+                 <pre><code class="code-snippet"><span class="code-cpp-keyword">class</span> Rectangle {
+<span class="code-cpp-keyword">private</span>:
+    <span class="code-cpp-type">double</span> width;
+    <span class="code-cpp-type">double</span> height;
+<span class="code-cpp-keyword">public</span>:
+    <span class="code-cpp-comment">// Parameterized constructor</span>
+    Rectangle(<span class="code-cpp-type">double</span> w, <span class="code-cpp-type">double</span> h) {
+        width = w;
+        height = h;
+        std::cout &lt;&lt; <span class="code-cpp-string">"Parameterized constructor called."</span> &lt;&lt; std::endl;
+    }
+    <span class="code-cpp-type">double</span> <span class="code-cpp-function">getArea</span>() { <span class="code-cpp-keyword">return</span> width * height; }
+};
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    Rectangle rect1(<span class="code-cpp-number">10.0</span>, <span class="code-cpp-number">5.0</span>); <span class="code-cpp-comment">// Calls parameterized constructor</span>
+    std::cout &lt;&lt; <span class="code-cpp-string">"Area: "</span> &lt;&lt; rect1.<span class="code-function">getArea</span>() &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: Area: 50</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <p>If you define <em>any</em> constructor (like a parameterized one), the compiler will <em>not</em> automatically generate a default constructor.</p>
+                 <h4>Copy Constructor</h4>
+                 <p>A copy constructor creates an object by initializing it with an object of the same class, which has been created previously. The compiler provides an implicit copy constructor if you don't define one, but sometimes you need a custom one (especially when dealing with dynamic memory).</p>
+                 <pre><code class="code-snippet"><span class="code-cpp-comment">// Simplified example</span>
+Rectangle rect2 = rect1; <span class="code-cpp-comment">// Calls the copy constructor (likely the implicit one here)</span>
+Rectangle rect3(rect1);  <span class="code-cpp-comment">// Also calls the copy constructor</span></code></pre>
+            </div>
+        </section>
+
+        <section id="destructors" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Destructors: Cleaning Up Objects.</h3>
+                <p>A <strong>destructor</strong> is another special member function that is automatically called when an object of the class goes out of scope or is explicitly deleted (if created with `new`). Its primary purpose is to release resources that the object may have acquired during its lifetime (e.g., deallocate dynamic memory, close files).</p>
+                 <p>Key characteristics of destructors:</p>
+                 <ul>
+                    <li>They have the <strong>same name as the class</strong>, preceded by a tilde (`~`).</li>
+                    <li>They have <strong>no return type</strong> and take <strong>no parameters</strong>.</li>
+                    <li>A class can only have one destructor.</li>
+                 </ul>
+                 <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+<span class="code-cpp-preprocessor">#include &lt;string&gt;</span>
+
+<span class="code-cpp-keyword">class</span> Message {
+<span class="code-cpp-keyword">private</span>:
+    <span class="code-cpp-type">std::string</span> text;
+<span class="code-cpp-keyword">public</span>:
+    <span class="code-cpp-comment">// Constructor</span>
+    Message(<span class="code-cpp-type">std::string</span> t) {
+        text = t;
+        std::cout &lt;&lt; <span class="code-cpp-string">"Message object created: "</span> &lt;&lt; text &lt;&lt; std::endl;
+    }
+    <span class="code-cpp-comment">// Destructor</span>
+    ~Message() {
+        std::cout &lt;&lt; <span class="code-cpp-string">"Message object destroyed: "</span> &lt;&lt; text &lt;&lt; std::endl;
+    }
+};
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    std::cout &lt;&lt; <span class="code-cpp-string">"Entering main..."</span> &lt;&lt; std::endl;
+    Message msg1(<span class="code-cpp-string">"First"</span>);
+    { <span class="code-cpp-comment">// Inner scope</span>
+        Message msg2(<span class="code-cpp-string">"Second"</span>);
+        std::cout &lt;&lt; <span class="code-cpp-string">"Inside inner scope..."</span> &lt;&lt; std::endl;
+    } <span class="code-cpp-comment">// msg2 goes out of scope here, destructor called</span>
+    std::cout &lt;&lt; <span class="code-cpp-string">"Exiting main..."</span> &lt;&lt; std::endl;
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>; <span class="code-cpp-comment">// msg1 goes out of scope here, destructor called</span>
+}</code></pre>
+                <p>Output Order:</p>
+                <pre><code>Entering main...
+Message object created: First
+Message object created: Second
+Inside inner scope...
+Message object destroyed: Second
+Exiting main...
+Message object destroyed: First</code></pre>
+                <p>Destructors are crucial for preventing resource leaks, especially when working with dynamically allocated memory.</p>
+            </div>
+        </section>
+
+        <section id="this-pointer" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h3>The `this` Pointer.</h3>
+                <p>Inside a non-static member function of a class, the keyword `this` acts as a <strong>pointer</strong> that holds the memory address of the <strong>current object</strong> for which the method was called.</p>
+                <p>It's implicitly available within member functions and is primarily used to:</p>
+                <ul>
+                    <li>Distinguish between member variables and parameters with the same name.</li>
+                    <li>Return a reference or pointer to the current object from a member function.</li>
+                </ul>
+                <h4>Example: Disambiguation</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-keyword">class</span> Example {
+<span class="code-cpp-keyword">private</span>:
+    <span class="code-cpp-type">int</span> value;
+<span class="code-cpp-keyword">public</span>:
+    <span class="code-cpp-comment">// Parameter name 'value' is the same as the member variable name</span>
+    <span class="code-cpp-type">void</span> <span class="code-cpp-function">setValue</span>(<span class="code-cpp-type">int</span> value) {
+        <span class="code-cpp-comment">// 'this->value' refers to the member variable</span>
+        <span class="code-cpp-comment">// 'value' refers to the parameter</span>
+        <span class="code-keyword">this</span>->value = value;
+    }
+    <span class="code-cpp-type">int</span> <span class="code-cpp-function">getValue</span>() { <span class="code-cpp-keyword">return</span> value; } <span class="code-cpp-comment">// 'this->' is implicit here</span>
+};
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    Example obj;
+    obj.<span class="code-function">setValue</span>(<span class="code-cpp-number">42</span>);
+    std::cout &lt;&lt; <span class="code-cpp-string">"Value: "</span> &lt;&lt; obj.<span class="code-function">getValue</span>() &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 42</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <p>While you often don't need to explicitly write `this->` to access members (the compiler understands it implicitly), it's necessary when there's a naming conflict like in the `setValue` example.</p>
+            </div>
+        </section>
+
+        <section id="static-members" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>`static` Members (Variables and Methods).</h3>
+                <p>Class members (variables and methods) can be declared as `static`. Static members belong to the <strong>class itself</strong>, rather than to any specific object (instance) of the class.</p>
+                <h4>Static Member Variables</h4>
+                <ul>
+                    <li>There is only <strong>one copy</strong> of a static member variable shared among all objects of the class.</li>
+                    <li>They must be defined (usually initialized) outside the class definition, typically in the `.cpp` file.</li>
+                    <li>They are accessed using the class name and the scope resolution operator (`::`), e.g., `ClassName::staticVariable`.</li>
+                </ul>
+                <pre><code class="code-snippet"><span class="code-cpp-comment">// --- Thing.h ---</span>
+<span class="code-cpp-keyword">class</span> Thing {
+<span class="code-cpp-keyword">public</span>:
+    <span class="code-cpp-keyword">static</span> <span class="code-cpp-type">int</span> objectCount; <span class="code-cpp-comment">// Declaration</span>
+    Thing() { objectCount++; } <span class="code-cpp-comment">// Increment count when an object is created</span>
+};
+
+<span class="code-cpp-comment">// --- Thing.cpp ---</span>
+<span class="code-cpp-comment">// #include "Thing.h" // Assuming separate files</span>
+<span class="code-cpp-type">int</span> Thing::objectCount = <span class="code-cpp-number">0</span>; <span class="code-cpp-comment">// Definition and initialization</span>
+
+<span class="code-cpp-comment">// --- main.cpp ---</span>
+<span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+<span class="code-cpp-comment">// #include "Thing.h" // Assuming separate files</span>
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    std::cout &lt;&lt; <span class="code-cpp-string">"Initial count: "</span> &lt;&lt; Thing::objectCount &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 0</span>
+    Thing t1;
+    Thing t2;
+    std::cout &lt;&lt; <span class="code-cpp-string">"Count after creating objects: "</span> &lt;&lt; Thing::objectCount &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 2</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <h4>Static Member Functions (Methods)</h4>
+                 <ul>
+                    <li>Static methods also belong to the class, not a specific object.</li>
+                    <li>They can be called using the class name and scope resolution operator (`ClassName::staticMethod()`) without needing an object instance.</li>
+                    <li>They can only access <strong>static</strong> member variables and other static member functions directly. They do not have access to the `this` pointer or non-static members.</li>
+                 </ul>
+                 <pre><code class="code-snippet"><span class="code-cpp-keyword">class</span> MathUtils {
+<span class="code-cpp-keyword">public</span>:
+    <span class="code-cpp-keyword">static</span> <span class="code-cpp-type">double</span> PI; <span class="code-cpp-comment">// Static variable</span>
+    <span class="code-cpp-keyword">static</span> <span class="code-cpp-type">double</span> <span class="code-cpp-function">circleArea</span>(<span class="code-cpp-type">double</span> radius) { <span class="code-cpp-comment">// Static method</span>
+        <span class="code-cpp-keyword">return</span> PI * radius * radius; <span class="code-cpp-comment">// Accesses static member PI</span>
+    }
+};
+
+<span class="code-cpp-comment">// Definition outside class</span>
+<span class="code-cpp-type">double</span> MathUtils::PI = <span class="code-cpp-number">3.14159</span>;
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-cpp-type">double</span> area = MathUtils::<span class="code-function">circleArea</span>(<span class="code-cpp-number">10.0</span>); <span class="code-cpp-comment">// Call static method using class name</span>
+    std::cout &lt;&lt; <span class="code-cpp-string">"Area: "</span> &lt;&lt; area &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: Approx 314.159</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <p>Static members are useful for defining constants shared by all objects or utility functions related to the class that don't depend on a specific object's state.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CPPLearn - Your C++ Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#intro-cpp">Intro C++</a>
+                <a href="Week1.html#why-learn-cpp">Why C++?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#hello-world">Hello World</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#constants">Constants</a>
+                <a href="Week2.html#operators">Operators</a>
+                <a href="Week2.html#type-casting">Type Casting</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#io-stream">Input/Output</a>
+                 <a href="Week3.html#conditionals">Conditionals</a>
+                 <a href="Week3.html#nested-if">Nested If</a>
+                 <a href="Week3.html#switch">Switch</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#for-loops">for Loops</a>
+                <a href="Week4.html#while-loops">while Loops</a>
+                <a href="Week4.html#do-while">do...while</a>
+                <a href="Week4.html#break-continue">break/continue</a>
+                <a href="Week4.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#functions-def">Definition</a>
+                <a href="Week5.html#functions-proto">Prototypes</a>
+                <a href="Week5.html#functions-params">Parameters</a>
+                <a href="Week5.html#functions-return">Return Values</a>
+                <a href="Week5.html#functions-overload">Overloading</a>
+                <a href="Week5.html#scope">Scope</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#arrays">Arrays</a>
+                <a href="Week6.html#multi-arrays">Multi-Dim Arrays</a>
+                <a href="Week6.html#c-strings">C-Strings</a>
+                <a href="Week6.html#std-string">std::string</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#memory-addresses">Memory</a>
+                <a href="Week7.html#pointers">Pointers</a>
+                <a href="Week7.html#dynamic-mem">Dynamic Memory</a>
+                <a href="Week7.html#references">References</a>
+                <a href="Week7.html#pass-by-ref">Pass by Reference</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#oop-concepts">OOP Concepts</a>
+                <a href="Week8.html#classes-objects">Classes/Objects</a>
+                <a href="Week8.html#access-specifiers">Access Specifiers</a>
+                <a href="Week8.html#members">Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#constructors">Constructors</a>
+                <a href="#destructors">Destructors</a>
+                <a href="#this-pointer">`this` Pointer</a>
+                <a href="#static-members">Static Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#inheritance">Inheritance</a>
+                <a href="Week10.html#overriding">Overriding</a>
+                <a href="Week10.html#polymorphism">Polymorphism</a>
+                <a href="Week10.html#virtual-funcs">Virtual Functions</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#stl-overview">STL Overview</a>
+                <a href="Week11.html#containers">Containers</a>
+                <a href="Week11.html#iterators">Iterators</a>
+                <a href="Week11.html#algorithms">Algorithms</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#file-io">File I/O</a>
+                <a href="Week12.html#error-handling">Error Handling</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+                <a href="Week12.html#project">Mini-Project</a>
+            </div>
+        </div>
+
+    </div> </body>
+</html>

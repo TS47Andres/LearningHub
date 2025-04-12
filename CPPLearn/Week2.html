@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPP Learning - Week 2: Variables, Data Types & Operators</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="cpp.ico" type="image/x-icon">
+    </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="cpp-color">CPP</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#variables">Variables</a></li>
+                <li><a href="#data-types">Data Types</a></li>
+                <li><a href="#constants">Constants</a></li>
+                <li><a href="#operators">Operators</a></li>
+                <li><a href="#type-casting">Type Casting</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 2: C++ Data Fundamentals & Operations</h1>
+                <p class="tagline">Learn how to store data using variables, understand basic types, and perform operations.</p>
+                <a href="#variables" class="button">Explore Chapter 2</a>
+            </div>
+        </section>
+
+        <section id="variables" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 2: Variables, Data Types, and Operators</h2>
+                <h3>Variables: Naming, Declaration, Initialization.</h3>
+                <p>Variables are named storage locations in memory used to hold data. Before using a variable in C++, you must declare it, specifying its data type and name.</p>
+                <h4>Naming Variables</h4>
+                <p>C++ variable names (identifiers):</p>
+                <ul>
+                    <li>Must begin with a letter (a-z, A-Z) or an underscore (_).</li>
+                    <li>Can contain letters, numbers, and underscores.</li>
+                    <li>Are case-sensitive (`myVariable` and `myvariable` are different).</li>
+                    <li>Cannot be C++ keywords (like `int`, `if`, `class`, `return`, etc.).</li>
+                    <li>Convention often uses `camelCase` or `snake_case`. Be consistent!</li>
+                </ul>
+                <h4>Declaration</h4>
+                <p>Declaring a variable tells the compiler its type and name.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-type">int</span> studentCount;     <span class="code-cpp-comment">// Declares an integer variable named studentCount</span>
+<span class="code-cpp-type">double</span> averageScore;    <span class="code-cpp-comment">// Declares a double-precision floating-point variable</span>
+<span class="code-cpp-type">char</span> grade;           <span class="code-cpp-comment">// Declares a character variable</span>
+<span class="code-cpp-type">bool</span> isValid;         <span class="code-cpp-comment">// Declares a boolean variable</span></code></pre>
+                <h4>Initialization</h4>
+                <p>Initialization means assigning an initial value to a variable at the time of declaration. It's good practice to initialize variables to avoid using potentially undefined values.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-type">int</span> age = 25;               <span class="code-cpp-comment">// C-like initialization</span>
+<span class="code-cpp-type">double</span> pi(3.14159);        <span class="code-cpp-comment">// Constructor initialization</span>
+<span class="code-cpp-type">char</span> initial {<span class="code-cpp-string">'A'</span>};          <span class="code-cpp-comment">// Uniform initialization (preferred in modern C++)</span>
+<span class="code-cpp-type">bool</span> isReady = <span class="code-cpp-keyword">true</span>;</span></code></pre>
+                 <h4>Assignment</h4>
+                 <p>You can change the value of a variable (unless it's `const`) after declaration using the assignment operator `=`. </p>
+                 <pre><code class="code-snippet">studentCount = 30;    <span class="code-cpp-comment">// Assign 30 to studentCount</span>
+age = 26;             <span class="code-cpp-comment">// Update the value of age</span></code></pre>
+            </div>
+        </section>
+
+        <section id="data-types" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Fundamental Data Types.</h3>
+                <p>C++ is statically typed, meaning the type of a variable is fixed at compile time. Here are some fundamental types:</p>
+                <ul>
+                    <li><strong>Integer Types:</strong> Store whole numbers.
+                        <ul>
+                            <li>`int`: The most common integer type (size depends on the system, often 4 bytes).</li>
+                            <li>`short int` (or `short`): Usually smaller than `int`.</li>
+                            <li>`long int` (or `long`): Usually larger than or equal to `int`.</li>
+                            <li>`long long int` (or `long long`): Usually larger than `long`.</li>
+                            <li>Modifiers: `signed` (can hold +/- values, default) and `unsigned` (holds only non-negative values, allowing for a larger positive range).</li>
+                        </ul>
+                        <pre><code class="code-snippet"><span class="code-cpp-type">int</span> score = <span class="code-cpp-number">100</span>;
+<span class="code-cpp-type">unsigned int</span> positiveValue = <span class="code-cpp-number">50000</span>;</code></pre>
+                    </li>
+                    <li><strong>Floating-Point Types:</strong> Store real numbers (numbers with decimal points).
+                         <ul>
+                            <li>`float`: Single-precision floating-point.</li>
+                            <li>`double`: Double-precision floating-point (more precision than `float`, generally preferred).</li>
+                            <li>`long double`: Extended-precision floating-point (even more precision).</li>
+                        </ul>
+                        <pre><code class="code-snippet"><span class="code-cpp-type">float</span> price = <span class="code-cpp-number">19.99f</span>; <span class="code-cpp-comment">// 'f' suffix denotes float literal</span>
+<span class="code-cpp-type">double</span> measurement = <span class="code-cpp-number">123.45678</span>;</code></pre>
+                    </li>
+                     <li><strong>Character Type:</strong>
+                         <ul><li>`char`: Stores a single character (letter, digit, symbol). Enclosed in single quotes `' '`. It's technically an integer type storing the character's ASCII/Unicode value.</li></ul>
+                         <pre><code class="code-snippet"><span class="code-cpp-type">char</span> grade = <span class="code-cpp-string">'A'</span>;
+<span class="code-cpp-type">char symbol =</span> <span class="code-cpp-string">'#'</span>;</code></pre>
+                     </li>
+                     <li><strong>Boolean Type:</strong>
+                         <ul><li>`bool`: Stores logical values `true` or `false`.</li></ul>
+                         <pre><code class="code-snippet"><span class="code-cpp-type">bool</span> isActive = <span class="code-cpp-keyword">true</span>;
+<span class="code-cpp-type">bool</span> hasFinished = <span class="code-cpp-keyword">false</span>;</code></pre>
+                     </li>
+                     <li><strong>Void Type:</strong>
+                         <ul><li>`void`: Represents the absence of a type. Used primarily for functions that do not return a value or for generic pointers.</li></ul>
+                     </li>
+                </ul>
+                 <p>The `sizeof` operator can tell you the size (in bytes) of a data type or variable on your specific system.</p>
+                <pre><code class="code-snippet">std::cout &lt;&lt; <span class="code-cpp-string">"Size of int: "</span> &lt;&lt; <span class="code-cpp-keyword">sizeof</span>(<span class="code-cpp-type">int</span>) &lt;&lt; <span class="code-cpp-string">" bytes"</span> &lt;&lt; std::endl;</code></pre>
+            </div>
+        </section>
+
+        <section id="constants" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h3>Constants (`const`).</h3>
+                <p>Constants are variables whose values cannot be changed after initialization. They make code safer and more readable by representing fixed values.</p>
+                <p>You declare a constant using the `const` keyword.</p>
+                 <pre><code class="code-snippet"><span class="code-cpp-keyword">const</span> <span class="code-cpp-type">double</span> PI = <span class="code-cpp-number">3.14159</span>;
+<span class="code-cpp-keyword">const</span> <span class="code-cpp-type">int</span> MAX_USERS = <span class="code-cpp-number">100</span>;
+
+<span class="code-cpp-comment">// PI = 3.14; // Error! Cannot assign to a const variable.</span>
+<span class="code-cpp-comment">// MAX_USERS++; // Error!</span></code></pre>
+                <p>It's a common convention to name constants using all uppercase letters.</p>
+            </div>
+        </section>
+
+        <section id="operators" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Operators in C++.</h3>
+                <p>Operators are symbols that perform operations on operands (variables or values).</p>
+                <h4>Arithmetic Operators</h4>
+                <p>Perform mathematical calculations.</p>
+                <ul><li>`+` (Addition), `-` (Subtraction), `*` (Multiplication), `/` (Division), `%` (Modulo - remainder)</li></ul>
+                <pre><code class="code-snippet"><span class="code-cpp-type">int</span> a = <span class="code-cpp-number">10</span>, b = <span class="code-cpp-number">3</span>;
+<span class="code-cpp-type">int</span> sum = a + b; <span class="code-cpp-comment">// 13</span>
+<span class="code-cpp-type">int</span> diff = a - b; <span class="code-cpp-comment">// 7</span>
+<span class="code-cpp-type">int</span> product = a * b; <span class="code-cpp-comment">// 30</span>
+<span class="code-cpp-type">int</span> quotient = a / b; <span class="code-cpp-comment">// 3 (integer division truncates)</span>
+<span class="code-cpp-type">int</span> remainder = a % b; <span class="code-cpp-comment">// 1</span>
+<span class="code-cpp-type">double</span> preciseQuotient = (<span class="code-cpp-type">double</span>)a / b; <span class="code-cpp-comment">// 3.333... (requires casting for float division)</span></code></pre>
+
+                <h4>Comparison (Relational) Operators</h4>
+                <p>Compare two values, resulting in `true` or `false`.</p>
+                <ul><li>`==` (Equal to), `!=` (Not equal to), `>` (Greater than), `<` (Less than), `>=` (Greater than or equal to), `<=` (Less than or equal to)</li></ul>
+                <pre><code class="code-snippet"><span class="code-cpp-type">bool</span> isEqual = (a == 10); <span class="code-cpp-comment">// true</span>
+<span class="code-cpp-type">bool</span> isGreater = (a > b); <span class="code-cpp-comment">// true</span></code></pre>
+
+                <h4>Logical Operators</h4>
+                <p>Combine or modify boolean expressions.</p>
+                <ul><li>`&&` (Logical AND), `||` (Logical OR), `!` (Logical NOT)</li></ul>
+                <pre><code class="code-snippet"><span class="code-cpp-type">bool</span> condition1 = <span class="code-cpp-keyword">true</span>;
+<span class="code-cpp-type">bool</span> condition2 = <span class="code-cpp-keyword">false</span>;
+<span class="code-cpp-type">bool</span> bothTrue = condition1 && condition2; <span class="code-cpp-comment">// false</span>
+<span class="code-cpp-type">bool</span> eitherTrue = condition1 || condition2; <span class="code-cpp-comment">// true</span>
+<span class="code-cpp-type">bool</span> notCondition1 = !condition1;     <span class="code-cpp-comment">// false</span></code></pre>
+
+                <h4>Assignment Operators</h4>
+                <p>Assign values to variables.</p>
+                <ul><li>`=` (Assignment), `+=`, `-=`, `*=`, `/=`, `%=` (Compound assignment)</li></ul>
+                <pre><code class="code-snippet"><span class="code-cpp-type">int</span> count = <span class="code-cpp-number">5</span>;
+count += <span class="code-cpp-number">3</span>; <span class="code-cpp-comment">// Equivalent to count = count + 3; (count is now 8)</span>
+count *= <span class="code-cpp-number">2</span>; <span class="code-cpp-comment">// Equivalent to count = count * 2; (count is now 16)</span></code></pre>
+
+                <h4>Increment/Decrement Operators</h4>
+                <ul><li>`++` (Increment), `--` (Decrement) - Can be prefix (`++x`) or postfix (`x++`).</li></ul>
+                 <pre><code class="code-snippet"><span class="code-cpp-type">int</span> num = <span class="code-cpp-number">10</span>;
+num++;    <span class="code-cpp-comment">// num becomes 11 (postfix)</span>
+++num;    <span class="code-cpp-comment">// num becomes 12 (prefix)</span>
+--num;    <span class="code-cpp-comment">// num becomes 11 (prefix)</span></code></pre>
+                <p>Understanding operator precedence (the order in which operators are evaluated) is important. Use parentheses `()` to enforce a specific order when needed.</p>
+            </div>
+        </section>
+
+        <section id="type-casting" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h3>Type Casting.</h3>
+                <p>Type casting is the explicit conversion of a value from one data type to another.</p>
+                <h4>C-style Cast</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-type">int</span> total = <span class="code-cpp-number">10</span>;
+<span class="code-cpp-type">int</span> count = <span class="code-cpp-number">3</span>;
+<span class="code-cpp-type">double</span> average = (<span class="code-cpp-type">double</span>)total / count; <span class="code-cpp-comment">// Cast 'total' to double before division</span>
+                                            <span class="code-cpp-comment">// Result: 3.333...</span></code></pre>
+                <h4>Static Cast (C++)</h4>
+                <p>The preferred method in modern C++ for many standard type conversions.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-type">double</span> average_cpp = <span class="code-keyword">static_cast</span>&lt;<span class="code-cpp-type">double</span>&gt;(total) / count;</code></pre>
+                <p>Be cautious with type casting, especially narrowing conversions (e.g., `double` to `int`), as they can lead to loss of information.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CPPLearn - Your C++ Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#intro-cpp">Intro C++</a>
+                <a href="Week1.html#why-learn-cpp">Why C++?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#hello-world">Hello World</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#variables">Variables</a>
+                <a href="#data-types">Data Types</a>
+                <a href="#constants">Constants</a>
+                <a href="#operators">Operators</a>
+                <a href="#type-casting">Type Casting</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#io-stream">iostream</a>
+                <a href="Week3.html#conditionals">Conditionals</a>
+                <a href="Week3.html#switch">Switch</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#for-loops">For Loops</a>
+                <a href="Week4.html#while-loops">While Loops</a>
+                <a href="Week4.html#do-while">Do-While</a>
+                <a href="Week4.html#break-continue">Break/Continue</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#functions-def">Definition</a>
+                <a href="Week5.html#functions-params">Parameters</a>
+                <a href="Week5.html#functions-return">Return</a>
+                <a href="Week5.html#functions-overload">Overloading</a>
+                <a href="Week5.html#scope">Scope</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#arrays">Arrays</a>
+                <a href="Week6.html#multi-arrays">Multi-Dim Arrays</a>
+                <a href="Week6.html#c-strings">C-Strings</a>
+                <a href="Week6.html#std-string">std::string</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#pointers">Pointers</a>
+                <a href="Week7.html#dynamic-mem">Dynamic Memory</a>
+                <a href="Week7.html#references">References</a>
+                <a href="Week7.html#pass-by-ref">Pass by Reference</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#oop-concepts">OOP Concepts</a>
+                <a href="Week8.html#classes-objects">Classes/Objects</a>
+                <a href="Week8.html#access-specifiers">Access Specifiers</a>
+                <a href="Week8.html#members">Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#constructors">Constructors</a>
+                <a href="Week9.html#destructors">Destructors</a>
+                <a href="Week9.html#this-pointer">`this` Pointer</a>
+                <a href="Week9.html#static-members">Static Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#inheritance">Inheritance</a>
+                <a href="Week10.html#overriding">Overriding</a>
+                <a href="Week10.html#polymorphism">Polymorphism</a>
+                <a href="Week10.html#virtual-funcs">Virtual Functions</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#stl-overview">STL Overview</a>
+                <a href="Week11.html#containers">Containers</a>
+                <a href="Week11.html#iterators">Iterators</a>
+                <a href="Week11.html#algorithms">Algorithms</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#file-io">File I/O</a>
+                <a href="Week12.html#error-handling">Error Handling</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+                <a href="Week12.html#project">Mini-Project</a>
+            </div>
+        </div>
+
+    </div> </body>
+</html>

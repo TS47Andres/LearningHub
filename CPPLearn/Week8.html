@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPP Learning - Week 8: Introduction to OOP</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="cpp.ico" type="image/x-icon">
+    </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="cpp-color">CPP</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#oop-concepts">OOP Concepts</a></li>
+                <li><a href="#classes-objects">Classes/Objects</a></li>
+                <li><a href="#access-specifiers">Access Specifiers</a></li>
+                <li><a href="#members">Members</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 8: Introduction to Object-Oriented Programming</h1>
+                <p class="tagline">Explore the fundamental concepts of OOP using classes and objects in C++.</p>
+                <a href="#oop-concepts" class="button">Explore Chapter 8</a>
+            </div>
+        </section>
+
+        <section id="oop-concepts" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 8: Basics of Object-Oriented Programming (OOP)</h2>
+                <h3>Core OOP Concepts.</h3>
+                <p>Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data in the form of fields (often known as attributes or properties) and code in the form of procedures (often known as methods). OOP aims to improve code organization, reusability, and maintainability, especially for complex software.</p>
+                <p>Key concepts in OOP include:</p>
+                <ul>
+                    <li><strong>Encapsulation:</strong> Bundling data (attributes) and methods (functions that operate on the data) within a single unit (an object). It often involves restricting direct access to some of an object's components (data hiding).</li>
+                    <li><strong>Abstraction:</strong> Hiding complex implementation details and exposing only the essential features of an object. Users interact with the object through a simplified interface.</li>
+                    <li><strong>Inheritance:</strong> A mechanism where a new class (derived or child class) inherits properties and methods from an existing class (base or parent class). This promotes code reuse and creates class hierarchies.</li>
+                    <li><strong>Polymorphism:</strong> Literally "many forms." Allows objects of different classes to respond to the same message (method call) in different ways. Often achieved through virtual functions (discussed later).</li>
+                </ul>
+                <p>This week, we'll focus on the foundational elements: classes and objects, attributes, methods, and access control.</p>
+            </div>
+        </section>
+
+        <section id="classes-objects" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Classes and Objects.</h3>
+                <h4>Classes: The Blueprint</h4>
+                <p>A <strong>class</strong> is a user-defined blueprint or template from which objects are created. It defines a type, bundling together data members (attributes) and member functions (methods) that operate on that data.</p>
+                <p>You define a class using the `class` keyword.</p>
+                 <pre><code class="code-snippet"><span class="code-cpp-keyword">class</span> Dog {
+<span class="code-cpp-keyword">public</span>: <span class="code-cpp-comment">// Access specifier (more on this later)</span>
+    <span class="code-cpp-comment">// Member Variables (Attributes)</span>
+    <span class="code-cpp-type">std::string</span> name;
+    <span class="code-cpp-type">std::string</span> breed;
+    <span class="code-cpp-type">int</span> age;
+
+    <span class="code-cpp-comment">// Member Function (Method)</span>
+    <span class="code-cpp-type">void</span> <span class="code-cpp-function">bark</span>() {
+        std::cout &lt;&lt; name &lt;&lt; <span class="code-cpp-string">" says Woof!"</span> &lt;&lt; std::endl;
+    }
+}; <span class="code-cpp-comment">// Note the semicolon after the class definition</span></code></pre>
+
+                <h4>Objects: Instances of a Class</h4>
+                 <p>An <strong>object</strong> is a concrete instance created from a class blueprint. When you create an object, memory is allocated for its member variables.</p>
+                 <p>You create objects (instantiate a class) much like you declare variables of built-in types.</p>
+                 <pre><code class="code-snippet"><span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-cpp-type">Dog</span> myDog;       <span class="code-cpp-comment">// Create an object (instance) of the Dog class named myDog</span>
+    <span class="code-cpp-type">Dog</span> anotherDog;  <span class="code-cpp-comment">// Create another Dog object</span>
+
+    <span class="code-cpp-comment">// Accessing member variables using the dot (.) operator</span>
+    myDog.name = <span class="code-cpp-string">"Buddy"</span>;
+    myDog.breed = <span class="code-cpp-string">"Golden Retriever"</span>;
+    myDog.age = <span class="code-cpp-number">3</span>;
+
+    anotherDog.name = <span class="code-cpp-string">"Lucy"</span>;
+
+    <span class="code-cpp-comment">// Calling member functions using the dot (.) operator</span>
+    myDog.<span class="code-function">bark</span>();      <span class="code-cpp-comment">// Output: Buddy says Woof!</span>
+    anotherDog.<span class="code-function">bark</span>(); <span class="code-cpp-comment">// Output: Lucy says Woof!</span>
+
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <p>Each object (`myDog`, `anotherDog`) has its own separate set of member variables (`name`, `breed`, `age`).</p>
+            </div>
+        </section>
+
+        <section id="access-specifiers" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h3>Access Specifiers (`public`, `private`, `protected`).</h3>
+                <p>Access specifiers control the visibility and accessibility of class members (variables and methods) from outside the class. This is a key part of <strong>encapsulation</strong>.</p>
+                <ul>
+                    <li><strong>`public`</strong>: Members declared as `public` are accessible from anywhere - outside the class, in derived classes, and within the class itself.</li>
+                    <li><strong>`private`</strong>: Members declared as `private` are accessible only from within the class itself (i.e., by its own member functions or friend functions/classes). This is the default access level if no specifier is provided for a class.</li>
+                    <li><strong>`protected`</strong>: Similar to `private`, but `protected` members are also accessible from within derived classes (inheritance).</li>
+                </ul>
+                 <p>Good practice often involves making member variables `private` and providing `public` member functions (getters and setters) to access or modify them in a controlled way.</p>
+                 <pre><code class="code-snippet"><span class="code-cpp-keyword">class</span> Rectangle {
+<span class="code-cpp-keyword">private</span>: <span class="code-cpp-comment">// Data members are typically private</span>
+    <span class="code-cpp-type">double</span> width;
+    <span class="code-cpp-type">double</span> height;
+
+<span class="code-cpp-keyword">public</span>: <span class="code-cpp-comment">// Member functions are often public</span>
+    <span class="code-cpp-comment">// Setter methods</span>
+    <span class="code-cpp-type">void</span> <span class="code-cpp-function">setWidth</span>(<span class="code-cpp-type">double</span> w) {
+        <span class="code-cpp-keyword">if</span> (w > 0) width = w; <span class="code-cpp-comment">// Add validation</span>
+    }
+    <span class="code-cpp-type">void</span> <span class="code-cpp-function">setHeight</span>(<span class="code-cpp-type">double</span> h) {
+        <span class="code-cpp-keyword">if</span> (h > 0) height = h;
+    }
+
+    <span class="code-cpp-comment">// Getter methods</span>
+    <span class="code-cpp-type">double</span> <span class="code-cpp-function">getWidth</span>() { <span class="code-cpp-keyword">return</span> width; }
+    <span class="code-cpp-type">double</span> <span class="code-cpp-function">getHeight</span>() { <span class="code-cpp-keyword">return</span> height; }
+
+    <span class="code-cpp-comment">// Method to calculate area</span>
+    <span class="code-cpp-type">double</span> <span class="code-cpp-function">getArea</span>() {
+        <span class="code-cpp-keyword">return</span> width * height;
+    }
+};
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    Rectangle rect;
+    <span class="code-cpp-comment">// rect.width = 10; // Error! width is private</span>
+    rect.<span class="code-function">setWidth</span>(<span class="code-cpp-number">10.0</span>);  <span class="code-cpp-comment">// OK, using public setter</span>
+    rect.<span class="code-function">setHeight</span>(<span class="code-cpp-number">5.0</span>); <span class="code-cpp-comment">// OK</span>
+
+    std::cout &lt;&lt; <span class="code-cpp-string">"Area: "</span> &lt;&lt; rect.<span class="code-function">getArea</span>() &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 50</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="members" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Member Variables (Attributes) and Member Functions (Methods).</h3>
+                <h4>Member Variables (Attributes)</h4>
+                <p>These are the data components of a class. They define the properties or state of objects created from the class. As seen above, they are declared within the class definition like regular variables, usually within a `private` section for good encapsulation.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-keyword">class</span> Circle {
+<span class="code-cpp-keyword">private</span>:
+    <span class="code-cpp-type">double</span> radius; <span class="code-cpp-comment">// Member variable</span>
+    <span class="code-cpp-comment">// ... maybe color, position, etc.</span>
+<span class="code-cpp-keyword">public</span>:
+    <span class="code-cpp-comment">// ... methods ...</span>
+};</code></pre>
+
+                <h4>Member Functions (Methods)</h4>
+                <p>These are functions defined within the class scope. They operate on the data (member variables) of the specific object they are called on. They define the behavior or actions an object can perform.</p>
+                <p>Methods have access to all members (`public`, `private`, `protected`) of their own class.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-keyword">class</span> Counter {
+<span class="code-cpp-keyword">private</span>:
+    <span class="code-cpp-type">int</span> count = <span class="code-cpp-number">0</span>; <span class="code-cpp-comment">// Member variable, initialized</span>
+
+<span class="code-cpp-keyword">public</span>:
+    <span class="code-cpp-type">void</span> <span class="code-cpp-function">increment</span>() { <span class="code-cpp-comment">// Member function</span>
+        count++; <span class="code-cpp-comment">// Accesses the private member 'count'</span>
+    }
+    <span class="code-cpp-type">void</span> <span class="code-cpp-function">reset</span>() { <span class="code-cpp-comment">// Another member function</span>
+        count = <span class="code-cpp-number">0</span>;
+    }
+    <span class="code-cpp-type">int</span> <span class="code-cpp-function">getValue</span>() { <span class="code-cpp-comment">// Member function to access private data</span>
+        <span class="code-cpp-keyword">return</span> count;
+    }
+};
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    Counter myCounter;
+    myCounter.<span class="code-function">increment</span>();
+    myCounter.<span class="code-function">increment</span>();
+    std::cout &lt;&lt; <span class="code-cpp-string">"Counter value: "</span> &lt;&lt; myCounter.<span class="code-function">getValue</span>() &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 2</span>
+    myCounter.<span class="code-function">reset</span>();
+    std::cout &lt;&lt; <span class="code-cpp-string">"Counter value: "</span> &lt;&lt; myCounter.<span class="code-function">getValue</span>() &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 0</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                 <p>We'll explore special member functions like constructors and destructors next week.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CPPLearn - Your C++ Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#intro-cpp">Intro C++</a>
+                <a href="Week1.html#why-learn-cpp">Why C++?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#hello-world">Hello World</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#constants">Constants</a>
+                <a href="Week2.html#operators">Operators</a>
+                <a href="Week2.html#type-casting">Type Casting</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#io-stream">Input/Output</a>
+                 <a href="Week3.html#conditionals">Conditionals</a>
+                 <a href="Week3.html#nested-if">Nested If</a>
+                 <a href="Week3.html#switch">Switch</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#for-loops">for Loops</a>
+                <a href="Week4.html#while-loops">while Loops</a>
+                <a href="Week4.html#do-while">do...while</a>
+                <a href="Week4.html#break-continue">break/continue</a>
+                <a href="Week4.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#functions-def">Definition</a>
+                <a href="Week5.html#functions-proto">Prototypes</a>
+                <a href="Week5.html#functions-params">Parameters</a>
+                <a href="Week5.html#functions-return">Return Values</a>
+                <a href="Week5.html#functions-overload">Overloading</a>
+                <a href="Week5.html#scope">Scope</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#arrays">Arrays</a>
+                <a href="Week6.html#multi-arrays">Multi-Dim Arrays</a>
+                <a href="Week6.html#c-strings">C-Strings</a>
+                <a href="Week6.html#std-string">std::string</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#memory-addresses">Memory</a>
+                <a href="Week7.html#pointers">Pointers</a>
+                <a href="Week7.html#dynamic-mem">Dynamic Memory</a>
+                <a href="Week7.html#references">References</a>
+                <a href="Week7.html#pass-by-ref">Pass by Reference</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#oop-concepts">OOP Concepts</a>
+                <a href="#classes-objects">Classes/Objects</a>
+                <a href="#access-specifiers">Access Specifiers</a>
+                <a href="#members">Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#constructors">Constructors</a>
+                <a href="Week9.html#destructors">Destructors</a>
+                <a href="Week9.html#this-pointer">`this` Pointer</a>
+                <a href="Week9.html#static-members">Static Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#inheritance">Inheritance</a>
+                <a href="Week10.html#overriding">Overriding</a>
+                <a href="Week10.html#polymorphism">Polymorphism</a>
+                <a href="Week10.html#virtual-funcs">Virtual Functions</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#stl-overview">STL Overview</a>
+                <a href="Week11.html#containers">Containers</a>
+                <a href="Week11.html#iterators">Iterators</a>
+                <a href="Week11.html#algorithms">Algorithms</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#file-io">File I/O</a>
+                <a href="Week12.html#error-handling">Error Handling</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+                <a href="Week12.html#project">Mini-Project</a>
+            </div>
+        </div>
+
+    </div> </body>
+</html>

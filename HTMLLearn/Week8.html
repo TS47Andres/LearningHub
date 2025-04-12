@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Learning - Week 8: Review & Next Steps</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="html.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">HTML</span>earn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#review-section">Review</a></li>
+                <li><a href="#best-practices-section">Best Practices</a></li>
+                <li><a href="#integration-section">Integration</a></li>
+                <li><a href="#next-steps-section">Next Steps</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 8: Consolidating Knowledge and Looking Ahead</h1>
+                <p class="tagline">Review key HTML concepts, learn best practices, and see where to go next.</p>
+                <a href="#review-section" class="button">Explore Chapter 8</a>
+            </div>
+        </section>
+
+        <section id="review-section" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 8: Wrapping Up and Moving Forward</h2>
+                <h3>Review of Key HTML Concepts</h3>
+                <p>Over the past seven weeks, we've covered the fundamentals of structuring web content using HTML. Let's recap the major areas:</p>
+                <ul>
+                    <li><strong>Basic Structure:</strong> `&lt;!DOCTYPE html&gt;`, `&lt;html&gt;`, `&lt;head&gt;`, `&lt;body&gt;`, `&lt;title&gt;`. (Week 1)</li>
+                    <li><strong>Text Content:</strong> Headings (`&lt;h1&gt;`-`&lt;h6&gt;`), Paragraphs (`&lt;p&gt;`), Line Breaks (`&lt;br&gt;`). (Week 1)</li>
+                    <li><strong>Text Formatting:</strong> Semantic (`&lt;strong&gt;`, `&lt;em&gt;`) and presentational (`&lt;b&gt;`, `&lt;i&gt;`), Sub/Superscript (`&lt;sub&gt;`, `&lt;sup&gt;`), Phrase Tags (`&lt;code&gt;`, `&lt;kbd&gt;`, etc.). (Week 2)</li>
+                    <li><strong>Links:</strong> Anchor tag (`&lt;a&gt;`), `href`, `target`, linking pages and sections, `mailto:`. (Week 2)</li>
+                    <li><strong>Paths:</strong> Absolute vs. Relative paths for linking resources. (Week 2)</li>
+                    <li><strong>Lists:</strong> Unordered (`&lt;ul&gt;`), Ordered (`&lt;ol&gt;`), Definition (`&lt;dl&gt;`). (Week 3)</li>
+                    <li><strong>Images:</strong> Embedding (`&lt;img&gt;`), `src`, `alt` attributes, common formats. (Week 3)</li>
+                    <li><strong>Tables:</strong> Structure (`&lt;table&gt;`, `&lt;tr&gt;`, `&lt;th&gt;`, `&lt;td&gt;`), Sections (`&lt;thead&gt;`, `&lt;tbody&gt;`, `&lt;tfoot&gt;`), Spanning (`colspan`, `rowspan`), Captions (`&lt;caption&gt;`). (Week 4)</li>
+                    <li><strong>Forms:</strong> `&lt;form&gt;`, basic inputs (`text`, `password`, `submit`, `reset`, `button`), labels (`&lt;label&gt;`), common attributes (`name`, `id`, `value`, `required`, etc.). (Week 5)</li>
+                    <li><strong>More Form Controls:</strong> Checkboxes, radio buttons, dropdowns (`&lt;select&gt;`), text areas (`&lt;textarea&gt;`), grouping (`&lt;fieldset&gt;`, `&lt;legend&gt;`). (Week 6)</li>
+                    <li><strong>Semantic HTML:</strong> Importance, structural elements (`&lt;header&gt;`, `&lt;nav&gt;`, `&lt;main&gt;`, `&lt;article&gt;`, `&lt;section&gt;`, `&lt;aside&gt;`, `&lt;footer&gt;`). (Week 7)</li>
+                    <li><strong>Multimedia:</strong> Embedding audio (`&lt;audio&gt;`) and video (`&lt;video&gt;`), using `&lt;source&gt;` and `&lt;track&gt;`. (Week 7)</li>
+                    <li><strong>Embedding Content:</strong> Using `&lt;iframe&gt;` for external documents/media. (Week 7)</li>
+                </ul>
+                <p>You now have the foundational knowledge to create well-structured HTML documents!</p>
+            </div>
+        </section>
+
+        <section id="best-practices-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>HTML Best Practices</h3>
+                <p>Writing good HTML goes beyond just knowing the tags. Following best practices ensures your code is maintainable, accessible, and performs well.</p>
+                <ul>
+                    <li><strong>Validate Your HTML:</strong> Use tools like the <a href="https://validator.w3.org/" target="_blank">W3C Markup Validation Service</a> to check your HTML for syntax errors. Valid code is more likely to render consistently across different browsers.</li>
+                    <li><strong>Use Semantic HTML Correctly:</strong> Choose HTML elements based on their meaning, not just their appearance. Use `&lt;nav&gt;` for navigation, `&lt;article&gt;` for self-contained content, `&lt;strong&gt;` for importance, etc. Avoid using `&lt;div&gt;` for everything.</li>
+                    <li><strong>Prioritize Accessibility (a11y):</strong>
+                        <ul>
+                            <li>Always use descriptive `alt` text for images.</li>
+                            <li>Use `&lt;label&gt;` elements correctly associated with form inputs (`for`/`id`).</li>
+                            <li>Ensure a logical document structure using headings and semantic elements.</li>
+                            <li>Use table headers (`&lt;th&gt;`) with `scope` attributes where appropriate.</li>
+                            <li>Provide captions or transcripts for multimedia content (`&lt;track&gt;`).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Keep HTML Focused on Structure:</strong> Use HTML to define the structure and meaning of your content. Leave presentation (colors, fonts, layout) primarily to CSS.</li>
+                    <li><strong>Maintain Clean and Readable Code:</strong> Use consistent indentation and formatting. Add comments (`&lt;!-- ... --&gt;`) to explain complex sections or decisions.</li>
+                    <li><strong>Close Your Tags:</strong> Ensure all non-empty elements have a corresponding closing tag.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="integration-section" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Integration with CSS and JavaScript</h3>
+                <p>While this course focused solely on HTML, it's crucial to understand how it fits into the broader picture of web development alongside CSS and JavaScript.</p>
+                <img src="https://placehold.co/600x150/EEE/333?text=HTML+%2B+CSS+%2B+JS" alt="Diagram showing HTML for Structure, CSS for Presentation, JS for Behavior" style="display: block; margin: 20px auto; max-width: 100%; height: auto;">
+                <ul>
+                    <li><strong>HTML (Structure):</strong> Defines the content and its semantic structure (headings, paragraphs, lists, images, forms, etc.). It's the skeleton of the webpage.</li>
+                    <li><strong>CSS (Presentation):</strong> Cascading Style Sheets control the visual appearance of the HTML elements. This includes layout, colors, fonts, spacing, borders, animations, and responsiveness across different devices. CSS makes the skeleton look good.</li>
+                    <li><strong>JavaScript (Behavior):</strong> Adds interactivity and dynamic behavior to the webpage. It can manipulate HTML and CSS, respond to user actions (clicks, form submissions), fetch data from servers, create complex animations, and much more. JavaScript brings the styled skeleton to life.</li>
+                </ul>
+                <p>You typically link CSS files within the `&lt;head&gt;` section using the `&lt;link&gt;` tag, and JavaScript files often just before the closing `&lt;/body&gt;` tag using the `&lt;script&gt;` tag (as we've done with `script.js`).</p>
+                <pre><code class="code-snippet html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Integration Example&lt;/title&gt;
+    &lt;!-- Link to external CSS file --&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- HTML Content --&gt;
+    &lt;h1 id="main-heading"&gt;My Page&lt;/h1&gt;
+    &lt;button id="my-button"&gt;Click Me&lt;/button&gt;
+
+    &lt;!-- Link to external JavaScript file --&gt;
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                <p>Mastering all three (HTML, CSS, and JavaScript) is essential for modern front-end web development.</p>
+            </div>
+        </section>
+
+        <section id="next-steps-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Where to Go Next?</h3>
+                <p>Congratulations on completing the 8-week HTMLLearn program! You've built a strong foundation in structuring web content.</p>
+                <h4>Immediate Next Step: Learn CSS!</h4>
+                <p>The most logical next step is to learn <strong>CSS (Cascading Style Sheets)</strong>. CSS will allow you to take your structured HTML documents and make them visually appealing, control layout, and adapt them for different screen sizes (responsive design).</p>
+                <p>Look for resources or courses focusing on:</p>
+                <ul>
+                    <li>CSS Selectors</li>
+                    <li>The Box Model (Margin, Border, Padding, Content)</li>
+                    <li>Colors, Backgrounds, Fonts</li>
+                    <li>Layout Techniques (Flexbox, Grid)</li>
+                    <li>Responsive Design (Media Queries)</li>
+                </ul>
+
+                <h4>Practice Project Idea</h4>
+                <p>Apply what you've learned by building a simple project, such as:</p>
+                <ul>
+                    <li>A personal portfolio page showcasing your skills (even if they are just HTML for now!).</li>
+                    <li>A simple recipe page using headings, lists, paragraphs, and images.</li>
+                    <li>The structure for a basic blog layout using semantic elements.</li>
+                </ul>
+
+                <h4>Further Learning</h4>
+                <p>Once you're comfortable with HTML and CSS, you can move on to:</p>
+                <ul>
+                    <li><strong>JavaScript:</strong> To add interactivity and dynamic behavior (like our JSLearn course!).</li>
+                    <li><strong>Version Control (Git):</strong> Essential for managing code and collaborating.</li>
+                    <li><strong>Front-End Frameworks (React, Vue, Angular):</strong> Libraries/frameworks that streamline building complex user interfaces (after learning JavaScript).</li>
+                </ul>
+                <p>Keep practicing, building, and exploring. The journey of web development is continuous learning!</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2025 HTMLLearn - Your HTML Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro</a>
+                <a href="Week1.html#what-is-html-section">What is HTML?</a>
+                <a href="Week1.html#basic-structure-section">Structure</a>
+                <a href="Week1.html#setup-section">Setup</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#formatting-section">Formatting</a>
+                <a href="Week2.html#phrase-tags-section">Phrase Tags</a>
+                <a href="Week2.html#links-section">Links</a>
+                <a href="Week2.html#paths-section">Paths</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#lists-section">Lists</a>
+                <a href="Week3.html#images-section">Images</a>
+                <a href="Week3.html#image-formats-section">Formats</a>
+                <a href="Week3.html#image-attributes-section">Attributes</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#table-structure">Structure</a>
+                <a href="Week4.html#table-sections">Sections</a>
+                <a href="Week4.html#spanning">Spanning Cells</a>
+                <a href="Week4.html#headers-captions">Headers & Captions</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#form-tag-section">Form Tag</a>
+                <a href="Week5.html#input-fields-section">Input Fields</a>
+                <a href="Week5.html#labels-section">Labels</a>
+                <a href="Week5.html#attributes-section">Attributes</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#checkbox-radio-section">Checkbox/Radio</a>
+                <a href="Week6.html#select-section">Dropdowns</a>
+                <a href="Week6.html#textarea-section">Text Areas</a>
+                <a href="Week6.html#grouping-section">Grouping</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#semantic-section">Semantic HTML</a>
+                <a href="Week7.html#multimedia-section">Multimedia</a>
+                <a href="Week7.html#iframe-section">Iframes</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#review-section">Review</a>
+                <a href="#best-practices-section">Best Practices</a>
+                <a href="#integration-section">Integration</a>
+                <a href="#next-steps-section">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Learning - Week 1: Getting Started</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="html.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">HTML</span>earn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#introduction-section">Introduction</a></li>
+                <li><a href="#what-is-html-section">What is HTML?</a></li>
+                <li><a href="#basic-structure-section">Basic Structure</a></li>
+                <li><a href="#setup-section">Setup Environment</a></li>
+                <li><a href="#first-program-section">First Program</a></li>
+                <li><a href="#basic-syntax-section">Basic Syntax</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 1: Getting Started with HTML</h1>
+                <p class="tagline">Your first steps into the world of web page structure.</p>
+                <a href="#introduction-section" class="button">Explore Chapter 1</a>
+            </div>
+        </section>
+
+        <section id="introduction-section" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 1: Introduction to HTML and Your Development Environment</h2>
+                <p>Welcome to the world of HTML! This week, we'll cover the basics of HTML, its role in web development, and how to set up your environment to start creating web pages.</p>
+            </div>
+        </section>
+
+        <section id="what-is-html-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>What is HTML?</h3>
+                <p>HTML (Hypertext Markup Language) is the standard markup language for creating web pages. It provides the structure of a web page, defining the content and layout.</p>
+                <p>HTML consists of a series of elements, which tell the browser how to display the content.  Elements are represented by tags, like &lt;p&gt; for paragraphs, &lt;h1&gt; for headings, and so on.</p>
+                <h4>Key Concepts</h4>
+                <ul>
+                    <li><strong>Elements:</strong>  A part of a web page.  Made of tags.</li>
+                    <li><strong>Tags:</strong>  Used to create elements (e.g., &lt;p&gt;, &lt;h1&gt;, &lt;a&gt;).  Most have an opening and closing tag.</li>
+                    <li><strong>Attributes:</strong> Provide additional information about an element (e.g., &lt;a href="https://www.example.com"&gt;).</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="basic-structure-section" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Basic HTML Document Structure</h3>
+                <p>Every HTML document has a basic structure. Here's the breakdown:</p>
+                <pre><code class="code-snippet html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;My First Webpage&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;This is my first webpage.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </code></pre>
+                <ul>
+                    <li><strong>&lt;!DOCTYPE html&gt;:</strong>  The document type declaration.  It tells the browser that this is an HTML5 document.</li>
+                    <li><strong>&lt;html&gt;:</strong> The root element of the page.</li>
+                    <li><strong>&lt;head&gt;:</strong> Contains meta-information about the HTML document (like the title, character set, links to stylesheets).</li>
+                    <li><strong>&lt;title&gt;:</strong>  Specifies a title for the HTML document, which is shown in the browser's title bar or tab.</li>
+                    <li><strong>&lt;body&gt;:</strong> Contains the visible page content.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="setup-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Setting up your Development Environment</h3>
+                <p>For HTML, you really only need two things:</p>
+                <ol>
+                    <li><strong>A Text Editor:</strong>  Where you'll write your HTML code.  VS Code is recommended, but others work too (Sublime Text, Atom, Notepad++).</li>
+                    <li><strong>A Web Browser:</strong>  To view your HTML pages.  Any modern browser will do (Chrome, Firefox, Edge, Safari).</li>
+                </ol>
+                <p>That's it!  No special server setup is needed for basic HTML.</p>
+            </div>
+        </section>
+
+        <section id="first-program-section" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Your First HTML Page: Hello, World!</h3>
+                <p>Let's create your first HTML page.</p>
+                <ol>
+                    <li>Open your text editor.</li>
+                    <li>Create a new file named "index.html".</li>
+                    <li>Paste in the following code:</li>
+                    <pre><code class="code-snippet html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My First HTML Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;Welcome to HTML!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                    </code></pre>
+                    <li>Save the file.</li>
+                    <li>Open the "index.html" file in your web browser (double-click it).</li>
+                    <li>You should see "Hello, World!" in big letters, and "Welcome to HTML!" below it.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="basic-syntax-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Basic HTML Syntax</h3>
+                <p>Here are some HTML syntax fundamentals:</p>
+                <ul>
+                    <li><strong>Tags:</strong>  Keywords in angle brackets.  Most come in pairs: &lt;p&gt; (opening tag) and &lt;/p&gt; (closing tag).</li>
+                    <li><strong>Elements:</strong>  An HTML element is everything from the start tag to the end tag:  &lt;p&gt;This is a paragraph.&lt;/p&gt;</li>
+                    <li><strong>Attributes:</strong>  Provide extra info about elements.  Written in the start tag: &lt;a href="https://www.example.com"&gt;Example Link&lt;/a&gt;</li>
+                    <li><strong>Nesting:</strong>  Elements can be nested (put inside other elements): &lt;p&gt;&lt;strong&gt;Important!&lt;/strong&gt; This is a paragraph.&lt;/p&gt;</li>
+                    <li><strong>Empty Elements:</strong> Some elements have no closing tag: &lt;br&gt; (line break), &lt;img&gt; (image).</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 HTMLLearn - Your HTML Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro</a>
+                <a href="Week1.html#what-is-html-section">What is HTML?</a>
+                <a href="Week1.html#basic-structure-section">Structure</a>
+                <a href="Week1.html#setup-section">Setup</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#formatting-section">Formatting</a>
+                <a href="#phrase-tags-section">Phrase Tags</a>
+                <a href="#links-section">Links</a>
+                <a href="#paths-section">Paths</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#lists">Lists</a>
+                <a href="Week3.html#images">Images</a>
+                <a href="Week3.html#formats">Formats</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#table-structure">Structure</a>
+                <a href="Week4.html#spanning">Spanning</a>
+                <a href="Week4.html#headers-captions">Headers</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#form-tag">Form Tag</a>
+                 <a href="Week5.html#inputs">Inputs</a>
+                 <a href="Week5.html#labels">Labels</a>
+                 <a href="Week5.html#attributes">Attributes</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#checkbox-radio">Checkbox/Radio</a>
+                <a href="Week6.html#select">Dropdown</a>
+                <a href="Week6.html#textarea">Text Area</a>
+                <a href="Week6.html#grouping">Grouping</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#semantic">Semantic HTML</a>
+                <a href="Week7.html#multimedia">Audio/Video</a>
+                <a href="Week7.html#iframe">Iframe</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#review">Review</a>
+                <a href="Week8.html#best-practices">Best Practices</a>
+                <a href="Week8.html#integration">Integration</a>
+                <a href="Week8.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

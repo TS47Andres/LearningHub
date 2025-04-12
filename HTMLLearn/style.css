@@ -1,0 +1,825 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lexend:wght@100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Shippori+Antique&display=swap');
+
+/* Import Remixicon font library */
+@import 'remixicon/fonts/remixicon.css';
+
+/* --- HTML Theme Colors (Inspired by HTML5 Logo) --- */
+:root {
+    /* Primary HTML Colors */
+    --html-orange: #E44D26; /* Main orange */
+    --html-dark-orange: #F16529; /* Accent orange */
+
+    /* Backgrounds & Text (Keeping similar contrast levels) */
+    --html-dark-bg: #282C34; /* Dark background (similar to JS theme) */
+    --html-light-bg: #F8F8F8; /* Light background */
+    --html-medium-light-bg: #F0F0F0; /* Medium light background */
+    --html-dark-text: #1E1E1E; /* Dark text color */
+    --html-light-text: #D4D4D4; /* Light text color */
+
+    /* Borders */
+    --html-border-light: #E0E0E0; /* Light border */
+    --html-border-dark: #555555; /* Dark border */
+
+    /* Code Highlighting (Keeping JS theme for consistency, can be adjusted) */
+    --code-comment-grey: #5c6370;
+    --code-keyword-purple: #c678dd;
+    --code-string-green: #98c379;
+    --code-function-blue: #61afef;
+    --code-parameter-orange: #d19a66;
+    --code-variable-red: #e06c75;
+    --code-number-orange: #d19a66; /* Re-using parameter orange */
+}
+
+
+/* --- General Body and Typography (Layout/Font styles unchanged) --- */
+body {
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    background-color: var(--html-light-bg); /* Light background */
+    color: var(--html-dark-text); /* Dark text color */
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+    color: var(--html-dark-text); /* Dark text for headings in light mode */
+    margin-bottom: 15px;
+}
+
+h3, h4 {
+    font-family: "Shippori Antique", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--html-dark-text); /* Dark text for headings in light mode */
+    margin-bottom: 15px;
+}
+
+/* --- Header and Navigation (Layout/Structure unchanged, Colors updated) --- */
+header {
+    background-color: var(--html-dark-bg); /* Dark background */
+    color: var(--html-orange); /* HTML Orange text */
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Updated class name for targeting, using HTML Orange */
+.python-yellow { /* Renamed variable in mind, but keep class for HTML targeting */
+    color: var(--html-orange); /* HTML Orange highlight color */
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: var(--html-orange); /* HTML Orange */
+    text-decoration: none;
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: medium;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #FFFFFF; /* White hover color */
+}
+
+/* --- Main Content Area (Layout/Structure unchanged, Colors updated) --- */
+main {
+    padding-top: 70px; /* Adjust based on header height */
+}
+
+.full-width {
+    width: 100%;
+    padding: 40px 0;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.container > p {
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: medium;
+}
+
+.content-block {
+    background-color: #FFFFFF; /* White background for content blocks */
+}
+
+.bg-light {
+    background-color: var(--html-medium-light-bg); /* Slightly darker than body background */
+}
+
+/* Common styles for lists, tables (Layout unchanged, Colors updated) */
+.content-block ul,
+.content-block ol,
+.content-block table {
+    padding-left: 25px;
+    margin-bottom: 15px;
+}
+
+.content-block table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.content-block li,
+.content-block th,
+.content-block td {
+    margin-bottom: 8px;
+    padding: 8px;
+    text-align: left;
+}
+
+.content-block th,
+.content-block td {
+    border: 1px solid var(--html-border-light); /* Lighter gray border */
+}
+
+.content-block ul li,
+.content-block ol li {
+    border: none;
+    padding: 0;
+    text-align: inherit;
+    font-family: "Lexend", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 15px;
+}
+
+.content-block th {
+    background-color: #E8E8E8; /* Slightly darker gray for header */
+    font-weight: bold;
+}
+
+/* Code block styling (Layout unchanged, Colors updated for non-highlighted) */
+.content-block pre {
+    background-color: #ECECEC; /* Light gray for general pre */
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: monospace;
+}
+
+.content-block code {
+    font-family: monospace;
+}
+
+/* --- Hero Section (Layout unchanged, Colors updated) --- */
+.hero {
+    background-color: var(--html-orange); /* HTML Orange background */
+    color: var(--html-dark-text); /* Dark text */
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+
+.hero-content h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-content .tagline {
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #FFFFFF; /* White text on orange */
+    letter-spacing: 2px;
+}
+
+/* --- Buttons (Layout unchanged, Colors updated) --- */
+.button {
+    display: inline-block;
+    background-color: var(--html-dark-bg); /* Dark background */
+    color: var(--html-orange); /* HTML Orange text */
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: medium;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid var(--html-orange); /* Add border */
+}
+
+.button:hover {
+    background-color: var(--html-orange); /* Orange background on hover */
+    color: #FFFFFF; /* White text on hover */
+    border-color: var(--html-orange);
+}
+
+/* --- Syllabus Section (Layout unchanged, Colors updated) --- */
+.syllabus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.syllabus-card {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.syllabus-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.syllabus-card h3 {
+    color: var(--html-dark-text);
+    margin-bottom: 10px;
+    font-weight: bolder;
+}
+
+.syllabus-card p {
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 0.95rem;
+}
+
+.syllabus-card ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 15px;
+}
+
+.syllabus-card li {
+    margin-bottom: 5px;
+    border: none;
+    list-style-type: none;
+    display: flex;
+    align-items: baseline;
+}
+
+/* Custom bullet points using Remixicon */
+.syllabus-card li::before {
+    font-family: 'RemixIcon';
+    content: '\EA6C'; /* Remixicon checkmark */
+    font-size: 0.9em;
+    color: var(--html-dark-orange); /* Darker Orange for bullets */
+    margin-right: 0.6em;
+    flex-shrink: 0;
+}
+
+.syllabus-link {
+    display: inline-block;
+    background-color: var(--html-orange); /* HTML Orange background */
+    color: #FFFFFF; /* White text */
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-family: 'Merriweather', serif;
+    font-size: 15px;
+    border: 1px solid var(--html-orange);
+}
+
+.syllabus-link:hover {
+    background-color: var(--html-dark-orange); /* Darker Orange on hover */
+    border-color: var(--html-dark-orange);
+}
+
+/* --- Scroll Animations (Unchanged) --- */
+.scroll-fade-in,
+.scroll-slide-left,
+.scroll-slide-right {
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.scroll-fade-in { transform: translateY(20px); }
+.scroll-slide-left { transform: translateX(-50px); }
+.scroll-slide-right { transform: translateX(50px); }
+.scroll-fade-in.show,
+.scroll-slide-left.show,
+.scroll-slide-right.show {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+}
+
+/* --- Code Snippet Highlighting (Using original JS theme colors for now) --- */
+pre code.code-snippet {
+    font-family: 'Courier New', monospace;
+    background-color: var(--html-dark-bg); /* Dark background for code */
+    color: var(--html-light-text); /* Light text color for code */
+    padding: 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    margin-bottom: 1em;
+    display: block;
+}
+
+/* Syntax highlighting colors (Kept JS theme colors) */
+.code-keyword { color: var(--code-keyword-purple); }
+.code-string { color: var(--code-string-green); }
+.code-comment { color: var(--code-comment-grey); font-style: italic; }
+.code-function { color: var(--code-function-blue); }
+.code-parameter { color: var(--code-parameter-orange); }
+.code-variable { color: var(--code-variable-red); }
+.code-number { color: var(--code-number-orange); }
+/* Explicitly style HTML tags and attributes if needed within code snippets */
+.code-snippet .html-tag { color: var(--code-variable-red); } /* Example: Red for tags */
+.code-snippet .html-attr-name { color: var(--code-parameter-orange); } /* Example: Orange for attribute names */
+.code-snippet .html-attr-value { color: var(--code-string-green); } /* Example: Green for attribute values */
+.code-snippet .html-doctype { color: var(--code-comment-grey); } /* Example: Grey for doctype */
+.code-snippet .html-comment { color: var(--code-comment-grey); font-style: italic; } /* Example: Grey for HTML comments */
+
+
+/* --- Dark Mode Toggle Button (Layout unchanged, Colors updated) --- */
+#darkModeToggle {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 101;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 1.2em;
+    line-height: 1;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--html-orange); /* HTML Orange background */
+    color: #FFFFFF; /* White icon/text */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease;
+}
+
+#darkModeToggle:hover {
+    background-color: var(--html-dark-orange); /* Darker orange on hover */
+}
+
+/* --- Footer (Layout unchanged, Colors updated) --- */
+footer {
+    background-color: var(--html-dark-bg); /* Dark background */
+    color: var(--html-orange); /* HTML Orange text */
+    text-align: center;
+    padding: 1rem 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 40px;
+}
+
+/* --- Vertical Navigation Styles (Layout unchanged, Colors updated) --- */
+.vertical-nav {
+    position: fixed;
+    left: 15px;
+    top: 80px;
+    width: 170px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    background-color: rgba(40, 44, 52, 0.95); /* Semi-transparent dark background */
+    border-radius: 5px;
+    z-index: 99;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    padding-bottom: 10px;
+}
+
+.vertical-nav a.nav-main-link,
+.vertical-nav button.nav-main-link {
+    display: block;
+    color: var(--html-orange); /* HTML Orange text */
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+    padding: 12px 15px;
+    width: 100%;
+    text-align: left;
+    font-size: 1em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: "Lexend", sans-serif;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.vertical-nav button.nav-main-link i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+}
+
+.vertical-nav button.nav-main-link.active i {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.vertical-nav a.nav-main-link:hover,
+.vertical-nav button.nav-main-link:hover {
+    background-color: var(--html-orange); /* HTML Orange hover */
+    color: #FFFFFF; /* White text */
+}
+
+.nav-item {
+    border-bottom: 1px solid rgba(228, 77, 38, 0.2); /* Faint orange separator */
+}
+
+.nav-item:last-child {
+    border-bottom: none;
+}
+
+.sub-nav {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.sub-nav.show {
+    max-height: 500px;
+}
+
+.sub-nav a {
+    display: block;
+    color: var(--html-light-text); /* Light gray sub-link color */
+    text-decoration: none;
+    padding: 8px 15px 8px 25px;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+    font-family: "Lexend", sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sub-nav a:hover {
+    background-color: rgba(228, 77, 38, 0.1); /* Faint orange highlight */
+}
+
+/* --- Hamburger Menu Button (Unchanged) --- */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: inherit; /* Inherits color from header (#E44D26) */
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0 5px;
+    z-index: 110;
+    line-height: 1;
+}
+.menu-toggle .ri-close-line { display: none; }
+.menu-toggle.active .ri-menu-line { display: none; }
+.menu-toggle.active .ri-close-line { display: block; }
+
+
+/* --- Dark Mode Styles (Colors updated for HTML theme) --- */
+body.dark-mode {
+    background-color: var(--html-dark-bg); /* Dark background */
+    color: var(--html-light-text); /* Light gray text */
+}
+
+body.dark-mode header {
+    background-color: #3a3f47; /* Slightly lighter dark header */
+    color: var(--html-orange); /* HTML Orange text */
+    border-bottom: 1px solid #444;
+}
+
+body.dark-mode nav ul li a {
+    color: var(--html-orange); /* HTML Orange nav link */
+}
+
+body.dark-mode nav ul li a:hover {
+    color: #FFFFFF; /* White hover */
+}
+
+body.dark-mode .hero {
+    background-color: var(--html-orange); /* HTML Orange */
+    color: #FFFFFF; /* White text on orange */
+}
+
+body.dark-mode .hero-content .tagline {
+    color: #f0f0f0; /* Lighter text on orange bg */
+}
+
+body.dark-mode .button {
+    background-color: var(--html-orange); /* Orange background */
+    color: #FFFFFF; /* White text */
+    border-color: var(--html-orange);
+}
+
+body.dark-mode .button:hover {
+    background-color: var(--html-dark-orange); /* Darker orange */
+    color: #FFFFFF;
+    border-color: var(--html-dark-orange);
+}
+
+body.dark-mode #darkModeToggle {
+    background-color: var(--html-orange); /* HTML Orange background */
+    color: #FFFFFF; /* White icon/text */
+    box-shadow: 0 2px 5px rgba(255,255,255,0.1);
+}
+body.dark-mode #darkModeToggle:hover {
+    background-color: var(--html-dark-orange); /* Darker orange */
+}
+
+body.dark-mode .content-block {
+    background-color: #2D2D2D; /* Slightly different dark for content */
+    color: var(--html-light-text); /* Light text */
+}
+
+body.dark-mode .bg-light {
+    background-color: #37373D; /* Darker content background */
+}
+
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+    color: var(--html-orange); /* HTML Orange headings in dark mode */
+}
+
+body.dark-mode .content-block th,
+body.dark-mode .content-block td {
+    border: 1px solid var(--html-border-dark); /* Darker borders */
+}
+
+body.dark-mode .content-block ul li,
+body.dark-mode .content-block ol li {
+    border: none;
+}
+
+body.dark-mode .container a:not(.button):not(.syllabus-link) {
+    color: var(--html-dark-orange); /* Dark Orange links */
+}
+body.dark-mode .container a:not(.button):not(.syllabus-link):hover {
+     color: #ff8c5a; /* Lighter orange on hover */
+}
+
+
+body.dark-mode .content-block th {
+    background-color: #37373D; /* Darker table header */
+    color: var(--html-light-text); /* Light text */
+}
+
+body.dark-mode .syllabus-card {
+     background-color: #2D2D2D; /* Dark card background */
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .syllabus-card li {
+    border: none;
+}
+
+body.dark-mode .syllabus-card li::before {
+    color: var(--html-dark-orange); /* Dark Orange icon */
+}
+
+body.dark-mode .content-block pre {
+    background-color: var(--html-dark-bg); /* Consistent dark code background */
+    color: var(--html-light-text); /* Default code text */
+    border: 1px solid var(--html-border-dark); /* Border for non-highlighted pre */
+}
+
+body.dark-mode footer {
+    background-color: var(--html-dark-bg); /* Dark footer */
+    color: var(--html-orange); /* HTML Orange text */
+    border-top: 1px solid #444;
+}
+
+/* index Page Specific Dark Mode */
+body.dark-mode .syllabus-card:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .syllabus-card h3 {
+    color: var(--html-orange); /* HTML Orange */
+}
+
+body.dark-mode .syllabus-link {
+    background-color: var(--html-orange); /* HTML Orange background */
+    color: #FFFFFF; /* White text */
+    border-color: var(--html-orange);
+}
+
+body.dark-mode .syllabus-link:hover {
+    background-color: var(--html-dark-orange); /* Darker Orange */
+    border-color: var(--html-dark-orange);
+}
+
+/* Dark mode code highlighting (already dark-themed, ensure colors remain) */
+body.dark-mode pre code.code-snippet {
+    background-color: var(--html-dark-bg);
+    color: var(--html-light-text);
+}
+body.dark-mode .code-keyword { color: var(--code-keyword-purple); }
+body.dark-mode .code-string { color: var(--code-string-green); }
+body.dark-mode .code-comment { color: var(--code-comment-grey); font-style: italic; }
+body.dark-mode .code-function { color: var(--code-function-blue); }
+body.dark-mode .code-parameter { color: var(--code-parameter-orange); }
+body.dark-mode .code-variable { color: var(--code-variable-red); }
+body.dark-mode .code-number { color: var(--code-number-orange); }
+/* Explicitly style HTML tags and attributes if needed within code snippets */
+body.dark-mode .code-snippet .html-tag { color: var(--code-variable-red); }
+body.dark-mode .code-snippet .html-attr-name { color: var(--code-parameter-orange); }
+body.dark-mode .code-snippet .html-attr-value { color: var(--code-string-green); }
+body.dark-mode .code-snippet .html-doctype { color: var(--code-comment-grey); }
+body.dark-mode .code-snippet .html-comment { color: var(--code-comment-grey); font-style: italic; }
+
+
+/* Dark Mode Vertical Nav */
+body.dark-mode .vertical-nav {
+    background-color: rgba(30, 30, 30, 0.95); /* Darker, more opaque background */
+    box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .vertical-nav a.nav-main-link,
+body.dark-mode .vertical-nav button.nav-main-link {
+    color: var(--html-orange); /* HTML Orange text */
+}
+
+body.dark-mode .vertical-nav a.nav-main-link:hover,
+body.dark-mode .vertical-nav button.nav-main-link:hover {
+    background-color: var(--html-orange); /* HTML Orange hover */
+    color: #FFFFFF; /* White text */
+}
+
+body.dark-mode .nav-item {
+    border-bottom: 1px solid rgba(212, 212, 212, 0.2); /* Faint light gray separator */
+}
+
+body.dark-mode .sub-nav {
+    background-color: rgba(0, 0, 0, 0.3); /* Darker sub-nav background */
+}
+
+body.dark-mode .sub-nav a {
+    color: #AAAAAA; /* Medium gray sub-link */
+}
+
+body.dark-mode .sub-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Faint white highlight */
+}
+/* --- End Dark Mode Styles --- */
+
+
+/* --- MOBILE RESPONSIVE STYLES (Layout unchanged, Colors updated where necessary) --- */
+@media (max-width: 768px) {
+
+    /* Basic resets and adjustments */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: hidden; width: 100%; }
+    body { font-size: 14px; -webkit-text-size-adjust: 100%; padding-top: 55px; position: relative; }
+    p, li, h1, h2, h3, h4, .tagline, .logo, nav a, .button, .syllabus-link, footer p, .syllabus-card p { overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; hyphens: auto; max-width: 100%; }
+    .container { padding-left: 12px; padding-right: 12px; }
+
+    /* Font size adjustments */
+    h1, .hero-content h1 { font-size: 1.8rem; line-height: 1.2; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.2rem; }
+    h4 { font-size: 1.0rem; }
+    .full-width { padding: 20px 0; }
+
+    /* Header & Navigation */
+    header { padding: 0.5rem 0; height: 55px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; left: 0; }
+    body.dark-mode header { background-color: #3a3f47; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 0 15px; height: 100%; position: relative; }
+    .logo { font-size: 1.2rem; margin: 0; flex-shrink: 0; }
+
+    /* Show Hamburger Button, hide desktop nav */
+    .menu-toggle { display: block; order: 3; /* Place it last in flex order */ }
+    header nav > ul { display: none !important; /* Permanently hide header nav list */ }
+
+    /* Vertical Navigation becomes Sidebar */
+    .vertical-nav {
+        display: block;
+        position: fixed;
+        left: -250px; /* Start off-screen */
+        top: 55px; /* Position below header */
+        width: 200px;
+        height: calc(100vh - 55px); /* Full height below header */
+        background-color: rgba(40, 44, 52, 0.98); /* More opaque light mode */
+        z-index: 105; /* High z-index for sidebar */
+        overflow-y: auto;
+        transition: left 0.3s ease-in-out; /* Slide effect */
+        border-right: 1px solid #444;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        box-shadow: 3px 0px 6px rgba(0,0,0,0.2); /* Shadow when open */
+    }
+    body.dark-mode .vertical-nav {
+        background-color: rgba(30, 30, 30, 0.98); /* More opaque dark mode */
+        border-right: 1px solid var(--html-border-dark);
+    }
+
+    /* Active state for sidebar */
+    .vertical-nav.sidebar-active {
+        left: 0; /* Slide into view */
+    }
+
+    /* Styling within the sidebar */
+    .vertical-nav a.nav-main-link,
+    .vertical-nav button.nav-main-link { padding: 10px 15px; font-size: 0.95rem; }
+    .vertical-nav .sub-nav a { padding: 6px 15px 6px 25px; font-size: 0.85rem; }
+    .vertical-nav .sub-nav { position: static; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background-color: rgba(0, 0, 0, 0.1); }
+    body.dark-mode .vertical-nav .sub-nav { background-color: rgba(0, 0, 0, 0.2); }
+    .vertical-nav .sub-nav.show { max-height: 500px; }
+
+    /* Hero Section */
+    .hero-content { padding: 25px 15px; overflow-x: hidden; }
+    .hero-content .tagline { font-size: 0.9rem; margin-bottom: 20px; }
+    .hero-content .button {
+        display: block;
+        margin-top: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+    }
+
+    /* Syllabus Grid */
+    .syllabus-grid { grid-template-columns: 1fr; /* Stack cards vertically */ gap: 15px; }
+    .syllabus-card { padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.08); overflow-x: hidden; }
+    .syllabus-card p { font-size: 0.9rem; }
+    .syllabus-card ul { padding-left: 5px; }
+    .syllabus-card ul li { font-size: 0.85rem; }
+    .syllabus-card li::before { margin-right: 0.5em; }
+    .syllabus-link { padding: 6px 12px; font-size: 0.8rem; }
+
+    /* Content Blocks & Code */
+    .content-block { overflow-x: hidden; }
+    .content-block p, .content-block li { font-size: 0.9rem; line-height: 1.5; }
+    .content-block ul, .content-block ol { padding-left: 20px; }
+    .content-block li { margin-bottom: 6px; }
+    .content-block pre { padding: 10px; font-size: 0.75em; line-height: 1.4; white-space: pre-wrap; word-wrap: break-word; word-break: break-all; overflow-x: auto; max-width: 100%; }
+    pre code.code-snippet { font-size: 1em; /* Relative to pre */ display: block; }
+
+    /* Tables - make them scrollable */
+    .content-block table { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; border: 1px solid var(--html-border-light); margin-bottom: 15px; font-size: 0.85rem; }
+    body.dark-mode .content-block table { border: 1px solid var(--html-border-dark); }
+    .content-block th, .content-block td { padding: 5px 7px; white-space: normal; /* Allow wrapping within cells */ }
+
+    /* Dark Mode Toggle Button */
+    #darkModeToggle { position: fixed; top: 70px; /* Adjust position */ right: 15px; padding: 10px; font-size: 1.1em; z-index: 101; }
+
+    /* Footer */
+    footer { padding: 0.8rem 0; font-size: 0.75rem; }
+
+} /* End of @media (max-width: 768px) */
+
+
+/* Optional: Further adjustments for very small screens */
+@media (max-width: 480px) {
+    h1, .hero-content h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; }
+    h3 { font-size: 1.1rem; }
+    .logo { font-size: 1.1rem; }
+    .vertical-nav { width: 180px; left: -200px; /* Ensure it's off-screen */ }
+    #darkModeToggle { top: 65px; right: 10px; padding: 8px; font-size: 1em; }
+}
+/* --- END MOBILE RESPONSIVE STYLES ---  */
+

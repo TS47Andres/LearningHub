@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Learning - Week 6: Forms Part 2</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="html.ico" type="image/x-icon"> </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">HTML</span>earn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#checkbox-radio-section">Checkbox/Radio</a></li>
+                <li><a href="#select-section">Dropdowns</a></li>
+                <li><a href="#textarea-section">Text Areas</a></li>
+                <li><a href="#grouping-section">Grouping</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 6: More Form Controls</h1>
+                <p class="tagline">Expand your form-building skills with checkboxes, radio buttons, dropdowns, and more.</p>
+                <a href="#checkbox-radio-section" class="button">Explore Chapter 6</a>
+            </div>
+        </section>
+
+        <section id="checkbox-radio-section" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 6: Advanced Form Elements</h2>
+                <h3>Checkboxes and Radio Buttons</h3>
+
+                <h4>Checkboxes (`type="checkbox"`)</h4>
+                <p>Checkboxes allow users to select zero or more options from a set.</p>
+                <pre><code class="code-snippet html">&lt;form action="/process" method="post"&gt;
+  &lt;p&gt;Select your interests:&lt;/p&gt;
+  &lt;input type="checkbox" id="interest1" name="interests" value="music"&gt;
+  &lt;label for="interest1"&gt;Music&lt;/label&gt;&lt;br&gt;
+
+  &lt;input type="checkbox" id="interest2" name="interests" value="sports" checked&gt; &lt;!-- 'checked' pre-selects --&gt;
+  &lt;label for="interest2"&gt;Sports&lt;/label&gt;&lt;br&gt;
+
+  &lt;input type="checkbox" id="interest3" name="interests" value="reading"&gt;
+  &lt;label for="interest3"&gt;Reading&lt;/label&gt;&lt;br&gt;&lt;br&gt;
+
+  &lt;input type="submit" value="Submit Choices"&gt;
+&lt;/form&gt;</code></pre>
+                <p>Key points for checkboxes:</p>
+                <ul>
+                    <li>Each checkbox should have a unique `id` for its corresponding `<label>`.</li>
+                    <li>Checkboxes that belong to the same group should share the same `name` attribute.</li>
+                    <li>The `value` attribute specifies the data sent to the server if the checkbox is checked.</li>
+                    <li>The boolean `checked` attribute makes the checkbox selected by default.</li>
+                </ul>
+
+                <h4>Radio Buttons (`type="radio"`)</h4>
+                <p>Radio buttons allow users to select exactly one option from a set.</p>
+                <pre><code class="code-snippet html">&lt;form action="/process" method="post"&gt;
+  &lt;p&gt;Choose your preferred contact method:&lt;/p&gt;
+  &lt;input type="radio" id="contact_email" name="contact_pref" value="email" checked&gt;
+  &lt;label for="contact_email"&gt;Email&lt;/label&gt;&lt;br&gt;
+
+  &lt;input type="radio" id="contact_phone" name="contact_pref" value="phone"&gt;
+  &lt;label for="contact_phone"&gt;Phone&lt;/label&gt;&lt;br&gt;
+
+  &lt;input type="radio" id="contact_mail" name="contact_pref" value="mail"&gt;
+  &lt;label for="contact_mail"&gt;Mail&lt;/label&gt;&lt;br&gt;&lt;br&gt;
+
+  &lt;input type="submit" value="Submit Preference"&gt;
+&lt;/form&gt;</code></pre>
+                <p>Key points for radio buttons:</p>
+                <ul>
+                    <li>All radio buttons within the same group <strong>must</strong> have the same `name` attribute. This is how the browser knows only one can be selected.</li>
+                    <li>Each radio button needs a unique `id` for its `<label>`.</li>
+                    <li>The `value` attribute is crucial for identifying which option was selected when the data is sent.</li>
+                    <li>Use the `checked` attribute to set a default selection.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="select-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Dropdown Lists (&lt;select&gt; and &lt;option&gt;)</h3>
+                <p>The &lt;select&gt; element creates a dropdown list, allowing users to choose one (or multiple, with the `multiple` attribute) options from a predefined list contained within &lt;option&gt; tags.</p>
+                <pre><code class="code-snippet html">&lt;form action="/process" method="post"&gt;
+  &lt;label for="country_select"&gt;Choose a country:&lt;/label&gt;
+  &lt;select id="country_select" name="country"&gt;
+    &lt;option value=""&gt;--Please choose an option--&lt;/option&gt; &lt;!-- Placeholder option --&gt;
+    &lt;option value="usa"&gt;United States&lt;/option&gt;
+    &lt;option value="canada"&gt;Canada&lt;/option&gt;
+    &lt;option value="uk" selected&gt;United Kingdom&lt;/option&gt; &lt;!-- 'selected' pre-selects --&gt;
+    &lt;option value="australia"&gt;Australia&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;br&gt;&lt;br&gt;
+
+  &lt;input type="submit" value="Submit Country"&gt;
+&lt;/form&gt;</code></pre>
+                <ul>
+                    <li>The &lt;select&gt; element needs `name` and `id` attributes.</li>
+                    <li>Each &lt;option&gt; represents one choice in the list.</li>
+                    <li>The `value` attribute of the selected &lt;option&gt; is sent to the server. If omitted, the text content of the option is sent.</li>
+                    <li>The boolean `selected` attribute marks an option as the default choice.</li>
+                    <li>You can group related options using the &lt;optgroup&gt; tag with a `label` attribute.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="textarea-section" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Text Areas (&lt;textarea&gt;)</h3>
+                <p>The &lt;textarea&gt; element defines a multi-line text input control, suitable for longer messages or comments.</p>
+                <pre><code class="code-snippet html">&lt;form action="/process" method="post"&gt;
+  &lt;label for="message"&gt;Your Message:&lt;/label&gt;&lt;br&gt;
+  &lt;textarea id="message" name="user_message" rows="5" cols="40" placeholder="Enter your comments here..."&gt;&lt;/textarea&gt;
+  &lt;br&gt;&lt;br&gt;
+
+  &lt;input type="submit" value="Send Message"&gt;
+&lt;/form&gt;</code></pre>
+                <ul>
+                    <li>Unlike &lt;input&gt;, &lt;textarea&gt; is not an empty tag; it has opening and closing tags. Any text between the tags becomes the default content.</li>
+                    <li>The `rows` attribute specifies the visible number of text lines.</li>
+                    <li>The `cols` attribute specifies the visible width in average character widths.</li>
+                    <li>Use CSS for more precise control over size and styling.</li>
+                    <li>It requires `name` and `id` attributes like other form controls.</li>
+                    <li>The `placeholder` attribute works similarly to text inputs.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="grouping-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Grouping Form Controls (&lt;fieldset&gt; and &lt;legend&gt;)</h3>
+                <p>You can group related form controls together using the &lt;fieldset&gt; element. This improves structure and accessibility.</p>
+                <p>The &lt;legend&gt; element provides a caption or title for the &lt;fieldset&gt; group.</p>
+                <pre><code class="code-snippet html">&lt;form action="/process" method="post"&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Personal Information&lt;/legend&gt;
+
+    &lt;label for="fname"&gt;First Name:&lt;/label&gt;
+    &lt;input type="text" id="fname" name="firstName"&gt;&lt;br&gt;&lt;br&gt;
+
+    &lt;label for="lname"&gt;Last Name:&lt;/label&gt;
+    &lt;input type="text" id="lname" name="lastName"&gt;&lt;br&gt;&lt;br&gt;
+  &lt;/fieldset&gt;
+  &lt;br&gt;
+
+  &lt;fieldset&gt;
+    &lt;legend&gt;Contact Preference&lt;/legend&gt;
+
+    &lt;input type="radio" id="pref_email" name="preference" value="email" checked&gt;
+    &lt;label for="pref_email"&gt;Email&lt;/label&gt;&lt;br&gt;
+
+    &lt;input type="radio" id="pref_phone" name="preference" value="phone"&gt;
+    &lt;label for="pref_phone"&gt;Phone&lt;/label&gt;
+  &lt;/fieldset&gt;
+  &lt;br&gt;
+
+  &lt;input type="submit" value="Submit All"&gt;
+&lt;/form&gt;</code></pre>
+                <p>Browsers typically render a border around the &lt;fieldset&gt; with the &lt;legend&gt; embedded in the top border. This visual grouping helps users understand the form's structure.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 HTMLLearn - Your HTML Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro</a>
+                <a href="Week1.html#what-is-html-section">What is HTML?</a>
+                <a href="Week1.html#basic-structure-section">Structure</a>
+                <a href="Week1.html#setup-section">Setup</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#formatting-section">Formatting</a>
+                <a href="Week2.html#phrase-tags-section">Phrase Tags</a>
+                <a href="Week2.html#links-section">Links</a>
+                <a href="Week2.html#paths-section">Paths</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#lists-section">Lists</a>
+                <a href="Week3.html#images-section">Images</a>
+                <a href="Week3.html#image-formats-section">Formats</a>
+                <a href="Week3.html#image-attributes-section">Attributes</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#table-structure">Structure</a>
+                <a href="Week4.html#table-sections">Sections</a>
+                <a href="Week4.html#spanning">Spanning Cells</a>
+                <a href="Week4.html#headers-captions">Headers & Captions</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#form-tag-section">Form Tag</a>
+                 <a href="Week5.html#input-fields-section">Input Fields</a>
+                 <a href="Week5.html#labels-section">Labels</a>
+                 <a href="Week5.html#attributes-section">Attributes</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#checkbox-radio-section">Checkbox/Radio</a>
+                <a href="#select-section">Dropdowns</a>
+                <a href="#textarea-section">Text Areas</a>
+                <a href="#grouping-section">Grouping</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#semantic">Semantic HTML</a>
+                <a href="Week7.html#multimedia">Audio/Video</a>
+                <a href="Week7.html#iframe">Iframe</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#review">Review</a>
+                <a href="Week8.html#best-practices">Best Practices</a>
+                <a href="Week8.html#integration">Integration</a>
+                <a href="Week8.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

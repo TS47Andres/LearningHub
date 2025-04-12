@@ -1,0 +1,136 @@
+CPPLearn: 12-Week C++ Syllabus
+
+Week 1: Introduction to C++ & Setup
+
+What is C++? History and Applications (Gaming, Systems, Finance, etc.)
+Why learn C++? (Performance, Control, Versatility)
+Setting up the Environment:
+Choosing a Compiler (g++, Clang, MSVC)
+Code Editors/IDEs (VS Code, CLion, Visual Studio)
+Compiler Installation and Configuration
+Your First C++ Program: Hello, World!
+Basic structure (#include <iostream>, int main())
+Compiling and running
+Basic Syntax: Comments, Statements, {} blocks
+
+
+Week 2: Variables, Data Types & Operators
+
+Variables: Naming, Declaration, Initialization
+Fundamental Data Types: int, float, double, char, bool, void
+Constants (const)
+Operators:
+Arithmetic (+, -, *, /, %)
+Comparison (==, !=, >, <, >=, <=)
+Logical (&&, ||, !)
+Assignment (=, +=, -=, etc.)
+Type Casting
+
+
+Week 3: Input/Output & Basic Control Flow
+
+Standard Input/Output (iostream): std::cout (output), std::cin (input)
+Input formatting and potential issues
+Control Flow - Conditionals:
+if, else if, else statements
+Nested if statements
+The switch statement
+
+
+Week 4: More Control Flow - Loops
+
+Repeating actions:
+for loops (initialization, condition, increment)
+while loops (condition checked first)
+do...while loops (condition checked after first iteration)
+Controlling loops: break and continue
+Nested loops
+
+
+Week 5: Functions
+
+Defining functions: Return type, name, parameters
+Function prototypes (declarations) vs. definitions
+Passing arguments (by value)
+Returning values (return statement)
+Function overloading (multiple functions with the same name, different parameters)
+Variable scope (local vs. global)
+
+
+Week 6: Arrays & Strings
+
+Arrays:
+Declaration, initialization
+Accessing elements (indexing)
+Iterating over arrays
+Multidimensional arrays (basic)
+C-style strings (char arrays)
+Introduction to std::string (from <string> header):
+Creation, concatenation, comparison
+Common methods (length, find, substr, etc.)
+
+
+Week 7: Pointers & References
+
+Memory Addresses
+Pointers:
+Declaration (*), dereferencing (*), address-of operator (&)
+Pointers and arrays
+Dynamic memory allocation (new, delete) - Importance of memory management
+References:
+Declaration (&), usage as aliases
+Passing arguments by reference (&)
+
+
+Week 8: Introduction to Object-Oriented Programming (OOP)
+
+Core OOP Concepts: Encapsulation, Abstraction, Inheritance, Polymorphism
+Classes and Objects:
+Defining classes (class keyword)
+Access specifiers (public, private, protected)
+Member variables (attributes)
+Member functions (methods)
+Creating objects (instances of classes)
+
+
+Week 9: Classes In-Depth
+
+Constructors: Default, parameterized, copy constructors
+Destructors (~ClassName())
+The this pointer
+static members (variables and methods)
+Friend functions and classes (briefly)
+
+
+Week 10: Inheritance & Polymorphism
+
+Inheritance:
+Base and derived classes
+Types of inheritance (public, protected, private)
+Overriding methods
+Polymorphism:
+Virtual functions (virtual keyword)
+Abstract classes and pure virtual functions
+Runtime vs. Compile-time polymorphism
+
+
+Week 11: Introduction to the Standard Template Library (STL)
+
+Overview of the STL: Containers, Iterators, Algorithms
+Containers:
+Sequence Containers: std::vector, std::list, std::deque (introduction and basic usage)
+Associative Containers: std::map, std::set (introduction and basic usage)
+Iterators: Accessing elements in containers
+Basic Algorithms (from <algorithm>): sort, find, copy, etc.
+
+
+Week 12: File Handling & Next Steps
+
+File I/O (fstream):
+Opening files (ofstream, ifstream, fstream)
+Reading from files
+Writing to files
+Closing files
+Basic Error Handling (try, catch, throw) - Introduction
+Where to go next: Advanced STL, Templates, Exceptions in detail, Build Systems (Make, CMake), Graphics Libraries, Game Engines, etc.
+Mini-Project: Applying concepts learned.

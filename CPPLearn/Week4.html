@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPP Learning - Week 4: Loops</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="cpp.ico" type="image/x-icon">
+    </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="cpp-color">CPP</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#for-loops">for Loops</a></li>
+                <li><a href="#while-loops">while Loops</a></li>
+                <li><a href="#do-while">do...while</a></li>
+                <li><a href="#break-continue">break/continue</a></li>
+                <li><a href="#nested-loops">Nested Loops</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 4: Automating Tasks with Loops</h1>
+                <p class="tagline">Learn how to use `for`, `while`, and `do...while` loops to execute code repeatedly in C++.</p>
+                <a href="#for-loops" class="button">Explore Chapter 4</a>
+            </div>
+        </section>
+
+        <section id="for-loops" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 4: Repeating Actions with Loops</h2>
+                <h3>`for` Loops: Iterating a Specific Number of Times.</h3>
+                <p>The `for` loop is commonly used when you know in advance how many times you want to repeat a block of code or when iterating over a range.</p>
+                <h4>Classic `for` Loop Syntax</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-keyword">for</span> (initialization; condition; update) {
+    <span class="code-cpp-comment">// Code block to be executed</span>
+    statement1;
+    statement2;
+    <span class="code-cpp-comment">// ...</span>
+}</code></pre>
+                <ul>
+                    <li><strong>initialization</strong>: Executed once before the loop starts. Often used to declare and initialize a loop counter (e.g., `int i = 0`).</li>
+                    <li><strong>condition</strong>: Evaluated before each iteration. If it's `true`, the loop body executes. If it's `false`, the loop terminates.</li>
+                    <li><strong>update</strong>: Executed at the end of each iteration, typically used to increment or decrement the loop counter (e.g., `i++`, `i--`).</li>
+                </ul>
+                <h4>Example: Counting 0 to 4</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-cpp-keyword">for</span> (<span class="code-cpp-type">int</span> i = <span class="code-cpp-number">0</span>; i < <span class="code-cpp-number">5</span>; i++) {
+        std::cout &lt;&lt; <span class="code-cpp-string">"The number is "</span> &lt;&lt; i &lt;&lt; std::endl;
+    }
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>The number is 0
+The number is 1
+The number is 2
+The number is 3
+The number is 4</code></pre>
+                 <h4>Range-based `for` Loop (C++11 and later)</h4>
+                 <p>Modern C++ offers a simpler syntax for iterating over elements of a container (like arrays or vectors, which we'll cover later).</p>
+                 <pre><code class="code-snippet"><span class="code-cpp-comment">// Example with an array (Week 6 topic)</span>
+<span class="code-cpp-type">int</span> numbers[] = {<span class="code-cpp-number">10</span>, <span class="code-cpp-number">20</span>, <span class="code-cpp-number">30</span>};
+<span class="code-cpp-keyword">for</span> (<span class="code-cpp-type">int</span> num : numbers) {
+    std::cout &lt;&lt; num &lt;&lt; <span class="code-cpp-string">" "</span>; <span class="code-cpp-comment">// Output: 10 20 30</span>
+}
+std::cout &lt;&lt; std::endl;</code></pre>
+            </div>
+        </section>
+
+        <section id="while-loops" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>`while` Loops: Repeating Based on a Condition.</h3>
+                <p>A `while` loop executes a block of code repeatedly as long as a specified condition remains `true`. The condition is checked <em>before</em> each iteration.</p>
+                <h4>Syntax</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-keyword">while</span> (condition) {
+    <span class="code-cpp-comment">// Code to execute as long as condition is true</span>
+    statement1;
+    <span class="code-cpp-comment">// IMPORTANT: Ensure the condition eventually becomes false!</span>
+}</code></pre>
+                <ul>
+                    <li>If the condition is initially false, the loop body never executes.</li>
+                    <li>You must include logic within the loop to eventually make the condition false, otherwise, you'll create an infinite loop.</li>
+                </ul>
+                <h4>Example: Countdown</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-cpp-type">int</span> count = <span class="code-cpp-number">3</span>;
+    <span class="code-cpp-keyword">while</span> (count > 0) {
+        std::cout &lt;&lt; count &lt;&lt; <span class="code-cpp-string">"..."</span> &lt;&lt; std::endl;
+        count--; <span class="code-cpp-comment">// Decrement count, crucial to eventually exit</span>
+    }
+    std::cout &lt;&lt; <span class="code-cpp-string">"Blast off!"</span> &lt;&lt; std::endl;
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>3...
+2...
+1...
+Blast off!</code></pre>
+            </div>
+        </section>
+
+        <section id="do-while" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                 <h3>`do...while` Loops: Condition Checked After Execution.</h3>
+                <p>The `do...while` loop is similar to `while`, but the condition is checked <em>after</em> the loop body executes. This guarantees that the loop body will run at least once, even if the condition is initially false.</p>
+                <h4>Syntax</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-keyword">do</span> {
+    <span class="code-cpp-comment">// Code to execute</span>
+    <span class="code-cpp-comment">// This block runs at least once</span>
+    statement1;
+    <span class="code-cpp-comment">// Ensure condition might eventually become false</span>
+} <span class="code-cpp-keyword">while</span> (condition); <span class="code-cpp-comment">// Note the semicolon at the end</span></code></pre>
+                <h4>Example: Simple Menu</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-cpp-type">int</span> choice;
+    <span class="code-cpp-keyword">do</span> {
+        std::cout &lt;&lt; <span class="code-cpp-string">"--- Menu ---\n"</span>;
+        std::cout &lt;&lt; <span class="code-cpp-string">"1. Option 1\n"</span>;
+        std::cout &lt;&lt; <span class="code-cpp-string">"2. Option 2\n"</span>;
+        std::cout &lt;&lt; <span class="code-cpp-string">"0. Exit\n"</span>;
+        std::cout &lt;&lt; <span class="code-cpp-string">"Enter your choice: "</span>;
+        std::cin &gt;&gt; choice;
+
+        <span class="code-cpp-comment">// Process choice here (omitted for brevity)</span>
+        <span class="code-cpp-keyword">if</span> (choice != 0) {
+            std::cout &lt;&lt; <span class="code-cpp-string">"Processing choice "</span> &lt;&lt; choice &lt;&lt; <span class="code-cpp-string">"...\n"</span>;
+        }
+
+    } <span class="code-cpp-keyword">while</span> (choice != 0); <span class="code-cpp-comment">// Loop continues until user enters 0</span>
+
+    std::cout &lt;&lt; <span class="code-cpp-string">"Exiting menu."</span> &lt;&lt; std::endl;
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}
+</code></pre>
+                 <p>`do...while` is less common than `for` or `while`, but useful when you need to guarantee at least one execution of the loop body, like in menu-driven programs.</p>
+            </div>
+        </section>
+
+        <section id="break-continue" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>`break` and `continue`: Controlling Loop Flow.</h3>
+                <p>These statements allow you to alter the normal execution flow within loops (`for`, `while`, `do...while`).</p>
+                <h4>`break` Statement</h4>
+                <p>The `break` statement immediately terminates the innermost loop it's contained within. Program execution continues with the statement immediately following the terminated loop.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-keyword">for</span> (<span class="code-cpp-type">int</span> i = 0; i < 10; i++) {
+    <span class="code-cpp-keyword">if</span> (i == 5) {
+        std::cout &lt;&lt; <span class="code-cpp-string">"Found 5! Breaking loop."</span> &lt;&lt; std::endl;
+        <span class="code-cpp-keyword">break</span>; <span class="code-cpp-comment">// Exit the loop immediately</span>
+    }
+    std::cout &lt;&lt; <span class="code-cpp-string">"Current number: "</span> &lt;&lt; i &lt;&lt; std::endl;
+}
+std::cout &lt;&lt; <span class="code-cpp-string">"Loop finished."</span> &lt;&lt; std::endl;</code></pre>
+                 <p>Output:</p>
+                <pre><code>Current number: 0
+Current number: 1
+Current number: 2
+Current number: 3
+Current number: 4
+Found 5! Breaking loop.
+Loop finished.</code></pre>
+                <h4>`continue` Statement</h4>
+                <p>The `continue` statement skips the <em>rest</em> of the current iteration of the loop and proceeds immediately to the next iteration's condition check (`while`, `do...while`) or update expression (`for`).</p>
+                <pre><code class="code-snippet"><span class="code-cpp-keyword">for</span> (<span class="code-cpp-type">int</span> i = 1; i <= 5; i++) {
+    <span class="code-cpp-keyword">if</span> (i % 2 != 0) { <span class="code-cpp-comment">// If the number is odd</span>
+        <span class="code-cpp-keyword">continue</span>; <span class="code-cpp-comment">// Skip the rest of this iteration</span>
+    }
+    <span class="code-cpp-comment">// This line only runs for even numbers</span>
+    std::cout &lt;&lt; <span class="code-cpp-string">"Found an even number: "</span> &lt;&lt; i &lt;&lt; std::endl;
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>Found an even number: 2
+Found an even number: 4</code></pre>
+            </div>
+        </section>
+
+        <section id="nested-loops" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h3>Nested Loops: Loops Inside Loops.</h3>
+                <p>You can place one loop inside another. The inner loop will complete all its iterations for each single iteration of the outer loop.</p>
+                <h4>Example: Creating a Grid Pattern</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-cpp-type">int</span> rows = 3;
+    <span class="code-cpp-type">int</span> cols = 4;
+
+    <span class="code-cpp-keyword">for</span> (<span class="code-cpp-type">int</span> i = 0; i < rows; ++i) { <span class="code-cpp-comment">// Outer loop (for rows)</span>
+        <span class="code-cpp-keyword">for</span> (<span class="code-cpp-type">int</span> j = 0; j < cols; ++j) { <span class="code-cpp-comment">// Inner loop (for columns)</span>
+            std::cout &lt;&lt; <span class="code-cpp-string">"("</span> &lt;&lt; i &lt;&lt; <span class="code-cpp-string">","</span> &lt;&lt; j &lt;&lt; <span class="code-cpp-string">") "</span>; <span class="code-cpp-comment">// Print coordinate</span>
+        }
+        std::cout &lt;&lt; std::endl; <span class="code-cpp-comment">// Newline after each row</span>
+    }
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>(0,0) (0,1) (0,2) (0,3)
+(1,0) (1,1) (1,2) (1,3)
+(2,0) (2,1) (2,2) (2,3)
+</code></pre>
+                <p>Nested loops are common for working with multi-dimensional data structures (like 2D arrays or matrices) or when performing operations that require iterating through combinations of elements.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CPPLearn - Your C++ Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#intro-cpp">Intro C++</a>
+                <a href="Week1.html#why-learn-cpp">Why C++?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#hello-world">Hello World</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#constants">Constants</a>
+                <a href="Week2.html#operators">Operators</a>
+                <a href="Week2.html#type-casting">Type Casting</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#io-stream">Input/Output</a>
+                 <a href="Week3.html#conditionals">Conditionals</a>
+                 <a href="Week3.html#nested-if">Nested If</a>
+                 <a href="Week3.html#switch">Switch</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#for-loops">for Loops</a>
+                <a href="#while-loops">while Loops</a>
+                <a href="#do-while">do...while</a>
+                <a href="#break-continue">break/continue</a>
+                <a href="#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#functions-def">Definition</a>
+                <a href="Week5.html#functions-params">Parameters</a>
+                <a href="Week5.html#functions-return">Return</a>
+                <a href="Week5.html#functions-overload">Overloading</a>
+                <a href="Week5.html#scope">Scope</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#arrays">Arrays</a>
+                <a href="Week6.html#multi-arrays">Multi-Dim Arrays</a>
+                <a href="Week6.html#c-strings">C-Strings</a>
+                <a href="Week6.html#std-string">std::string</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#pointers">Pointers</a>
+                <a href="Week7.html#dynamic-mem">Dynamic Memory</a>
+                <a href="Week7.html#references">References</a>
+                <a href="Week7.html#pass-by-ref">Pass by Reference</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#oop-concepts">OOP Concepts</a>
+                <a href="Week8.html#classes-objects">Classes/Objects</a>
+                <a href="Week8.html#access-specifiers">Access Specifiers</a>
+                <a href="Week8.html#members">Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#constructors">Constructors</a>
+                <a href="Week9.html#destructors">Destructors</a>
+                <a href="Week9.html#this-pointer">`this` Pointer</a>
+                <a href="Week9.html#static-members">Static Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#inheritance">Inheritance</a>
+                <a href="Week10.html#overriding">Overriding</a>
+                <a href="Week10.html#polymorphism">Polymorphism</a>
+                <a href="Week10.html#virtual-funcs">Virtual Functions</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#stl-overview">STL Overview</a>
+                <a href="Week11.html#containers">Containers</a>
+                <a href="Week11.html#iterators">Iterators</a>
+                <a href="Week11.html#algorithms">Algorithms</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#file-io">File I/O</a>
+                <a href="Week12.html#error-handling">Error Handling</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+                <a href="Week12.html#project">Mini-Project</a>
+            </div>
+        </div>
+
+    </div> </body>
+</html>

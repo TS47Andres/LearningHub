@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPP Learning - Week 12: File I/O & Next Steps</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="cpp.ico" type="image/x-icon">
+    </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="cpp-color">CPP</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#file-io">File I/O</a></li>
+                <li><a href="#error-handling">Error Handling</a></li>
+                <li><a href="#project">Mini-Project</a></li>
+                <li><a href="#next-steps">Next Steps</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 12: File Handling, Exceptions, and Your Path Forward</h1>
+                <p class="tagline">Learn to interact with files, handle errors gracefully, and plan your continued C++ journey.</p>
+                <a href="#file-io" class="button">Explore Chapter 12</a>
+            </div>
+        </section>
+
+        <section id="file-io" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 12: Working with Files and Looking Ahead</h2>
+                <h3>File I/O (`fstream`).</h3>
+                <p>Many applications need to read data from files or write results to files. C++ provides the `fstream` library for file input/output operations.</p>
+                <p>You typically need to include the `<fstream>` header.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;fstream&gt;</span> <span class="code-cpp-comment">// For file stream operations</span>
+<span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span> <span class="code-cpp-comment">// For std::cout, std::cerr</span>
+<span class="code-cpp-preprocessor">#include &lt;string&gt;</span>    <span class="code-cpp-comment">// For std::string</span></code></pre>
+
+                <h4>Writing to Files (`ofstream`)</h4>
+                <p>Use `std::ofstream` (output file stream) to write data to a file. If the file doesn't exist, it's created. If it does exist, its contents are typically discarded by default (use `std::ios::app` mode to append).</p>
+                <pre><code class="code-snippet"><span class="code-cpp-comment">// Create and open a file for writing</span>
+std::ofstream outputFile(<span class="code-cpp-string">"output.txt"</span>);
+
+<span class="code-cpp-keyword">if</span> (outputFile.is_open()) { <span class="code-cpp-comment">// Always check if the file opened successfully</span>
+    outputFile &lt;&lt; <span class="code-cpp-string">"This is the first line.\n"</span>;
+    outputFile &lt;&lt; <span class="code-cpp-string">"Writing some data: "</span> &lt;&lt; <span class="code-cpp-number">123</span> &lt;&lt; <span class="code-cpp-string">"\n"</span>;
+    outputFile.close(); <span class="code-cpp-comment">// Close the file when done</span>
+    std::cout &lt;&lt; <span class="code-cpp-string">"Successfully wrote to output.txt\n"</span>;
+} <span class="code-cpp-keyword">else</span> {
+    std::cerr &lt;&lt; <span class="code-cpp-string">"Unable to open file for writing!\n"</span>;
+}</code></pre>
+
+                <h4>Reading from Files (`ifstream`)</h4>
+                <p>Use `std::ifstream` (input file stream) to read data from a file.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-type">std::string</span> line;
+std::ifstream inputFile(<span class="code-cpp-string">"output.txt"</span>); <span class="code-cpp-comment">// Open the file we just wrote</span>
+
+<span class="code-cpp-keyword">if</span> (inputFile.is_open()) {
+    std::cout &lt;&lt; <span class="code-cpp-string">"Reading from output.txt:\n"</span>;
+    <span class="code-cpp-comment">// Read line by line</span>
+    <span class="code-cpp-keyword">while</span> (std::<span class="code-function">getline</span>(inputFile, line)) {
+        std::cout &lt;&lt; line &lt;&lt; <span class="code-cpp-string">'\n'</span>;
+    }
+    inputFile.close(); <span class="code-cpp-comment">// Close the file</span>
+} <span class="code-cpp-keyword">else</span> {
+    std::cerr &lt;&lt; <span class="code-cpp-string">"Unable to open file for reading!\n"</span>;
+}</code></pre>
+                <p>Remember to check if files opened correctly using `is_open()` and to `close()` files when you're finished. Using file streams within objects whose destructors automatically close the file (RAII principle) is a more robust approach, especially when dealing with potential errors.</p>
+            </div>
+        </section>
+
+        <section id="error-handling" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Basic Error Handling (`try`, `catch`, `throw`).</h3>
+                <p>Errors and exceptional situations can occur during program execution (e.g., trying to open a non-existent file, dividing by zero, invalid user input). C++ provides exception handling mechanisms to deal with these situations gracefully.</p>
+                <h4>Core Components</h4>
+                <ul>
+                    <li><strong>`try` Block:</strong> Encloses the code that might potentially throw an exception.</li>
+                    <li><strong>`catch` Block:</strong> Follows a `try` block. Contains the code to handle a specific type of exception if one is thrown within the `try` block. You can have multiple `catch` blocks for different exception types.</li>
+                    <li><strong>`throw` Statement:</strong> Used to signal that an exceptional situation has occurred. You typically throw an object (often an instance of a class derived from `std::exception`).</li>
+                </ul>
+                 <h4>Example</h4>
+                 <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+<span class="code-cpp-preprocessor">#include &lt;stdexcept&gt; <span class="code-cpp-comment">// For standard exception classes like std::runtime_error</span></span>
+
+<span class="code-cpp-type">double</span> <span class="code-cpp-function">divide</span>(<span class="code-cpp-type">double</span> numerator, <span class="code-cpp-type">double</span> denominator) {
+    <span class="code-cpp-keyword">if</span> (denominator == <span class="code-cpp-number">0.0</span>) {
+        <span class="code-cpp-keyword">throw</span> std::runtime_error(<span class="code-cpp-string">"Math error: Attempted to divide by zero"</span>); <span class="code-cpp-comment">// Throw an exception</span>
+    }
+    <span class="code-cpp-keyword">return</span> numerator / denominator;
+}
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-cpp-type">double</span> a = <span class="code-cpp-number">10.0</span>;
+    <span class="code-cpp-type">double</span> b = <span class="code-cpp-number">0.0</span>;
+    <span class="code-cpp-type">double</span> result;
+
+    <span class="code-cpp-keyword">try</span> {
+        std::cout &lt;&lt; <span class="code-cpp-string">"Attempting division..."</span> &lt;&lt; std::endl;
+        result = <span class="code-function">divide</span>(a, b); <span class="code-cpp-comment">// This might throw</span>
+        std::cout &lt;&lt; <span class="code-cpp-string">"Result: "</span> &lt;&lt; result &lt;&lt; std::endl; <span class="code-cpp-comment">// Won't execute if exception occurs</span>
+    }
+    <span class="code-cpp-keyword">catch</span> (<span class="code-cpp-keyword">const</span> std::runtime_error& e) { <span class="code-cpp-comment">// Catch the specific exception type</span>
+        std::cerr &lt;&lt; <span class="code-cpp-string">"Exception caught: "</span> &lt;&lt; e.what() &lt;&lt; <span class="code-cpp-string">'\n'</span>; <span class="code-cpp-comment">// .what() gets the error message</span>
+    }
+    <span class="code-cpp-comment">// Can have more catch blocks for different exception types</span>
+    <span class="code-cpp-comment">// catch (...) { // Catches any type of exception (use sparingly)</span>
+    <span class="code-cpp-comment">//    std::cerr << "An unknown error occurred.\n";</span>
+    <span class="code-cpp-comment">// }</span>
+
+    std::cout &lt;&lt; <span class="code-cpp-string">"Program continues after try-catch block."</span> &lt;&lt; std::endl;
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <p>Exception handling allows your program to recover from errors or terminate in a more controlled manner instead of crashing abruptly.</p>
+            </div>
+        </section>
+
+        <section id="project" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                 <h3>Mini-Project Idea.</h3>
+                 <p>To consolidate your learning, try creating a small project. This helps reinforce concepts and exposes practical challenges.</p>
+                 <p><strong>Idea: Simple Contact Management System</strong></p>
+                 <ol>
+                     <li><strong>Define a `Contact` class:</strong> With private members for name, phone number, email. Include a constructor and public getter methods.</li>
+                     <li><strong>Use `std::vector` or `std::map`:</strong> Store multiple `Contact` objects in an STL container (e.g., `std::vector<Contact>`).</li>
+                     <li><strong>Implement Core Features (Functions):</strong>
+                         <ul>
+                             <li>`addContact()`: Prompts the user for details and adds a new `Contact` object to your container.</li>
+                             <li>`viewContacts()`: Iterates through the container and displays all contact details neatly.</li>
+                             <li>`searchContact()`: Prompts for a name and displays the details if found.</li>
+                             <li>(Optional) `saveToFile()`: Writes the contact list to a text file using `ofstream`.</li>
+                             <li>(Optional) `loadFromFile()`: Reads the contact list from the text file using `ifstream` when the program starts.</li>
+                         </ul>
+                     </li>
+                     <li><strong>Create a Menu (`main` function):</strong> Use a loop (`do...while` is good here) to present a menu to the user (Add, View, Search, Exit) and call the appropriate functions based on their input.</li>
+                     <li><strong>(Optional) Add Basic Error Handling:</strong> Use `try-catch` for file operations or potentially invalid input.</li>
+                 </ol>
+                 <p>This project integrates classes, STL containers, file I/O, functions, and control flow.</p>
+            </div>
+        </section>
+
+        <section id="next-steps" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Where to Go Next?</h3>
+                <p>Congratulations on completing this 12-week introduction to C++!</p>
+                <p>You now have a strong foundation. The world of C++ is vast and deep. Here are some areas to explore further:</p>
+                <ul>
+                    <li><strong>Advanced STL:</strong> Explore more containers (`queue`, `stack`, `priority_queue`), advanced algorithms, and allocators.</li>
+                    <li><strong>Templates In-Depth:</strong> Master function templates and class templates for writing truly generic code.</li>
+                    <li><strong>Advanced OOP:</strong> Multiple inheritance, virtual inheritance, operator overloading, design patterns.</li>
+                    <li><strong>Modern C++ Features:</strong> Dive deeper into C++11, C++14, C++17, C++20 features (smart pointers, lambdas, concurrency features, modules, concepts, ranges, etc.).</li>
+                    <li><strong>Build Systems:</strong> Learn tools like CMake or Make for managing larger projects.</li>
+                    <li><strong>Debugging Tools:</strong> Get proficient with debuggers like GDB or the debugger integrated into your IDE.</li>
+                    <li><strong>Specific Application Domains:</strong>
+                        <ul>
+                             <li><strong>Game Development:</strong> Unreal Engine (C++), custom engines, graphics libraries (OpenGL, Vulkan, DirectX).</li>
+                             <li><strong>System Programming:</strong> OS interaction, networking, low-level optimization.</li>
+                             <li><strong>High-Performance Computing:</strong> Parallel programming (OpenMP, MPI), libraries like Boost.</li>
+                             <li><strong>Embedded Systems:</strong> Programming microcontrollers and resource-constrained devices.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Contribute to Open Source:</strong> Find a C++ project you're interested in and contribute!</li>
+                </ul>
+                 <p>The best way to learn is by building projects that interest you. Keep coding, keep experimenting, and keep learning!</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CPPLearn - Your C++ Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#intro-cpp">Intro C++</a>
+                <a href="Week1.html#why-learn-cpp">Why C++?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#hello-world">Hello World</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#constants">Constants</a>
+                <a href="Week2.html#operators">Operators</a>
+                <a href="Week2.html#type-casting">Type Casting</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#io-stream">Input/Output</a>
+                 <a href="Week3.html#conditionals">Conditionals</a>
+                 <a href="Week3.html#nested-if">Nested If</a>
+                 <a href="Week3.html#switch">Switch</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#for-loops">for Loops</a>
+                <a href="Week4.html#while-loops">while Loops</a>
+                <a href="Week4.html#do-while">do...while</a>
+                <a href="Week4.html#break-continue">break/continue</a>
+                <a href="Week4.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#functions-def">Definition</a>
+                <a href="Week5.html#functions-proto">Prototypes</a>
+                <a href="Week5.html#functions-params">Parameters</a>
+                <a href="Week5.html#functions-return">Return Values</a>
+                <a href="Week5.html#functions-overload">Overloading</a>
+                <a href="Week5.html#scope">Scope</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#arrays">Arrays</a>
+                <a href="Week6.html#multi-arrays">Multi-Dim Arrays</a>
+                <a href="Week6.html#c-strings">C-Strings</a>
+                <a href="Week6.html#std-string">std::string</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#memory-addresses">Memory</a>
+                <a href="Week7.html#pointers">Pointers</a>
+                <a href="Week7.html#dynamic-mem">Dynamic Memory</a>
+                <a href="Week7.html#references">References</a>
+                <a href="Week7.html#pass-by-ref">Pass by Reference</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#oop-concepts">OOP Concepts</a>
+                <a href="Week8.html#classes-objects">Classes/Objects</a>
+                <a href="Week8.html#access-specifiers">Access Specifiers</a>
+                <a href="Week8.html#members">Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#constructors">Constructors</a>
+                <a href="Week9.html#destructors">Destructors</a>
+                <a href="Week9.html#this-pointer">`this` Pointer</a>
+                <a href="Week9.html#static-members">Static Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#inheritance">Inheritance</a>
+                <a href="Week10.html#overriding">Overriding</a>
+                <a href="Week10.html#polymorphism">Polymorphism</a>
+                <a href="Week10.html#virtual-funcs">Virtual Functions</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#stl-overview">STL Overview</a>
+                <a href="Week11.html#containers">Containers</a>
+                <a href="Week11.html#iterators">Iterators</a>
+                <a href="Week11.html#algorithms">Algorithms</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#file-io">File I/O</a>
+                <a href="#error-handling">Error Handling</a>
+                <a href="#project">Mini-Project</a>
+                <a href="#next-steps">Next Steps</a>
+            </div>
+        </div>
+
+    </div> </body>
+</html>

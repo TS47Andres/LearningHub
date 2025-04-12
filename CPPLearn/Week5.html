@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPP Learning - Week 5: Functions</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="cpp.ico" type="image/x-icon">
+    </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="cpp-color">CPP</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#functions-def">Definition</a></li>
+                <li><a href="#functions-proto">Prototypes</a></li>
+                <li><a href="#functions-params">Parameters</a></li>
+                <li><a href="#functions-return">Return Values</a></li>
+                <li><a href="#functions-overload">Overloading</a></li>
+                <li><a href="#scope">Scope</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 5: Building Reusable Code with Functions</h1>
+                <p class="tagline">Learn to define and use functions to organize your C++ code effectively.</p>
+                <a href="#functions-def" class="button">Explore Chapter 5</a>
+            </div>
+        </section>
+
+        <section id="functions-def" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 5: Functions - Modularizing Your Code</h2>
+                <h3>Defining Functions.</h3>
+                <p>Functions are blocks of code designed to perform a specific task. They allow you to break down large programs into smaller, manageable, and reusable units. Using functions makes your code more organized, easier to understand, and simpler to debug and maintain.</p>
+                <h4>Syntax</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-type">return_type</span> <span class="code-cpp-function">function_name</span>(<span class="code-cpp-type">parameter_type1</span> parameter_name1, <span class="code-cpp-type">parameter_type2</span> parameter_name2, ...) {
+    <span class="code-cpp-comment">// Code block (function body)</span>
+    statement1;
+    statement2;
+    <span class="code-cpp-comment">// ...</span>
+    <span class="code-cpp-keyword">return</span> value; <span class="code-cpp-comment">// Optional: returns a value of 'return_type'</span>
+}</code></pre>
+                <ul>
+                    <li><strong>`return_type`</strong>: The data type of the value the function will return (e.g., `int`, `double`, `void` if it returns nothing).</li>
+                    <li><strong>`function_name`</strong>: A descriptive name for the function (following identifier rules).</li>
+                    <li><strong>`parameter list`</strong>: Enclosed in parentheses `()`, specifies the type and name of input values the function accepts. Can be empty if the function takes no input.</li>
+                    <li><strong>`{ ... }`</strong>: Curly braces enclose the function body, containing the code to be executed.</li>
+                    <li><strong>`return value;`</strong>: Sends a value back to the part of the code that called the function. The type of `value` must match `return_type`. Functions with `void` return type don't need a `return` statement, or can use `return;` to exit early.</li>
+                </ul>
+                <h4>Example: A Simple Greeting Function</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+<span class="code-cpp-preprocessor">#include &lt;string&gt;</span>
+
+<span class="code-cpp-comment">// Function definition</span>
+<span class="code-cpp-type">void</span> <span class="code-cpp-function">greet</span>(<span class="code-cpp-type">std::string</span> name) {
+    std::cout &lt;&lt; <span class="code-cpp-string">"Hello, "</span> &lt;&lt; name &lt;&lt; <span class="code-cpp-string">"!"</span> &lt;&lt; std::endl;
+}
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-function">greet</span>(<span class="code-cpp-string">"Alice"</span>); <span class="code-cpp-comment">// Calling the function</span>
+    <span class="code-function">greet</span>(<span class="code-cpp-string">"Bob"</span>);   <span class="code-cpp-comment">// Calling it again</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="functions-proto" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                 <h3>Function Prototypes (Declarations).</h3>
+                 <p>In C++, a function must be declared before it is called. If you define a function *after* the `main` function (or any function that calls it), you need to provide a <strong>function prototype</strong> (or declaration) beforehand.</p>
+                 <p>A prototype tells the compiler the function's name, return type, and parameter types, without providing the function body.</p>
+                <h4>Syntax</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-type">return_type</span> <span class="code-cpp-function">function_name</span>(<span class="code-cpp-type">parameter_type1</span>, <span class="code-cpp-type">parameter_type2</span>, ...); <span class="code-cpp-comment">// Note the semicolon!</span></code></pre>
+                <p>Parameter names are optional in the prototype but required in the definition.</p>
+                 <h4>Example</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-comment">// Function prototype (declaration)</span>
+<span class="code-cpp-type">int</span> <span class="code-cpp-function">add</span>(<span class="code-cpp-type">int</span> a, <span class="code-cpp-type">int</span> b);
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-cpp-type">int</span> result = <span class="code-function">add</span>(<span class="code-cpp-number">5</span>, <span class="code-cpp-number">3</span>); <span class="code-cpp-comment">// Function can be called because it was declared</span>
+    std::cout &lt;&lt; <span class="code-cpp-string">"Sum: "</span> &lt;&lt; result &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: Sum: 8</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}
+
+<span class="code-cpp-comment">// Function definition (provided later)</span>
+<span class="code-cpp-type">int</span> <span class="code-cpp-function">add</span>(<span class="code-cpp-type">int</span> a, <span class="code-cpp-type">int</span> b) {
+    <span class="code-cpp-keyword">return</span> a + b;
+}</code></pre>
+                <p>Prototypes are often placed in header files (`.h` or `.hpp`) for better organization in larger projects.</p>
+            </div>
+        </section>
+
+        <section id="functions-params" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h3>Parameters and Arguments (Pass by Value).</h3>
+                <p>Parameters are the variables listed in the function definition. Arguments are the actual values passed to the function when it is called.</p>
+                <h4>Pass by Value</h4>
+                <p>By default, C++ passes arguments <strong>by value</strong>. This means a <em>copy</em> of the argument's value is made and passed to the function parameter. Any modifications made to the parameter inside the function do <em>not</em> affect the original argument outside the function.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-type">void</span> <span class="code-cpp-function">tryToModify</span>(<span class="code-cpp-type">int</span> num) {
+    num = <span class="code-cpp-number">100</span>; <span class="code-cpp-comment">// Modifies the local copy (parameter 'num')</span>
+    std::cout &lt;&lt; <span class="code-cpp-string">"Inside function, num = "</span> &lt;&lt; num &lt;&lt; std::endl; <span class="code-cpp-comment">// Outputs 100</span>
+}
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-cpp-type">int</span> originalValue = <span class="code-cpp-number">10</span>;
+    <span class="code-function">tryToModify</span>(originalValue);
+    std::cout &lt;&lt; <span class="code-cpp-string">"Outside function, originalValue = "</span> &lt;&lt; originalValue &lt;&lt; std::endl; <span class="code-cpp-comment">// Outputs 10</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <p>We will cover other ways of passing arguments (like pass by reference and pass by pointer) in Week 7, which allow functions to modify the original arguments.</p>
+                 <h4>Default Arguments</h4>
+                <p>You can provide default values for parameters in the function declaration (or definition if no separate declaration exists). If the caller omits an argument for that parameter, the default value is used. Default arguments must come after non-default arguments in the parameter list.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-type">void</span> <span class="code-cpp-function">showValues</span>(<span class="code-cpp-type">int</span> a, <span class="code-cpp-type">int</span> b = <span class="code-cpp-number">10</span>, <span class="code-cpp-type">int</span> c = <span class="code-cpp-number">20</span>) {
+    std::cout &lt;&lt; <span class="code-cpp-string">"a="</span> &lt;&lt; a &lt;&lt; <span class="code-cpp-string">", b="</span> &lt;&lt; b &lt;&lt; <span class="code-cpp-string">", c="</span> &lt;&lt; c &lt;&lt; std::endl;
+}
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-function">showValues</span>(<span class="code-cpp-number">1</span>);          <span class="code-cpp-comment">// Output: a=1, b=10, c=20</span>
+    <span class="code-function">showValues</span>(<span class="code-cpp-number">1</span>, <span class="code-cpp-number">55</span>);      <span class="code-cpp-comment">// Output: a=1, b=55, c=20</span>
+    <span class="code-function">showValues</span>(<span class="code-cpp-number">1</span>, <span class="code-cpp-number">55</span>, <span class="code-cpp-number">99</span>); <span class="code-cpp-comment">// Output: a=1, b=55, c=99</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="functions-return" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Returning Values (`return` Statement).</h3>
+                <p>The `return` statement allows a function to send a value back to the caller. The type of the returned value must match the function's declared `return_type`.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-type">double</span> <span class="code-cpp-function">calculateArea</span>(<span class="code-cpp-type">double</span> radius) {
+    <span class="code-cpp-keyword">const</span> <span class="code-cpp-type">double</span> PI = <span class="code-cpp-number">3.14159</span>;
+    <span class="code-cpp-keyword">if</span> (radius < 0) {
+        std::cout &lt;&lt; <span class="code-cpp-string">"Error: Radius cannot be negative."</span> &lt;&lt; std::endl;
+        <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0.0</span>; <span class="code-cpp-comment">// Return a default value on error</span>
+    }
+    <span class="code-cpp-type">double</span> area = PI * radius * radius;
+    <span class="code-cpp-keyword">return</span> area; <span class="code-cpp-comment">// Return the calculated area</span>
+}
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-cpp-type">double</span> circleArea = <span class="code-function">calculateArea</span>(<span class="code-cpp-number">5.0</span>);
+    std::cout &lt;&lt; <span class="code-cpp-string">"Area of circle: "</span> &lt;&lt; circleArea &lt;&lt; std::endl;
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                 <p>A function with a `void` return type doesn't return a value. It can use `return;` without a value to exit early.</p>
+            </div>
+        </section>
+
+         <section id="functions-overload" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                 <h3>Function Overloading.</h3>
+                 <p>C++ allows you to define multiple functions with the <strong>same name</strong> but with different <strong>parameter lists</strong> (differing in the number or type of parameters). This is called function overloading.</p>
+                 <p>The compiler determines which version of the function to call based on the arguments provided during the function call.</p>
+                 <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+<span class="code-cpp-preprocessor">#include &lt;string&gt;</span>
+
+<span class="code-cpp-comment">// Overloaded functions named 'printData'</span>
+<span class="code-cpp-type">void</span> <span class="code-cpp-function">printData</span>(<span class="code-cpp-type">int</span> data) {
+    std::cout &lt;&lt; <span class="code-cpp-string">"Integer data: "</span> &lt;&lt; data &lt;&lt; std::endl;
+}
+
+<span class="code-cpp-type">void</span> <span class="code-cpp-function">printData</span>(<span class="code-cpp-type">double</span> data) {
+    std::cout &lt;&lt; <span class="code-cpp-string">"Double data: "</span> &lt;&lt; data &lt;&lt; std::endl;
+}
+
+<span class="code-cpp-type">void</span> <span class="code-cpp-function">printData</span>(<span class="code-cpp-type">std::string</span> data) {
+    std::cout &lt;&lt; <span class="code-cpp-string">"String data: "</span> &lt;&lt; data &lt;&lt; std::endl;
+}
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-function">printData</span>(<span class="code-cpp-number">100</span>);       <span class="code-cpp-comment">// Calls the int version</span>
+    <span class="code-function">printData</span>(<span class="code-cpp-number">3.14</span>);     <span class="code-cpp-comment">// Calls the double version</span>
+    <span class="code-function">printData</span>(<span class="code-cpp-string">"C++"</span>);    <span class="code-cpp-comment">// Calls the string version</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                 <p>Note: Function overloading is based only on the parameter list, not the return type.</p>
+            </div>
+        </section>
+
+        <section id="scope" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Variable Scope (Local vs. Global).</h3>
+                <p>The scope of a variable determines where in the code it can be accessed.</p>
+                <h4>Local Variables</h4>
+                <p>Variables declared inside a function (or any block defined by `{}`) are <strong>local variables</strong>. They exist only within that function/block and cannot be accessed from outside.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-type">void</span> <span class="code-cpp-function">myFunction</span>() {
+    <span class="code-cpp-type">int</span> localVar = <span class="code-cpp-number">50</span>; <span class="code-cpp-comment">// localVar is local to myFunction</span>
+    std::cout &lt;&lt; localVar; <span class="code-cpp-comment">// OK here</span>
+}
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    myFunction();
+    <span class="code-cpp-comment">// std::cout << localVar; // Error! localVar is not in scope here</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <h4>Global Variables</h4>
+                 <p>Variables declared outside of any function have <strong>global scope</strong>. They can be accessed (and potentially modified) from any function within the same file (or across files if declared correctly using `extern`, which is more advanced).</p>
+                 <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-type">int</span> globalVar = <span class="code-cpp-number">100</span>; <span class="code-cpp-comment">// Global variable</span>
+
+<span class="code-cpp-type">void</span> <span class="code-cpp-function">printGlobal</span>() {
+    std::cout &lt;&lt; <span class="code-cpp-string">"Global variable: "</span> &lt;&lt; globalVar &lt;&lt; std::endl; <span class="code-cpp-comment">// Access global</span>
+}
+
+<span class="code-cpp-type">void</span> <span class="code-cpp-function">modifyLocal</span>() {
+    <span class="code-cpp-type">int</span> globalVar = <span class="code-cpp-number">5</span>; <span class="code-cpp-comment">// This declares a *new local* variable hiding the global one</span>
+    std::cout &lt;&lt; <span class="code-cpp-string">"Local variable shadowing global: "</span> &lt;&lt; globalVar &lt;&lt; std::endl;
+}
+
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-function">printGlobal</span>(); <span class="code-cpp-comment">// Accesses the global 100</span>
+    modifyLocal(); <span class="code-cpp-comment">// Accesses the local 5</span>
+    <span class="code-function">printGlobal</span>(); <span class="code-cpp-comment">// Still accesses the global 100</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                 <p>While global variables are accessible everywhere, excessive use is discouraged as it can make code harder to understand and maintain due to potential side effects from different functions modifying the same global state.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CPPLearn - Your C++ Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#intro-cpp">Intro C++</a>
+                <a href="Week1.html#why-learn-cpp">Why C++?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#hello-world">Hello World</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#constants">Constants</a>
+                <a href="Week2.html#operators">Operators</a>
+                <a href="Week2.html#type-casting">Type Casting</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#io-stream">Input/Output</a>
+                 <a href="Week3.html#conditionals">Conditionals</a>
+                 <a href="Week3.html#nested-if">Nested If</a>
+                 <a href="Week3.html#switch">Switch</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#for-loops">for Loops</a>
+                <a href="Week4.html#while-loops">while Loops</a>
+                <a href="Week4.html#do-while">do...while</a>
+                <a href="Week4.html#break-continue">break/continue</a>
+                <a href="Week4.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#functions-def">Definition</a>
+                <a href="#functions-proto">Prototypes</a>
+                <a href="#functions-params">Parameters</a>
+                <a href="#functions-return">Return Values</a>
+                <a href="#functions-overload">Overloading</a>
+                <a href="#scope">Scope</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#arrays">Arrays</a>
+                <a href="Week6.html#multi-arrays">Multi-Dim Arrays</a>
+                <a href="Week6.html#c-strings">C-Strings</a>
+                <a href="Week6.html#std-string">std::string</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#pointers">Pointers</a>
+                <a href="Week7.html#dynamic-mem">Dynamic Memory</a>
+                <a href="Week7.html#references">References</a>
+                <a href="Week7.html#pass-by-ref">Pass by Reference</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#oop-concepts">OOP Concepts</a>
+                <a href="Week8.html#classes-objects">Classes/Objects</a>
+                <a href="Week8.html#access-specifiers">Access Specifiers</a>
+                <a href="Week8.html#members">Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#constructors">Constructors</a>
+                <a href="Week9.html#destructors">Destructors</a>
+                <a href="Week9.html#this-pointer">`this` Pointer</a>
+                <a href="Week9.html#static-members">Static Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#inheritance">Inheritance</a>
+                <a href="Week10.html#overriding">Overriding</a>
+                <a href="Week10.html#polymorphism">Polymorphism</a>
+                <a href="Week10.html#virtual-funcs">Virtual Functions</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#stl-overview">STL Overview</a>
+                <a href="Week11.html#containers">Containers</a>
+                <a href="Week11.html#iterators">Iterators</a>
+                <a href="Week11.html#algorithms">Algorithms</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#file-io">File I/O</a>
+                <a href="Week12.html#error-handling">Error Handling</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+                <a href="Week12.html#project">Mini-Project</a>
+            </div>
+        </div>
+
+    </div> </body>
+</html>

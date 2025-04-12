@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Learning - Week 4: Tables</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="html.ico" type="image/x-icon"> </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">HTML</span>earn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#table-structure">Structure</a></li>
+                <li><a href="#table-sections">Sections</a></li>
+                <li><a href="#spanning">Spanning Cells</a></li>
+                <li><a href="#headers-captions">Headers & Captions</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 4: Structuring Data with Tables</h1>
+                <p class="tagline">Learn how to present tabular data effectively using HTML tables.</p>
+                <a href="#table-structure" class="button">Explore Chapter 4</a>
+            </div>
+        </section>
+
+        <section id="table-structure" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 4: Presenting Tabular Data</h2>
+                <h3>Basic Table Structure</h3>
+                <p>HTML tables are used to display data arranged in rows and columns. The core elements for creating a table are:</p>
+                <ul>
+                    <li><strong>&lt;table&gt;:</strong> The main container for the entire table.</li>
+                    <li><strong>&lt;tr&gt; (Table Row):</strong> Defines a row within the table.</li>
+                    <li><strong>&lt;td&gt; (Table Data):</strong> Defines a standard data cell within a row.</li>
+                    <li><strong>&lt;th&gt; (Table Header):</strong> Defines a header cell within a row. Header cells are typically displayed as bold and centered by browsers and carry semantic meaning.</li>
+                </ul>
+                <h4>Example: Simple Table</h4>
+                <pre><code class="code-snippet html">&lt;table border="1"&gt; &lt;!-- Note: border attribute is outdated; use CSS for styling --&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Name&lt;/th&gt;
+    &lt;th&gt;Role&lt;/th&gt;
+    &lt;th&gt;Email&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Alice&lt;/td&gt;
+    &lt;td&gt;Developer&lt;/td&gt;
+    &lt;td&gt;alice@example.com&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Bob&lt;/td&gt;
+    &lt;td&gt;Designer&lt;/td&gt;
+    &lt;td&gt;bob@example.com&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+                <p>Renders as (basic structure, styling depends on CSS):</p>
+                <table border="1">
+                  <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Email</th>
+                  </tr>
+                  <tr>
+                    <td>Alice</td>
+                    <td>Developer</td>
+                    <td>alice@example.com</td>
+                  </tr>
+                  <tr>
+                    <td>Bob</td>
+                    <td>Designer</td>
+                    <td>bob@example.com</td>
+                  </tr>
+                </table>
+                <p><strong>Important:</strong> Use tables for presenting actual tabular data, not for page layout. CSS is the standard for layout.</p>
+            </div>
+        </section>
+
+        <section id="table-sections" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Semantic Table Sections: &lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;</h3>
+                <p>For better structure and semantics, especially in larger tables, you can group rows into header, body, and footer sections:</p>
+                <ul>
+                    <li><strong>&lt;thead&gt;:</strong> Groups the header content (usually containing &lt;th&gt; elements) of the table.</li>
+                    <li><strong>&lt;tbody&gt;:</strong> Groups the main body content (data rows) of the table.</li>
+                    <li><strong>&lt;tfoot&gt;:</strong> Groups the footer content (summary rows, totals, etc.) of the table.</li>
+                </ul>
+                <p>These elements don't change the visual appearance by default but provide important structural information for browsers, screen readers, and styling with CSS. They also allow the browser to scroll the table body independently of the header and footer in some cases.</p>
+                <h4>Example with Sections</h4>
+                <pre><code class="code-snippet html">&lt;table border="1"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Item&lt;/th&gt;
+      &lt;th&gt;Quantity&lt;/th&gt;
+      &lt;th&gt;Price&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Apples&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;$5.00&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Oranges&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;$3.50&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;td colspan="2"&gt;Total&lt;/td&gt; &lt;!-- Colspan explained next --&gt;
+      &lt;td&gt;$8.50&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+                 <p>Renders similarly to the previous example but has better semantic structure.</p>
+                 <table border="1">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Apples</td>
+                      <td>5</td>
+                      <td>$5.00</td>
+                    </tr>
+                    <tr>
+                      <td>Oranges</td>
+                      <td>3</td>
+                      <td>$3.50</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="2">Total</td>
+                      <td>$8.50</td>
+                    </tr>
+                  </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <section id="spanning" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Spanning Rows and Columns</h3>
+                <p>Sometimes, a cell needs to span across multiple columns or rows. This is achieved using the `colspan` and `rowspan` attributes on &lt;td&gt; or &lt;th&gt; elements.</p>
+                <ul>
+                    <li><strong>`colspan="number"`:</strong> Makes the cell span horizontally across the specified `number` of columns.</li>
+                    <li><strong>`rowspan="number"`:</strong> Makes the cell span vertically across the specified `number` of rows.</li>
+                </ul>
+                <h4>Example: Spanning</h4>
+                <pre><code class="code-snippet html">&lt;table border="1"&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Time&lt;/th&gt;
+    &lt;th&gt;Monday&lt;/th&gt;
+    &lt;th&gt;Tuesday&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;th&gt;9:00 AM&lt;/th&gt;
+    &lt;td&gt;Meeting&lt;/td&gt;
+    &lt;td rowspan="2"&gt;Project Work&lt;/td&gt; &lt;!-- Spans 2 rows --&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;th&gt;10:00 AM&lt;/th&gt;
+    &lt;td&gt;Break&lt;/td&gt;
+    &lt;!-- Cell for Tuesday 10:00 is covered by rowspan --&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;th&gt;11:00 AM&lt;/th&gt;
+    &lt;td colspan="2"&gt;Team Sync&lt;/td&gt; &lt;!-- Spans 2 columns --&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+                <p>Renders as:</p>
+                 <table border="1">
+                  <tr>
+                    <th>Time</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                  </tr>
+                  <tr>
+                    <th>9:00 AM</th>
+                    <td>Meeting</td>
+                    <td rowspan="2">Project Work</td>
+                  </tr>
+                  <tr>
+                    <th>10:00 AM</th>
+                    <td>Break</td>
+                  </tr>
+                  <tr>
+                    <th>11:00 AM</th>
+                    <td colspan="2">Team Sync</td>
+                  </tr>
+                </table>
+            </div>
+        </section>
+
+        <section id="headers-captions" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Table Headers and Captions</h3>
+                <h4>Table Headers (&lt;th&gt;) Revisited</h4>
+                <p>As shown earlier, &lt;th&gt; defines header cells. They provide context for the data in their corresponding row or column.</p>
+                <p>You can use the `scope` attribute on &lt;th&gt; to explicitly define whether it's a header for a `col` (column) or a `row`.</p>
+                <pre><code class="code-snippet html">&lt;table border="1"&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt; &lt;!-- Empty corner cell --&gt;
+    &lt;th scope="col"&gt;Score 1&lt;/th&gt;
+    &lt;th scope="col"&gt;Score 2&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;th scope="row"&gt;Student A&lt;/th&gt;
+    &lt;td&gt;85&lt;/td&gt;
+    &lt;td&gt;92&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;th scope="row"&gt;Student B&lt;/th&gt;
+    &lt;td&gt;78&lt;/td&gt;
+    &lt;td&gt;88&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+                <p>Using `scope` improves table accessibility for screen readers.</p>
+
+                <h4>Table Captions (&lt;caption&gt;)</h4>
+                <p>The &lt;caption&gt; tag provides a title or description for the table. It should be placed immediately after the opening &lt;table&gt; tag.</p>
+                <pre><code class="code-snippet html">&lt;table border="1"&gt;
+  &lt;caption&gt;Monthly Sales Figures&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Month&lt;/th&gt;
+      &lt;th&gt;Sales&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;January&lt;/td&gt;
+      &lt;td&gt;$10,000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;February&lt;/td&gt;
+      &lt;td&gt;$12,500&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+                 <p>Renders as:</p>
+                 <table border="1">
+                  <caption>Monthly Sales Figures</caption>
+                  <thead>
+                    <tr>
+                      <th>Month</th>
+                      <th>Sales</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>January</td>
+                      <td>$10,000</td>
+                    </tr>
+                    <tr>
+                      <td>February</td>
+                      <td>$12,500</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 HTMLLearn - Your HTML Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro</a>
+                <a href="Week1.html#what-is-html-section">What is HTML?</a>
+                <a href="Week1.html#basic-structure-section">Structure</a>
+                <a href="Week1.html#setup-section">Setup</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#formatting-section">Formatting</a>
+                <a href="Week2.html#phrase-tags-section">Phrase Tags</a>
+                <a href="Week2.html#links-section">Links</a>
+                <a href="Week2.html#paths-section">Paths</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#lists-section">Lists</a>
+                <a href="Week3.html#images-section">Images</a>
+                <a href="Week3.html#image-formats-section">Formats</a>
+                <a href="Week3.html#image-attributes-section">Attributes</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#table-structure">Structure</a>
+                <a href="#table-sections">Sections</a>
+                <a href="#spanning">Spanning Cells</a>
+                <a href="#headers-captions">Headers & Captions</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#form-tag">Form Tag</a>
+                 <a href="Week5.html#inputs">Inputs</a>
+                 <a href="Week5.html#labels">Labels</a>
+                 <a href="Week5.html#attributes">Attributes</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#checkbox-radio">Checkbox/Radio</a>
+                <a href="Week6.html#select">Dropdown</a>
+                <a href="Week6.html#textarea">Text Area</a>
+                <a href="Week6.html#grouping">Grouping</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#semantic">Semantic HTML</a>
+                <a href="Week7.html#multimedia">Audio/Video</a>
+                <a href="Week7.html#iframe">Iframe</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#review">Review</a>
+                <a href="Week8.html#best-practices">Best Practices</a>
+                <a href="Week8.html#integration">Integration</a>
+                <a href="Week8.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

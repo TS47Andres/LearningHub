@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPP Learning - Week 3: Input/Output & Conditionals</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="cpp.ico" type="image/x-icon">
+    </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="cpp-color">CPP</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#io-stream">Input/Output</a></li>
+                <li><a href="#conditionals">Conditionals</a></li>
+                <li><a href="#nested-if">Nested If</a></li>
+                <li><a href="#switch">Switch</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 3: Interaction & Basic Decisions</h1>
+                <p class="tagline">Learn how to interact with users and guide your program's flow using conditionals.</p>
+                <a href="#io-stream" class="button">Explore Chapter 3</a>
+            </div>
+        </section>
+
+        <section id="io-stream" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 3: Input/Output and Conditional Control Flow</h2>
+                <h3>Standard Input/Output (`iostream`).</h3>
+                <p>To make programs interactive, we need ways to display information to the user and receive input from them. In C++, the standard way to do this is using the `iostream` library.</p>
+                <p>You need to include the header file at the beginning of your code:</p>
+                <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span></code></pre>
+
+                <h4>Output with `std::cout`</h4>
+                <p>The `std::cout` object (stands for "character output") is used with the insertion operator (`<<`) to send data to the standard output stream (usually the console).</p>
+                 <pre><code class="code-snippet"><span class="code-cpp-type">int</span> score = <span class="code-cpp-number">95</span>;
+<span class="code-cpp-type">std::string</span> name = <span class="code-cpp-string">"Alice"</span>;
+
+std::cout &lt;&lt; <span class="code-cpp-string">"Hello, World!"</span> &lt;&lt; std::endl; <span class="code-cpp-comment">// std::endl inserts a newline and flushes the buffer</span>
+std::cout &lt;&lt; <span class="code-cpp-string">"Name: "</span> &lt;&lt; name &lt;&lt; <span class="code-cpp-string">", Score: "</span> &lt;&lt; score &lt;&lt; <span class="code-cpp-string">'\n'</span>; <span class="code-cpp-comment">// '\n' also inserts a newline</span></code></pre>
+                 <p>You can chain multiple `<<` operators to output various data types.</p>
+
+                <h4>Input with `std::cin`</h4>
+                <p>The `std::cin` object (stands for "character input") is used with the extraction operator (`>>`) to read data from the standard input stream (usually the keyboard).</p>
+                 <pre><code class="code-snippet"><span class="code-cpp-type">int</span> age;
+<span class="code-cpp-type">std::string</span> username;
+
+std::cout &lt;&lt; <span class="code-cpp-string">"Enter your age: "</span>;
+std::cin &gt;&gt; age; <span class="code-cpp-comment">// Reads an integer from input</span>
+
+std::cout &lt;&lt; <span class="code-cpp-string">"Enter your username: "</span>;
+std::cin &gt;&gt; username; <span class="code-cpp-comment">// Reads a string (stops at whitespace)</span>
+
+std::cout &lt;&lt; <span class="code-cpp-string">"Welcome, "</span> &lt;&lt; username &lt;&lt; <span class="code-cpp-string">"! You are "</span> &lt;&lt; age &lt;&lt; <span class="code-cpp-string">" years old."</span> &lt;&lt; std::endl;</code></pre>
+                <h4>Input Issues & `getline`</h4>
+                 <p>The `>>` operator stops reading at the first whitespace character (space, tab, newline). This can be problematic when reading strings with spaces. To read an entire line of text, use the `std::getline()` function.</p>
+                 <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;string&gt; // Need to include the string header</span>
+<span class="code-cpp-comment">// ... include iostream too ...</span>
+
+<span class="code-cpp-type">std::string</span> fullName;
+std::cout &lt;&lt; <span class="code-cpp-string">"Enter your full name: "</span>;
+<span class="code-cpp-comment">// std::cin.ignore(); // May be needed after using cin >> age; to consume leftover newline</span>
+std::<span class="code-function">getline</span>(std::cin, fullName); <span class="code-cpp-comment">// Reads the entire line</span>
+
+std::cout &lt;&lt; <span class="code-cpp-string">"Your full name is: "</span> &lt;&lt; fullName &lt;&lt; std::endl;</code></pre>
+                <p>Handling input robustly (checking for valid types, dealing with errors) is an important aspect we'll revisit.</p>
+            </div>
+        </section>
+
+        <section id="conditionals" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Control Flow - Conditional Statements (`if`, `else if`, `else`).</h3>
+                <p>Conditional statements allow your program to execute different blocks of code based on whether a condition is true or false.</p>
+                <h4>`if` Statement</h4>
+                <p>Executes a block of code only if the condition is true.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-type">int</span> temperature = <span class="code-cpp-number">25</span>;
+<span class="code-cpp-keyword">if</span> (temperature > 20) {
+    std::cout &lt;&lt; <span class="code-cpp-string">"It's a warm day!"</span> &lt;&lt; std::endl;
+}</code></pre>
+                <h4>`if...else` Statement</h4>
+                <p>Executes one block if the condition is true and another block if it's false.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-type">int</span> number = <span class="code-cpp-number">7</span>;
+<span class="code-cpp-keyword">if</span> (number % <span class="code-cpp-number">2</span> == <span class="code-cpp-number">0</span>) {
+    std::cout &lt;&lt; <span class="code-cpp-string">"The number is even."</span> &lt;&lt; std::endl;
+} <span class="code-cpp-keyword">else</span> {
+    std::cout &lt;&lt; <span class="code-cpp-string">"The number is odd."</span> &lt;&lt; std::endl;
+}</code></pre>
+                <h4>`if...else if...else` Statement</h4>
+                <p>Allows checking multiple conditions in sequence.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-type">int</span> grade = 85;
+<span class="code-cpp-keyword">if</span> (grade >= 90) {
+    std::cout &lt;&lt; <span class="code-cpp-string">"Grade: A"</span> &lt;&lt; std::endl;
+} <span class="code-cpp-keyword">else if</span> (grade >= 80) {
+    std::cout &lt;&lt; <span class="code-cpp-string">"Grade: B"</span> &lt;&lt; std::endl; <span class="code-cpp-comment">// This block executes</span>
+} <span class="code-cpp-keyword">else if</span> (grade >= 70) {
+    std::cout &lt;&lt; <span class="code-cpp-string">"Grade: C"</span> &lt;&lt; std::endl;
+} <span class="code-cpp-keyword">else</span> {
+    std::cout &lt;&lt; <span class="code-cpp-string">"Grade: D or F"</span> &lt;&lt; std::endl;
+}</code></pre>
+                <p>Conditions are evaluated using comparison (`==`, `!=`, `>`, `<`, `>=`, `<=`) and logical (`&&`, `||`, `!`) operators.</p>
+            </div>
+        </section>
+
+        <section id="nested-if" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h3>Nested `if` Statements.</h3>
+                <p>You can place `if`, `else if`, or `else` statements inside the block of another conditional statement. This allows for more complex decision-making logic.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-type">int</span> age = 20;
+<span class="code-cpp-type">bool</span> hasLicense = <span class="code-cpp-keyword">true</span>;
+
+<span class="code-cpp-keyword">if</span> (age >= 18) {
+    std::cout &lt;&lt; <span class="code-cpp-string">"Eligible age."</span> &lt;&lt; std::endl;
+    <span class="code-cpp-keyword">if</span> (hasLicense) {
+        std::cout &lt;&lt; <span class="code-cpp-string">"Can drive."</span> &lt;&lt; std::endl;
+    } <span class="code-cpp-keyword">else</span> {
+        std::cout &lt;&lt; <span class="code-cpp-string">"Cannot drive without a license."</span> &lt;&lt; std::endl;
+    }
+} <span class="code-cpp-keyword">else</span> {
+    std::cout &lt;&lt; <span class="code-cpp-string">"Not eligible age to drive."</span> &lt;&lt; std::endl;
+}</code></pre>
+                <p>While powerful, excessive nesting can make code difficult to read and debug. Consider alternative structures or breaking logic into functions if nesting becomes too deep.</p>
+            </div>
+        </section>
+
+        <section id="switch" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>The `switch` Statement.</h3>
+                <p>The `switch` statement provides an alternative way to execute different blocks of code based on the value of an expression, specifically when comparing against multiple constant integer or character values.</p>
+                <h4>Syntax</h4>
+                 <pre><code class="code-snippet"><span class="code-cpp-keyword">switch</span> (expression) {
+    <span class="code-cpp-keyword">case</span> constant1:
+        <span class="code-cpp-comment">// Code block for constant1</span>
+        <span class="code-cpp-keyword">break</span>; <span class="code-cpp-comment">// Important: Exits the switch</span>
+    <span class="code-cpp-keyword">case</span> constant2:
+        <span class="code-cpp-comment">// Code block for constant2</span>
+        <span class="code-cpp-keyword">break</span>;
+    <span class="code-cpp-comment">// ... more cases</span>
+    <span class="code-cpp-keyword">default</span>:
+        <span class="code-cpp-comment">// Code block if no case matches (optional)</span>
+        <span class="code-cpp-keyword">break</span>; <span class="code-cpp-comment">// Technically optional here, but good practice</span>
+}</code></pre>
+                <ul>
+                    <li>The `expression` must evaluate to an integer type (`int`, `char`, `enum`).</li>
+                    <li>Each `case` label is followed by a constant value and a colon `:`.</li>
+                    <li>Execution jumps to the matching `case` label.</li>
+                    <li>The `break` statement is crucial! Without it, execution will "fall through" to the next case, which is usually unintended.</li>
+                    <li>The `default` case is optional and executes if no other case matches.</li>
+                </ul>
+                <h4>Example</h4>
+                 <pre><code class="code-snippet"><span class="code-cpp-type">char</span> grade = <span class="code-cpp-string">'B'</span>;
+
+<span class="code-cpp-keyword">switch</span> (grade) {
+    <span class="code-cpp-keyword">case</span> <span class="code-cpp-string">'A'</span>:
+        std::cout &lt;&lt; <span class="code-cpp-string">"Excellent!"</span> &lt;&lt; std::endl;
+        <span class="code-cpp-keyword">break</span>;
+    <span class="code-cpp-keyword">case</span> <span class="code-cpp-string">'B'</span>:
+        std::cout &lt;&lt; <span class="code-cpp-string">"Very Good!"</span> &lt;&lt; std::endl;
+        <span class="code-cpp-keyword">break</span>;
+    <span class="code-cpp-keyword">case</span> <span class="code-cpp-string">'C'</span>:
+        std::cout &lt;&lt; <span class="code-cpp-string">"Good."</span> &lt;&lt; std::endl;
+        <span class="code-cpp-keyword">break</span>;
+    <span class="code-cpp-keyword">default</span>:
+        std::cout &lt;&lt; <span class="code-cpp-string">"Needs Improvement."</span> &lt;&lt; std::endl;
+        <span class="code-cpp-keyword">break</span>;
+}</code></pre>
+                <p>`switch` statements can be clearer than long `if-else if` chains when dealing with multiple specific constant values.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CPPLearn - Your C++ Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#intro-cpp">Intro C++</a>
+                <a href="Week1.html#why-learn-cpp">Why C++?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#hello-world">Hello World</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#constants">Constants</a>
+                <a href="Week2.html#operators">Operators</a>
+                <a href="Week2.html#type-casting">Type Casting</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#io-stream">Input/Output</a>
+                <a href="#conditionals">Conditionals</a>
+                <a href="#nested-if">Nested If</a>
+                <a href="#switch">Switch</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#for-loops">For Loops</a>
+                <a href="Week4.html#while-loops">While Loops</a>
+                <a href="Week4.html#do-while">Do-While</a>
+                <a href="Week4.html#break-continue">Break/Continue</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#functions-def">Definition</a>
+                <a href="Week5.html#functions-params">Parameters</a>
+                <a href="Week5.html#functions-return">Return</a>
+                <a href="Week5.html#functions-overload">Overloading</a>
+                <a href="Week5.html#scope">Scope</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#arrays">Arrays</a>
+                <a href="Week6.html#multi-arrays">Multi-Dim Arrays</a>
+                <a href="Week6.html#c-strings">C-Strings</a>
+                <a href="Week6.html#std-string">std::string</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#pointers">Pointers</a>
+                <a href="Week7.html#dynamic-mem">Dynamic Memory</a>
+                <a href="Week7.html#references">References</a>
+                <a href="Week7.html#pass-by-ref">Pass by Reference</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#oop-concepts">OOP Concepts</a>
+                <a href="Week8.html#classes-objects">Classes/Objects</a>
+                <a href="Week8.html#access-specifiers">Access Specifiers</a>
+                <a href="Week8.html#members">Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#constructors">Constructors</a>
+                <a href="Week9.html#destructors">Destructors</a>
+                <a href="Week9.html#this-pointer">`this` Pointer</a>
+                <a href="Week9.html#static-members">Static Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#inheritance">Inheritance</a>
+                <a href="Week10.html#overriding">Overriding</a>
+                <a href="Week10.html#polymorphism">Polymorphism</a>
+                <a href="Week10.html#virtual-funcs">Virtual Functions</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#stl-overview">STL Overview</a>
+                <a href="Week11.html#containers">Containers</a>
+                <a href="Week11.html#iterators">Iterators</a>
+                <a href="Week11.html#algorithms">Algorithms</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#file-io">File I/O</a>
+                <a href="Week12.html#error-handling">Error Handling</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+                <a href="Week12.html#project">Mini-Project</a>
+            </div>
+        </div>
+
+    </div> </body>
+</html>

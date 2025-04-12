@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPP Learning - Week 11: Introduction to STL</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="cpp.ico" type="image/x-icon">
+    </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="cpp-color">CPP</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#stl-overview">STL Overview</a></li>
+                <li><a href="#containers">Containers</a></li>
+                <li><a href="#iterators">Iterators</a></li>
+                <li><a href="#algorithms">Algorithms</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 11: The Standard Template Library (STL)</h1>
+                <p class="tagline">Explore C++'s powerful library for data structures and algorithms.</p>
+                <a href="#stl-overview" class="button">Explore Chapter 11</a>
+            </div>
+        </section>
+
+        <section id="stl-overview" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 11: Introduction to the Standard Template Library</h2>
+                <h3>Overview of the STL: Containers, Iterators, Algorithms.</h3>
+                <p>The Standard Template Library (STL) is a collection of C++ template classes and functions that provide powerful and efficient implementations of common data structures and algorithms. It's a cornerstone of modern C++ programming.</p>
+                <p>The STL can be broadly divided into three main components:</p>
+                <ul>
+                    <li><strong>Containers:</strong> Objects that store collections of other objects (data). They manage the storage space for their elements and provide member functions to access them. Examples include `vector`, `list`, `map`, `set`.</li>
+                    <li><strong>Iterators:</strong> Objects that act like generalized pointers, allowing you to traverse the elements within a container sequentially without exposing the container's underlying representation.</li>
+                    <li><strong>Algorithms:</strong> Functions that perform common operations on sequences of objects, usually defined by ranges of iterators. Examples include `sort`, `find`, `copy`, `count`.</li>
+                </ul>
+                <p>Using the STL promotes code reusability, efficiency (as implementations are often highly optimized), and robustness.</p>
+            </div>
+        </section>
+
+        <section id="containers" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>STL Containers: Storing Your Data.</h3>
+                <p>STL containers are template classes used to manage collections of objects.</p>
+                <h4>Sequence Containers</h4>
+                <p>Maintain the order of elements as inserted.</p>
+                <ul>
+                    <li><strong>`std::vector` (from `<vector>`):</strong> A dynamic array that can grow or shrink in size. Provides fast random access (`[]` operator) and efficient addition/removal at the end (`push_back`, `pop_back`).
+                         <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;vector&gt;</span>
+<span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-type">std::vector</span>&lt;<span class="code-cpp-type">int</span>&gt; vec = {<span class="code-cpp-number">10</span>, <span class="code-cpp-number">20</span>, <span class="code-cpp-number">30</span>};
+vec.<span class="code-function">push_back</span>(<span class="code-cpp-number">40</span>); <span class="code-cpp-comment">// Add element to the end</span>
+std::cout &lt;&lt; vec[<span class="code-cpp-number">1</span>]; <span class="code-cpp-comment">// Access element (output: 20)</span></code></pre>
+                    </li>
+                     <li><strong>`std::list` (from `<list>`):</strong> A doubly-linked list. Efficient insertion/deletion anywhere in the list, but slower random access compared to `vector`.</li>
+                    <li><strong>`std::deque` (from `<deque>`):</strong> Double-ended queue. Efficient insertion/deletion at both the beginning and the end.</li>
+                 </ul>
+
+                 <h4>Associative Containers</h4>
+                 <p>Store elements in a sorted order (based on keys), allowing for fast searching.</p>
+                 <ul>
+                    <li><strong>`std::set` (from `<set>`):</strong> Stores unique elements in sorted order.
+                         <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;set&gt;</span>
+<span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-type">std::set</span>&lt;<span class="code-cpp-type">int</span>&gt; unique_nums = {<span class="code-cpp-number">5</span>, <span class="code-cpp-number">2</span>, <span class="code-cpp-number">8</span>, <span class="code-cpp-number">2</span>}; <span class="code-cpp-comment">// Stores 2, 5, 8</span>
+unique_nums.<span class="code-function">insert</span>(<span class="code-cpp-number">1</span>);</code></pre>
+                    </li>
+                     <li><strong>`std::map` (from `<map>`):</strong> Stores key-value pairs, sorted by key. Keys must be unique. Provides fast lookup based on the key.
+                         <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;map&gt;</span>
+<span class="code-cpp-preprocessor">#include &lt;string&gt;</span>
+<span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-type">std::map</span>&lt;<span class="code-cpp-type">std::string</span>, <span class="code-cpp-type">int</span>&gt; ages;
+ages[<span class="code-cpp-string">"Alice"</span>] = <span class="code-cpp-number">30</span>;
+ages[<span class="code-cpp-string">"Bob"</span>] = <span class="code-cpp-number">25</span>;
+std::cout &lt;&lt; ages[<span class="code-cpp-string">"Alice"</span>]; <span class="code-cpp-comment">// Output: 30</span></code></pre>
+                    </li>
+                 </ul>
+                 <p>(There are also unordered associative containers like `unordered_set` and `unordered_map` which use hash tables for potentially faster average-case lookup but don't store elements in sorted order).</p>
+            </div>
+        </section>
+
+        <section id="iterators" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h3>Iterators: Navigating Containers.</h3>
+                <p>Iterators are objects that act like pointers to elements within an STL container. They provide a uniform way to access container elements sequentially, regardless of the container's internal structure.</p>
+                <p>Common iterator operations:</p>
+                <ul>
+                    <li><strong>Getting Iterators:</strong> Containers provide member functions like `begin()` (points to the first element) and `end()` (points to the position *past* the last element).</li>
+                    <li><strong>Dereferencing:</strong> Use the `*` operator to get the value the iterator points to.</li>
+                    <li><strong>Incrementing:</strong> Use the `++` operator to move the iterator to the next element.</li>
+                    <li><strong>Comparison:</strong> Use `==` and `!=` to compare iterators (e.g., to check if you've reached the end).</li>
+                </ul>
+                 <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;vector&gt;</span>
+<span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-cpp-type">std::vector</span>&lt;<span class="code-cpp-type">int</span>&gt; data = {<span class="code-cpp-number">5</span>, <span class="code-cpp-number">10</span>, <span class="code-cpp-number">15</span>};
+
+    <span class="code-cpp-comment">// Declare an iterator for a vector of integers</span>
+    <span class="code-cpp-type">std::vector</span>&lt;<span class="code-cpp-type">int</span>&gt;::iterator it;
+
+    std::cout &lt;&lt; <span class="code-cpp-string">"Using iterators: "</span>;
+    <span class="code-cpp-comment">// Loop from the beginning to the end</span>
+    <span class="code-cpp-keyword">for</span> (it = data.<span class="code-function">begin</span>(); it != data.<span class="code-function">end</span>(); ++it) {
+        std::cout &lt;&lt; *it &lt;&lt; <span class="code-cpp-string">" "</span>; <span class="code-cpp-comment">// Dereference to get the value</span>
+    }
+    std::cout &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 5 10 15</span>
+
+    <span class="code-cpp-comment">// Modern C++ often uses range-based for loops, which use iterators internally:</span>
+    std::cout &lt;&lt; <span class="code-cpp-string">"Using range-based for: "</span>;
+    <span class="code-cpp-keyword">for</span> (<span class="code-cpp-type">int</span> val : data) {
+         std::cout &lt;&lt; val &lt;&lt; <span class="code-cpp-string">" "</span>;
+    }
+     std::cout &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 5 10 15</span>
+
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <p>Iterators are fundamental because STL algorithms operate on ranges defined by iterators, not directly on containers.</p>
+            </div>
+        </section>
+
+        <section id="algorithms" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>STL Algorithms: Operating on Sequences.</h3>
+                <p>The `<algorithm>` header provides a large collection of functions (algorithms) that perform operations on ranges of elements, typically specified by pairs of iterators (like `begin()` and `end()`).</p>
+                <p>These algorithms are generic and work with any container type that provides the necessary iterators.</p>
+                 <h4>Common Examples</h4>
+                 <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;vector&gt;</span>
+<span class="code-cpp-preprocessor">#include &lt;algorithm&gt; <span class="code-cpp-comment">// Include the algorithms header</span></span>
+<span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+<span class="code-cpp-preprocessor">#include &lt;numeric&gt; <span class="code-cpp-comment">// For std::accumulate</span></span>
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-cpp-type">std::vector</span>&lt;<span class="code-cpp-type">int</span>&gt; nums = {<span class="code-cpp-number">3</span>, <span class="code-cpp-number">1</span>, <span class="code-cpp-number">4</span>, <span class="code-cpp-number">1</span>, <span class="code-cpp-number">5</span>, <span class="code-cpp-number">9</span>};
+
+    <span class="code-cpp-comment">// Sort the vector</span>
+    std::<span class="code-function">sort</span>(nums.<span class="code-function">begin</span>(), nums.<span class="code-function">end</span>());
+    <span class="code-cpp-comment">// nums is now {1, 1, 3, 4, 5, 9}</span>
+
+    <span class="code-cpp-comment">// Find an element</span>
+    <span class="code-cpp-type">auto</span> it_find = std::<span class="code-function">find</span>(nums.<span class="code-function">begin</span>(), nums.<span class="code-function">end</span>(), <span class="code-cpp-number">5</span>);
+    <span class="code-cpp-keyword">if</span> (it_find != nums.<span class="code-function">end</span>()) {
+        std::cout &lt;&lt; <span class="code-cpp-string">"Found 5!"</span> &lt;&lt; std::endl;
+    }
+
+    <span class="code-cpp-comment">// Count occurrences of an element</span>
+    <span class="code-cpp-type">int</span> count_ones = std::<span class="code-function">count</span>(nums.<span class="code-function">begin</span>(), nums.<span class="code-function">end</span>(), <span class="code-cpp-number">1</span>);
+    std::cout &lt;&lt; <span class="code-cpp-string">"Count of 1s: "</span> &lt;&lt; count_ones &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 2</span>
+
+    <span class="code-cpp-comment">// Calculate sum (requires <numeric>)</span>
+    <span class="code-cpp-type">int</span> sum = std::<span class="code-function">accumulate</span>(nums.<span class="code-function">begin</span>(), nums.<span class="code-function">end</span>(), <span class="code-cpp-number">0</span>);
+    std::cout &lt;&lt; <span class="code-cpp-string">"Sum: "</span> &lt;&lt; sum &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 23</span>
+
+     <span class="code-cpp-comment">// Copy elements to another container (e.g., cout)</span>
+     std::cout &lt;&lt; <span class="code-cpp-string">"Sorted nums: "</span>;
+     std::<span class="code-function">copy</span>(nums.<span class="code-function">begin</span>(), nums.<span class="code-function">end</span>(), <span class="code-cpp-type">std::ostream_iterator</span>&lt;<span class="code-cpp-type">int</span>&gt;(std::cout, <span class="code-cpp-string">" "</span>));
+     std::cout &lt;&lt; std::endl;
+
+
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                 <p>There are many algorithms available for searching, sorting, modifying sequences, performing numeric operations, and more. Using STL algorithms is generally preferred over writing manual loops for these tasks, as they are often more efficient and less error-prone.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CPPLearn - Your C++ Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#intro-cpp">Intro C++</a>
+                <a href="Week1.html#why-learn-cpp">Why C++?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#hello-world">Hello World</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#constants">Constants</a>
+                <a href="Week2.html#operators">Operators</a>
+                <a href="Week2.html#type-casting">Type Casting</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#io-stream">Input/Output</a>
+                 <a href="Week3.html#conditionals">Conditionals</a>
+                 <a href="Week3.html#nested-if">Nested If</a>
+                 <a href="Week3.html#switch">Switch</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#for-loops">for Loops</a>
+                <a href="Week4.html#while-loops">while Loops</a>
+                <a href="Week4.html#do-while">do...while</a>
+                <a href="Week4.html#break-continue">break/continue</a>
+                <a href="Week4.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#functions-def">Definition</a>
+                <a href="Week5.html#functions-proto">Prototypes</a>
+                <a href="Week5.html#functions-params">Parameters</a>
+                <a href="Week5.html#functions-return">Return Values</a>
+                <a href="Week5.html#functions-overload">Overloading</a>
+                <a href="Week5.html#scope">Scope</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#arrays">Arrays</a>
+                <a href="Week6.html#multi-arrays">Multi-Dim Arrays</a>
+                <a href="Week6.html#c-strings">C-Strings</a>
+                <a href="Week6.html#std-string">std::string</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#memory-addresses">Memory</a>
+                <a href="Week7.html#pointers">Pointers</a>
+                <a href="Week7.html#dynamic-mem">Dynamic Memory</a>
+                <a href="Week7.html#references">References</a>
+                <a href="Week7.html#pass-by-ref">Pass by Reference</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#oop-concepts">OOP Concepts</a>
+                <a href="Week8.html#classes-objects">Classes/Objects</a>
+                <a href="Week8.html#access-specifiers">Access Specifiers</a>
+                <a href="Week8.html#members">Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#constructors">Constructors</a>
+                <a href="Week9.html#destructors">Destructors</a>
+                <a href="Week9.html#this-pointer">`this` Pointer</a>
+                <a href="Week9.html#static-members">Static Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#inheritance">Inheritance</a>
+                <a href="Week10.html#overriding">Overriding</a>
+                <a href="Week10.html#polymorphism">Polymorphism</a>
+                <a href="Week10.html#virtual-funcs">Virtual Functions</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#stl-overview">STL Overview</a>
+                <a href="#containers">Containers</a>
+                <a href="#iterators">Iterators</a>
+                <a href="#algorithms">Algorithms</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#file-io">File I/O</a>
+                <a href="Week12.html#error-handling">Error Handling</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+                <a href="Week12.html#project">Mini-Project</a>
+            </div>
+        </div>
+
+    </div> </body>
+</html>

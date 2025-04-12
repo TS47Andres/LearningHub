@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Learning - Week 2: Text Formatting & Links</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="html.ico" type="image/x-icon"> </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">HTML</span>earn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#formatting-section">Formatting</a></li>
+                <li><a href="#phrase-tags-section">Phrase Tags</a></li>
+                <li><a href="#links-section">Links</a></li>
+                <li><a href="#paths-section">Paths</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 2: Formatting Text and Creating Links</h1>
+                <p class="tagline">Learn how to style text semantically and connect pages together.</p>
+                <a href="#formatting-section" class="button">Explore Chapter 2</a>
+            </div>
+        </section>
+
+        <section id="formatting-section" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 2: Styling Text and Building Connections</h2>
+                <h3>Text Formatting Elements</h3>
+                <p>HTML provides various tags to format text, giving it semantic meaning or visual style. While CSS is preferred for purely visual styling, these HTML tags add meaning to the content.</p>
+                <ul>
+                    <li><strong>&lt;strong&gt; and &lt;b&gt;:</strong> Both typically render text as bold. Use &lt;strong&gt; to indicate strong importance, seriousness, or urgency. Use &lt;b&gt; for stylistically offset text without added importance (like keywords).
+                        <pre><code class="code-snippet html">&lt;p&gt;This text is normal.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;This text is important!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Use the &lt;b&gt;Save&lt;/b&gt; button to save your changes.&lt;/p&gt;</code></pre>
+                    </li>
+                    <li><strong>&lt;em&gt; and &lt;i&gt;:</strong> Both typically render text as italicized. Use &lt;em&gt; to indicate emphasis. Use &lt;i&gt; for text in an alternate voice or mood, technical terms, thoughts, etc.
+                        <pre><code class="code-snippet html">&lt;p&gt;You &lt;em&gt;must&lt;/em&gt; complete the assignment.&lt;/p&gt;
+&lt;p&gt;The term &lt;i&gt;hypertext&lt;/i&gt; is key here.&lt;/p&gt;</code></pre>
+                    </li>
+                    <li><strong>&lt;u&gt;:</strong> Represents text with an unarticulated, non-textual annotation (like marking a misspelling). Avoid using it purely for underlining; use CSS instead.</li>
+                    <li><strong>&lt;s&gt;:</strong> Renders text with a strikethrough, indicating content that is no longer relevant or accurate.</li>
+                    <li><strong>&lt;sub&gt;:</strong> Defines subscript text (appears slightly below the normal line).</li>
+                    <li><strong>&lt;sup&gt;:</strong> Defines superscript text (appears slightly above the normal line).</li>
+                        <pre><code class="code-snippet html">&lt;p&gt;Water is H&lt;sub&gt;2&lt;/sub&gt;O.&lt;/p&gt;
+&lt;p&gt;E = mc&lt;sup&gt;2&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;Old Price: $50&lt;/s&gt; New Price: $40&lt;/p&gt;</code></pre>
+                </ul>
+            </div>
+        </section>
+
+        <section id="phrase-tags-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Phrase Tags for Semantic Meaning</h3>
+                <p>Phrase tags provide specific semantic context for the enclosed text, which can be useful for browsers, screen readers, and search engines.</p>
+                <ul>
+                    <li><strong>&lt;code&gt;:</strong> Indicates a fragment of computer code.
+                        <pre><code class="code-snippet html">&lt;p&gt;Use the &lt;code&gt;console.log()&lt;/code&gt; function.&lt;/p&gt;</code></pre>
+                    </li>
+                    <li><strong>&lt;var&gt;:</strong> Represents a variable in a mathematical expression or programming context.
+                        <pre><code class="code-snippet html">&lt;p&gt;The equation is &lt;var&gt;x&lt;/var&gt; + &lt;var&gt;y&lt;/var&gt; = 10.&lt;/p&gt;</code></pre>
+                    </li>
+                    <li><strong>&lt;kbd&gt;:</strong> Indicates user keyboard input.
+                        <pre><code class="code-snippet html">&lt;p&gt;Press &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt; to save.&lt;/p&gt;</code></pre>
+                    </li>
+                    <li><strong>&lt;samp&gt;:</strong> Represents sample or quoted output from a computer program.
+                        <pre><code class="code-snippet html">&lt;p&gt;The program outputted: &lt;samp&gt;File not found.&lt;/samp&gt;&lt;/p&gt;</code></pre>
+                    </li>
+                     <li><strong>&lt;mark&gt;:</strong> Represents text marked or highlighted for reference or notation purposes.
+                        <pre><code class="code-snippet html">&lt;p&gt;The important part is &lt;mark&gt;this section&lt;/mark&gt;.&lt;/p&gt;</code></pre>
+                    </li>
+                     <li><strong>&lt;small&gt;:</strong> Represents side comments or small print (like copyright).</li>
+                     <li><strong>&lt;time&gt;:</strong> Represents a specific period in time (can include `datetime` attribute for machine-readable format).</li>
+                     <li><strong>&lt;abbr&gt;:</strong> Represents an abbreviation or acronym (use `title` attribute for expansion).</li>
+                        <pre><code class="code-snippet html">&lt;p&gt;Learn &lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;.&lt;/p&gt;</code></pre>
+
+                </ul>
+                <p>Using these tags appropriately improves the semantics and accessibility of your web pages.</p>
+            </div>
+        </section>
+
+        <section id="links-section" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Creating Hyperlinks (&lt;a&gt;)</h3>
+                <p>The anchor tag &lt;a&gt; is used to create hyperlinks, allowing users to navigate between pages or resources.</p>
+                <h4>Basic Link Structure</h4>
+                <pre><code class="code-snippet html">&lt;a href="url"&gt;Link Text&lt;/a&gt;</code></pre>
+                <ul>
+                    <li><strong>href Attribute:</strong> Specifies the destination URL (Uniform Resource Locator) of the link. This is the most important attribute.</li>
+                    <li><strong>Link Text:</strong> The visible part of the link that users click on.</li>
+                </ul>
+                <h4>Linking to External Pages</h4>
+                <pre><code class="code-snippet html">&lt;a href="https://www.google.com"&gt;Visit Google&lt;/a&gt;</code></pre>
+                <h4>Linking to Internal Pages (within your site)</h4>
+                <p>Use relative paths (explained in the next section).</p>
+                <pre><code class="code-snippet html">&lt;a href="about.html"&gt;About Us&lt;/a&gt;
+&lt;a href="contact.html"&gt;Contact Page&lt;/a&gt;</code></pre>
+                <h4>Linking to Sections on the Same Page</h4>
+                <p>Use the # symbol followed by the id attribute of the target element.</p>
+                <pre><code class="code-snippet html">&lt;!-- Link --&gt;
+&lt;a href="#section2"&gt;Go to Section 2&lt;/a&gt;
+
+&lt;!-- Target Element --&gt;
+&lt;h2 id="section2"&gt;Section 2&lt;/h2&gt;</code></pre>
+                <h4>Linking to Email Addresses</h4>
+                <p>Use `mailto:` within the `href` attribute.</p>
+                <pre><code class="code-snippet html">&lt;a href="mailto:info@example.com"&gt;Email Us&lt;/a&gt;</code></pre>
+                <h4>The `target` Attribute</h4>
+                <p>Specifies where to open the linked document.</p>
+                <ul>
+                    <li><strong>_self:</strong> (Default) Opens in the same window/tab.</li>
+                    <li><strong>_blank:</strong> Opens in a new window or tab.</li>
+                    <li><strong>_parent:</strong> Opens in the parent frame.</li>
+                    <li><strong>_top:</strong> Opens in the full body of the window.</li>
+                </ul>
+                <pre><code class="code-snippet html">&lt;!-- Opens Google in a new tab --&gt;
+&lt;a href="https://www.google.com" target="_blank"&gt;Google (New Tab)&lt;/a&gt;</code></pre>
+            </div>
+        </section>
+
+        <section id="paths-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Absolute vs. Relative Paths</h3>
+                <p>When linking to resources (other HTML pages, images, CSS files), you need to specify the path correctly.</p>
+                <h4>Absolute Paths</h4>
+                <p>An absolute path specifies the full URL, including the protocol (http/https) and domain name. It points to a specific location on the web, regardless of the current page's location.</p>
+                <pre><code class="code-snippet html">&lt;!-- Absolute path to an external website --&gt;
+&lt;a href="https://developer.mozilla.org/"&gt;MDN Web Docs&lt;/a&gt;
+
+&lt;!-- Absolute path to an image on another server --&gt;
+&lt;img src="https://placehold.co/100x50/EEE/333?text=Abs+Image" alt="Absolute Path Image"&gt;</code></pre>
+                <h4>Relative Paths</h4>
+                <p>A relative path specifies the location of a file relative to the current page's location. They are used for linking files within the same website.</p>
+                <p>Assume the following folder structure:</p>
+                <pre><code>
+my-website/
+├── index.html
+├── about.html
+├── contact.html
+└── images/
+    └── logo.png
+└── css/
+    └── style.css
+                </code></pre>
+                <ul>
+                    <li><strong>Linking to a file in the same directory:</strong> (From `index.html` to `about.html`)
+                        <pre><code class="code-snippet html">&lt;a href="about.html"&gt;About&lt;/a&gt;</code></pre>
+                    </li>
+                    <li><strong>Linking to a file in a subdirectory:</strong> (From `index.html` to `logo.png`)
+                        <pre><code class="code-snippet html">&lt;img src="images/logo.png" alt="Logo"&gt;</code></pre>
+                    </li>
+                    <li><strong>Linking to a file in a parent directory:</strong> (Imagine being inside the `images` folder and linking back to `index.html`)
+                        <pre><code class="code-snippet html">&lt;!-- If current page was images/somepage.html --&gt;
+&lt;a href="../index.html"&gt;Back to Home&lt;/a&gt; &lt;!-- ../ goes up one directory --&gt;</code></pre>
+                    </li>
+                </ul>
+                <p>Using relative paths is generally preferred for internal links within a website, as it makes the site more portable (you can move the entire folder without breaking links).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 HTMLLearn - Your HTML Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro</a>
+                <a href="Week1.html#what-is-html-section">What is HTML?</a>
+                <a href="Week1.html#basic-structure-section">Structure</a>
+                <a href="Week1.html#setup-section">Setup</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#formatting-section">Formatting</a>
+                <a href="#phrase-tags-section">Phrase Tags</a>
+                <a href="#links-section">Links</a>
+                <a href="#paths-section">Paths</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#lists">Lists</a>
+                <a href="Week3.html#images">Images</a>
+                <a href="Week3.html#formats">Formats</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#table-structure">Structure</a>
+                <a href="Week4.html#spanning">Spanning</a>
+                <a href="Week4.html#headers-captions">Headers</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#form-tag">Form Tag</a>
+                 <a href="Week5.html#inputs">Inputs</a>
+                 <a href="Week5.html#labels">Labels</a>
+                 <a href="Week5.html#attributes">Attributes</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#checkbox-radio">Checkbox/Radio</a>
+                <a href="Week6.html#select">Dropdown</a>
+                <a href="Week6.html#textarea">Text Area</a>
+                <a href="Week6.html#grouping">Grouping</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#semantic">Semantic HTML</a>
+                <a href="Week7.html#multimedia">Audio/Video</a>
+                <a href="Week7.html#iframe">Iframe</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#review">Review</a>
+                <a href="Week8.html#best-practices">Best Practices</a>
+                <a href="Week8.html#integration">Integration</a>
+                <a href="Week8.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

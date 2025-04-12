@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPP Learning - Week 10: Inheritance & Polymorphism</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="cpp.ico" type="image/x-icon">
+    </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="cpp-color">CPP</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#inheritance">Inheritance</a></li>
+                <li><a href="#overriding">Overriding</a></li>
+                <li><a href="#polymorphism">Polymorphism</a></li>
+                <li><a href="#virtual-funcs">Virtual Functions</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 10: Building Hierarchies & Flexible Code</h1>
+                <p class="tagline">Learn about inheritance and polymorphism, key pillars of Object-Oriented Programming in C++.</p>
+                <a href="#inheritance" class="button">Explore Chapter 10</a>
+            </div>
+        </section>
+
+        <section id="inheritance" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 10: Inheritance and Polymorphism</h2>
+                <h3>Inheritance: Creating "Is-A" Relationships.</h3>
+                <p>Inheritance is a fundamental OOP mechanism that allows a new class (the <strong>derived class</strong> or child class) to inherit properties (member variables) and behaviors (member functions) from an existing class (the <strong>base class</strong> or parent class).</p>
+                <p>This represents an "is-a" relationship (e.g., a `Dog` is an `Animal`, a `Car` is a `Vehicle`). Inheritance promotes code reusability and helps create logical hierarchies.</p>
+                <h4>Syntax</h4>
+                 <pre><code class="code-snippet"><span class="code-cpp-keyword">class</span> BaseClassName {
+    <span class="code-cpp-comment">// ... members ...</span>
+};
+
+<span class="code-cpp-keyword">class</span> DerivedClassName : <span class="code-cpp-keyword">access_specifier</span> BaseClassName {
+    <span class="code-cpp-comment">// ... additional members specific to DerivedClass ...</span>
+};</code></pre>
+                <ul>
+                    <li>The derived class name is followed by a colon (`:`), an access specifier (`public`, `protected`, or `private`), and the base class name.</li>
+                    <li><strong>`public` inheritance</strong> is the most common type. It means public members of the base class become public members of the derived class, and protected members of the base class become protected members of the derived class. Private members of the base class are inherited but are not directly accessible by the derived class.</li>
+                    <li>`protected` and `private` inheritance are less common and change how base class members are accessible in the derived class and further down the hierarchy.</li>
+                </ul>
+                <h4>Example</h4>
+                 <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+<span class="code-cpp-preprocessor">#include &lt;string&gt;</span>
+
+<span class="code-cpp-comment">// Base class</span>
+<span class="code-cpp-keyword">class</span> Animal {
+<span class="code-cpp-keyword">public</span>:
+    <span class="code-cpp-type">std::string</span> name;
+    <span class="code-cpp-type">void</span> <span class="code-cpp-function">eat</span>() {
+        std::cout &lt;&lt; name &lt;&lt; <span class="code-cpp-string">" is eating."</span> &lt;&lt; std::endl;
+    }
+};
+
+<span class="code-cpp-comment">// Derived class (inherits publicly from Animal)</span>
+<span class="code-cpp-keyword">class</span> Dog : <span class="code-cpp-keyword">public</span> Animal {
+<span class="code-cpp-keyword">public</span>:
+    <span class="code-cpp-type">void</span> <span class="code-cpp-function">bark</span>() {
+        std::cout &lt;&lt; name &lt;&lt; <span class="code-cpp-string">" says Woof!"</span> &lt;&lt; std::endl; <span class="code-cpp-comment">// Can access public 'name' from Animal</span>
+    }
+};
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    Dog myDog;
+    myDog.name = <span class="code-cpp-string">"Rex"</span>; <span class="code-cpp-comment">// Access inherited member</span>
+    myDog.<span class="code-function">eat</span>();    <span class="code-cpp-comment">// Call inherited method</span>
+    myDog.<span class="code-function">bark</span>();   <span class="code-cpp-comment">// Call derived class method</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="overriding" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Method Overriding.</h3>
+                <p>A derived class can provide its own specific implementation of a member function that is already defined in its base class. This is called <strong>method overriding</strong>. The function in the derived class must have the same name, same return type, and same parameters as the function in the base class.</p>
+                <p>Overriding allows a derived class to customize or specialize the behavior inherited from the base class.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-keyword">class</span> Bird : <span class="code-cpp-keyword">public</span> Animal { <span class="code-cpp-comment">// Inheriting from Animal class above</span>
+<span class="code-cpp-keyword">public</span>:
+    <span class="code-cpp-comment">// Override the eat method from Animal</span>
+    <span class="code-cpp-type">void</span> <span class="code-cpp-function">eat</span>() {
+        std::cout &lt;&lt; name &lt;&lt; <span class="code-cpp-string">" is pecking at seeds."</span> &lt;&lt; std::endl;
+    }
+    <span class="code-cpp-type">void</span> <span class="code-cpp-function">fly</span>() {
+        std::cout &lt;&lt; name &lt;&lt; <span class="code-cpp-string">" is flying."</span> &lt;&lt; std::endl;
+    }
+};
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    Dog dog1;
+    dog1.name = <span class="code-cpp-string">"Buddy"</span>;
+
+    Bird bird1;
+    bird1.name = <span class="code-cpp-string">"Sky"</span>;
+
+    dog1.<span class="code-function">eat</span>();  <span class="code-cpp-comment">// Output: Buddy is eating. (Calls Animal's eat)</span>
+    bird1.<span class="code-function">eat</span>(); <span class="code-cpp-comment">// Output: Sky is pecking at seeds. (Calls Bird's overridden eat)</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <p>To achieve true runtime polymorphism (deciding which version of the method to call based on the object's actual type, not just the pointer/reference type), we often use virtual functions, which we'll discuss next.</p>
+            </div>
+        </section>
+
+        <section id="polymorphism" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h3>Polymorphism: "Many Forms".</h3>
+                <p>Polymorphism is a core OOP concept that allows objects of different classes to be treated as objects of a common base class. More specifically, it enables you to call the same member function on different objects and have each object respond in its own way (based on its specific class implementation).</p>
+                <p>In C++, polymorphism is primarily achieved through:</p>
+                <ul>
+                    <li><strong>Function Overloading:</strong> (Compile-time polymorphism) Multiple functions with the same name but different parameters. The compiler selects the correct function based on the arguments provided at compile time. (Covered in Week 5).</li>
+                    <li><strong>Method Overriding with Virtual Functions:</strong> (Runtime polymorphism) Allows a derived class to provide its own implementation of a base class function. When called through a base class pointer or reference, the correct derived class version is executed at runtime.</li>
+                </ul>
+                <p>Runtime polymorphism is particularly powerful for creating flexible and extensible systems where you can work with objects through a base class interface without needing to know their specific derived type.</p>
+            </div>
+        </section>
+
+        <section id="virtual-funcs" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Virtual Functions (`virtual`) and Abstract Classes.</h3>
+                <h4>Virtual Functions</h4>
+                <p>To enable runtime polymorphism for an overridden method, the method must be declared as `virtual` in the <strong>base class</strong>.</p>
+                <p>When a `virtual` function is called via a pointer or reference to the base class, C++ determines at runtime which version of the function to execute based on the actual type of the object being pointed/referred to.</p>
+                 <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+<span class="code-cpp-preprocessor">#include &lt;string&gt;</span>
+
+<span class="code-cpp-keyword">class</span> BaseShape {
+<span class="code-cpp-keyword">public</span>:
+    <span class="code-cpp-comment">// Declare draw() as virtual in the base class</span>
+    <span class="code-cpp-keyword">virtual</span> <span class="code-cpp-type">void</span> <span class="code-cpp-function">draw</span>() {
+        std::cout &lt;&lt; <span class="code-cpp-string">"Drawing a generic BaseShape"</span> &lt;&lt; std::endl;
+    }
+    <span class="code-cpp-comment">// Virtual destructor is important when dealing with inheritance and pointers!</span>
+    <span class="code-cpp-keyword">virtual</span> ~BaseShape() {} <span class="code-cpp-comment">// Good practice!</span>
+};
+
+<span class="code-cpp-keyword">class</span> Circle : <span class="code-cpp-keyword">public</span> BaseShape {
+<span class="code-cpp-keyword">public</span>:
+    <span class="code-cpp-comment">// Override the virtual function (using 'override' keyword is good practice C++11+)</span>
+    <span class="code-cpp-type">void</span> <span class="code-cpp-function">draw</span>() <span class="code-cpp-keyword">override</span> {
+        std::cout &lt;&lt; <span class="code-cpp-string">"Drawing a Circle"</span> &lt;&lt; std::endl;
+    }
+};
+
+<span class="code-cpp-keyword">class</span> Square : <span class="code-cpp-keyword">public</span> BaseShape {
+<span class="code-cpp-keyword">public</span>:
+    <span class="code-cpp-type">void</span> <span class="code-cpp-function">draw</span>() <span class="code-cpp-keyword">override</span> {
+        std::cout &lt;&lt; <span class="code-cpp-string">"Drawing a Square"</span> &lt;&lt; std::endl;
+    }
+};
+
+<span class="code-cpp-comment">// Function that works with any BaseShape pointer</span>
+<span class="code-cpp-type">void</span> <span class="code-cpp-function">drawAnyShape</span>(BaseShape* shapePtr) {
+    shapePtr-><span class="code-function">draw</span>(); <span class="code-cpp-comment">// Calls the correct draw() based on the actual object type</span>
+}
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    BaseShape* shape1 = <span class="code-cpp-keyword">new</span> Circle();
+    BaseShape* shape2 = <span class="code-cpp-keyword">new</span> Square();
+    BaseShape* shape3 = <span class="code-cpp-keyword">new</span> BaseShape();
+
+    <span class="code-function">drawAnyShape</span>(shape1); <span class="code-cpp-comment">// Output: Drawing a Circle</span>
+    <span class="code-function">drawAnyShape</span>(shape2); <span class="code-cpp-comment">// Output: Drawing a Square</span>
+    <span class="code-function">drawAnyShape</span>(shape3); <span class="code-cpp-comment">// Output: Drawing a generic BaseShape</span>
+
+    <span class="code-cpp-keyword">delete</span> shape1; <span class="code-cpp-comment">// Clean up dynamic memory</span>
+    <span class="code-cpp-keyword">delete</span> shape2;
+    <span class="code-cpp-keyword">delete</span> shape3;
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                 <h4>Abstract Classes and Pure Virtual Functions</h4>
+                <p>Sometimes, a base class represents an abstract concept for which creating objects doesn't make sense (e.g., a generic `Shape`). You might want to force derived classes to provide their own implementation for certain methods.</p>
+                <ul>
+                    <li>A <strong>pure virtual function</strong> is declared by appending `= 0` to a virtual function declaration in the base class. It has no implementation in the base class.</li>
+                    <li>A class containing one or more pure virtual functions is called an <strong>abstract class</strong>.</li>
+                    <li>You <strong>cannot create objects</strong> (instances) of an abstract class directly.</li>
+                    <li>Any derived class must override all pure virtual functions inherited from its base class, or it too becomes abstract.</li>
+                </ul>
+                 <pre><code class="code-snippet"><span class="code-cpp-keyword">class</span> AbstractShape { <span class="code-cpp-comment">// Abstract base class</span>
+<span class="code-cpp-keyword">public</span>:
+    <span class="code-cpp-comment">// Pure virtual function - must be overridden by derived classes</span>
+    <span class="code-cpp-keyword">virtual</span> <span class="code-cpp-type">double</span> <span class="code-cpp-function">getArea</span>() = <span class="code-cpp-number">0</span>;
+    <span class="code-cpp-keyword">virtual</span> ~AbstractShape() {} <span class="code-cpp-comment">// Virtual destructor still needed</span>
+};
+
+<span class="code-cpp-keyword">class</span> ConcreteCircle : <span class="code-cpp-keyword">public</span> AbstractShape {
+<span class="code-cpp-keyword">private</span>: <span class="code-cpp-type">double</span> radius;
+<span class="code-cpp-keyword">public</span>:
+    ConcreteCircle(<span class="code-cpp-type">double</span> r) : radius(r) {}
+    <span class="code-cpp-type">double</span> <span class="code-cpp-function">getArea</span>() <span class="code-cpp-keyword">override</span> { <span class="code-cpp-comment">// MUST implement getArea()</span>
+        <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">3.14159</span> * radius * radius;
+    }
+};
+
+<span class="code-cpp-comment">// AbstractShape shape_obj; // Error! Cannot instantiate abstract class</span>
+ConcreteCircle circle_obj(<span class="code-cpp-number">5.0</span>); <span class="code-cpp-comment">// OK</span></code></pre>
+                <p>Abstract classes define interfaces that derived classes must adhere to, enforcing a common structure.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CPPLearn - Your C++ Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#intro-cpp">Intro C++</a>
+                <a href="Week1.html#why-learn-cpp">Why C++?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#hello-world">Hello World</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#constants">Constants</a>
+                <a href="Week2.html#operators">Operators</a>
+                <a href="Week2.html#type-casting">Type Casting</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#io-stream">Input/Output</a>
+                 <a href="Week3.html#conditionals">Conditionals</a>
+                 <a href="Week3.html#nested-if">Nested If</a>
+                 <a href="Week3.html#switch">Switch</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#for-loops">for Loops</a>
+                <a href="Week4.html#while-loops">while Loops</a>
+                <a href="Week4.html#do-while">do...while</a>
+                <a href="Week4.html#break-continue">break/continue</a>
+                <a href="Week4.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#functions-def">Definition</a>
+                <a href="Week5.html#functions-proto">Prototypes</a>
+                <a href="Week5.html#functions-params">Parameters</a>
+                <a href="Week5.html#functions-return">Return Values</a>
+                <a href="Week5.html#functions-overload">Overloading</a>
+                <a href="Week5.html#scope">Scope</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#arrays">Arrays</a>
+                <a href="Week6.html#multi-arrays">Multi-Dim Arrays</a>
+                <a href="Week6.html#c-strings">C-Strings</a>
+                <a href="Week6.html#std-string">std::string</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#memory-addresses">Memory</a>
+                <a href="Week7.html#pointers">Pointers</a>
+                <a href="Week7.html#dynamic-mem">Dynamic Memory</a>
+                <a href="Week7.html#references">References</a>
+                <a href="Week7.html#pass-by-ref">Pass by Reference</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#oop-concepts">OOP Concepts</a>
+                <a href="Week8.html#classes-objects">Classes/Objects</a>
+                <a href="Week8.html#access-specifiers">Access Specifiers</a>
+                <a href="Week8.html#members">Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#constructors">Constructors</a>
+                <a href="Week9.html#destructors">Destructors</a>
+                <a href="Week9.html#this-pointer">`this` Pointer</a>
+                <a href="Week9.html#static-members">Static Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#inheritance">Inheritance</a>
+                <a href="#overriding">Overriding</a>
+                <a href="#polymorphism">Polymorphism</a>
+                <a href="#virtual-funcs">Virtual Functions</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#stl-overview">STL Overview</a>
+                <a href="Week11.html#containers">Containers</a>
+                <a href="Week11.html#iterators">Iterators</a>
+                <a href="Week11.html#algorithms">Algorithms</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#file-io">File I/O</a>
+                <a href="Week12.html#error-handling">Error Handling</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+                <a href="Week12.html#project">Mini-Project</a>
+            </div>
+        </div>
+
+    </div> </body>
+</html>

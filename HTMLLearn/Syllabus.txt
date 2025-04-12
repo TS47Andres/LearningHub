@@ -1,0 +1,73 @@
+HTMLearn: 8-Week HTML Syllabus
+
+Week 1: Introduction to HTML & Basic Structure
+
+What is HTML? Its role alongside CSS & JavaScript.
+History and evolution (briefly).
+Setting up your development environment (Text Editor like VS Code, Browser Dev Tools).
+Basic HTML Document Structure (<!DOCTYPE html>, <html>, <head>, <body>).
+Essential Tags: Headings (<h1> to <h6>), Paragraphs (<p>), Line Breaks (<br>).
+Comments (``).
+Running your first HTML page in a browser.
+
+
+Week 2: Text Formatting & Links
+
+Formatting Text: Bold (<strong>, <b>), Italic (<em>, <i>), Underline (<u>), Strikethrough (<s>), Subscript (<sub>), Superscript (<sup>).
+Phrase Tags: Emphasis (<em>), Strong Importance (<strong>), Code (<code>), etc.
+Creating Hyperlinks (<a> tag): Linking to external pages, internal sections (#id), and email addresses (mailto:).
+Link Attributes: href, target (_blank, _self, etc.).
+Absolute vs. Relative Paths.
+
+
+Week 3: Lists & Images
+
+Unordered Lists (<ul>, <li>).
+Ordered Lists (<ol>, <li>, type attribute).
+Definition Lists (<dl>, <dt>, <dd>).
+Embedding Images (<img> tag): src and alt attributes.
+Image Formats (JPG, PNG, GIF, SVG) and when to use them.
+Linking Images.
+Basic image sizing attributes (width, height - though CSS is preferred).
+
+
+Week 4: Tables
+
+Creating Tables (<table>, <thead>, <tbody>, <tfoot>, <tr>, <th>, <td>).
+Table Structure and Semantics.
+Spanning Rows and Columns (rowspan, colspan).
+Table Headers and Captions (<caption>).
+Basic Table Styling (Note: Advanced styling is done with CSS).
+Week 5: Forms - Part 1 (Input Fields)
+
+Introduction to HTML Forms (<form> tag, action, method attributes).
+Basic Input Fields: Text (<input type="text">), Password (<input type="password">), Submit (<input type="submit">), Reset (<input type="reset">), Button (<input type="button">, <button>).
+Labels for Inputs (<label> tag, for attribute).
+Input Attributes: name, id, value, placeholder, required.
+
+
+Week 6: Forms - Part 2 (More Controls)
+
+Checkboxes (<input type="checkbox">).
+Radio Buttons (<input type="radio"> - grouping with name).
+Dropdown Lists (<select>, <option>, value attribute).
+Text Areas (<textarea>).
+Grouping Form Controls (<fieldset>, <legend>).
+Other Input Types (briefly): number, date, email, url, color.
+Week 7: Semantic HTML & Multimedia
+
+Introduction to Semantic HTML: Why it's important (Accessibility, SEO).
+Structural Elements: <header>, <nav>, <main>, <article>, <section>, <aside>, <footer>.
+Embedding Audio (<audio> tag, controls, <source>).
+Embedding Video (<video> tag, controls, width, height, <source>).
+Embedding other content (<iframe>).
+
+
+Week 8: Putting It Together & Next Steps
+
+Review of key HTML concepts.
+Best Practices: Validation, Accessibility considerations.
+Structuring a simple multi-page website using learned concepts.
+Brief overview of how CSS and JavaScript integrate with HTML (what they do).
+Where to go next: Introduction to CSS.
+Mini-Project: Build a simple personal portfolio page or a basic website structure.

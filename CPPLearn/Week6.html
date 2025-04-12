@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPP Learning - Week 6: Arrays & Strings</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="cpp.ico" type="image/x-icon">
+    </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="cpp-color">CPP</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#arrays">Arrays</a></li>
+                <li><a href="#multi-arrays">Multi-Dim Arrays</a></li>
+                <li><a href="#c-strings">C-Strings</a></li>
+                <li><a href="#std-string">std::string</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 6: Working with Sequences - Arrays & Strings</h1>
+                <p class="tagline">Learn to store and manipulate ordered collections of data using arrays and strings in C++.</p>
+                <a href="#arrays" class="button">Explore Chapter 6</a>
+            </div>
+        </section>
+
+        <section id="arrays" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 6: Arrays and Introduction to Strings</h2>
+                <h3>Arrays: Fixed-Size Sequences.</h3>
+                <p>Arrays are fundamental data structures used to store a fixed-size, sequential collection of elements of the <strong>same data type</strong>. They provide contiguous memory allocation for their elements.</p>
+                <h4>Declaration and Initialization</h4>
+                <p>You declare an array by specifying the element type, the array name, and the size (number of elements) in square brackets `[]`.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-type">int</span> scores[<span class="code-cpp-number">5</span>]; <span class="code-cpp-comment">// Declares an array named 'scores' that can hold 5 integers</span>
+
+<span class="code-cpp-comment">// Initialization at declaration</span>
+<span class="code-cpp-type">double</span> temperatures[<span class="code-cpp-number">3</span>] = { <span class="code-cpp-number">98.6</span>, <span class="code-cpp-number">100.2</span>, <span class="code-cpp-number">99.1</span> }; <span class="code-cpp-comment">// Using initializer list</span>
+<span class="code-cpp-type">char</span> vowels[] = { <span class="code-cpp-string">'a'</span>, <span class="code-cpp-string">'e'</span>, <span class="code-cpp-string">'i'</span>, <span class="code-cpp-string">'o'</span>, <span class="code-cpp-string">'u'</span> }; <span class="code-cpp-comment">// Size inferred from initializer list</span></code></pre>
+                <p>If you provide an initializer list, you can optionally omit the size, and the compiler will determine it.</p>
+                <h4>Accessing Elements (Indexing)</h4>
+                <p>Array elements are accessed using zero-based indexing (the first element is at index 0) with square brackets.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-cpp-type">int</span> numbers[<span class="code-cpp-number">4</span>] = {<span class="code-cpp-number">10</span>, <span class="code-cpp-number">20</span>, <span class="code-cpp-number">30</span>, <span class="code-cpp-number">40</span>};
+
+    std::cout &lt;&lt; <span class="code-cpp-string">"First element: "</span> &lt;&lt; numbers[<span class="code-cpp-number">0</span>] &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 10</span>
+    std::cout &lt;&lt; <span class="code-cpp-string">"Third element: "</span> &lt;&lt; numbers[<span class="code-cpp-number">2</span>] &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 30</span>
+
+    <span class="code-cpp-comment">// Modifying an element</span>
+    numbers[<span class="code-cpp-number">1</span>] = <span class="code-cpp-number">25</span>;
+    std::cout &lt;&lt; <span class="code-cpp-string">"Second element (modified): "</span> &lt;&lt; numbers[<span class="code-cpp-number">1</span>] &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 25</span>
+
+    <span class="code-cpp-comment">// Important: C++ does NOT typically check array bounds!</span>
+    <span class="code-cpp-comment">// Accessing numbers[4] or numbers[-1] leads to UNDEFINED BEHAVIOR.</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                <h4>Iterating Over Arrays</h4>
+                <p>You can use loops (especially `for` loops) to process array elements.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-type">double</span> prices[] = {<span class="code-cpp-number">1.99</span>, <span class="code-cpp-number">5.50</span>, <span class="code-cpp-number">10.00</span>, <span class="code-cpp-number">0.75</span>};
+<span class="code-cpp-type">int</span> numPrices = <span class="code-cpp-keyword">sizeof</span>(prices) / <span class="code-cpp-keyword">sizeof</span>(prices[<span class="code-cpp-number">0</span>]); <span class="code-cpp-comment">// Calculate array size</span>
+
+<span class="code-cpp-comment">// Classic for loop</span>
+<span class="code-cpp-keyword">for</span> (<span class="code-cpp-type">int</span> i = <span class="code-cpp-number">0</span>; i < numPrices; ++i) {
+    std::cout &lt;&lt; prices[i] &lt;&lt; <span class="code-cpp-string">" "</span>;
+}
+std::cout &lt;&lt; std::endl;
+
+<span class="code-cpp-comment">// Range-based for loop (C++11 onwards)</span>
+<span class="code-cpp-keyword">for</span> (<span class="code-cpp-type">double</span> price : prices) {
+    std::cout &lt;&lt; price &lt;&lt; <span class="code-cpp-string">" "</span>;
+}
+std::cout &lt;&lt; std::endl;</code></pre>
+            </div>
+        </section>
+
+        <section id="multi-arrays" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Multidimensional Arrays (Basic).</h3>
+                <p>C++ supports multidimensional arrays, which are essentially arrays of arrays. The most common is the 2D array, representing a grid or table.</p>
+                <h4>Declaration and Initialization</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-comment">// Declare a 2x3 integer array (2 rows, 3 columns)</span>
+<span class="code-cpp-type">int</span> matrix[<span class="code-cpp-number">2</span>][<span class="code-cpp-number">3</span>];
+
+<span class="code-cpp-comment">// Declare and initialize</span>
+<span class="code-cpp-type">int</span> grid[<span class="code-cpp-number">2</span>][<span class="code-cpp-number">3</span>] = {
+    { <span class="code-cpp-number">1</span>, <span class="code-cpp-number">2</span>, <span class="code-cpp-number">3</span> }, <span class="code-cpp-comment">// Row 0</span>
+    { <span class="code-cpp-number">4</span>, <span class="code-cpp-number">5</span>, <span class="code-cpp-number">6</span> }  <span class="code-cpp-comment">// Row 1</span>
+};
+
+<span class="code-cpp-comment">// Can omit the first dimension size if initializing</span>
+<span class="code-cpp-type">int</span> grid2[][<span class="code-cpp-number">3</span>] = { {<span class="code-cpp-number">1</span>, <span class="code-cpp-number">2</span>, <span class="code-cpp-number">3</span>}, {<span class="code-cpp-number">4</span>, <span class="code-cpp-number">5</span>, <span class="code-cpp-number">6</span>} };</code></pre>
+                <h4>Accessing Elements</h4>
+                 <p>Use two sets of square brackets: `arrayName[rowIndex][columnIndex]`.</p>
+                <pre><code class="code-snippet">std::cout &lt;&lt; grid[<span class="code-cpp-number">0</span>][<span class="code-cpp-number">1</span>]; <span class="code-cpp-comment">// Output: 2 (Element at row 0, column 1)</span>
+grid[<span class="code-cpp-number">1</span>][<span class="code-cpp-number">2</span>] = <span class="code-cpp-number">55</span>; <span class="code-cpp-comment">// Modify element at row 1, column 2</span></code></pre>
+                 <h4>Iterating</h4>
+                 <p>Nested loops are typically used to iterate over multidimensional arrays.</p>
+                  <pre><code class="code-snippet"><span class="code-cpp-type">int</span> rows = <span class="code-cpp-number">2</span>;
+<span class="code-cpp-type">int</span> cols = <span class="code-cpp-number">3</span>;
+<span class="code-cpp-keyword">for</span> (<span class="code-cpp-type">int</span> i = <span class="code-cpp-number">0</span>; i < rows; ++i) {
+    <span class="code-cpp-keyword">for</span> (<span class="code-cpp-type">int</span> j = <span class="code-cpp-number">0</span>; j < cols; ++j) {
+        std::cout &lt;&lt; grid[i][j] &lt;&lt; <span class="code-cpp-string">" "</span>;
+    }
+    std::cout &lt;&lt; std::endl;
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="c-strings" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h3>C-style Strings (`char` arrays).</h3>
+                <p>Before the introduction of the `std::string` class, C++ (inheriting from C) primarily handled strings as arrays of characters terminated by a special <strong>null character</strong> (`'\0'`).</p>
+                 <h4>Declaration and Initialization</h4>
+                 <pre><code class="code-snippet"><span class="code-cpp-type">char</span> greeting[] = <span class="code-cpp-string">"Hello"</span>; <span class="code-cpp-comment">// Compiler adds null terminator '\0' automatically. Size is 6.</span>
+<span class="code-cpp-type">char</span> message[<span class="code-cpp-number">20</span>] = <span class="code-cpp-string">"World"</span>; <span class="code-cpp-comment">// Size 20, initialized with "World\0", rest are undefined/garbage.</span>
+<span class="code-cpp-type">char</span> explicitNull[] = {<span class="code-cpp-string">'H'</span>, <span class="code-cpp-string">'i'</span>, <span class="code-cpp-string">'\0'</span>}; <span class="code-cpp-comment">// Manually null-terminated.</span></code></pre>
+                <h4>Working with C-strings</h4>
+                 <p>Many C-style string manipulation functions are available in the `<cstring>` (or `<string.h>`) header, such as `strlen()` (length), `strcpy()` (copy), `strcat()` (concatenate), `strcmp()` (compare).</p>
+                 <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;cstring&gt;</span>
+<span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span>
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-cpp-type">char</span> str1[<span class="code-cpp-number">50</span>] = <span class="code-cpp-string">"Hello"</span>;
+    <span class="code-cpp-type">char</span> str2[] = <span class="code-cpp-string">", World!"</span>;
+
+    std::<span class="code-function">strcat</span>(str1, str2); <span class="code-cpp-comment">// Concatenate str2 onto str1 (DANGEROUS if str1 isn't large enough!)</span>
+    std::cout &lt;&lt; str1 &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: Hello, World!</span>
+    std::cout &lt;&lt; <span class="code-cpp-string">"Length: "</span> &lt;&lt; std::<span class="code-function">strlen</span>(str1) &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: Length: 13</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>;
+}</code></pre>
+                 <p><strong>Caution:</strong> C-style strings are prone to errors, especially buffer overflows (writing past the end of the array), because they don't manage their own memory or track their size automatically. It's generally recommended to use `std::string` in modern C++.</p>
+            </div>
+        </section>
+
+        <section id="std-string" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Introduction to `std::string`.</h3>
+                <p>The `std::string` class (from the `<string>` header) is the modern C++ way to handle strings. It provides a much safer, more convenient, and feature-rich alternative to C-style character arrays.</p>
+                <h4>Include Header</h4>
+                <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;string&gt;</span></code></pre>
+                 <h4>Creation and Initialization</h4>
+                 <pre><code class="code-snippet"><span class="code-cpp-type">std::string</span> s1; <span class="code-cpp-comment">// Empty string</span>
+<span class="code-cpp-type">std::string</span> s2 = <span class="code-cpp-string">"Hello"</span>; <span class="code-cpp-comment">// Initialize with string literal</span>
+<span class="code-cpp-type">std::string</span> s3(<span class="code-cpp-string">"World"</span>); <span class="code-cpp-comment">// Initialize using constructor</span>
+<span class="code-cpp-type">std::string</span> s4 = s2; <span class="code-cpp-comment">// Copy initialization</span></code></pre>
+                 <h4>Concatenation and Comparison</h4>
+                <p>Operators work intuitively with `std::string`.</p>
+                <pre><code class="code-snippet"><span class="code-cpp-type">std::string</span> combined = s2 + <span class="code-cpp-string">" "</span> + s3 + <span class="code-cpp-string">"!"</span>; <span class="code-cpp-comment">// combined is "Hello World!"</span>
+<span class="code-cpp-keyword">if</span> (s2 == <span class="code-cpp-string">"Hello"</span>) { <span class="code-cpp-comment">// Comparison using ==</span>
+    std::cout &lt;&lt; <span class="code-cpp-string">"s2 is Hello"</span> &lt;&lt; std::endl;
+}</code></pre>
+                <h4>Common Methods</h4>
+                <p>`std::string` offers many useful member functions:</p>
+                 <ul>
+                     <li>`length()` or `size()`: Returns the number of characters.</li>
+                     <li>`empty()`: Returns `true` if the string is empty.</li>
+                     <li>`append()` or `+=`: Appends characters or another string.</li>
+                     <li>`find()`: Searches for a substring.</li>
+                     <li>`substr()`: Extracts a substring.</li>
+                     <li>`compare()`: Compares strings lexicographically.</li>
+                     <li>`[index]`: Access individual characters (like arrays, but safer with `at()` method).</li>
+                 </ul>
+                <pre><code class="code-snippet"><span class="code-cpp-type">std::string</span> text = <span class="code-cpp-string">"Programming"</span>;
+std::cout &lt;&lt; <span class="code-cpp-string">"Length: "</span> &lt;&lt; text.<span class="code-function">length</span>() &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 11</span>
+text += <span class="code-cpp-string">" is fun!"</span>; <span class="code-cpp-comment">// Append using +=</span>
+std::cout &lt;&lt; text &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: Programming is fun!</span>
+<span class="code-cpp-type">size_t</span> pos = text.<span class="code-function">find</span>(<span class="code-cpp-string">"gram"</span>); <span class="code-cpp-comment">// Find substring</span>
+<span class="code-cpp-keyword">if</span> (pos != std::string::npos) { <span class="code-cpp-comment">// npos means 'not found'</span>
+    std::cout &lt;&lt; <span class="code-cpp-string">"'gram' found at index: "</span> &lt;&lt; pos &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: 3</span>
+}
+std::cout &lt;&lt; <span class="code-cpp-string">"Character at index 1: "</span> &lt;&lt; text[<span class="code-cpp-number">1</span>] &lt;&lt; std::endl; <span class="code-cpp-comment">// Output: r</span>
+</code></pre>
+                <p>`std::string` automatically handles memory management and prevents many errors common with C-style strings. Use it whenever possible in modern C++.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CPPLearn - Your C++ Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#intro-cpp">Intro C++</a>
+                <a href="Week1.html#why-learn-cpp">Why C++?</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#hello-world">Hello World</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#constants">Constants</a>
+                <a href="Week2.html#operators">Operators</a>
+                <a href="Week2.html#type-casting">Type Casting</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week3.html#io-stream">Input/Output</a>
+                 <a href="Week3.html#conditionals">Conditionals</a>
+                 <a href="Week3.html#nested-if">Nested If</a>
+                 <a href="Week3.html#switch">Switch</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#for-loops">for Loops</a>
+                <a href="Week4.html#while-loops">while Loops</a>
+                <a href="Week4.html#do-while">do...while</a>
+                <a href="Week4.html#break-continue">break/continue</a>
+                <a href="Week4.html#nested-loops">Nested Loops</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#functions-def">Definition</a>
+                <a href="Week5.html#functions-proto">Prototypes</a>
+                <a href="Week5.html#functions-params">Parameters</a>
+                <a href="Week5.html#functions-return">Return Values</a>
+                <a href="Week5.html#functions-overload">Overloading</a>
+                <a href="Week5.html#scope">Scope</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#arrays">Arrays</a>
+                <a href="#multi-arrays">Multi-Dim Arrays</a>
+                <a href="#c-strings">C-Strings</a>
+                <a href="#std-string">std::string</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#pointers">Pointers</a>
+                <a href="Week7.html#dynamic-mem">Dynamic Memory</a>
+                <a href="Week7.html#references">References</a>
+                <a href="Week7.html#pass-by-ref">Pass by Reference</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#oop-concepts">OOP Concepts</a>
+                <a href="Week8.html#classes-objects">Classes/Objects</a>
+                <a href="Week8.html#access-specifiers">Access Specifiers</a>
+                <a href="Week8.html#members">Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#constructors">Constructors</a>
+                <a href="Week9.html#destructors">Destructors</a>
+                <a href="Week9.html#this-pointer">`this` Pointer</a>
+                <a href="Week9.html#static-members">Static Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#inheritance">Inheritance</a>
+                <a href="Week10.html#overriding">Overriding</a>
+                <a href="Week10.html#polymorphism">Polymorphism</a>
+                <a href="Week10.html#virtual-funcs">Virtual Functions</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#stl-overview">STL Overview</a>
+                <a href="Week11.html#containers">Containers</a>
+                <a href="Week11.html#iterators">Iterators</a>
+                <a href="Week11.html#algorithms">Algorithms</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#file-io">File I/O</a>
+                <a href="Week12.html#error-handling">Error Handling</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+                <a href="Week12.html#project">Mini-Project</a>
+            </div>
+        </div>
+
+    </div> </body>
+</html>

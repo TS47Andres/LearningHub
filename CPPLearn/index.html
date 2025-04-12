@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPPLearn - Your C++ Learning Journey</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="cpp.ico" type="image/x-icon">
+    </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="cpp-color">CPP</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#syllabus">Syllabus</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="full-width hero">
+            <div class="hero-content">
+                <h1>Welcome to CPPLearn</h1>
+                <p class="tagline">Embark on a 12-week journey to C++ mastery!</p>
+                <a href="#syllabus" class="button">Explore the Syllabus</a>
+                </div>
+        </section>
+
+        <section id="about" class="full-width content-block">
+            <div class="container">
+                <h2>About CPPLearn</h2>
+                <p>CPPLearn is a comprehensive online platform designed to guide you from a beginner to a confident C++ programmer in 12 weeks. Our curriculum covers fundamental concepts, object-oriented programming, memory management, and the Standard Template Library (STL).</p>
+                <p>Whether you aim to develop high-performance applications, games, system software, or delve into competitive programming, CPPLearn provides the foundational knowledge you need.</p>
+            </div>
+        </section>
+
+        <section id="syllabus" class="full-width content-block bg-light">
+            <div class="container">
+                <h2>Our 12-Week C++ Syllabus</h2>
+                <p>Click on the links below to dive into each week's learning material:</p>
+
+                <div class="syllabus-grid">
+                    <div class="syllabus-card">
+                        <h3>Week 1: Introduction & Setup</h3>
+                        <p>Getting started with C++ and your environment.</p>
+                        <ul>
+                            <li>What is C++?</li>
+                            <li>Environment Setup (Compiler, IDE)</li>
+                            <li>Hello, World!</li>
+                            <li>Basic Syntax</li>
+                        </ul>
+                        <a href="Week1.html" class="syllabus-link">Go to Week 1</a>
+                    </div>
+                    <div class="syllabus-card">
+                        <h3>Week 2: Variables, Data Types & Operators</h3>
+                        <p>Fundamentals of data storage and manipulation.</p>
+                        <ul>
+                            <li>Variables & Constants</li>
+                            <li>Data Types (int, float, char, bool)</li>
+                            <li>Operators (Arithmetic, Comparison, Logical)</li>
+                            <li>Type Casting</li>
+                        </ul>
+                        <a href="Week2.html" class="syllabus-link">Go to Week 2</a>
+                    </div>
+                    <div class="syllabus-card">
+                        <h3>Week 3: Input/Output & Basic Control Flow</h3>
+                        <p>Interacting with the user and basic decisions.</p>
+                        <ul>
+                            <li>`iostream` (`cout`, `cin`)</li>
+                            <li>`if`, `else if`, `else`</li>
+                            <li>`switch` statement</li>
+                        </ul>
+                        <a href="Week3.html" class="syllabus-link">Go to Week 3</a>
+                    </div>
+                    <div class="syllabus-card">
+                        <h3>Week 4: More Control Flow - Loops</h3>
+                        <p>Repeating actions effectively.</p>
+                        <ul>
+                            <li>`for` loops</li>
+                            <li>`while` loops</li>
+                            <li>`do...while` loops</li>
+                            <li>`break`, `continue`</li>
+                        </ul>
+                        <a href="Week4.html" class="syllabus-link">Go to Week 4</a>
+                    </div>
+                    <div class="syllabus-card">
+                        <h3>Week 5: Functions</h3>
+                        <p>Creating reusable blocks of code.</p>
+                        <ul>
+                            <li>Defining & Calling Functions</li>
+                            <li>Parameters & Arguments (by value)</li>
+                            <li>Return Values</li>
+                            <li>Function Overloading</li>
+                            <li>Scope</li>
+                        </ul>
+                        <a href="Week5.html" class="syllabus-link">Go to Week 5</a>
+                    </div>
+                    <div class="syllabus-card">
+                        <h3>Week 6: Arrays & Strings</h3>
+                        <p>Working with sequences of data.</p>
+                        <ul>
+                            <li>Arrays (Declaration, Indexing)</li>
+                            <li>Multidimensional Arrays</li>
+                            <li>C-style strings</li>
+                            <li>`std::string` basics</li>
+                        </ul>
+                        <a href="Week6.html" class="syllabus-link">Go to Week 6</a>
+                    </div>
+                    <div class="syllabus-card">
+                        <h3>Week 7: Pointers & References</h3>
+                        <p>Understanding memory management.</p>
+                        <ul>
+                            <li>Memory Addresses</li>
+                            <li>Pointers (`*`, `&`)</li>
+                            <li>Dynamic Memory (`new`, `delete`)</li>
+                            <li>References (`&`)</li>
+                            <li>Pass by Reference</li>
+                        </ul>
+                        <a href="Week7.html" class="syllabus-link">Go to Week 7</a>
+                    </div>
+                    <div class="syllabus-card">
+                        <h3>Week 8: Introduction to OOP</h3>
+                        <p>Object-Oriented Programming basics.</p>
+                        <ul>
+                            <li>OOP Concepts</li>
+                            <li>Classes & Objects</li>
+                            <li>Access Specifiers</li>
+                            <li>Members (Variables, Methods)</li>
+                        </ul>
+                        <a href="Week8.html" class="syllabus-link">Go to Week 8</a>
+                    </div>
+                    <div class="syllabus-card">
+                        <h3>Week 9: Classes In-Depth</h3>
+                        <p>Constructors, destructors, and more.</p>
+                        <ul>
+                            <li>Constructors (Default, Parameterized)</li>
+                            <li>Destructors</li>
+                            <li>`this` pointer</li>
+                            <li>`static` members</li>
+                        </ul>
+                        <a href="Week9.html" class="syllabus-link">Go to Week 9</a>
+                    </div>
+                    <div class="syllabus-card">
+                        <h3>Week 10: Inheritance & Polymorphism</h3>
+                        <p>Building class hierarchies and flexible code.</p>
+                        <ul>
+                            <li>Inheritance (Base/Derived)</li>
+                            <li>Method Overriding</li>
+                            <li>Polymorphism</li>
+                            <li>Virtual Functions</li>
+                        </ul>
+                        <a href="Week10.html" class="syllabus-link">Go to Week 10</a>
+                    </div>
+                    <div class="syllabus-card">
+                        <h3>Week 11: Intro to STL</h3>
+                        <p>Using the Standard Template Library.</p>
+                        <ul>
+                            <li>STL Overview</li>
+                            <li>Containers (`vector`, `map`, etc.)</li>
+                            <li>Iterators</li>
+                            <li>Basic Algorithms</li>
+                        </ul>
+                        <a href="Week11.html" class="syllabus-link">Go to Week 11</a>
+                    </div>
+                    <div class="syllabus-card">
+                        <h3>Week 12: File Handling & Next Steps</h3>
+                        <p>Working with files and continuing your journey.</p>
+                        <ul>
+                            <li>File I/O (`fstream`)</li>
+                            <li>Basic Error Handling</li>
+                            <li>Rethinking Concepts</li>
+                            <li>Next Steps</li>
+                        </ul>
+                        <a href="Week12.html" class="syllabus-link">Go to Week 12</a>
+                    </div>
+                </div> </div>
+        </section>
+
+        <section id="contact" class="full-width content-block bg-light">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p>Have questions or need support? Reach out to us!</p>
+                <p>Email: akshatpcid12@gmail.com</p>
+                <p>Phone: +91 7682001264</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CPPLearn - Your C++ Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#intro-cpp">Intro C++</a>
+                <a href="Week1.html#setup-env">Setup Env</a>
+                <a href="Week1.html#hello-world">Hello World</a>
+                <a href="Week1.html#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#operators">Operators</a>
+                <a href="Week2.html#type-casting">Type Casting</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#io-stream">iostream</a>
+                <a href="Week3.html#conditionals">Conditionals</a>
+                <a href="Week3.html#switch">Switch</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#for-loops">For Loops</a>
+                <a href="Week4.html#while-loops">While Loops</a>
+                <a href="Week4.html#do-while">Do-While</a>
+                <a href="Week4.html#break-continue">Break/Continue</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#functions-def">Definition</a>
+                <a href="Week5.html#functions-params">Parameters</a>
+                <a href="Week5.html#functions-return">Return</a>
+                <a href="Week5.html#functions-overload">Overloading</a>
+                <a href="Week5.html#scope">Scope</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#arrays">Arrays</a>
+                <a href="Week6.html#multi-arrays">Multi-Dim Arrays</a>
+                <a href="Week6.html#c-strings">C-Strings</a>
+                <a href="Week6.html#std-string">std::string</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#pointers">Pointers</a>
+                <a href="Week7.html#dynamic-mem">Dynamic Memory</a>
+                <a href="Week7.html#references">References</a>
+                <a href="Week7.html#pass-by-ref">Pass by Reference</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#oop-concepts">OOP Concepts</a>
+                <a href="Week8.html#classes-objects">Classes/Objects</a>
+                <a href="Week8.html#access-specifiers">Access Specifiers</a>
+                <a href="Week8.html#members">Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#constructors">Constructors</a>
+                <a href="Week9.html#destructors">Destructors</a>
+                <a href="Week9.html#this-pointer">`this` Pointer</a>
+                <a href="Week9.html#static-members">Static Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#inheritance">Inheritance</a>
+                <a href="Week10.html#overriding">Overriding</a>
+                <a href="Week10.html#polymorphism">Polymorphism</a>
+                <a href="Week10.html#virtual-funcs">Virtual Functions</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#stl-overview">STL Overview</a>
+                <a href="Week11.html#containers">Containers</a>
+                <a href="Week11.html#iterators">Iterators</a>
+                <a href="Week11.html#algorithms">Algorithms</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#file-io">File I/O</a>
+                <a href="Week12.html#error-handling">Error Handling</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+                <a href="Week12.html#project">Mini-Project</a>
+            </div>
+        </div>
+
+    </div> </body>
+</html>

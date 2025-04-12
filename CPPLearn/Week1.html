@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPP Learning - Week 1: Getting Started</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="cpp.ico" type="image/x-icon">
+    </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="cpp-color">CPP</span>Learn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i>
+            </button>
+            <ul>
+                <li><a href="#intro-cpp">Intro C++</a></li>
+                <li><a href="#why-learn-cpp">Why C++?</a></li>
+                <li><a href="#setup-env">Setup Env</a></li>
+                <li><a href="#hello-world">Hello World</a></li>
+                <li><a href="#basic-syntax">Basic Syntax</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 1: Starting Your C++ Adventure</h1>
+                <p class="tagline">Dive into the fundamentals of C++ and set up your development environment.</p>
+                <a href="#intro-cpp" class="button">Explore Chapter 1</a>
+            </div>
+        </section>
+
+        <section id="intro-cpp" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 1: Introduction to C++ and Environment Setup</h2>
+                <h3>What is C++? History and Applications.</h3>
+                <p>Welcome to C++! C++ is a powerful, general-purpose programming language known for its performance, efficiency, and control over system resources. It's an extension of the C language, adding object-oriented features and other enhancements.</p>
+                <h4>A Brief History</h4>
+                <p>C++ was developed by Bjarne Stroustrup starting in 1979 at Bell Labs as an enhancement to the C language. It was initially named "C with Classes" and was renamed C++ in 1983. It has evolved significantly over the decades through standardization (C++98, C++03, C++11, C++14, C++17, C++20, etc.).</p>
+                <h4>Key Characteristics</h4>
+                <ul>
+                    <li><strong>Compiled:</strong> C++ code is typically compiled directly into machine code, resulting in high execution speed.</li>
+                    <li><strong>Statically Typed:</strong> Variable types must be declared and are checked at compile time.</li>
+                    <li><strong>Multi-Paradigm:</strong> Supports procedural, object-oriented, and generic programming.</li>
+                    <li><strong>Performance-Oriented:</strong> Offers low-level memory manipulation capabilities.</li>
+                    <li><strong>Portable:</strong> C++ compilers exist for many platforms.</li>
+                </ul>
+                <h4>Applications</h4>
+                 <p>C++ is used extensively where performance is critical:</p>
+                 <ul>
+                    <li>Game Development (Engines like Unreal Engine)</li>
+                    <li>Operating Systems & System Software</li>
+                    <li>High-Performance Computing (HPC)</li>
+                    <li>Embedded Systems & IoT</li>
+                    <li>Financial Trading Systems</li>
+                    <li>Web Browsers (e.g., Chrome, Firefox)</li>
+                    <li>Database Software</li>
+                 </ul>
+            </div>
+        </section>
+
+        <section id="why-learn-cpp" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Why Learn C++?</h3>
+                <p>Learning C++ can be challenging but incredibly rewarding:</p>
+                <ul>
+                    <li><strong>Performance:</strong> C++ allows for highly optimized code that runs very fast.</li>
+                    <li><strong>Control:</strong> Provides fine-grained control over hardware and memory.</li>
+                    <li><strong>Foundation:</strong> Understanding C++ provides deep insights into how computers work and makes learning other languages easier.</li>
+                    <li><strong>Wide Applicability:</strong> Used in many performance-critical domains where other languages might not suffice.</li>
+                    <li><strong>Large Codebases:</strong> Many existing large-scale systems are built with C++.</li>
+                    <li><strong>Game Development Standard:</strong> A dominant language in the professional game development industry.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="setup-env" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Setting up Your Development Environment.</h3>
+                <p>To write and run C++ code, you need a compiler and usually a code editor or an Integrated Development Environment (IDE).</p>
+                <h4>1. Choosing a Compiler</h4>
+                <p>A compiler translates your C++ source code into executable machine code.</p>
+                <ul>
+                    <li><strong>GCC (g++):</strong> Part of the GNU Compiler Collection, widely available on Linux and macOS (often via Xcode Command Line Tools), available on Windows (e.g., via MinGW or Cygwin).</li>
+                    <li><strong>Clang:</strong> Another popular open-source compiler, known for fast compilation and helpful error messages. Often used alongside GCC or as part of LLVM.</li>
+                    <li><strong>MSVC (Microsoft Visual C++):</strong> The compiler included with Visual Studio on Windows.</li>
+                </ul>
+                <p>Installation varies by OS. On Linux, you can often install `g++` via your package manager (e.g., `sudo apt install build-essential` on Debian/Ubuntu). On macOS, installing Xcode Command Line Tools (`xcode-select --install` in Terminal) typically provides Clang/g++. On Windows, installing Visual Studio Community (with C++ workload) or setting up MinGW/MSYS2 are common choices.</p>
+
+                <h4>2. Choosing a Code Editor/IDE</h4>
+                <p>An IDE bundles an editor, compiler, debugger, and other tools.</p>
+                <ul>
+                    <li><strong>Visual Studio Code (VS Code):</strong> Free, popular, highly extensible. Requires installing C++ extensions (like Microsoft's C/C++ extension) and configuring it to use your chosen compiler.</li>
+                    <li><strong>Visual Studio (Community Edition):</strong> Free for individuals and small teams on Windows. A full-featured IDE with excellent C++ support (uses MSVC compiler).</li>
+                    <li><strong>CLion:</strong> Powerful cross-platform C++ IDE by JetBrains (paid, but often free for students).</li>
+                    <li><strong>Code::Blocks:</strong> Free, open-source, cross-platform IDE.</li>
+                    <li>Simple Text Editors (like Sublime Text, Atom, Notepad++) + Manual Compilation: Possible, but less convenient for larger projects.</li>
+                </ul>
+                <p>For beginners, VS Code (with configuration) or Visual Studio Community (on Windows) are often good starting points.</p>
+            </div>
+        </section>
+
+        <section id="hello-world" class="full-width content-block bg-light scroll-slide-left">
+            <div class="container">
+                <h3>Your First C++ Program: Hello, World!</h3>
+                <p>Let's write the traditional first program.</p>
+                <ol>
+                    <li><strong>Create a File:</strong> Open your code editor/IDE and create a new file named `hello.cpp`.</li>
+                    <li><strong>Write the Code:</strong>
+                        <pre><code class="code-snippet"><span class="code-cpp-preprocessor">#include &lt;iostream&gt;</span> <span class="code-cpp-comment">// Include the Input/Output Stream library</span>
+
+<span class="code-cpp-keyword">int</span> <span class="code-function">main</span>() { <span class="code-cpp-comment">// main function: program execution starts here</span>
+    std::cout &lt;&lt; <span class="code-cpp-string">"Hello, C++!"</span> &lt;&lt; std::endl; <span class="code-cpp-comment">// Output the string to the console</span>
+    <span class="code-cpp-keyword">return</span> <span class="code-cpp-number">0</span>; <span class="code-cpp-comment">// Indicate successful execution</span>
+}
+                        </code></pre>
+                    </li>
+                    <li><strong>Compile the Code:</strong> Open a terminal or command prompt, navigate to the directory where you saved `hello.cpp`, and use your compiler.
+                        <ul>
+                            <li>Using g++: `g++ hello.cpp -o hello`</li>
+                            <li>Using Clang: `clang++ hello.cpp -o hello`</li>
+                            <li>Using MSVC (from Developer Command Prompt): `cl hello.cpp`</li>
+                        </ul>
+                        This creates an executable file (e.g., `hello.exe` on Windows, `hello` on Linux/macOS).
+                    </li>
+                    <li><strong>Run the Executable:</strong>
+                        <ul>
+                            <li>Windows: `.\hello.exe` or `hello.exe`</li>
+                            <li>Linux/macOS: `./hello`</li>
+                        </ul>
+                    </li>
+                     <li><strong>See the Output:</strong> You should see `Hello, C++!` printed in your terminal.</li>
+                </ol>
+                <p>Congratulations! You've compiled and run your first C++ program.</p>
+            </div>
+        </section>
+
+        <section id="basic-syntax" class="full-width content-block scroll-slide-right">
+            <div class="container">
+                <h3>Basic Syntax, Comments, and Statements.</h3>
+                <p>Understanding the basic rules of C++ syntax is crucial.</p>
+                <ul>
+                     <li><strong>Statements:</strong> Instructions in C++ typically end with a semicolon (`;`).
+                         <pre><code class="code-snippet"><span class="code-cpp-keyword">int</span> score = 100;
+std::cout &lt;&lt; <span class="code-cpp-string">"Score:"</span> &lt;&lt; score;</code></pre>
+                      </li>
+                     <li><strong>Blocks:</strong> Code blocks are enclosed in curly braces `{}`. They define scope (e.g., for functions, loops, conditionals).
+                        <pre><code class="code-snippet"><span class="code-cpp-keyword">if</span> (score > 50) {
+    std::cout &lt;&lt; <span class="code-cpp-string">"Pass!"</span>;
+    <span class="code-cpp-comment">// More code inside the block</span>
+}</code></pre>
+                     </li>
+                    <li><strong>Case Sensitivity:</strong> C++ is case-sensitive (`myVar` and `myvar` are different).</li>
+                    <li><strong>Whitespace:</strong> C++ largely ignores extra spaces, tabs, and newlines between statements, used for readability.</li>
+                    <li><strong>Comments:</strong> Ignored by the compiler, used for explanations.
+                         <ul>
+                              <li><strong>Single-line comments:</strong> Start with `//`.
+                                   <pre><code class="code-snippet"><span class="code-cpp-comment">// This is a single-line comment</span>
+<span class="code-cpp-keyword">int</span> x = 10; <span class="code-cpp-comment">// Assign 10 to x</span></code></pre>
+                              </li>
+                              <li><strong>Multi-line comments:</strong> Start with `/*` and end with `*/`.
+                                   <pre><code class="code-snippet">/* This is a
+   multi-line comment.
+   It spans multiple lines. */
+<span class="code-cpp-keyword">int</span> y = 20;</code></pre>
+                              </li>
+                         </ul>
+                    </li>
+                     <li><strong>Preprocessor Directives:</strong> Lines starting with `#` (like `#include`) are processed before compilation. `#include` is used to bring in code from header files (libraries).</li>
+                     <li><strong>`main()` function:</strong> Every executable C++ program must have a `main` function. It's the starting point of execution. `int main()` indicates it returns an integer status code (0 typically means success).</li>
+                     <li><strong>Namespaces (`std::`):</strong> C++ uses namespaces to organize code and prevent naming conflicts. `std::` is the standard namespace where features like `cout`, `cin`, and `endl` are defined. We'll discuss `using namespace std;` later.</li>
+                </ul>
+                <p>These fundamental rules form the basis for writing C++ code.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CPPLearn - Your C++ Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#intro-cpp">Intro C++</a>
+                <a href="#why-learn-cpp">Why C++?</a>
+                <a href="#setup-env">Setup Env</a>
+                <a href="#hello-world">Hello World</a>
+                <a href="#basic-syntax">Basic Syntax</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#variables">Variables</a>
+                <a href="Week2.html#data-types">Data Types</a>
+                <a href="Week2.html#operators">Operators</a>
+                <a href="Week2.html#type-casting">Type Casting</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#io-stream">iostream</a>
+                <a href="Week3.html#conditionals">Conditionals</a>
+                <a href="Week3.html#switch">Switch</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#for-loops">For Loops</a>
+                <a href="Week4.html#while-loops">While Loops</a>
+                <a href="Week4.html#do-while">Do-While</a>
+                <a href="Week4.html#break-continue">Break/Continue</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week5.html#functions-def">Definition</a>
+                <a href="Week5.html#functions-params">Parameters</a>
+                <a href="Week5.html#functions-return">Return</a>
+                <a href="Week5.html#functions-overload">Overloading</a>
+                <a href="Week5.html#scope">Scope</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#arrays">Arrays</a>
+                <a href="Week6.html#multi-arrays">Multi-Dim Arrays</a>
+                <a href="Week6.html#c-strings">C-Strings</a>
+                <a href="Week6.html#std-string">std::string</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week7.html#pointers">Pointers</a>
+                <a href="Week7.html#dynamic-mem">Dynamic Memory</a>
+                <a href="Week7.html#references">References</a>
+                <a href="Week7.html#pass-by-ref">Pass by Reference</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#oop-concepts">OOP Concepts</a>
+                <a href="Week8.html#classes-objects">Classes/Objects</a>
+                <a href="Week8.html#access-specifiers">Access Specifiers</a>
+                <a href="Week8.html#members">Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 9 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week9.html#constructors">Constructors</a>
+                <a href="Week9.html#destructors">Destructors</a>
+                <a href="Week9.html#this-pointer">`this` Pointer</a>
+                <a href="Week9.html#static-members">Static Members</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 10 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week10.html#inheritance">Inheritance</a>
+                <a href="Week10.html#overriding">Overriding</a>
+                <a href="Week10.html#polymorphism">Polymorphism</a>
+                <a href="Week10.html#virtual-funcs">Virtual Functions</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 11 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week11.html#stl-overview">STL Overview</a>
+                <a href="Week11.html#containers">Containers</a>
+                <a href="Week11.html#iterators">Iterators</a>
+                <a href="Week11.html#algorithms">Algorithms</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 12 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week12.html#file-io">File I/O</a>
+                <a href="Week12.html#error-handling">Error Handling</a>
+                <a href="Week12.html#next-steps">Next Steps</a>
+                <a href="Week12.html#project">Mini-Project</a>
+            </div>
+        </div>
+
+    </div> </body>
+</html>

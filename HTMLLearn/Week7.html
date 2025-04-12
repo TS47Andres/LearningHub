@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Learning - Week 7: Semantic HTML & Multimedia</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="html.ico" type="image/x-icon"> </head>
+
+<body>
+    <header>
+        <button id="darkModeToggle">
+            <i class="ri-moon-fill"></i>
+        </button>
+        <nav>
+            <div class="logo">
+                <span class="python-yellow">HTML</span>earn
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="ri-menu-line"></i> <i class="ri-close-line"></i> </button>
+            <ul>
+                <li><a href="#semantic-section">Semantic HTML</a></li>
+                <li><a href="#multimedia-section">Multimedia</a></li>
+                <li><a href="#iframe-section">Iframes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="full-width hero scroll-fade-in">
+            <div class="hero-content">
+                <h1>Week 7: Meaningful Structure and Media</h1>
+                <p class="tagline">Learn to structure pages semantically and embed audio, video, and other content.</p>
+                <a href="#semantic-section" class="button">Explore Chapter 7</a>
+            </div>
+        </section>
+
+        <section id="semantic-section" class="full-width content-block scroll-slide-left">
+            <div class="container">
+                <h2>Chapter 7: Adding Meaning and Media</h2>
+                <h3>Introduction to Semantic HTML</h3>
+                <p>Semantic HTML refers to using HTML elements that accurately describe the meaning and structure of the content they contain, rather than just focusing on presentation.</p>
+                <h4>Why Use Semantic HTML?</h4>
+                <ul>
+                    <li><strong>Accessibility:</strong> Screen readers and assistive technologies use semantic elements to understand the page structure and navigate content effectively for users with disabilities.</li>
+                    <li><strong>SEO (Search Engine Optimization):</strong> Search engines can better understand the context and importance of different parts of your content, potentially improving search rankings.</li>
+                    <li><strong>Maintainability:</strong> Semantic markup makes the code clearer and easier for developers (including your future self) to understand and maintain.</li>
+                    <li><strong>Clarity:</strong> Using tags like `<article>`, `<nav>`, and `<footer>` clearly defines the purpose of different sections.</li>
+                </ul>
+                <p>Instead of relying solely on generic containers like `&lt;div&gt;` and `&lt;span&gt;` for everything, semantic HTML encourages using tags that convey meaning.</p>
+
+                <h4>Common Semantic Structural Elements</h4>
+                <ul>
+                    <li><strong>&lt;header&gt;:</strong> Represents introductory content for its nearest ancestor sectioning content or sectioning root element. Often contains headings, logos, navigation, search forms.</li>
+                    <li><strong>&lt;nav&gt;:</strong> Represents a section of a page whose purpose is to provide navigation links (either within the current document or to other documents).</li>
+                    <li><strong>&lt;main&gt;:</strong> Represents the dominant content of the `&lt;body&gt;` of a document. There should only be one `&lt;main&gt;` element per page.</li>
+                    <li><strong>&lt;article&gt;:</strong> Represents a self-contained composition in a document, page, application, or site, which is intended to be independently distributable or reusable (e.g., a forum post, a magazine or newspaper article, a blog entry).</li>
+                    <li><strong>&lt;section&gt;:</strong> Represents a generic standalone section of a document, which doesn't have a more specific semantic element to represent it. Typically includes a heading.</li>
+                    <li><strong>&lt;aside&gt;:</strong> Represents a portion of a document whose content is only indirectly related to the document's main content (e.g., sidebars, pull quotes, advertising).</li>
+                    <li><strong>&lt;footer&gt;:</strong> Represents a footer for its nearest ancestor sectioning content or sectioning root element. Often contains authorship information, copyright data, links to related documents.</li>
+                </ul>
+
+                <h4>Example Layout Structure</h4>
+                <pre><code class="code-snippet html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;title&gt;Semantic Layout Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;header&gt;
+    &lt;h1&gt;My Awesome Website&lt;/h1&gt;
+    &lt;nav&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;article&gt;
+      &lt;h2&gt;Main Article Title&lt;/h2&gt;
+      &lt;p&gt;This is the main content of the page...&lt;/p&gt;
+      &lt;section&gt;
+        &lt;h3&gt;Subsection Title&lt;/h3&gt;
+        &lt;p&gt;Content within a section of the article.&lt;/p&gt;
+      &lt;/section&gt;
+    &lt;/article&gt;
+
+    &lt;aside&gt;
+      &lt;h3&gt;Related Links&lt;/h3&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Link 1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Link 2&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/aside&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;&copy; 2025 My Awesome Website. All rights reserved.&lt;/p&gt;
+  &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+        </section>
+
+        <section id="multimedia-section" class="full-width content-block bg-light scroll-slide-right">
+            <div class="container">
+                <h3>Embedding Audio and Video</h3>
+                <p>HTML provides specific elements for embedding audio and video content directly into your web pages.</p>
+
+                <h4>Audio (`&lt;audio&gt;`)</h4>
+                <p>The `&lt;audio&gt;` element is used to embed sound content.</p>
+                <pre><code class="code-snippet html">&lt;audio controls&gt;
+  &lt;source src="audio/my-song.mp3" type="audio/mpeg"&gt;
+  &lt;source src="audio/my-song.ogg" type="audio/ogg"&gt;
+  Your browser does not support the audio element. &lt;!-- Fallback content --&gt;
+&lt;/audio&gt;</code></pre>
+                <ul>
+                    <li><strong>`controls`</strong>: A boolean attribute that displays standard audio controls (play/pause, volume, etc.).</li>
+                    <li><strong>`&lt;source&gt;`</strong>: Allows you to specify multiple audio sources. The browser will use the first format it supports. The `src` attribute points to the audio file, and `type` specifies the MIME type of the audio.</li>
+                    <li>Fallback content (text between the tags) is displayed in browsers that don't support the `&lt;audio&gt;` element.</li>
+                    <li>Other attributes include `autoplay`, `loop`, `muted`, `preload`.</li>
+                </ul>
+
+                <h4>Video (`&lt;video&gt;`)</h4>
+                <p>The `&lt;video&gt;` element is used to embed video content.</p>
+                <pre><code class="code-snippet html">&lt;video controls width="400" height="300" poster="images/video-poster.jpg"&gt;
+  &lt;source src="video/my-movie.mp4" type="video/mp4"&gt;
+  &lt;source src="video/my-movie.webm" type="video/webm"&gt;
+  &lt;track label="English" kind="subtitles" srclang="en" src="subtitles/my-movie-en.vtt" default&gt;
+  Your browser does not support the video tag. &lt;!-- Fallback content --&gt;
+&lt;/video&gt;</code></pre>
+                <ul>
+                    <li><strong>`controls`</strong>: Displays standard video controls.</li>
+                    <li><strong>`width` / `height`</strong>: Sets the dimensions of the video player (CSS is often preferred for responsive sizing).</li>
+                    <li><strong>`poster`</strong>: Specifies an image to be shown while the video is downloading, or until the user hits the play button.</li>
+                    <li><strong>`&lt;source&gt;`</strong>: Works like in `&lt;audio&gt;` for providing multiple video formats (e.g., MP4, WebM, Ogg).</li>
+                    <li><strong>`&lt;track&gt;`</strong>: Used to specify timed text tracks (like subtitles or captions). Attributes include `kind`, `src`, `srclang`, `label`, `default`.</li>
+                    <li>Other attributes include `autoplay`, `loop`, `muted`, `preload`.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="iframe-section" class="full-width content-block scroll-fade-in">
+            <div class="container">
+                <h3>Embedding Other Content (&lt;iframe&gt;)</h3>
+                <p>An `&lt;iframe&gt;` (Inline Frame) is used to embed another HTML document within the current one. This is commonly used for embedding maps, videos from third-party sites (like YouTube), advertisements, or other external content.</p>
+                <pre><code class="code-snippet html">&lt;!-- Embedding a YouTube Video --&gt;
+&lt;iframe width="560" height="315"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen&gt;
+&lt;/iframe&gt;
+
+&lt;!-- Embedding a Google Map --&gt;
+&lt;iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d..."
+        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"&gt;
+&lt;/iframe&gt;</code></pre>
+                <h4>Key Attributes of &lt;iframe&gt;:</h4>
+                <ul>
+                    <li><strong>`src`</strong>: Specifies the URL of the page to embed.</li>
+                    <li><strong>`width` / `height`</strong>: Define the dimensions of the frame (CSS is often preferred).</li>
+                    <li><strong>`title`</strong>: Provides a description of the frame's content for accessibility. Important!</li>
+                    <li><strong>`frameborder`</strong>: (Deprecated, use CSS `border` instead) Specifies whether to display a border around the iframe (0 = no border, 1 = border).</li>
+                    <li><strong>`allow`</strong>: Specifies a feature policy for the iframe (e.g., what browser features it can access like camera, microphone, fullscreen).</li>
+                    <li><strong>`allowfullscreen`</strong>: A boolean attribute that allows the iframe content to go fullscreen.</li>
+                    <li><strong>`loading="lazy"`</strong>: A modern attribute that suggests the browser should defer loading the iframe until it's close to the viewport, improving initial page load performance.</li>
+                </ul>
+                <p>Be cautious when embedding content from untrusted sources using iframes, as it can pose security risks.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 HTMLLearn - Your HTML Learning Platform</p>
+    </footer>
+
+    <div class="vertical-nav">
+        <a href="index.html#syllabus" class="nav-main-link">Syllabus</a>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 1 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week1.html#introduction-section">Intro</a>
+                <a href="Week1.html#what-is-html-section">What is HTML?</a>
+                <a href="Week1.html#basic-structure-section">Structure</a>
+                <a href="Week1.html#setup-section">Setup</a>
+                <a href="Week1.html#first-program-section">First Program</a>
+                <a href="Week1.html#basic-syntax-section">Basic Syntax</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 2 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week2.html#formatting-section">Formatting</a>
+                <a href="Week2.html#phrase-tags-section">Phrase Tags</a>
+                <a href="Week2.html#links-section">Links</a>
+                <a href="Week2.html#paths-section">Paths</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 3 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week3.html#lists-section">Lists</a>
+                <a href="Week3.html#images-section">Images</a>
+                <a href="Week3.html#image-formats-section">Formats</a>
+                <a href="Week3.html#image-attributes-section">Attributes</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 4 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week4.html#table-structure">Structure</a>
+                <a href="Week4.html#table-sections">Sections</a>
+                <a href="Week4.html#spanning">Spanning Cells</a>
+                <a href="Week4.html#headers-captions">Headers & Captions</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 5 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                 <a href="Week5.html#form-tag-section">Form Tag</a>
+                 <a href="Week5.html#input-fields-section">Input Fields</a>
+                 <a href="Week5.html#labels-section">Labels</a>
+                 <a href="Week5.html#attributes-section">Attributes</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 6 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week6.html#checkbox-radio-section">Checkbox/Radio</a>
+                <a href="Week6.html#select-section">Dropdowns</a>
+                <a href="Week6.html#textarea-section">Text Areas</a>
+                <a href="Week6.html#grouping-section">Grouping</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle active">Week 7 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav show">
+                <a href="#semantic-section">Semantic HTML</a>
+                <a href="#multimedia-section">Multimedia</a>
+                <a href="#iframe-section">Iframes</a>
+            </div>
+        </div>
+
+         <div class="nav-item">
+            <button class="nav-main-link nav-toggle">Week 8 <i class="ri-arrow-down-s-line"></i></button>
+            <div class="sub-nav">
+                <a href="Week8.html#review">Review</a>
+                <a href="Week8.html#best-practices">Best Practices</a>
+                <a href="Week8.html#integration">Integration</a>
+                <a href="Week8.html#next-steps">Next Steps</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
